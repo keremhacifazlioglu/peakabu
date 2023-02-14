@@ -40,7 +40,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_posting?',
+              '/job_posting',
               queryParameters: queryParameters,
               data: _data,
             )

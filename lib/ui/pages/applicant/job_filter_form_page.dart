@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:platform/config/locator.dart';
 import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/organisms/redirect/choose_gender_row.dart';
 import 'package:platform/ui/organisms/search_caretaker_criteria_form.dart';
+import 'package:platform/util/logger.dart';
 
 class JobFilterFormPage extends StatelessWidget {
   const JobFilterFormPage({Key? key}) : super(key: key);
@@ -88,7 +90,13 @@ class JobFilterFormPage extends StatelessWidget {
           ),
           child: PlatformSubmitButton(
             buttonText: "Sonuçları göster",
-            onPressed: () {},
+            onPressed: () {
+              secureLocalRepository.readAllSecureData().then(
+                    (value) => {
+                      Log.i(value.first.value),
+                    },
+                  );
+            },
           ),
         ),
       ),

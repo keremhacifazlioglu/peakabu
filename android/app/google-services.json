@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531635005389",
+    "project_id": "peakabu-app",
+    "storage_bucket": "peakabu-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531635005389:android:b5e2605f3e4a28ea3f0684",
+        "android_client_info": {
+          "package_name": "com.peakabu.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531635005389-ohmvlnqh0cpfe58soqkd5878qlbuahe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5Dsgh_8zDCAhYswDZIRfMktSNMX7rjdk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531635005389-ohmvlnqh0cpfe58soqkd5878qlbuahe1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

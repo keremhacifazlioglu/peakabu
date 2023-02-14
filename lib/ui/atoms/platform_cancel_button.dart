@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/tokens/colors.dart';
 
@@ -20,11 +19,15 @@ class PlatformCancelButton extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(PlatformColor.offWhiteColor),
-          foregroundColor: MaterialStateProperty.all<Color>(PlatformColor.offWhiteColor),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(PlatformColor.offWhiteColor),
+          foregroundColor:
+              MaterialStateProperty.all<Color>(PlatformColor.offWhiteColor),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0,),
+              borderRadius: BorderRadius.circular(
+                5.0,
+              ),
               side: const BorderSide(color: PlatformColor.offBlackColor),
             ),
           ),
@@ -33,10 +36,9 @@ class PlatformCancelButton extends StatelessWidget {
         child: Text(
           buttonText!,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: PlatformColor.offBlackColor,
-                fontWeight: FontWeight.w600,
-                fontSize: PlatformTypographyFoundation.bodyLarge
-              ),
+              color: PlatformColor.offBlackColor,
+              fontWeight: FontWeight.w600,
+              fontSize: PlatformTypographyFoundation.bodyLarge),
         ),
       ),
     );

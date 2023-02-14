@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:platform/network/interceptor/log_interceptor.dart';
 import 'package:platform/network/interceptor/token_interceptor.dart';
@@ -7,7 +8,6 @@ import 'package:platform/network/rest_client.dart';
 
 @module
 abstract class AppModule {
-
   @lazySingleton
   Dio get retrofitApi {
     Dio dio = Dio(
@@ -23,6 +23,8 @@ abstract class AppModule {
   }
 
   @lazySingleton
-  RestClient get injectRestClient=> RestClient(retrofitApi);
+  RestClient get injectRestClient => RestClient(retrofitApi);
 
+  @lazySingleton
+  FlutterSecureStorage flutterSecureStorage() => const FlutterSecureStorage();
 }
