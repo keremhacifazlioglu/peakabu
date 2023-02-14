@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'applicant_requests.g.dart';
+part 'applicant_request.g.dart';
 
 @JsonSerializable()
-class ApplicantRequests {
+class ApplicantRequest {
   String? title;
   String? caretakerType;
   String? workType;
@@ -12,7 +12,7 @@ class ApplicantRequests {
   String? createdAt;
   bool? follow;
 
-  ApplicantRequests({
+  ApplicantRequest({
     this.title,
     this.caretakerType,
     this.workType,
@@ -22,9 +22,9 @@ class ApplicantRequests {
     this.follow,
   });
 
-  factory ApplicantRequests.fromJson(Map<String, dynamic> json) {
-    return _$ApplicantRequestsFromJson(json);
+  factory ApplicantRequest.fromJson(Map<String, dynamic> json) {
+    return _$ApplicantRequestFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$ApplicantRequestsToJson(this);
+  Map<String, dynamic> toJson() => _$ApplicantRequestToJson(this);
 }

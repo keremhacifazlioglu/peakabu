@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'applicant_requests.dart';
+part of 'applicant_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ApplicantRequests _$ApplicantRequestsFromJson(Map<String, dynamic> json) =>
-    ApplicantRequests(
+ApplicantRequest _$ApplicantRequestFromJson(Map<String, dynamic> json) =>
+    ApplicantRequest(
       title: json['title'] as String?,
       caretakerType: json['caretakerType'] as String?,
       workType: json['workType'] as String?,
@@ -17,7 +17,7 @@ ApplicantRequests _$ApplicantRequestsFromJson(Map<String, dynamic> json) =>
       follow: json['follow'] as bool?,
     );
 
-Map<String, dynamic> _$ApplicantRequestsToJson(ApplicantRequests instance) =>
+Map<String, dynamic> _$ApplicantRequestToJson(ApplicantRequest instance) =>
     <String, dynamic>{
       'title': instance.title,
       'caretakerType': instance.caretakerType,
