@@ -6,7 +6,10 @@ import 'package:platform/ui/molecules/platform_icon_label.dart';
 
 class JobRequestListItem extends StatelessWidget {
   final int? index;
-  const JobRequestListItem({Key? key,this.index,}) : super(key: key);
+  const JobRequestListItem({
+    Key? key,
+    this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,8 @@ class JobRequestListItem extends StatelessWidget {
                     top: 8,
                   ),
                   child: PlatformDefaultText(
-                    text: "İstanbul Beşiktaş'ta ÇOKKKK ACİLLLL Temizlikçi Arıyorum",
+                    text:
+                        "İstanbul Beşiktaş'ta ÇOKKKK ACİLLLL Temizlikçi Arıyorum",
                     color: PlatformColorFoundation.textColor,
                     fontWeight: FontWeight.w600,
                     fontSize: PlatformTypographyFoundation.bodyLarge,

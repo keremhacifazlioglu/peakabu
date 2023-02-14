@@ -14,7 +14,8 @@ class PlatformMultilineText extends StatelessWidget {
           text: "Açıklama",
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: PlatformDimensionFoundations.sizeXL, vertical: 4),
+          padding: const EdgeInsets.symmetric(
+              horizontal: PlatformDimensionFoundations.sizeXL, vertical: 4),
           child: Container(
             color: Colors.white,
             child: const TextField(

@@ -23,7 +23,11 @@ class SearchCaretakerCriteriaForm extends StatelessWidget {
           text: text,
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(PlatformDimensionFoundations.sizeXL, 0, PlatformDimensionFoundations.sizeXL, 0),
+          padding: const EdgeInsets.fromLTRB(
+              PlatformDimensionFoundations.sizeXL,
+              0,
+              PlatformDimensionFoundations.sizeXL,
+              0),
           child: CustomDropdownMenu(
             data: data!,
             onChange: (p0) => onChange!(p0),

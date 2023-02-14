@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'job_posting.g.dart';
+part 'favorite_job_posting.g.dart';
 
 @JsonSerializable()
-class JobPosting {
+class FavoriteJobPosting {
   String? title;
   String? caretakerType;
   String? workType;
@@ -11,7 +11,7 @@ class JobPosting {
   String? district;
   String? createdAt;
 
-  JobPosting({
+  FavoriteJobPosting({
     this.title,
     this.caretakerType,
     this.workType,
@@ -20,7 +20,9 @@ class JobPosting {
     this.createdAt,
   });
 
-  Map<String, dynamic> toJson() => _$JobPostingToJson(this);
+  factory FavoriteJobPosting.fromJson(Map<String, dynamic> json) {
+    return _$FavoriteJobPostingFromJson(json);
+  }
 
-  factory JobPosting.fromJson(Map<String, dynamic> json) => _$JobPostingFromJson(json);
+  Map<String, dynamic> toJson() => _$FavoriteJobPostingToJson(this);
 }

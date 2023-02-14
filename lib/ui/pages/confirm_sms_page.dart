@@ -28,7 +28,8 @@ class ConfirmSmsPage extends StatelessWidget {
                 color: PlatformColorFoundation.textColor,
                 fontWeight: FontWeight.w400,
                 fontSize: PlatformDimensionFoundations.sizeMD,
-                headText: "Telefonunuza gönderilen 4 haneli doğrulama kodunu giriniz",
+                headText:
+                    "Telefonunuza gönderilen 4 haneli doğrulama kodunu giriniz",
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
@@ -152,7 +153,8 @@ class ConfirmSmsPage extends StatelessWidget {
                             "İletişim talebiniz ilan sahibi tarafından yanıtlandığında bildirim alacaksınız.")
                         .then(
                           (value) => {
-                            Navigator.of(context).pushNamed("/create_applicant_profile"),
+                            Navigator.of(context)
+                                .pushNamed("/create_applicant_profile"),
                           },
                         );
                   },

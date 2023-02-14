@@ -4,7 +4,10 @@ import 'package:platform/ui/molecules/applicant/job_request/job_request_list_ite
 
 class JobRequestList extends StatelessWidget {
   final int? index;
-  const JobRequestList({Key? key,this.index,}) : super(key: key);
+  const JobRequestList({
+    Key? key,
+    this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

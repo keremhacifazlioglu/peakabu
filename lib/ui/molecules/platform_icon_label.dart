@@ -5,8 +5,7 @@ import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/tokens/typography.dart';
 
 class PlatformIconLabel extends StatelessWidget {
-
-  final String? labelIconPath,labelText;
+  final String? labelIconPath, labelText;
 
   const PlatformIconLabel({
     Key? key,

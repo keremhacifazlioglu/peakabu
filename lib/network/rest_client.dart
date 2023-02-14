@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:platform/domain/job_posting.dart';
+import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';
@@ -9,5 +9,8 @@ abstract class RestClient {
   factory RestClient(Dio dio) = _RestClient;
 
   @GET("/job_posting")
-  Future<List<JobPosting>> fetchJobPosting(@Query("pageNumber") int pageNumber, @Query("pageSize") int pageSize,);
+  Future<List<JobPosting>> fetchJobPosting(
+    @Query("pageNumber") int pageNumber,
+    @Query("pageSize") int pageSize,
+  );
 }

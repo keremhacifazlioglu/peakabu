@@ -27,7 +27,8 @@ class CreateAccountPage extends StatelessWidget {
                 color: PlatformColorFoundation.textColor,
                 fontWeight: FontWeight.w400,
                 fontSize: PlatformDimensionFoundations.sizeMD,
-                headText: "Telefon numaranızı girerek hemen uygulamayı kullanmayı başlayın.",
+                headText:
+                    "Telefon numaranızı girerek hemen uygulamayı kullanmayı başlayın.",
               ),
               const PlatformTextFormInput(
                 labelText: "Telefon Numarınız",

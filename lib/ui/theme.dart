@@ -20,7 +20,7 @@ ThemeData theme() {
       secondary: PlatformColor.primaryColor,
       onSecondary: PlatformColor.primaryColor,
       background: PlatformColor.offWhiteColor,
-      onBackground:PlatformColor.offWhiteColor,
+      onBackground: PlatformColor.offWhiteColor,
       surface: PlatformColor.offBlackColor,
       onSurface: PlatformColor.offBlackColor,
       error: Colors.red,
@@ -47,7 +47,8 @@ ThemeData theme() {
         fontSize: 13,
         color: PlatformColorFoundation.textColor,
       ),
-      hintStyle: TextStyle(color: PlatformColorFoundation.textColor, fontSize: 13),
+      hintStyle:
+          TextStyle(color: PlatformColorFoundation.textColor, fontSize: 13),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: PlatformColor.grayLightColor,
@@ -86,14 +87,41 @@ ThemeData theme() {
 
 TextTheme textTheme() {
   return const TextTheme(
-    displayLarge: TextStyle(fontFamily: 'Inter', fontSize: 20, color: PlatformColorFoundation.textColor),
-    displayMedium: TextStyle(fontFamily: 'Inter', fontSize: 18, color: PlatformColorFoundation.textColor),
-    displaySmall: TextStyle(fontFamily: 'Inter', fontSize: 16, color: PlatformColorFoundation.textColor),
-    headlineLarge: TextStyle(fontFamily: 'Inter', fontSize: 20, color: PlatformColorFoundation.textColor),
-    headlineMedium: TextStyle(fontFamily: 'Inter', fontSize: 18, color: PlatformColorFoundation.textColor),
-    headlineSmall: TextStyle(fontFamily: 'Inter', fontSize: 16, color: PlatformColorFoundation.textColor),
-    titleLarge: TextStyle(fontFamily: 'Inter', fontSize: 20, color: PlatformColorFoundation.textColor),
-    titleMedium: TextStyle(fontFamily: 'Inter', fontSize: 18, color: PlatformColorFoundation.textColor),
-    titleSmall: TextStyle(fontFamily: 'Inter', fontSize: 16, color: PlatformColorFoundation.textColor),
+    displayLarge: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 20,
+        color: PlatformColorFoundation.textColor),
+    displayMedium: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 18,
+        color: PlatformColorFoundation.textColor),
+    displaySmall: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 16,
+        color: PlatformColorFoundation.textColor),
+    headlineLarge: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 20,
+        color: PlatformColorFoundation.textColor),
+    headlineMedium: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 18,
+        color: PlatformColorFoundation.textColor),
+    headlineSmall: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 16,
+        color: PlatformColorFoundation.textColor),
+    titleLarge: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 20,
+        color: PlatformColorFoundation.textColor),
+    titleMedium: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 18,
+        color: PlatformColorFoundation.textColor),
+    titleSmall: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 16,
+        color: PlatformColorFoundation.textColor),
   );
 }

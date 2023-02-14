@@ -25,9 +25,14 @@ class PlatformBottomNavBar extends StatelessWidget {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       selectedItemColor: Colors.black,
-      selectedLabelStyle: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 11, fontWeight: FontWeight.w500),
-      unselectedLabelStyle:
-          Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 11, fontWeight: FontWeight.w500),
+      selectedLabelStyle: Theme.of(context)
+          .textTheme
+          .displaySmall!
+          .copyWith(fontSize: 11, fontWeight: FontWeight.w500),
+      unselectedLabelStyle: Theme.of(context)
+          .textTheme
+          .displaySmall!
+          .copyWith(fontSize: 11, fontWeight: FontWeight.w500),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: PlatformIcon(

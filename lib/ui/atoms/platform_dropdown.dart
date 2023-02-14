@@ -8,7 +8,8 @@ class PlatformDropdown extends StatelessWidget {
   final Map<String, String>? data;
   final Function(String)? onChange;
 
-  const PlatformDropdown({Key? key, this.data, this.onChange}) : super(key: key);
+  const PlatformDropdown({Key? key, this.data, this.onChange})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class PlatformDropdown extends StatelessWidget {
                   child: SizedBox(
                     width: 200,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: PlatformDimension.sizeXS),
+                      padding:
+                          const EdgeInsets.only(left: PlatformDimension.sizeXS),
                       child: PlatformDefaultText(
                         color: PlatformColorFoundation.textColor,
                         text: value,

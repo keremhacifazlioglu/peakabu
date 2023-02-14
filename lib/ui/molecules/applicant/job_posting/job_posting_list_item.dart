@@ -22,7 +22,8 @@ class JobPostingListItem extends StatelessWidget {
                   top: 16,
                 ),
                 child: PlatformDefaultText(
-                  text: "İstanbul Beşiktaş'ta ÇOKKKK ACİLLLL Temizlikçi Arıyorum",
+                  text:
+                      "İstanbul Beşiktaş'ta ÇOKKKK ACİLLLL Temizlikçi Arıyorum",
                   color: PlatformColorFoundation.textColor,
                   fontWeight: FontWeight.w600,
                   fontSize: PlatformTypographyFoundation.bodyLarge,

@@ -4,7 +4,7 @@ import 'package:platform/ui/atoms/platform_default_text.dart';
 class PlatformTabMenu extends StatelessWidget {
   final double? width;
   final String? text;
-  final Color? borderColor, textColor,color;
+  final Color? borderColor, textColor, color;
 
   const PlatformTabMenu({
     Key? key,
@@ -30,7 +30,7 @@ class PlatformTabMenu extends StatelessWidget {
         ),
         color: color,
       ),
-      child:  Center(
+      child: Center(
         child: PlatformDefaultText(
           color: textColor,
           fontWeight: FontWeight.w400,

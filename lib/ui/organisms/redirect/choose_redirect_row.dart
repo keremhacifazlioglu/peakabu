@@ -11,9 +11,7 @@ class ChooseRedirectRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: PlatformDimension.sizeLG * 2),
       child: GestureDetector(
-        onTap: () {
-
-        },
+        onTap: () {},
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [

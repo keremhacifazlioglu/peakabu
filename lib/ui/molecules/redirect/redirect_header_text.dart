@@ -34,7 +34,8 @@ class RedirectHeaderText extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
           PlatformHeadText(
-            headText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit et dolore magna aliqua",
+            headText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit et dolore magna aliqua",
             fontWeight: FontWeight.w200,
             color: PlatformColorFoundation.textColor,
             fontSize: PlatformTypography.sizeSL,

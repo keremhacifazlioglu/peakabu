@@ -81,7 +81,8 @@ extension CustomAlertDialogExtension on CustomAlertDialog {
       context: context,
       barrierDismissible: false,
       transitionDuration: const Duration(milliseconds: 200),
-      pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
         return CustomAlertDialog(
           message: message,
         );

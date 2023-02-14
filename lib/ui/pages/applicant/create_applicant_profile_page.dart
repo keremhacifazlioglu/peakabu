@@ -31,7 +31,8 @@ class CreateApplicantProfilePage extends StatelessWidget {
                 color: PlatformColorFoundation.textColor,
                 fontWeight: FontWeight.w600,
                 fontSize: PlatformTypographyFoundation.titleLarge,
-                headText: "Seçtiğiniz iş ilanına başvurmak için ücretsiz hesap oluşturun.",
+                headText:
+                    "Seçtiğiniz iş ilanına başvurmak için ücretsiz hesap oluşturun.",
               ),
             ),
             const PlatformProfileImgUpload(

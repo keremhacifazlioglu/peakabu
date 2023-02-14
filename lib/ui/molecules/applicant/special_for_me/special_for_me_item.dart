@@ -6,10 +6,13 @@ import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/tokens/colors.dart';
 
 class SpecialForMeItem extends StatelessWidget {
+  final String? svgPath, title;
 
-  final String? svgPath,title;
-
-  const SpecialForMeItem({Key? key,this.svgPath,this.title,}) : super(key: key);
+  const SpecialForMeItem({
+    Key? key,
+    this.svgPath,
+    this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class SpecialForMeItem extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Padding(
-                padding: const EdgeInsets.only(left: 12.0,right: 4),
+                padding: const EdgeInsets.only(left: 12.0, right: 4),
                 child: PlatformIcon(
                   color: PlatformColor.primaryColor,
                   height: 20,

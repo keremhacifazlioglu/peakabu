@@ -44,7 +44,8 @@ class JobPostingDetailPage extends StatelessWidget {
           child: PlatformSubmitButton(
             buttonText: "Başvur",
             onPressed: () {
-             const  CustomAlertDialog().showDialog(context, "Değişiklikleri kaydetmek istediğinizden emin misiniz?");
+              const CustomAlertDialog().showDialog(context,
+                  "Değişiklikleri kaydetmek istediğinizden emin misiniz?");
             },
           ),
         ),

@@ -53,7 +53,10 @@ class CustomShowDialog extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "$description",
-                      style: const TextStyle(color: Colors.black, fontSize: 15, decoration: TextDecoration.none),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          decoration: TextDecoration.none),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -68,12 +71,14 @@ class CustomShowDialog extends StatelessWidget {
 }
 
 extension CustomShowDialogExtension on CustomShowDialog {
-  Future<T?> showDialog<T>(BuildContext context, String message, String description) {
+  Future<T?> showDialog<T>(
+      BuildContext context, String message, String description) {
     return showGeneralDialog<T>(
       context: context,
       barrierDismissible: false,
       transitionDuration: const Duration(milliseconds: 200),
-      pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
         return CustomShowDialog(
           message: message,
           description: description,

@@ -20,7 +20,8 @@ class PlatformSubmitButton extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(PlatformColorFoundation.buttonColor),
+          foregroundColor: MaterialStateProperty.all<Color>(
+              PlatformColorFoundation.buttonColor),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0),
@@ -31,10 +32,9 @@ class PlatformSubmitButton extends StatelessWidget {
         child: Text(
           buttonText!,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: PlatformColor.offWhiteColor,
-                fontWeight: FontWeight.w600,
-                fontSize: PlatformTypographyFoundation.bodyLarge
-              ),
+              color: PlatformColor.offWhiteColor,
+              fontWeight: FontWeight.w600,
+              fontSize: PlatformTypographyFoundation.bodyLarge),
         ),
       ),
     );

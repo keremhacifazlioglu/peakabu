@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '531635005389',
     projectId: 'peakabu-app',
     storageBucket: 'peakabu-app.appspot.com',
-    iosClientId: '531635005389-anc7c47sbuhcc1osdg4redvr70ld8vn6.apps.googleusercontent.com',
+    iosClientId:
+        '531635005389-anc7c47sbuhcc1osdg4redvr70ld8vn6.apps.googleusercontent.com',
     iosBundleId: 'com.peakabu.app',
   );
 }

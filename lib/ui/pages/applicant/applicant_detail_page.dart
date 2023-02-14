@@ -50,7 +50,8 @@ class ApplicantDetailPage extends StatelessWidget {
           child: PlatformSubmitButton(
             buttonText: "Düzenle",
             onPressed: () {
-              Navigator.of(context,rootNavigator: true).pushNamed("/applicant_profile");
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed("/applicant_profile");
             },
           ),
         ),
