@@ -1,7 +1,17 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:platform/domain/request/auth/confirm_sms_request.dart';
+import 'package:platform/domain/request/auth/register_request.dart';
+import 'package:platform/domain/request/auth/send_sms_request.dart';
+import 'package:platform/domain/request/auth/token_request.dart';
+import 'package:platform/domain/request/job/my_job_posting_request.dart';
+import 'package:platform/domain/request/job/my_job_posting_update.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/applicant/find_applicant.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
+import 'package:platform/domain/response/auth/confirm_sms.dart';
+import 'package:platform/domain/response/auth/token.dart';
 import 'package:platform/domain/response/favorite/favorite_job_posting.dart';
 import 'package:platform/domain/response/job/find_job.dart';
 import 'package:platform/domain/response/job/hire_job.dart';
@@ -107,4 +117,76 @@ abstract class RestClient {
 
   @GET("/ages")
   Future<List<Age>> fetchAges();
+
+  @POST("/send_sms")
+  Future sendSms(@Body() SendSmsRequest sendSmsRequest);
+
+  @POST("/confirm_sms")
+  Future<ConfirmSms> sendConfirmSms(
+      @Body() ConfirmSmsRequest confirmSmsRequest);
+
+  @POST("/register")
+  Future<Token> register(@Body() RegisterRequest registerRequest);
+
+  @POST("/token")
+  Future<Token> token(@Body() TokenRequest tokenRequest);
+
+  @POST("/job_postings/{jobId}/favorite")
+  Future jobPostingAddFavorite(@Path() int jobId);
+
+  @POST("/job_postings/{jobId}/apply")
+  Future jobPostingApply(@Path() int jobId);
+
+  @POST("/job_postings/{jobId}/reject")
+  Future jobPostingReject(@Path() int jobId);
+
+  @POST("/my_job_posting")
+  Future createMyJobPosting(@Body() MyJobPostingRequest myJobPostingRequest);
+
+  @PUT("/my_job_posting")
+  Future updateMyJobPosting(@Body() MyJobPostingUpdate myJobPostingUpdate);
+
+  @POST("/applicant_profiles/{jobId}/favorite")
+  Future addFavoriteApplicantProfile(@Path() int jobId);
+
+  @POST("/applicant_profiles/{jobId}/request")
+  Future applicantProfileRequest(@Path() int jobId);
+
+  @POST('/applicant_profile')
+  @MultiPart()
+  Future<dynamic> createApplicantProfile({
+    @Part() required String name,
+    @Part() required String gender,
+    @Part() required String city,
+    @Part() required String title,
+    @Part() required String district,
+    @Part() required String caretakerType,
+    @Part() required String shiftSystems,
+    @Part() required String experience,
+    @Part() required String nationality,
+    @Part() required String age,
+    @Part() required int description,
+    @Part() required int smoking,
+    @Part() required int travelRestriction,
+    @Part() File? thumbnail,
+  });
+
+  @PUT('/applicant_profile')
+  @MultiPart()
+  Future<dynamic> updateApplicantProfile({
+    @Part() required String name,
+    @Part() required String gender,
+    @Part() required String city,
+    @Part() required String title,
+    @Part() required String district,
+    @Part() required String caretakerType,
+    @Part() required String shiftSystems,
+    @Part() required String experience,
+    @Part() required String nationality,
+    @Part() required String age,
+    @Part() required int description,
+    @Part() required int smoking,
+    @Part() required int travelRestriction,
+    @Part() File? thumbnail,
+  });
 }
