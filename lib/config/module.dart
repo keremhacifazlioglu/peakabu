@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:platform/network/interceptor/error_interceptor.dart';
 import 'package:platform/network/interceptor/log_interceptor.dart';
 import 'package:platform/network/interceptor/token_interceptor.dart';
 import 'package:platform/network/rest_client.dart';
@@ -16,6 +17,7 @@ abstract class AppModule {
       ),
     );
     dio.interceptors.add(TokenInterceptor());
+    dio.interceptors.add(ErrorInterceptor());
     if (kDebugMode) {
       dio.interceptors.add(LoggerInterceptor());
     }
@@ -23,7 +25,7 @@ abstract class AppModule {
   }
 
   @lazySingleton
-  RestClient get injectRestClient => RestClient(retrofitApi);
+  RestClient get restClient => RestClient(retrofitApi);
 
   @lazySingleton
   FlutterSecureStorage flutterSecureStorage() => const FlutterSecureStorage();

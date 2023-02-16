@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:platform/domain/request/auth/confirm_sms_request.dart';
 import 'package:platform/domain/request/auth/register_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
@@ -29,6 +30,7 @@ part 'rest_client.g.dart';
 
 @RestApi(baseUrl: "https://070f6af2-2bf4-403f-843f-a6c2e2452664.mock.pstmn.io")
 abstract class RestClient {
+  @factoryMethod
   factory RestClient(Dio dio) = _RestClient;
 
   @GET("/job_posting")
