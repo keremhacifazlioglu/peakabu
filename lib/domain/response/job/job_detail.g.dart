@@ -20,10 +20,15 @@ JobDetail _$JobDetailFromJson(Map<String, dynamic> json) => JobDetail(
       experience: json['experience'] as String?,
       nationality: json['nationality'] as String?,
       age: json['age'] as String?,
-      status: json['status'] as String?,
+      message: json['message'] as String?,
+      status: json['status'] as int?,
+      isSuccess: json['isSuccess'] as bool?,
     );
 
 Map<String, dynamic> _$JobDetailToJson(JobDetail instance) => <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'isSuccess': instance.isSuccess,
       'id': instance.id,
       'title': instance.title,
       'gender': instance.gender,
@@ -37,5 +42,4 @@ Map<String, dynamic> _$JobDetailToJson(JobDetail instance) => <String, dynamic>{
       'experience': instance.experience,
       'nationality': instance.nationality,
       'age': instance.age,
-      'status': instance.status,
     };

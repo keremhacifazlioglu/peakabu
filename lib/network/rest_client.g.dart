@@ -136,7 +136,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_posting',
+              '/job_postings',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -148,25 +148,25 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<JobPosting> fetchJobPosting(jobId) async {
+  Future<JobDetail> fetchJobPosting(jobId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<JobPosting>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<JobDetail>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/job_posting/${jobId}',
+              '/job_postings/${jobId}',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = JobPosting.fromJson(_result.data!);
+    final value = JobDetail.fromJson(_result.data!);
     return value;
   }
 

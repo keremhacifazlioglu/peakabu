@@ -16,6 +16,7 @@ import 'package:platform/domain/response/auth/token.dart';
 import 'package:platform/domain/response/favorite/favorite_job_posting.dart';
 import 'package:platform/domain/response/job/find_job.dart';
 import 'package:platform/domain/response/job/hire_job.dart';
+import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/recruiter_job_posting.dart';
@@ -51,14 +52,14 @@ abstract class RestClient {
 
   // todo Job
 
-  @GET("/job_posting")
+  @GET("/job_postings")
   Future<List<JobPosting>> fetchJobPostings(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @GET("/job_posting/{id}")
-  Future<JobPosting> fetchJobPosting(@Path("id") int jobId);
+  @GET("/job_postings/{id}")
+  Future<JobDetail> fetchJobPosting(@Path("id") int jobId);
 
   @GET("/job_posting/{id}/get_phone")
   Future<JobPhone> fetchJobPostingPhone(@Path("id") int jobId);

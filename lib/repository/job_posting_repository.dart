@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
+import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
@@ -20,7 +21,7 @@ class JobPostingRepository extends IJobPostingRepository {
 
   @override
   Future<BaseListResponse> fetchJobPostings(int pageSize, int pageNmber) async {
-    BaseListResponse baseListResponse = BaseListResponse();
+    BaseListResponse<JobPosting> baseListResponse = BaseListResponse();
     try {
       List<JobPosting> response =
           await _restClient.fetchJobPostings(pageNmber, pageSize);
@@ -28,20 +29,23 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
       baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
     }
     return baseListResponse;
   }
 
   @override
-  Future<JobPosting> fetchJobPosting(int jobId) async {
-    JobPosting jobPosting = JobPosting();
+  Future<JobDetail> fetchJobPosting(int jobId) async {
+    JobDetail jobDetail = JobDetail();
     try {
-      jobPosting = await _restClient.fetchJobPosting(jobId);
+      jobDetail = await _restClient.fetchJobPosting(jobId);
+      jobDetail.isSuccess = true;
     } on CustomGenericDioError catch (e) {
-      jobPosting.message = e.text;
-      jobPosting.status = e.response!.statusCode;
+      jobDetail.message = e.text;
+      jobDetail.status = e.response!.statusCode;
+      jobDetail.isSuccess = false;
     }
-    return jobPosting;
+    return jobDetail;
   }
 
   @override
@@ -52,6 +56,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       jobPhone.message = e.text;
       jobPhone.status = e.response!.statusCode;
+      jobPhone.isSuccess = false;
     }
     return jobPhone;
   }
@@ -66,6 +71,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
       baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
     }
     return baseListResponse;
   }
@@ -78,6 +84,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
     return successResponse;
   }
@@ -90,6 +97,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
     return successResponse;
   }
@@ -104,6 +112,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
       baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
     }
     return baseListResponse;
   }
@@ -116,6 +125,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
     return successResponse;
   }
@@ -128,6 +138,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
     return successResponse;
   }
@@ -142,6 +153,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
     return successResponse;
   }
@@ -156,6 +168,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
     return successResponse;
   }
@@ -168,6 +181,7 @@ class JobPostingRepository extends IJobPostingRepository {
     } on CustomGenericDioError catch (e) {
       recruiterJobPosting.message = e.text;
       recruiterJobPosting.status = e.response!.statusCode;
+      recruiterJobPosting.isSuccess = false;
     }
     return recruiterJobPosting;
   }

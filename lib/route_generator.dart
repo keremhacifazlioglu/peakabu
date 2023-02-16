@@ -7,6 +7,7 @@ import 'package:platform/ui/pages/applicant/job_follow_page.dart';
 import 'package:platform/ui/pages/applicant/job_request_page.dart';
 import 'package:platform/ui/pages/confirm_sms_page.dart';
 import 'package:platform/ui/pages/create_account_page.dart';
+import 'package:platform/ui/pages/redirect_page.dart';
 import 'package:platform/ui/pages/root_page.dart';
 import 'package:platform/ui/pages/applicant/special_for_me_page.dart';
 
@@ -29,9 +30,19 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const RootPage(),
         );
+      case 'redirect':
+        return MaterialPageRoute(
+          builder: (_) => const RedirectPage(),
+        );
       case 'job_posting':
         return MaterialPageRoute(
           builder: (_) => JobPostingPage(),
+        );
+      case '/job_posting_detail':
+        return MaterialPageRoute(
+          builder: (_) => JobPostingDetailPage(
+            jobPosting: settings.routeArgs(),
+          ),
         );
       case 'job_follow':
         return MaterialPageRoute(
@@ -44,10 +55,6 @@ class RouteGenerator {
       case 'special_for_me':
         return MaterialPageRoute(
           builder: (_) => const SpecialForMePage(),
-        );
-      case '/job_posting_detail':
-        return MaterialPageRoute(
-          builder: (_) => const JobPostingDetailPage(),
         );
       case '/applicant_profile':
         return MaterialPageRoute(

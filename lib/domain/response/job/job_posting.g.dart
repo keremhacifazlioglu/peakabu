@@ -15,12 +15,13 @@ JobPosting _$JobPostingFromJson(Map<String, dynamic> json) => JobPosting(
       createdAt: json['createdAt'] as String?,
       message: json['message'] as String?,
       status: json['status'] as int?,
-    );
+    )..isSuccess = json['isSuccess'] as bool?;
 
 Map<String, dynamic> _$JobPostingToJson(JobPosting instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
+      'isSuccess': instance.isSuccess,
       'title': instance.title,
       'caretakerType': instance.caretakerType,
       'workType': instance.workType,

@@ -16,11 +16,12 @@ HireJob _$HireJobFromJson(Map<String, dynamic> json) => HireJob(
       status1: json['status1'] as String?,
       message: json['message'] as String?,
       status: json['status'] as int?,
-    );
+    )..isSuccess = json['isSuccess'] as bool?;
 
 Map<String, dynamic> _$HireJobToJson(HireJob instance) => <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
+      'isSuccess': instance.isSuccess,
       'title': instance.title,
       'caretakerType': instance.caretakerType,
       'workType': instance.workType,
