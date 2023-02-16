@@ -24,6 +24,7 @@ import 'package:platform/domain/response/other/caretaker_type.dart';
 import 'package:platform/domain/response/other/experience.dart';
 import 'package:platform/domain/response/other/nationality.dart';
 import 'package:platform/domain/response/other/shift_system.dart';
+import 'package:platform/domain/response/success_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';
@@ -121,7 +122,7 @@ abstract class RestClient {
   Future<List<Age>> fetchAges();
 
   @POST("/send_sms")
-  Future sendSms(@Body() SendSmsRequest sendSmsRequest);
+  Future<SuccessResponse> sendSms(@Body() SendSmsRequest sendSmsRequest);
 
   @POST("/confirm_sms")
   Future<ConfirmSms> sendConfirmSms(
