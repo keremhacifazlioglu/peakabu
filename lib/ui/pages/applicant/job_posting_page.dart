@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
+import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/atoms/platform_icon.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/organisms/applicant/job_posting/job_posting_list.dart';
 import 'package:platform/ui/tokens/colors.dart';
+import 'package:provider/provider.dart';
 
 class JobPostingPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -23,12 +25,12 @@ class JobPostingPage extends StatelessWidget {
         ),
         actions: [
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               secureLocalRepository.writeSecureData(
                 StorageItem("deneme", "deneme"),
               );
-              Navigator.of(context, rootNavigator: true)
-                  .pushNamed("/job_filter");
+              await context.read<JobPostingProvider>().token();
+              //Navigator.of(context, rootNavigator: true).pushNamed("/job_filter");
             },
             child: const SizedBox(
               child: Padding(

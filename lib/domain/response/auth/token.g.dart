@@ -9,9 +9,13 @@ part of 'token.dart';
 Token _$TokenFromJson(Map<String, dynamic> json) => Token(
       token: json['token'] as String?,
       isUserRegistered: json['isUserRegistered'] as bool?,
+      message: json['message'] as String?,
+      status: json['status'] as int?,
     );
 
 Map<String, dynamic> _$TokenToJson(Token instance) => <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
       'token': instance.token,
       'isUserRegistered': instance.isUserRegistered,
     };
