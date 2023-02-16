@@ -21,7 +21,7 @@ class AuthRepository implements IAuthRepository {
     ConfirmSms confirmSms = ConfirmSms();
     try {
       confirmSms = await _restClient.sendConfirmSms(confirmSmsRequest);
-    } on BaseError catch (e) {
+    } on CustomGenericDioError catch (e) {
       confirmSms.message = e.text;
       confirmSms.status = e.response!.statusCode;
     }
@@ -33,7 +33,7 @@ class AuthRepository implements IAuthRepository {
     Token token = Token();
     try {
       token = await _restClient.register(registerRequest);
-    } on BaseError catch (e) {
+    } on CustomGenericDioError catch (e) {
       token.message = e.text;
       token.status = e.response!.statusCode;
     }
@@ -45,7 +45,7 @@ class AuthRepository implements IAuthRepository {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse = await _restClient.sendSms(sendSmsRequest);
-    } on BaseError catch (e) {
+    } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
     }
@@ -57,7 +57,7 @@ class AuthRepository implements IAuthRepository {
     Token token = Token();
     try {
       token = await _restClient.token(tokenRequest);
-    } on BaseError catch (e) {
+    } on CustomGenericDioError catch (e) {
       token.message = e.text;
       token.status = e.response!.statusCode;
     }

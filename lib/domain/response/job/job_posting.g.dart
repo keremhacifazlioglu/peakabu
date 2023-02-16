@@ -13,10 +13,14 @@ JobPosting _$JobPostingFromJson(Map<String, dynamic> json) => JobPosting(
       city: json['city'] as String?,
       district: json['district'] as String?,
       createdAt: json['createdAt'] as String?,
+      message: json['message'] as String?,
+      status: json['status'] as int?,
     );
 
 Map<String, dynamic> _$JobPostingToJson(JobPosting instance) =>
     <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
       'title': instance.title,
       'caretakerType': instance.caretakerType,
       'workType': instance.workType,

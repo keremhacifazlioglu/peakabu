@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:platform/domain/exception_error.dart';
 
 part 'job_posting.g.dart';
 
 @JsonSerializable()
-class JobPosting {
+class JobPosting extends ExceptionError {
   String? title;
   String? caretakerType;
   String? workType;
@@ -18,7 +19,9 @@ class JobPosting {
     this.city,
     this.district,
     this.createdAt,
-  });
+    String? message,
+    int? status,
+  }) : super(message: message, status: status);
 
   Map<String, dynamic> toJson() => _$JobPostingToJson(this);
 

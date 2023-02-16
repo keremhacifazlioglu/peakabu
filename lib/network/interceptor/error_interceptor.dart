@@ -21,7 +21,7 @@ class ErrorInterceptor extends Interceptor {
           Log.e("Hata Mesajı çözülemedi");
         }
         if (message != null) {
-          throw BaseError(message, err.requestOptions);
+          throw CustomGenericDioError(message, err.requestOptions);
         }
         switch (err.response?.statusCode) {
           case 400:
@@ -39,9 +39,9 @@ class ErrorInterceptor extends Interceptor {
       case DioErrorType.unknown:
         switch (err.runtimeType) {
           case SocketException:
-            throw BaseError("Soket Hatası", err.requestOptions);
+            throw CustomGenericDioError("Soket Hatası", err.requestOptions);
           case FormatException:
-            throw BaseError("Format Hatası", err.requestOptions);
+            throw CustomGenericDioError("Format Hatası", err.requestOptions);
           default:
             throw NoInternetConnectionException(err.requestOptions);
         }
@@ -55,8 +55,8 @@ class ErrorInterceptor extends Interceptor {
   }
 }
 
-class BaseError extends DioError {
-  BaseError(this.text, RequestOptions r) : super(requestOptions: r);
+class CustomGenericDioError extends DioError {
+  CustomGenericDioError(this.text, RequestOptions r) : super(requestOptions: r);
   final String text;
   @override
   String toString() {

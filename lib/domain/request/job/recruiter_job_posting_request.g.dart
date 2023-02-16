@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'my_job_posting_request.dart';
+part of 'recruiter_job_posting_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MyJobPostingRequest _$MyJobPostingRequestFromJson(Map<String, dynamic> json) =>
-    MyJobPostingRequest(
+RecruiterJobPostingRequest _$RecruiterJobPostingRequestFromJson(
+        Map<String, dynamic> json) =>
+    RecruiterJobPostingRequest(
       title: json['title'] as String?,
       caretakerType: json['caretakerType'] as String?,
       workType: json['workType'] as String?,
@@ -17,8 +18,8 @@ MyJobPostingRequest _$MyJobPostingRequestFromJson(Map<String, dynamic> json) =>
       follow: json['follow'] as bool?,
     );
 
-Map<String, dynamic> _$MyJobPostingRequestToJson(
-        MyJobPostingRequest instance) =>
+Map<String, dynamic> _$RecruiterJobPostingRequestToJson(
+        RecruiterJobPostingRequest instance) =>
     <String, dynamic>{
       'title': instance.title,
       'caretakerType': instance.caretakerType,
