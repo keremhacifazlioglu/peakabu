@@ -10,9 +10,8 @@ SuccessResponse _$SuccessResponseFromJson(Map<String, dynamic> json) =>
     SuccessResponse(
       success: json['success'] as bool?,
       message: json['message'] as String?,
-    )
-      ..status = json['status'] as int?
-      ..isSuccess = json['isSuccess'] as bool?;
+      isSuccess: json['isSuccess'] as bool?,
+    )..status = json['status'] as int?;
 
 Map<String, dynamic> _$SuccessResponseToJson(SuccessResponse instance) =>
     <String, dynamic>{

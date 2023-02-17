@@ -17,18 +17,6 @@ class AuthRepository implements IAuthRepository {
   AuthRepository(this._restClient);
 
   @override
-  Future<ConfirmSms> confirmSms(ConfirmSmsRequest confirmSmsRequest) async {
-    ConfirmSms confirmSms = ConfirmSms();
-    try {
-      confirmSms = await _restClient.sendConfirmSms(confirmSmsRequest);
-    } on CustomGenericDioError catch (e) {
-      confirmSms.message = e.text;
-      confirmSms.status = e.response!.statusCode;
-    }
-    return confirmSms;
-  }
-
-  @override
   Future<Token> register(RegisterRequest registerRequest) async {
     Token token = Token();
     try {
@@ -45,11 +33,27 @@ class AuthRepository implements IAuthRepository {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse = await _restClient.sendSms(sendSmsRequest);
+      successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
     return successResponse;
+  }
+
+  @override
+  Future<ConfirmSms> confirmSms(ConfirmSmsRequest confirmSmsRequest) async {
+    ConfirmSms confirmSms = ConfirmSms();
+    try {
+      confirmSms = await _restClient.sendConfirmSms(confirmSmsRequest);
+      confirmSms.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      confirmSms.message = e.text;
+      confirmSms.status = e.response!.statusCode;
+      confirmSms.isSuccess = false;
+    }
+    return confirmSms;
   }
 
   @override

@@ -11,7 +11,12 @@ class SuccessResponse extends ExceptionError {
     this.success,
     String? message,
     int? statusCode,
-  }) : super(message: message, status: statusCode);
+    bool? isSuccess,
+  }) : super(
+          message: message,
+          status: statusCode,
+          isSuccess: isSuccess,
+        );
 
   factory SuccessResponse.fromJson(Map<String, dynamic> json) {
     return _$SuccessResponseFromJson(json);
