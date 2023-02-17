@@ -8,8 +8,8 @@ class ConfirmSms extends ExceptionError {
   String? phone;
   String? code;
 
-  ConfirmSms({this.phone, this.code, String? message, int? status})
-      : super(message: message, status: status);
+  ConfirmSms({this.phone, this.code, String? message, int? status,bool? isSuccess})
+      : super(message: message, status: status, isSuccess:isSuccess);
 
   factory ConfirmSms.fromJson(Map<String, dynamic> json) {
     return _$ConfirmSmsFromJson(json);

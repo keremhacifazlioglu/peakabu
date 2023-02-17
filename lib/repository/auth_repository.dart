@@ -43,17 +43,17 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<ConfirmSms> confirmSms(ConfirmSmsRequest confirmSmsRequest) async {
-    ConfirmSms confirmSms = ConfirmSms();
+  Future<SuccessResponse> confirmSms(ConfirmSmsRequest confirmSmsRequest) async {
+    SuccessResponse successResponse = SuccessResponse();
     try {
-      confirmSms = await _restClient.sendConfirmSms(confirmSmsRequest);
-      confirmSms.isSuccess = true;
+      successResponse = await _restClient.sendConfirmSms(confirmSmsRequest);
+      successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
-      confirmSms.message = e.text;
-      confirmSms.status = e.response!.statusCode;
-      confirmSms.isSuccess = false;
+      successResponse.message = e.text;
+      successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
     }
-    return confirmSms;
+    return successResponse;
   }
 
   @override

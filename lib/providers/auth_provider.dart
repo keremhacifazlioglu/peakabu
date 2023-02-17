@@ -1,5 +1,7 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:platform/domain/request/auth/confirm_sms_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
+import 'package:platform/domain/response/auth/confirm_sms.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/auth_repository.dart';
@@ -12,6 +14,16 @@ class AuthProvider with ChangeNotifier {
   NetworkStatus networkStatus = NetworkStatus.none;
   String? phoneNumber;
   bool? isKvkkCheck;
+  FocusScopeNode? node = FocusScopeNode();
+  String smsPin = "";
+  bool resend = false;
+  int second = 10;
+  List<TextEditingController> textEditingControllerList = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController()
+  ];
 
   AuthProvider(this._authRepository, this._secureLocalRepository);
 
@@ -21,7 +33,6 @@ class AuthProvider with ChangeNotifier {
     SuccessResponse successResponse = await _authRepository.sendSms(
       SendSmsRequest(phoneNumber: phoneNumber!),
     );
-
     if (successResponse.success!) {
       _secureLocalRepository
           .writeSecureData(StorageItem("phoneNumber", phoneNumber!));
@@ -31,5 +42,59 @@ class AuthProvider with ChangeNotifier {
     }
     notifyListeners();
     return successResponse;
+  }
+
+  Future<SuccessResponse> resendSms() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    String? phoneNumber= await _secureLocalRepository.readSecureData("phoneNumber");
+    SuccessResponse successResponse = await _authRepository.sendSms(
+      SendSmsRequest(phoneNumber: phoneNumber!),
+    );
+    if (successResponse.success!) {
+      smsPin = "";
+      resend = false;
+      networkStatus = NetworkStatus.success;
+    } else {
+      networkStatus = NetworkStatus.error;
+    }
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future<SuccessResponse> confirmSms() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = SuccessResponse();
+    if(smsPin.isNotEmpty){
+      String? phoneNumber= await _secureLocalRepository.readSecureData("phoneNumber");
+      successResponse = await _authRepository.confirmSms(
+        ConfirmSmsRequest(phone: phoneNumber,code: smsPin),
+      );
+      if (successResponse.isSuccess!) {
+        _secureLocalRepository
+            .writeSecureData(StorageItem("uuid", smsPin));
+        networkStatus = NetworkStatus.success;
+      } else {
+        networkStatus = NetworkStatus.error;
+      }
+    }else{
+      networkStatus = NetworkStatus.error;
+      successResponse.isSuccess = false;
+      successResponse.message = "Lütfen sms ile gelen kodu giriniz";
+    }
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future prepareSmsPin() async {
+    for (TextEditingController textEditingController in textEditingControllerList) {
+      smsPin += textEditingController.text.toString();
+    }
+  }
+
+  Future activateResendMessage() async{
+    resend = true;
+    notifyListeners();
   }
 }

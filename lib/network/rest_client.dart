@@ -47,7 +47,7 @@ abstract class RestClient {
   Future<SuccessResponse> sendSms(@Body() SendSmsRequest sendSmsRequest);
 
   @POST("/confirm_sms")
-  Future<ConfirmSms> sendConfirmSms(
+  Future<SuccessResponse> sendConfirmSms(
       @Body() ConfirmSmsRequest confirmSmsRequest);
 
   // todo Job

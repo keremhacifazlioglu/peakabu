@@ -93,14 +93,14 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<ConfirmSms> sendConfirmSms(confirmSmsRequest) async {
+  Future<SuccessResponse> sendConfirmSms(confirmSmsRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(confirmSmsRequest.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ConfirmSms>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -112,7 +112,7 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ConfirmSms.fromJson(_result.data!);
+    final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 

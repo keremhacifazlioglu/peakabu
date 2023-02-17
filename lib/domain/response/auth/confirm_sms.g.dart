@@ -11,7 +11,8 @@ ConfirmSms _$ConfirmSmsFromJson(Map<String, dynamic> json) => ConfirmSms(
       code: json['code'] as String?,
       message: json['message'] as String?,
       status: json['status'] as int?,
-    )..isSuccess = json['isSuccess'] as bool?;
+      isSuccess: json['isSuccess'] as bool?,
+    );
 
 Map<String, dynamic> _$ConfirmSmsToJson(ConfirmSms instance) =>
     <String, dynamic>{
