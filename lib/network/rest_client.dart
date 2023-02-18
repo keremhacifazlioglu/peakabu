@@ -178,7 +178,9 @@ abstract class RestClient {
   // todo Favorite
 
   @GET("/favorite_job_postings")
-  Future<List<FavoriteJobPosting>> fetchFavoriteJobPosting();
+  Future<List<JobPosting>> fetchFavoriteJobPosting(
+      @Query("pageNumber") int pageNumber,
+      @Query("pageSize") int pageSize,);
 
   @GET("/favorite_applicant_profiles")
   Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile();

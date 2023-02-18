@@ -20,11 +20,25 @@ class JobPostingRepository extends IJobPostingRepository {
   JobPostingRepository(this._restClient);
 
   @override
-  Future<BaseListResponse> fetchJobPostings(int pageSize, int pageNmber) async {
+  Future<BaseListResponse> fetchJobPostings(int pageSize, int pageNumber) async {
     BaseListResponse<JobPosting> baseListResponse = BaseListResponse();
     try {
       List<JobPosting> response =
-          await _restClient.fetchJobPostings(pageNmber, pageSize);
+          await _restClient.fetchJobPostings(pageNumber, pageSize);
+      baseListResponse.data = response;
+    } on CustomGenericDioError catch (e) {
+      baseListResponse.message = e.text;
+      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
+    }
+    return baseListResponse;
+  }
+
+  @override
+  Future<BaseListResponse> fetchFavoriteJobPostings(int pageSize, int pageNumber) async {
+    BaseListResponse<JobPosting> baseListResponse = BaseListResponse();
+    try {
+      List<JobPosting> response = await _restClient.fetchFavoriteJobPosting(pageNumber,pageSize);
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;

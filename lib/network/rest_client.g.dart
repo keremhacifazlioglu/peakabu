@@ -851,13 +851,19 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<List<FavoriteJobPosting>> fetchFavoriteJobPosting() async {
+  Future<List<JobPosting>> fetchFavoriteJobPosting(
+    pageNumber,
+    pageSize,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNumber': pageNumber,
+      r'pageSize': pageSize,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<FavoriteJobPosting>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<JobPosting>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -870,8 +876,7 @@ class _RestClient implements RestClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) =>
-            FavoriteJobPosting.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => JobPosting.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

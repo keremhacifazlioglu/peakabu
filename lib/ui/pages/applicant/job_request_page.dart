@@ -42,22 +42,28 @@ class JobRequestPage extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(2),
-                        child: PlatformTabMenu(
-                          width: (MediaQuery.of(context).size.width - 64) / 2,
-                          color: PlatformColor.primaryColor,
-                          borderColor: PlatformColor.primaryColor,
-                          text: "İş Başvuruları",
-                          textColor: PlatformColor.offWhiteColor,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: PlatformTabMenu(
+                            width: (MediaQuery.of(context).size.width - 64) / 2,
+                            color: PlatformColor.primaryColor,
+                            borderColor: PlatformColor.primaryColor,
+                            text: "İş Başvuruları",
+                            textColor: PlatformColor.offWhiteColor,
+                          ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(2),
-                        child: PlatformTabMenu(
-                          width: (MediaQuery.of(context).size.width - 64) / 2,
-                          color: PlatformColor.offWhiteColor,
-                          borderColor: PlatformColor.offWhiteColor,
-                          text: "İletişim Talepleri",
-                          textColor: PlatformColor.grayLightColor,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: PlatformTabMenu(
+                            width: (MediaQuery.of(context).size.width - 64) / 2,
+                            color: PlatformColor.offWhiteColor,
+                            borderColor: PlatformColor.offWhiteColor,
+                            text: "İletişim Talepleri",
+                            textColor: PlatformColor.grayLightColor,
+                          ),
                         ),
                       ),
                     ],

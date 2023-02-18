@@ -7,19 +7,21 @@ import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/success_response.dart';
 
 abstract class IJobPostingRepository {
-  Future<BaseListResponse> fetchJobPostings(int pageSize, int pageNmber);
+  Future<BaseListResponse> fetchJobPostings(int pageSize, int pageNumber);
 
   Future<JobDetail> fetchJobPosting(int jobId);
 
+  Future<BaseListResponse> fetchFavoriteJobPostings(int pageSize, int pageNumber);
+
   Future<JobPhone> findJobPostingPhone(int jobId);
 
-  Future<BaseListResponse> findJobPostings(int pageSize, int pageNmber);
+  Future<BaseListResponse> findJobPostings(int pageSize, int pageNumber);
 
   Future<SuccessResponse> applyJobPosting(int jobId);
 
   Future<SuccessResponse> rejectJobPosting(int jobId);
 
-  Future<BaseListResponse> findHirePostings(int pageSize, int pageNmber);
+  Future<BaseListResponse> findHirePostings(int pageSize, int pageNumber);
 
   Future<SuccessResponse> applyHireJob(int hireId);
 

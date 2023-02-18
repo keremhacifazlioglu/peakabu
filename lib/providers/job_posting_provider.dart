@@ -10,9 +10,9 @@ import 'package:platform/repository/job_posting_repository.dart';
 @injectable
 class JobPostingProvider with ChangeNotifier {
   final JobPostingRepository _jobPostingRepository;
-  List<JobPosting> allJobPostings = [];
+  List<JobPosting> allJobPostings = [], allFavoriteJobPosting = [];
   bool isLastPage = false;
-  int pagingSize = 10, pageNumber = 1;
+  int pagingSize = 10, pageNumber = 1,pageFavoriteNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
   JobDetail? jobDetail;
 
@@ -20,6 +20,7 @@ class JobPostingProvider with ChangeNotifier {
       this._jobPostingRepository, @factoryParam PageType pageType) {
     if (pageType == PageType.fetch) {
       fetchJobPostingsWithPagination();
+      fetchFavoriteJobPostingsWithPagination();
     } else if (pageType == PageType.detail) {
       fetchJobPostingDetail();
     }
@@ -35,6 +36,27 @@ class JobPostingProvider with ChangeNotifier {
         isLastPage = response.data!.length < pagingSize;
         pageNumber++;
         allJobPostings.addAll(response.data! as List<JobPosting>);
+        networkStatus = NetworkStatus.success;
+      } else {
+        networkStatus = NetworkStatus.error;
+      }
+    } else {
+      networkStatus = NetworkStatus.success;
+    }
+    notifyListeners();
+  }
+
+
+  Future fetchFavoriteJobPostingsWithPagination() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    if (!isLastPage) {
+      BaseListResponse response =
+      await _jobPostingRepository.fetchFavoriteJobPostings(pagingSize, pageFavoriteNumber);
+      if (response.isSuccess!) {
+        isLastPage = response.data!.length < pagingSize;
+        pageFavoriteNumber++;
+        allFavoriteJobPosting.addAll(response.data! as List<JobPosting>);
         networkStatus = NetworkStatus.success;
       } else {
         networkStatus = NetworkStatus.error;
