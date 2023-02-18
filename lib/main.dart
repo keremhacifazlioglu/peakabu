@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:platform/config/injection.dart';
 import 'package:platform/firebase_options.dart';
+import 'package:platform/providers/other_provider.dart';
 import 'package:platform/providers/root_provider.dart';
 import 'package:platform/route_generator.dart';
 import 'package:platform/ui/theme.dart';
@@ -27,6 +28,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider<RootProvider>(
           create: (_) => RootProvider(),
+        ),
+        ChangeNotifierProvider<OtherProvider>(
+          create: (_) => OtherProvider(),
         ),
       ],
       child: const MyApp(),
