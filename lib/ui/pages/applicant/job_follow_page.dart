@@ -3,8 +3,6 @@ import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/job_posting_provider.dart';
-import 'package:platform/ui/atoms/platform_icon.dart';
-import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/organisms/applicant/job_posting/job_posting_list.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +34,8 @@ class JobFollowPage extends StatelessWidget {
                     }
                     return true;
                   },
-                  child: JobPostingList(jobPostings: provider.allFavoriteJobPosting),
+                  child: JobPostingList(
+                      jobPostings: provider.allFavoriteJobPosting),
                 );
               }
               if (provider.networkStatus == NetworkStatus.error) {

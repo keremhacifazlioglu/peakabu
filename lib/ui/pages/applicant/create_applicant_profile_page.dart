@@ -28,7 +28,7 @@ class CreateApplicantProfilePage extends StatelessWidget {
         create: (context) =>
             AuthProvider(authRepository, secureLocalRepository),
         builder: (context, child) {
-          var authProvider = Provider.of<AuthProvider>(context);
+          // var authProvider = Provider.of<AuthProvider>(context);
           return SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

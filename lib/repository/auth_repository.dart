@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:platform/domain/response/auth/token.dart';
-import 'package:platform/domain/response/auth/confirm_sms.dart';
 import 'package:platform/domain/request/auth/token_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
 import 'package:platform/domain/request/auth/register_request.dart';
@@ -43,7 +42,8 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<SuccessResponse> confirmSms(ConfirmSmsRequest confirmSmsRequest) async {
+  Future<SuccessResponse> confirmSms(
+      ConfirmSmsRequest confirmSmsRequest) async {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse = await _restClient.sendConfirmSms(confirmSmsRequest);

@@ -11,7 +11,7 @@ import 'package:platform/repository/job_posting_repository.dart';
 class JobPostingProvider with ChangeNotifier {
   final JobPostingRepository _jobPostingRepository;
   List<JobPosting> allJobPostings = [], allFavoriteJobPosting = [];
-  bool isLastPage = false;
+  bool isLastPage = false, isFavoriteLastPage = false;
   int pagingSize = 10, pageNumber = 1,pageFavoriteNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
   JobDetail? jobDetail;
@@ -50,11 +50,11 @@ class JobPostingProvider with ChangeNotifier {
   Future fetchFavoriteJobPostingsWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
-    if (!isLastPage) {
+    if (!isFavoriteLastPage) {
       BaseListResponse response =
       await _jobPostingRepository.fetchFavoriteJobPostings(pagingSize, pageFavoriteNumber);
       if (response.isSuccess!) {
-        isLastPage = response.data!.length < pagingSize;
+        isFavoriteLastPage = response.data!.length < pagingSize;
         pageFavoriteNumber++;
         allFavoriteJobPosting.addAll(response.data! as List<JobPosting>);
         networkStatus = NetworkStatus.success;

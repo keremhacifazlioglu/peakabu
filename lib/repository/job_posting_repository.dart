@@ -3,11 +3,10 @@ import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
+import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
-import 'package:platform/domain/response/job/hire_job.dart';
-import 'package:platform/domain/response/job/find_job.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/interceptor/error_interceptor.dart';
 import 'package:platform/network/rest_client.dart';
@@ -20,7 +19,8 @@ class JobPostingRepository extends IJobPostingRepository {
   JobPostingRepository(this._restClient);
 
   @override
-  Future<BaseListResponse> fetchJobPostings(int pageSize, int pageNumber) async {
+  Future<BaseListResponse> fetchJobPostings(
+      int pageSize, int pageNumber) async {
     BaseListResponse<JobPosting> baseListResponse = BaseListResponse();
     try {
       List<JobPosting> response =
@@ -35,10 +35,12 @@ class JobPostingRepository extends IJobPostingRepository {
   }
 
   @override
-  Future<BaseListResponse> fetchFavoriteJobPostings(int pageSize, int pageNumber) async {
+  Future<BaseListResponse> fetchFavoriteJobPostings(
+      int pageSize, int pageNumber) async {
     BaseListResponse<JobPosting> baseListResponse = BaseListResponse();
     try {
-      List<JobPosting> response = await _restClient.fetchFavoriteJobPosting(pageNumber,pageSize);
+      List<JobPosting> response =
+          await _restClient.fetchFavoriteJobPosting(pageNumber, pageSize);
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
@@ -76,11 +78,12 @@ class JobPostingRepository extends IJobPostingRepository {
   }
 
   @override
-  Future<BaseListResponse> findHirePostings(int pageSize, int pageNmber) async {
+  Future<BaseListResponse> findHirePostings(
+      int pageSize, int pageNumber) async {
     BaseListResponse baseListResponse = BaseListResponse();
     try {
-      List<HireJob> response =
-          await _restClient.findHirePostings(pageNmber, pageSize);
+      List<JobRequest> response =
+          await _restClient.findHirePostings(pageNumber, pageSize);
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
@@ -117,11 +120,11 @@ class JobPostingRepository extends IJobPostingRepository {
   }
 
   @override
-  Future<BaseListResponse> findJobPostings(int pageSize, int pageNmber) async {
+  Future<BaseListResponse> findJobPostings(int pageSize, int pageNumber) async {
     BaseListResponse baseListResponse = BaseListResponse();
     try {
-      List<FindJob> response =
-          await _restClient.findJobPostings(pageNmber, pageSize);
+      List<JobRequest> response =
+          await _restClient.findJobPostings(pageNumber, pageSize);
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;

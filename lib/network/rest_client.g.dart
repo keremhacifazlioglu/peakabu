@@ -194,7 +194,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<List<FindJob>> findJobPostings(
+  Future<List<JobRequest>> findJobPostings(
     pageNumber,
     pageSize,
   ) async {
@@ -205,8 +205,8 @@ class _RestClient implements RestClient {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<FindJob>>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<JobRequest>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -219,7 +219,7 @@ class _RestClient implements RestClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => FindJob.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => JobRequest.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
@@ -271,7 +271,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<List<HireJob>> findHirePostings(
+  Future<List<JobRequest>> findHirePostings(
     pageNumber,
     pageSize,
   ) async {
@@ -282,8 +282,8 @@ class _RestClient implements RestClient {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<HireJob>>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<JobRequest>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -296,7 +296,7 @@ class _RestClient implements RestClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => HireJob.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => JobRequest.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
@@ -570,7 +570,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requets',
+              '/applicant_requests',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -596,7 +596,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requets/{id}/apply',
+              '/applicant_requests/{id}/apply',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -619,7 +619,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requets/{id}/reject',
+              '/applicant_requests/{id}/reject',
               queryParameters: queryParameters,
               data: _data,
             )

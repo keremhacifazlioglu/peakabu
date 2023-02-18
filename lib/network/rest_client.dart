@@ -11,11 +11,8 @@ import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/applicant/find_applicant.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
-import 'package:platform/domain/response/auth/confirm_sms.dart';
 import 'package:platform/domain/response/auth/token.dart';
-import 'package:platform/domain/response/favorite/favorite_job_posting.dart';
-import 'package:platform/domain/response/job/find_job.dart';
-import 'package:platform/domain/response/job/hire_job.dart';
+import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
@@ -65,7 +62,7 @@ abstract class RestClient {
   Future<JobPhone> fetchJobPostingPhone(@Path("id") int jobId);
 
   @GET("/find_jobs")
-  Future<List<FindJob>> findJobPostings(
+  Future<List<JobRequest>> findJobPostings(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
@@ -77,7 +74,7 @@ abstract class RestClient {
   Future<SuccessResponse> jobPostingReject(@Path() int jobId);
 
   @GET("/hire_jobs")
-  Future<List<HireJob>> findHirePostings(
+  Future<List<JobRequest>> findHirePostings(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
@@ -122,16 +119,16 @@ abstract class RestClient {
     @Query("pageSize") int pageSize,
   );
 
-  @GET("/applicant_requets")
+  @GET("/applicant_requests")
   Future<List<ApplicantRequest>> fetchApplicantRequests(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @GET("/applicant_requets/{id}/apply")
+  @GET("/applicant_requests/{id}/apply")
   Future<ApplicantRequest> applypplicantRequest();
 
-  @GET("/applicant_requets/{id}/reject")
+  @GET("/applicant_requests/{id}/reject")
   Future<ApplicantRequest> rejectApplicantRequests();
 
   @POST("/applicant_profiles/{jobId}/request")
@@ -179,8 +176,9 @@ abstract class RestClient {
 
   @GET("/favorite_job_postings")
   Future<List<JobPosting>> fetchFavoriteJobPosting(
-      @Query("pageNumber") int pageNumber,
-      @Query("pageSize") int pageSize,);
+    @Query("pageNumber") int pageNumber,
+    @Query("pageSize") int pageSize,
+  );
 
   @GET("/favorite_applicant_profiles")
   Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile();
