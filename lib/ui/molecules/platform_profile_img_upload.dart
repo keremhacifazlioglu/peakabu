@@ -4,10 +4,12 @@ import 'package:platform/ui/tokens/colors.dart';
 
 class PlatformProfileImgUpload extends StatelessWidget {
   final bool? isFirst;
+  final String? imageUrl;
 
   const PlatformProfileImgUpload({
     Key? key,
     this.isFirst,
+    this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class PlatformProfileImgUpload extends StatelessWidget {
                       Radius.circular(80),
                     ),
                     child: Image.network(
-                      "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
+                      imageUrl!,
                       fit: BoxFit.cover,
                       height: 150,
                       width: 150,

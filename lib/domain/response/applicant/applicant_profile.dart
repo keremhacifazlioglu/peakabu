@@ -17,6 +17,7 @@ class ApplicantProfile extends ExceptionError {
   String? gender;
   String? nationality;
   String? experience;
+  String? age;
   bool? smoking;
   bool? travelRestriction;
 
@@ -35,6 +36,7 @@ class ApplicantProfile extends ExceptionError {
     this.travelRestriction,
     this.nationality,
     this.experience,
+    this.age,
     String? message,
     int? status,
     bool? isSuccess,

@@ -4,7 +4,7 @@ import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/molecules/platform_dropdown_menu.dart';
 
 class SearchCaretakerCriteriaForm extends StatelessWidget {
-  final String? text;
+  final String? text,selectedValue;
   final Map<String, String>? data;
   final Function(String)? onChange;
 
@@ -13,6 +13,7 @@ class SearchCaretakerCriteriaForm extends StatelessWidget {
     this.text,
     this.data,
     this.onChange,
+    this.selectedValue,
   }) : super(key: key);
 
   @override
@@ -24,12 +25,14 @@ class SearchCaretakerCriteriaForm extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(
-              PlatformDimensionFoundations.sizeXL,
-              0,
-              PlatformDimensionFoundations.sizeXL,
-              0),
+            PlatformDimensionFoundations.sizeXL,
+            0,
+            PlatformDimensionFoundations.sizeXL,
+            0,
+          ),
           child: CustomDropdownMenu(
             data: data!,
+            selectedValue: selectedValue,
             onChange: (p0) => onChange!(p0),
           ),
         ),

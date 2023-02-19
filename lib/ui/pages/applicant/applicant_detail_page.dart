@@ -52,7 +52,7 @@ class ApplicantDetailPage extends StatelessWidget {
                 }
                 if (provider.networkStatus == NetworkStatus.error) {
                   return const Center(
-                    child: Text("Uyarı çıakrtılacak."),
+                    child: Text("Uyarı çıkartılacak."),
                   );
                 }
                 return const Center(

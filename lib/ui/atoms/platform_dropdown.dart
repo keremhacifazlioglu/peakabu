@@ -7,15 +7,16 @@ import 'package:platform/ui/tokens/sizes.dart';
 class PlatformDropdown extends StatelessWidget {
   final Map<String, String>? data;
   final Function(String)? onChange;
+  final String? selectedValue;
 
-  const PlatformDropdown({Key? key, this.data, this.onChange})
+  const PlatformDropdown({Key? key, this.data,this.selectedValue, this.onChange})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       underline: const SizedBox(),
-      value: data!.values.toList().first,
+      value: selectedValue,
       icon: const SizedBox(),
       items: data!
           .map(
