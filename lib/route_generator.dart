@@ -19,7 +19,8 @@ extension RouteSettingsEx on RouteSettings {
 }
 
 class RouteGenerator {
-  static GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> mainNavigatorKey =
+      GlobalKey<NavigatorState>();
 
   static NavigatorState? get navigator => mainNavigatorKey.currentState;
 

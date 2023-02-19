@@ -11,7 +11,8 @@ abstract class IJobPostingRepository {
 
   Future<JobDetail> fetchJobPosting(int jobId);
 
-  Future<BaseListResponse> fetchFavoriteJobPostings(int pageSize, int pageNumber);
+  Future<BaseListResponse> fetchFavoriteJobPostings(
+      int pageSize, int pageNumber);
 
   Future<JobPhone> findJobPostingPhone(int jobId);
 

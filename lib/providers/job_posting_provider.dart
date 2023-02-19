@@ -12,7 +12,7 @@ class JobPostingProvider with ChangeNotifier {
   final JobPostingRepository _jobPostingRepository;
   List<JobPosting> allJobPostings = [], allFavoriteJobPosting = [];
   bool isLastPage = false, isFavoriteLastPage = false;
-  int pagingSize = 10, pageNumber = 1,pageFavoriteNumber = 1;
+  int pagingSize = 10, pageNumber = 1, pageFavoriteNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
   JobDetail? jobDetail;
 
@@ -46,13 +46,12 @@ class JobPostingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
   Future fetchFavoriteJobPostingsWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     if (!isFavoriteLastPage) {
-      BaseListResponse response =
-      await _jobPostingRepository.fetchFavoriteJobPostings(pagingSize, pageFavoriteNumber);
+      BaseListResponse response = await _jobPostingRepository
+          .fetchFavoriteJobPostings(pagingSize, pageFavoriteNumber);
       if (response.isSuccess!) {
         isFavoriteLastPage = response.data!.length < pagingSize;
         pageFavoriteNumber++;

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/ui/molecules/applicant/profile/applicant_profile_header_card.dart';
 import 'package:platform/ui/tokens/sizes.dart';
 
 class ApplicantDetailHeader extends StatelessWidget {
-  const ApplicantDetailHeader({Key? key}) : super(key: key);
+  final ApplicantProfile? applicantProfile;
+
+  const ApplicantDetailHeader({Key? key, this.applicantProfile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,8 @@ class ApplicantDetailHeader extends StatelessWidget {
                   bottomRight: Radius.circular(PlatformDimension.sizeXL),
                 ),
                 child: Image.network(
-                  "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
+                  applicantProfile!.image!,
+                  //"https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
                   fit: BoxFit.cover,
                   height: 500,
                   width: double.infinity,
@@ -38,11 +42,13 @@ class ApplicantDetailHeader extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 450,
             left: 27,
             right: 27,
-            child: ApplicantProfileHeaderCard(),
+            child: ApplicantProfileHeaderCard(
+              applicantProfile: applicantProfile!,
+            ),
           ),
         ],
       ),

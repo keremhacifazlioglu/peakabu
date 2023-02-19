@@ -9,18 +9,18 @@ import 'package:platform/repository/job_posting_repository.dart';
 @injectable
 class JobRequestsProvider with ChangeNotifier {
   final JobPostingRepository _jobPostingRepository;
-  List<JobRequest> allFindJobPostings = [],
-      allHireJobPosting = [];
+  List<JobRequest> allFindJobPostings = [], allHireJobPosting = [];
   bool isLastPage = false,
       isHireLastPage = false,
       isSelectedFindJob = true,
-      isSelectedHireJob = false, selectedTab = true;
-  int pagingSize = 10,
-      pageFindJobNumber = 1,
-      pageHireJobNumber = 1;
+      isSelectedHireJob = false,
+      selectedTab = true;
+  int pagingSize = 10, pageFindJobNumber = 1, pageHireJobNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
 
-  JobRequestsProvider(this._jobPostingRepository, @factoryParam PageType pageType, {bool selectedTab = true}) {
+  JobRequestsProvider(
+      this._jobPostingRepository, @factoryParam PageType pageType,
+      {bool selectedTab = true}) {
     if (pageType == PageType.fetch) {
       fetchFindJobPostingsWithPagination();
       fetchHireJobPostingsWithPagination();
@@ -32,7 +32,8 @@ class JobRequestsProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     if (!isLastPage) {
-      BaseListResponse response = await _jobPostingRepository.findJobPostings(pagingSize, pageFindJobNumber);
+      BaseListResponse response = await _jobPostingRepository.findJobPostings(
+          pagingSize, pageFindJobNumber);
       if (response.isSuccess!) {
         isLastPage = response.data!.length < pagingSize;
         pageFindJobNumber++;
@@ -51,7 +52,8 @@ class JobRequestsProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     if (!isHireLastPage) {
-      BaseListResponse response = await _jobPostingRepository.findHirePostings(pagingSize, pageHireJobNumber);
+      BaseListResponse response = await _jobPostingRepository.findHirePostings(
+          pagingSize, pageHireJobNumber);
       if (response.isSuccess!) {
         isHireLastPage = response.data!.length < pagingSize;
         pageHireJobNumber++;
@@ -72,7 +74,7 @@ class JobRequestsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-    Future selectedFindJob() async {
+  Future selectedFindJob() async {
     isSelectedFindJob = true;
     isSelectedHireJob = false;
     notifyListeners();
@@ -83,5 +85,4 @@ class JobRequestsProvider with ChangeNotifier {
     isSelectedFindJob = false;
     notifyListeners();
   }
-
 }

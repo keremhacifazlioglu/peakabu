@@ -53,7 +53,8 @@ class JobRequestListItem extends StatelessWidget {
                       ),
                       child: PlatformIconLabel(
                         labelIconPath: "assets/icons/group.svg",
-                        labelText: "${jobRequest!.caretakerType!}/${jobRequest!.workType!}",
+                        labelText:
+                            "${jobRequest!.caretakerType!}/${jobRequest!.workType!}",
                       ),
                     ),
                     Padding(
@@ -75,7 +76,7 @@ class JobRequestListItem extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(5),
                   ),
-                  color:  getColor(jobRequest!.status!)!.withOpacity(0.15),
+                  color: getColor(jobRequest!.status!)!.withOpacity(0.15),
                 ),
                 child: Center(
                   child: PlatformDefaultText(
@@ -93,7 +94,7 @@ class JobRequestListItem extends StatelessWidget {
     );
   }
 
-  Color? getColor(String status)  {
+  Color? getColor(String status) {
     Color? jobRequestTextColor;
     switch (status) {
       case "sent_job":
@@ -113,7 +114,7 @@ class JobRequestListItem extends StatelessWidget {
         }
       case "wait_request":
         {
-          jobRequestTextColor = const Color.fromRGBO(153 ,153, 153, 1);
+          jobRequestTextColor = const Color.fromRGBO(153, 153, 153, 1);
           break;
         }
       case "accept_request":
@@ -133,6 +134,5 @@ class JobRequestListItem extends StatelessWidget {
     }
 
     return jobRequestTextColor;
-
   }
 }

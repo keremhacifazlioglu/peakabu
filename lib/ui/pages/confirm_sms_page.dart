@@ -40,7 +40,8 @@ class ConfirmSmsPage extends StatelessWidget {
                       color: PlatformColorFoundation.textColor,
                       fontWeight: FontWeight.w400,
                       fontSize: PlatformDimensionFoundations.sizeMD,
-                      headText: "Telefonunuza gönderilen 4 haneli doğrulama kodunu giriniz",
+                      headText:
+                          "Telefonunuza gönderilen 4 haneli doğrulama kodunu giriniz",
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(15, 30, 15, 0),
@@ -57,7 +58,8 @@ class ConfirmSmsPage extends StatelessWidget {
                               itemCount: 4,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
                                   child: Container(
                                     width: 70,
                                     height: 70,
@@ -84,8 +86,10 @@ class ConfirmSmsPage extends StatelessWidget {
                                           ),
                                           counterText: "",
                                         ),
-                                        controller: authProvider.textEditingControllerList[index],
-                                        onEditingComplete: authProvider.node!.nextFocus,
+                                        controller: authProvider
+                                            .textEditingControllerList[index],
+                                        onEditingComplete:
+                                            authProvider.node!.nextFocus,
                                         maxLength: 1,
                                         cursorColor: Colors.black,
                                         style: const TextStyle(
@@ -131,7 +135,10 @@ class ConfirmSmsPage extends StatelessWidget {
                               TimerCountdown(
                                 format: CountDownTimerFormat.minutesSeconds,
                                 enableDescriptions: false,
-                                timeTextStyle: Theme.of(context).textTheme.displaySmall!.copyWith(
+                                timeTextStyle: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .copyWith(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,
                                       color: PlatformColorFoundation.textColor,
@@ -177,11 +184,13 @@ class ConfirmSmsPage extends StatelessWidget {
                                 (value) => {
                                   if (value.isSuccess!)
                                     {
-                                      Navigator.of(context).pushNamed("/create_applicant_profile"),
+                                      Navigator.of(context).pushNamed(
+                                          "/create_applicant_profile"),
                                     }
                                   else
                                     {
-                                      const CustomShowDialog().showDialog(context, "Uyarı", value.message!),
+                                      const CustomShowDialog().showDialog(
+                                          context, "Uyarı", value.message!),
                                     }
                                 },
                               );

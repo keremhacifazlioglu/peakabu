@@ -5,7 +5,6 @@ import 'package:platform/domain/response/other/nationality.dart';
 import 'package:platform/domain/response/other/shift_system.dart';
 
 abstract class IOtherRepository {
-
   Future<List<CaretakerType>> fetchCaretakerTypes();
 
   Future<List<ShiftSystem>> fetchShiftSystems();
@@ -15,6 +14,4 @@ abstract class IOtherRepository {
   Future<List<Nationality>> fetchNationalities();
 
   Future<List<Age>> fetchAges();
-
-
 }
