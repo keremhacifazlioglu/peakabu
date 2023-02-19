@@ -18,13 +18,13 @@ class SpecialForMeList extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context, rootNavigator: true).pushNamed("job_request");
+              Navigator.of(context, rootNavigator: true).pushNamed("job_request",arguments: false);
             },
             child: const SpecialForMeItem(svgPath: "assets/icons/iconMegaphone.svg", title: "İletişim Talepleri"),
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context, rootNavigator: true).pushNamed("job_request");
+              Navigator.of(context, rootNavigator: true).pushNamed("job_request",arguments: true);
             },
             child: const SpecialForMeItem(svgPath: "assets/icons/iconSend.svg", title: "İş Başvurularım"),
           ),

@@ -9,16 +9,23 @@ import 'package:platform/repository/job_posting_repository.dart';
 @injectable
 class JobRequestsProvider with ChangeNotifier {
   final JobPostingRepository _jobPostingRepository;
-  List<JobRequest> allFindJobPostings = [], allHireJobPosting = [];
-  bool isLastPage = false, isHireLastPage = false, isSelectedFindJob= true, isSelectedHireJob= false;
-  int pagingSize = 10, pageFindJobNumber = 1, pageHireJobNumber = 1;
+  List<JobRequest> allFindJobPostings = [],
+      allHireJobPosting = [];
+  bool isLastPage = false,
+      isHireLastPage = false,
+      isSelectedFindJob = true,
+      isSelectedHireJob = false, selectedTab = true;
+  int pagingSize = 10,
+      pageFindJobNumber = 1,
+      pageHireJobNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
 
-  JobRequestsProvider(this._jobPostingRepository, @factoryParam PageType pageType) {
+  JobRequestsProvider(this._jobPostingRepository, @factoryParam PageType pageType, {bool selectedTab = true}) {
     if (pageType == PageType.fetch) {
       fetchFindJobPostingsWithPagination();
       fetchHireJobPostingsWithPagination();
-    } else if (pageType == PageType.detail) {}
+    }
+    selectedTabMenu(selectedTab);
   }
 
   Future fetchFindJobPostingsWithPagination() async {
@@ -59,7 +66,13 @@ class JobRequestsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future selectedFindJob() async {
+  Future selectedTabMenu(bool selectedTab) async {
+    isSelectedFindJob = selectedTab;
+    isSelectedHireJob = !selectedTab;
+    notifyListeners();
+  }
+
+    Future selectedFindJob() async {
     isSelectedFindJob = true;
     isSelectedHireJob = false;
     notifyListeners();

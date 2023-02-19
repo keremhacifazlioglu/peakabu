@@ -5,11 +5,11 @@ import 'package:platform/ui/pages/applicant/create_applicant_profile_page.dart';
 import 'package:platform/ui/pages/applicant/job_filter_form_page.dart';
 import 'package:platform/ui/pages/applicant/job_follow_page.dart';
 import 'package:platform/ui/pages/applicant/job_request_page.dart';
+import 'package:platform/ui/pages/applicant/special_for_me_page.dart';
 import 'package:platform/ui/pages/confirm_sms_page.dart';
 import 'package:platform/ui/pages/create_account_page.dart';
 import 'package:platform/ui/pages/redirect_page.dart';
 import 'package:platform/ui/pages/root_page.dart';
-import 'package:platform/ui/pages/applicant/special_for_me_page.dart';
 
 import 'ui/pages/applicant/job_posting_detail_page.dart';
 import 'ui/pages/applicant/job_posting_page.dart';
@@ -19,8 +19,7 @@ extension RouteSettingsEx on RouteSettings {
 }
 
 class RouteGenerator {
-  static GlobalKey<NavigatorState> mainNavigatorKey =
-      GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
 
   static NavigatorState? get navigator => mainNavigatorKey.currentState;
 
@@ -50,7 +49,9 @@ class RouteGenerator {
         );
       case 'job_request':
         return MaterialPageRoute(
-          builder: (_) => const JobRequestPage(),
+          builder: (_) => JobRequestPage(
+            selectedTab: settings.routeArgs(),
+          ),
         );
       case 'special_for_me':
         return MaterialPageRoute(

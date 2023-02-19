@@ -10,12 +10,17 @@ import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class JobRequestPage extends StatelessWidget {
-  const JobRequestPage({Key? key}) : super(key: key);
+  final bool? selectedTab;
+
+  const JobRequestPage({
+    Key? key,
+    this.selectedTab,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobRequestsProvider>(
-      create: (context) => JobRequestsProvider(jobPostingRepository, PageType.fetch),
+      create: (context) => JobRequestsProvider(jobPostingRepository, PageType.fetch, selectedTab: selectedTab ?? true),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -59,10 +64,16 @@ class JobRequestPage extends StatelessWidget {
                                   },
                                   child: PlatformTabMenu(
                                     width: (MediaQuery.of(context).size.width - 64) / 2,
-                                    color: provider.isSelectedFindJob ? PlatformColor.primaryColor : PlatformColor.offWhiteColor,
-                                    borderColor: provider.isSelectedFindJob ? PlatformColor.primaryColor : PlatformColor.offWhiteColor,
+                                    color: provider.isSelectedFindJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
+                                    borderColor: provider.isSelectedFindJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
                                     text: "İş Başvuruları",
-                                    textColor: provider.isSelectedFindJob ? PlatformColor.offWhiteColor : PlatformColor.grayLightColor,
+                                    textColor: provider.isSelectedFindJob
+                                        ? PlatformColor.offWhiteColor
+                                        : PlatformColor.grayLightColor,
                                   ),
                                 ),
                               ),
@@ -75,10 +86,16 @@ class JobRequestPage extends StatelessWidget {
                                   },
                                   child: PlatformTabMenu(
                                     width: (MediaQuery.of(context).size.width - 64) / 2,
-                                    color: provider.isSelectedHireJob ? PlatformColor.primaryColor : PlatformColor.offWhiteColor,
-                                    borderColor: provider.isSelectedHireJob ? PlatformColor.primaryColor : PlatformColor.offWhiteColor,
+                                    color: provider.isSelectedHireJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
+                                    borderColor: provider.isSelectedHireJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
                                     text: "İletişim Talepleri",
-                                    textColor: provider.isSelectedHireJob ? PlatformColor.offWhiteColor : PlatformColor.grayLightColor,
+                                    textColor: provider.isSelectedHireJob
+                                        ? PlatformColor.offWhiteColor
+                                        : PlatformColor.grayLightColor,
                                   ),
                                 ),
                               ),
