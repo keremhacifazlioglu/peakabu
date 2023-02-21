@@ -1,17 +1,16 @@
-import 'package:platform/domain/response/other/age.dart';
-import 'package:platform/domain/response/other/caretaker_type.dart';
-import 'package:platform/domain/response/other/experience.dart';
-import 'package:platform/domain/response/other/nationality.dart';
-import 'package:platform/domain/response/other/shift_system.dart';
+import 'package:platform/domain/response/job/base_list_response.dart';
 
 abstract class IOtherRepository {
-  Future<List<CaretakerType>> fetchCaretakerTypes();
 
-  Future<List<ShiftSystem>> fetchShiftSystems();
+  Future<BaseListResponse> fetchCaretakerTypes();
 
-  Future<List<Experience>> fetchExperiences();
+  Future<BaseListResponse> fetchShiftSystems();
 
-  Future<List<Nationality>> fetchNationalities();
+  Future<BaseListResponse> fetchExperiences();
 
-  Future<List<Age>> fetchAges();
+  Future<BaseListResponse> fetchNationalities();
+
+  Future<BaseListResponse> fetchAges();
+
+  Future<BaseListResponse> fetchCities();
 }

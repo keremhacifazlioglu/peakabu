@@ -18,7 +18,7 @@ class JobPostingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
       create: (context) =>
-          JobPostingProvider(jobPostingRepository, PageType.fetch),
+          JobPostingProvider(jobPostingRepository, otherRepository,secureLocalRepository,PageType.fetch),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: PlatformColor.offWhiteColor2,

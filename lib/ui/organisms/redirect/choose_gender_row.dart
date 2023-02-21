@@ -4,7 +4,7 @@ import 'package:platform/ui/tokens/colors.dart';
 import 'package:platform/ui/tokens/sizes.dart';
 
 class ChooseGenderRow extends StatelessWidget {
-  final Function(String)? onTap;
+  final Function(bool)? onTap;
   final bool? onSelected;
 
   const ChooseGenderRow({
@@ -21,7 +21,7 @@ class ChooseGenderRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: PlatformDimension.sizeXL),
           child: GestureDetector(
-            onTap: onTap!("1"),
+            onTap: onTap!(true),
             child: PlatformGenderButton(
               selectedColor: onSelected! ? PlatformColor.primaryColor : PlatformColor.grayLightColor ,
               text: "Kadın",
@@ -32,7 +32,7 @@ class ChooseGenderRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: PlatformDimension.sizeXL),
           child: GestureDetector(
-            onTap: onTap!("2"),
+            onTap: onTap!(false),
             child: PlatformGenderButton(
               selectedColor: !onSelected! ? PlatformColor.primaryColor : PlatformColor.grayLightColor,
               text: "Erkek",

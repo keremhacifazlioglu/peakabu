@@ -3,4 +3,6 @@ enum PageType {
   detail,
   create,
   update,
+  filter,
+  filterForm,
 }

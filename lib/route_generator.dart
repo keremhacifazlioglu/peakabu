@@ -3,6 +3,7 @@ import 'package:platform/ui/pages/applicant/applicant_detail_page.dart';
 import 'package:platform/ui/pages/applicant/applicant_profile_page.dart';
 import 'package:platform/ui/pages/applicant/create_applicant_profile_page.dart';
 import 'package:platform/ui/pages/applicant/job_filter_form_page.dart';
+import 'package:platform/ui/pages/applicant/job_filter_page.dart';
 import 'package:platform/ui/pages/applicant/job_follow_page.dart';
 import 'package:platform/ui/pages/applicant/job_request_page.dart';
 import 'package:platform/ui/pages/applicant/special_for_me_page.dart';
@@ -81,6 +82,10 @@ class RouteGenerator {
       case '/job_filter':
         return MaterialPageRoute(
           builder: (_) => const JobFilterFormPage(),
+        );
+      case '/job_filters':
+        return MaterialPageRoute(
+          builder: (_) => const JobFilterPage(),
         );
       default:
         return _errorRoute();

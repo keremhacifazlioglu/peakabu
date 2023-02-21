@@ -3,6 +3,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:platform/config/injection.dart';
+import 'package:platform/config/locator.dart';
 import 'package:platform/firebase_options.dart';
 import 'package:platform/providers/other_provider.dart';
 import 'package:platform/providers/root_provider.dart';
@@ -30,7 +31,7 @@ void main() async {
           create: (_) => RootProvider(),
         ),
         ChangeNotifierProvider<OtherProvider>(
-          create: (_) => OtherProvider(),
+          create: (_) => OtherProvider(otherRepository),
         ),
       ],
       child: const MyApp(),

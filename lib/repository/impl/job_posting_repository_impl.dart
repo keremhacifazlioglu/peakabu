@@ -11,8 +11,7 @@ abstract class IJobPostingRepository {
 
   Future<JobDetail> fetchJobPosting(int jobId);
 
-  Future<BaseListResponse> fetchFavoriteJobPostings(
-      int pageSize, int pageNumber);
+  Future<BaseListResponse> fetchFavoriteJobPostings(int pageSize, int pageNumber);
 
   Future<JobPhone> findJobPostingPhone(int jobId);
 
@@ -30,8 +29,9 @@ abstract class IJobPostingRepository {
 
   Future<RecruiterJobPosting> fetchRecruiterJobPosting();
 
-  Future<SuccessResponse> createRecruiterJobPosting(
-      RecruiterJobPostingRequest recruiterJobPostingRequest);
-  Future<SuccessResponse> updateRecruiterJobPosting(
-      RecruiterJobPostingUpdate recruiterJobPostingUpdate);
+  Future<SuccessResponse> createRecruiterJobPosting(RecruiterJobPostingRequest recruiterJobPostingRequest);
+
+  Future<SuccessResponse> updateRecruiterJobPosting(RecruiterJobPostingUpdate recruiterJobPostingUpdate);
+
+  Future<BaseListResponse> fetchFilterJobPostings(Map<String, String> queries);
 }

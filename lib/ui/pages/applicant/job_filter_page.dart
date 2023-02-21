@@ -7,21 +7,21 @@ import 'package:platform/ui/organisms/applicant/job_posting/job_posting_list.dar
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
-class JobFollowPage extends StatelessWidget {
-  const JobFollowPage({Key? key}) : super(key: key);
+class JobFilterPage extends StatelessWidget {
+  const JobFilterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
       create: (context) =>
-          JobPostingProvider(jobPostingRepository, otherRepository,secureLocalRepository,PageType.fetch),
+          JobPostingProvider(jobPostingRepository, otherRepository,secureLocalRepository,PageType.filter),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: PlatformColor.offWhiteColor2,
           appBar: AppBar(
             title: const Padding(
               padding: EdgeInsets.only(left: 12),
-              child: Text("Takip ettiklerim"),
+              child: Text("Filtrelenen İş ilanları"),
             ),
           ),
           body: Consumer<JobPostingProvider>(
@@ -30,12 +30,11 @@ class JobFollowPage extends StatelessWidget {
                 return NotificationListener<ScrollNotification>(
                   onNotification: (ScrollNotification scrollInfo) {
                     if (scrollInfo is ScrollEndNotification) {
-                      provider.fetchFavoriteJobPostingsWithPagination();
+                      provider.fetchFilterJobPostingsWithPagination();
                     }
                     return true;
                   },
-                  child: JobPostingList(
-                      jobPostings: provider.allFavoriteJobPosting),
+                  child: JobPostingList(jobPostings: provider.allFilterJobPosting),
                 );
               }
               if (provider.networkStatus == NetworkStatus.error) {

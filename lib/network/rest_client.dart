@@ -12,13 +12,14 @@ import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/applicant/find_applicant.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
 import 'package:platform/domain/response/auth/token.dart';
-import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
+import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/other/age.dart';
 import 'package:platform/domain/response/other/caretaker_type.dart';
+import 'package:platform/domain/response/other/city.dart';
 import 'package:platform/domain/response/other/experience.dart';
 import 'package:platform/domain/response/other/nationality.dart';
 import 'package:platform/domain/response/other/shift_system.dart';
@@ -44,8 +45,7 @@ abstract class RestClient {
   Future<SuccessResponse> sendSms(@Body() SendSmsRequest sendSmsRequest);
 
   @POST("/confirm_sms")
-  Future<SuccessResponse> sendConfirmSms(
-      @Body() ConfirmSmsRequest confirmSmsRequest);
+  Future<SuccessResponse> sendConfirmSms(@Body() ConfirmSmsRequest confirmSmsRequest);
 
   // todo Job
 
@@ -54,6 +54,19 @@ abstract class RestClient {
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
+
+  @GET("/job_postings")
+  Future<List<JobPosting>> fetchJobPostingsFilter( @Queries() Map<String,String> queries);
+      /*
+      @Query("pageNumber") int pageNumber,
+      @Query("pageSize") int pageSize,
+      @Query("city") String city,
+      @Query("district") String district,
+      @Query("caretakerType") String caretakerType,
+      @Query("shiftSystems") String shiftSystems,
+      @Query("experience") int experience,
+      @Query("nationality") String nationality,
+      @Query("gender") bool gender);*/
 
   @GET("/job_postings/{id}")
   Future<JobDetail> fetchJobPosting(@Path("id") int jobId);
@@ -89,12 +102,10 @@ abstract class RestClient {
   Future<RecruiterJobPosting> fetchMyJobPosting();
 
   @POST("/my_job_posting")
-  Future<SuccessResponse> createMyJobPosting(
-      @Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
+  Future<SuccessResponse> createMyJobPosting(@Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
 
   @PUT("/my_job_posting")
-  Future<SuccessResponse> updateMyJobPosting(
-      @Body() RecruiterJobPostingUpdate recruiterJobPostingUpdate);
+  Future<SuccessResponse> updateMyJobPosting(@Body() RecruiterJobPostingUpdate recruiterJobPostingUpdate);
 
   // todo Applicant
 
@@ -205,4 +216,7 @@ abstract class RestClient {
 
   @GET("/ages")
   Future<List<Age>> fetchAges();
+
+  @GET("/cities")
+  Future<List<City>> fetchCity();
 }

@@ -15,13 +15,11 @@ class JobPostingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      key: const PageStorageKey<String>("JobPosting"),
+      addAutomaticKeepAlives: true,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            /*
-            Navigator.of(context, rootNavigator: true)
-                .pushNamed("/create_account");
-            */
             Navigator.of(context, rootNavigator: true).pushNamed(
               "/job_posting_detail",
               arguments: jobPostings![index],

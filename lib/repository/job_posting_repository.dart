@@ -51,6 +51,21 @@ class JobPostingRepository extends IJobPostingRepository {
   }
 
   @override
+  Future<BaseListResponse> fetchFilterJobPostings(Map<String,String> queries) async {
+    BaseListResponse<JobPosting> baseListResponse = BaseListResponse();
+    try {
+      List<JobPosting> response =
+      await _restClient.fetchJobPostingsFilter(queries);
+      baseListResponse.data = response;
+    } on CustomGenericDioError catch (e) {
+      baseListResponse.message = e.text;
+      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
+    }
+    return baseListResponse;
+  }
+
+  @override
   Future<JobDetail> fetchJobPosting(int jobId) async {
     JobDetail jobDetail = JobDetail();
     try {
