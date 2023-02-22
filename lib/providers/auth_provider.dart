@@ -12,7 +12,6 @@ class AuthProvider with ChangeNotifier {
   final SecureLocalRepository _secureLocalRepository;
   NetworkStatus networkStatus = NetworkStatus.none;
   String? phoneNumber;
-  //bool? isKvkkCheck;
   FocusScopeNode? node = FocusScopeNode();
   String smsPin = "";
   bool isKvkkCheck = false,resend = false,privacyPolicy=false,termOfUse=false;
