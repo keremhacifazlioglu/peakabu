@@ -26,7 +26,7 @@ class JobPostingDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
       create: (context) =>
-          JobPostingProvider(jobPostingRepository,otherRepository,secureLocalRepository, PageType.detail),
+          JobPostingProvider(jobPostingRepository,secureLocalRepository,otherService, PageType.detail),
       builder: (context, child) {
         return Scaffold(
           appBar: AppBar(

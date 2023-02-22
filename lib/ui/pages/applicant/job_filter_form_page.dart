@@ -18,7 +18,8 @@ class JobFilterFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
-      create: (context) => JobPostingProvider(jobPostingRepository, otherRepository, secureLocalRepository,PageType.filterForm),
+      create: (context) =>
+          JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.filterForm),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -36,23 +37,22 @@ class JobFilterFormPage extends StatelessWidget {
                         text: "Cinsiyet",
                       ),
                       ChooseGenderRow(
-                        onSelected: provider.gender,
-                        onTap: (p0){
-
-                        },
+                        onSelected: provider.otherService.gender,
+                        onTap: (p0) {},
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Şehir",
-                        selectedValue: provider.selectedCity ?? provider.cities["1"],
-                        data: provider.cities,
+                        selectedValue: provider.otherService.selectedCity ?? provider.otherService.cities["1"],
+                        data: provider.otherService.cities,
                         onChange: (p0) async {
                           await provider.setSelectedCity(p0);
                         },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Yardımcı türü",
-                        selectedValue: provider.selectedCaretakerType ?? provider.caretakerTypes["1"],
-                        data: provider.caretakerTypes,
+                        selectedValue:
+                            provider.otherService.selectedCaretakerType ?? provider.otherService.caretakerTypes["1"],
+                        data: provider.otherService.caretakerTypes,
                         onChange: (p0) async {
                           Log.w(p0);
                           await provider.setSelectedCaretakerTypes(p0);
@@ -60,32 +60,35 @@ class JobFilterFormPage extends StatelessWidget {
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Çalışma şekli",
-                        selectedValue: provider.selectedShiftSystem ?? provider.shiftSystems["1"],
-                        data: provider.shiftSystems,
+                        selectedValue:
+                            provider.otherService.selectedShiftSystem ?? provider.otherService.shiftSystems["1"],
+                        data: provider.otherService.shiftSystems,
                         onChange: (p0) async {
                           await provider.setSelectedShiftSystem(p0);
                         },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Deneyim",
-                        selectedValue: provider.selectedExperience ?? provider.experiences["1"],
-                        data: provider.experiences,
+                        selectedValue:
+                            provider.otherService.selectedExperience ?? provider.otherService.experiences["1"],
+                        data: provider.otherService.experiences,
                         onChange: (p0) async {
                           await provider.setSelectedExperience(p0);
                         },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Uyruk",
-                        selectedValue: provider.selectedNationality ?? provider.nationalities["1"],
-                        data: provider.nationalities,
+                        selectedValue:
+                            provider.otherService.selectedNationality ?? provider.otherService.nationalities["1"],
+                        data: provider.otherService.nationalities,
                         onChange: (p0) async {
                           await provider.setSelectedNationality(p0);
                         },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Yaş",
-                        selectedValue: provider.selectedAge ?? provider.ages["1"],
-                        data: provider.ages,
+                        selectedValue: provider.otherService.selectedAge ?? provider.otherService.ages["1"],
+                        data: provider.otherService.ages,
                         onChange: (p0) async {
                           await provider.setSelectedAge(p0);
                         },
@@ -110,27 +113,29 @@ class JobFilterFormPage extends StatelessWidget {
               );
             },
           ),
-          bottomNavigationBar: Consumer<JobPostingProvider>(builder: (context, provider, child) {
-            return Container(
-              height: 100,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  PlatformDimensionFoundations.sizeXXL,
-                  PlatformDimensionFoundations.sizeXL,
-                  PlatformDimensionFoundations.sizeXXL,
-                  PlatformDimensionFoundations.sizeXL,
+          bottomNavigationBar: Consumer<JobPostingProvider>(
+            builder: (context, provider, child) {
+              return Container(
+                height: 100,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    PlatformDimensionFoundations.sizeXXL,
+                    PlatformDimensionFoundations.sizeXL,
+                    PlatformDimensionFoundations.sizeXXL,
+                    PlatformDimensionFoundations.sizeXL,
+                  ),
+                  child: PlatformSubmitButton(
+                    buttonText: "Sonuçları göster",
+                    onPressed: () {
+                      provider.saveFilterData();
+                      Navigator.of(context).pushNamed("/job_filters");
+                    },
+                  ),
                 ),
-                child: PlatformSubmitButton(
-                  buttonText: "Sonuçları göster",
-                  onPressed: () {
-                    provider.saveFilterData();
-                    Navigator.of(context).pushNamed("/job_filters");
-                  },
-                ),
-              ),
-            );
-          }),
+              );
+            },
+          ),
         );
       },
     );

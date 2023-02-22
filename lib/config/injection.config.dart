@@ -9,17 +9,18 @@ import 'package:dio/dio.dart' as _i3;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:platform/config/module.dart' as _i16;
+import 'package:platform/config/module.dart' as _i17;
 import 'package:platform/cons/page_type.dart' as _i11;
 import 'package:platform/network/rest_client.dart' as _i5;
-import 'package:platform/providers/applicant_provider.dart' as _i13;
-import 'package:platform/providers/job_posting_provider.dart' as _i14;
+import 'package:platform/providers/applicant_provider.dart' as _i14;
+import 'package:platform/providers/job_posting_provider.dart' as _i15;
 import 'package:platform/providers/job_requests_provider.dart' as _i10;
-import 'package:platform/providers/other_provider.dart' as _i15;
+import 'package:platform/providers/other_provider.dart' as _i16;
 import 'package:platform/repository/applicant_repository.dart' as _i7;
 import 'package:platform/repository/auth_repository.dart' as _i8;
 import 'package:platform/repository/job_posting_repository.dart' as _i9;
 import 'package:platform/repository/other_repository.dart' as _i12;
+import 'package:platform/service/other_service.dart' as _i13;
 import 'package:platform/storage/secure_local_repository.dart' as _i6;
 
 /// ignore_for_file: unnecessary_lambdas
@@ -59,22 +60,26 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i12.OtherRepository>(
         () => _i12.OtherRepository(gh<_i5.RestClient>()));
-    gh.factory<_i13.ApplicantProvider>(
-        () => _i13.ApplicantProvider(gh<_i7.ApplicantRepository>()));
-    gh.factoryParam<_i14.JobPostingProvider, _i11.PageType, dynamic>((
+    gh.factory<_i13.OtherService>(
+        () => _i13.OtherService(gh<_i12.OtherRepository>()));
+    gh.factory<_i14.ApplicantProvider>(() => _i14.ApplicantProvider(
+          gh<_i7.ApplicantRepository>(),
+          gh<_i13.OtherService>(),
+        ));
+    gh.factoryParam<_i15.JobPostingProvider, _i11.PageType, dynamic>((
       pageType,
       _,
     ) =>
-        _i14.JobPostingProvider(
+        _i15.JobPostingProvider(
           gh<_i9.JobPostingRepository>(),
-          gh<_i12.OtherRepository>(),
           gh<_i6.SecureLocalRepository>(),
+          gh<_i13.OtherService>(),
           pageType,
         ));
-    gh.factory<_i15.OtherProvider>(
-        () => _i15.OtherProvider(gh<_i12.OtherRepository>()));
+    gh.factory<_i16.OtherProvider>(
+        () => _i16.OtherProvider(gh<_i12.OtherRepository>()));
     return this;
   }
 }
 
-class _$AppModule extends _i16.AppModule {}
+class _$AppModule extends _i17.AppModule {}

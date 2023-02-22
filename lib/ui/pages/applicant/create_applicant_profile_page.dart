@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:platform/config/locator.dart';
-import 'package:platform/providers/auth_provider.dart';
+import 'package:platform/providers/applicant_provider.dart';
+import 'package:platform/ui/atoms/platform_cancel_button.dart';
 import 'package:platform/ui/atoms/platform_head_text.dart';
 import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
@@ -24,11 +26,10 @@ class CreateApplicantProfilePage extends StatelessWidget {
         title: const Text("Profil Oluştur"),
         centerTitle: true,
       ),
-      body: ChangeNotifierProvider<AuthProvider>(
-        create: (context) =>
-            AuthProvider(authRepository, secureLocalRepository),
+      body: ChangeNotifierProvider<ApplicantProvider>(
+        create: (context) => ApplicantProvider(applicantRepository,otherService),
         builder: (context, child) {
-          // var authProvider = Provider.of<AuthProvider>(context);
+          var provider = Provider.of<ApplicantProvider>(context);
           return SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,8 +44,11 @@ class CreateApplicantProfilePage extends StatelessWidget {
                         "Seçtiğiniz iş ilanına başvurmak için ücretsiz hesap oluşturun.",
                   ),
                 ),
-                const PlatformProfileImgUpload(
+                PlatformProfileImgUpload(
                   isFirst: true,
+                  onTap: () async {
+                    showUpdateProfileImage( context,  provider);
+                  },
                 ),
                 const PlatformLabel(
                   text: "Adınız",
@@ -63,6 +67,7 @@ class CreateApplicantProfilePage extends StatelessWidget {
                   text: "Cinsiyet",
                 ),
                 ChooseGenderRow(
+                  onSelected: false,
                   onTap: (p0) {},
                 ),
                 SearchCaretakerCriteriaForm(
@@ -161,6 +166,54 @@ class CreateApplicantProfilePage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future showUpdateProfileImage(BuildContext context, ApplicantProvider applicantProvider) async {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: PlatformColor.offWhiteColor,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: PlatformSubmitButton(
+                      buttonText: "Kameraya git",
+                      onPressed: () async {
+                        final image = await ImagePicker().pickImage(source: ImageSource.camera);
+                        if (image == null) return;
+                        applicantProvider.setProfileImage(image.path).then((value) => Navigator.of(context).pop());
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: PlatformCancelButton(
+                      buttonText: "Galeriye git",
+                      onPressed: () async {
+                        final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                        if (image == null) return;
+                        applicantProvider.setProfileImage(image.path).then((value) => Navigator.of(context).pop());
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

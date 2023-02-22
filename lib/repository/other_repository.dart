@@ -21,7 +21,7 @@ class OtherRepository implements IOtherRepository{
   Future<BaseListResponse> fetchAges() async {
     BaseListResponse<Age> baseListResponse = BaseListResponse<Age>();
     try {
-      List<Age> response = await _restClient.fetchAges();;
+      List<Age> response = await _restClient.fetchAges();
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;

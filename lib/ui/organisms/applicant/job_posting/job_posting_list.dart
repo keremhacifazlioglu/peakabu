@@ -21,9 +21,13 @@ class JobPostingList extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             Navigator.of(context, rootNavigator: true).pushNamed(
+              "/create_account",
+              //arguments: jobPostings![index],
+            );
+            /*Navigator.of(context, rootNavigator: true).pushNamed(
               "/job_posting_detail",
               arguments: jobPostings![index],
-            );
+            );*/
           },
           child: Container(
             width: double.infinity,

@@ -15,7 +15,7 @@ class ApplicantDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ApplicantProvider>(
-        create: (context) => ApplicantProvider(applicantRepository),
+        create: (context) => ApplicantProvider(applicantRepository,otherService),
         builder: (context, child) {
           return Scaffold(
             appBar: AppBar(

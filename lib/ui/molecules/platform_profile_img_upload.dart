@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:platform/ui/atoms/platform_icon.dart';
 import 'package:platform/ui/tokens/colors.dart';
@@ -5,11 +7,15 @@ import 'package:platform/ui/tokens/colors.dart';
 class PlatformProfileImgUpload extends StatelessWidget {
   final bool? isFirst;
   final String? imageUrl;
+  final Function()? onTap;
+  final File? file;
 
   const PlatformProfileImgUpload({
     Key? key,
     this.isFirst,
+    this.file,
     this.imageUrl,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -31,20 +37,25 @@ class PlatformProfileImgUpload extends StatelessWidget {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(80),
                     ),
-                    child: Image.network(
-                      imageUrl!,
-                      fit: BoxFit.cover,
-                      height: 150,
-                      width: 150,
-                    ),
+                    child: file == null
+                        ? Image.network(
+                            imageUrl!,
+                            fit: BoxFit.cover,
+                            height: 150,
+                            width: 150,
+                          )
+                        : Image.file(file!,fit: BoxFit.cover,),
                   )
-                : const Padding(
-                    padding: EdgeInsets.all(32.0),
-                    child: PlatformIcon(
-                      height: 50,
-                      width: 50,
-                      svgPath: "assets/icons/camera.svg",
-                      color: PlatformColor.grayLightColor,
+                :  Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: GestureDetector(
+                      onTap: onTap!,
+                      child: const PlatformIcon(
+                        height: 50,
+                        width: 50,
+                        svgPath: "assets/icons/camera.svg",
+                        color: PlatformColor.grayLightColor,
+                      ),
                     ),
                   ),
           ),
@@ -53,21 +64,24 @@ class PlatformProfileImgUpload extends StatelessWidget {
           Positioned(
             top: 110,
             left: 115,
-            child: Container(
-              width: 28,
-              height: 28,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5),
+            child: GestureDetector(
+              onTap: onTap!,
+              child: Container(
+                width: 28,
+                height: 28,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                  color: PlatformColor.primaryColor,
                 ),
-                color: PlatformColor.primaryColor,
-              ),
-              child: const Center(
-                child: PlatformIcon(
-                  height: 16,
-                  width: 16,
-                  color: PlatformColor.offWhiteColor,
-                  svgPath: "assets/icons/profile_edit.svg",
+                child: const Center(
+                  child: PlatformIcon(
+                    height: 16,
+                    width: 16,
+                    color: PlatformColor.offWhiteColor,
+                    svgPath: "assets/icons/profile_edit.svg",
+                  ),
                 ),
               ),
             ),

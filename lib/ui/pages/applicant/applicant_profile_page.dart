@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:platform/config/locator.dart';
+import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_provider.dart';
+import 'package:platform/ui/atoms/platform_cancel_button.dart';
 import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/sizes.dart';
@@ -16,7 +19,7 @@ class ApplicantProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ApplicantProvider>(
-      create: (context) => ApplicantProvider(applicantRepository),
+      create: (context) => ApplicantProvider(applicantRepository, otherService),
       builder: (context, child) {
         var applicantProvider = Provider.of<ApplicantProvider>(context);
         return Scaffold(
@@ -25,137 +28,197 @@ class ApplicantProfilePage extends StatelessWidget {
             title: const Text("Profil Düzenle"),
             centerTitle: true,
           ),
-          body: SingleChildScrollView(
+          body: Consumer<ApplicantProvider>(
+            builder: (context, provider, child) {
+              if (provider.networkStatus == NetworkStatus.success && applicantProvider.applicantProfile != null) {
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 36,
+                        ),
+                        child: PlatformProfileImgUpload(
+                          isFirst: false,
+                          file: provider.file,
+                          imageUrl: applicantProvider.applicantProfile!.image ?? "",
+                          onTap: () {
+                            showUpdateProfileImage(context, provider);
+                          },
+                        ),
+                      ),
+                      const PlatformLabel(
+                        text: "Adınız",
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+                        child: TextFormField(
+                          controller: TextEditingController()..text = applicantProvider.applicantProfile!.name!,
+                          decoration: const InputDecoration(
+                            hintText: 'Adınız',
+                            contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
+                          ),
+                        ),
+                      ),
+                      const PlatformLabel(
+                        text: "Cinsiyet",
+                      ),
+                      ChooseGenderRow(
+                        onSelected: applicantProvider.applicantProfile!.gender! == "Kadın",
+                        onTap: (p0) {},
+                      ),
+                      SearchCaretakerCriteriaForm(
+                        text: "Şehir",
+                        selectedValue: applicantProvider.applicantProfile!.city,
+                        data: applicantProvider.otherService.cities,
+                        onChange: (p0) {},
+                      ),
+                      SearchCaretakerCriteriaForm(
+                        text: "Yardımcı türü",
+                        selectedValue: applicantProvider.applicantProfile!.caretakerType,
+                        data: applicantProvider.otherService.caretakerTypes,
+                        onChange: (p0) {},
+                      ),
+                      SearchCaretakerCriteriaForm(
+                        text: "Çalışma şekli",
+                        selectedValue: applicantProvider.applicantProfile!.shiftSystems,
+                        data: applicantProvider.otherService.shiftSystems,
+                        onChange: (p0) {},
+                      ),
+                      SearchCaretakerCriteriaForm(
+                        text: "Deneyim",
+                        selectedValue: applicantProvider.applicantProfile!.experience,
+                        data: applicantProvider.otherService.experiences,
+                        onChange: (p0) {},
+                      ),
+                      SearchCaretakerCriteriaForm(
+                        text: "Uyruk",
+                        selectedValue: applicantProvider.applicantProfile!.nationality,
+                        data: applicantProvider.otherService.nationalities,
+                        onChange: (p0) {},
+                      ),
+                      SearchCaretakerCriteriaForm(
+                        text: "Yaş",
+                        selectedValue: applicantProvider.applicantProfile!.age,
+                        data: applicantProvider.otherService.ages,
+                        onChange: (p0) {},
+                      ),
+                      const PlatformLabel(
+                        text: "Başlık",
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                        child: TextFormField(
+                          controller: TextEditingController()..text = applicantProvider.applicantProfile!.descTitle!,
+                          decoration: const InputDecoration(
+                            hintText: 'Başlık',
+                            contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
+                          ),
+                        ),
+                      ),
+                      const PlatformLabel(
+                        text: "Kendinizi kısace tanıtınız",
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                        child: TextFormField(
+                          maxLines: 4,
+                          controller: TextEditingController()..text = applicantProvider.applicantProfile!.desc!,
+                          decoration: const InputDecoration(
+                            hintText: '',
+                            contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              if (provider.networkStatus == NetworkStatus.error) {
+                return const Center(
+                  child: Text("Uyarı çıkartılacak."),
+                );
+              }
+              return const Center(
+                child: SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: CircularProgressIndicator(
+                    color: PlatformColor.primaryColor,
+                  ),
+                ),
+              );
+            },
+          ),
+          bottomNavigationBar: Consumer<ApplicantProvider>(
+            builder: (context, provider, child) {
+              return Container(
+                height: 100,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    PlatformDimensionFoundations.sizeXXL,
+                    PlatformDimensionFoundations.sizeXL,
+                    PlatformDimensionFoundations.sizeXXL,
+                    PlatformDimensionFoundations.sizeXL,
+                  ),
+                  child: PlatformSubmitButton(
+                    buttonText: "Kaydet",
+                    onPressed: () async {
+                      await provider.updateApplicantProfile();
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Future showUpdateProfileImage(BuildContext context, ApplicantProvider applicantProvider) async {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: PlatformColor.offWhiteColor,
+          child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(
-                    top: 36,
-                  ),
-                  child: PlatformProfileImgUpload(
-                    isFirst: false,
-                    imageUrl: applicantProvider.applicantProfile!.image ?? "",
-                  ),
-                ),
-                const PlatformLabel(
-                  text: "Adınız",
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-                  child: TextFormField(
-                    controller: TextEditingController()..text = applicantProvider.applicantProfile!.name!,
-                    decoration: const InputDecoration(
-                      hintText: 'Adınız',
-                      contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: PlatformSubmitButton(
+                      buttonText: "Kameraya git",
+                      onPressed: () async {
+                        final image = await ImagePicker().pickImage(source: ImageSource.camera);
+                        if (image == null) return;
+                        applicantProvider.setProfileImage(image.path).then((value) => Navigator.of(context).pop());
+                      },
                     ),
                   ),
                 ),
-                const PlatformLabel(
-                  text: "Cinsiyet",
-                ),
-                ChooseGenderRow(
-                  onSelected:applicantProvider.applicantProfile!.gender! == "Kadın" ,
-                  onTap: (p0) {},
-                ),
-                SearchCaretakerCriteriaForm(
-                  text: "Şehir",
-                  selectedValue: applicantProvider.applicantProfile!.city,
-                  data: const {
-                    "0": "İstanbul",
-                    "1": "Ankara",
-                  },
-                  onChange: (p0) {},
-                ),
-                SearchCaretakerCriteriaForm(
-                  text: "Yardımcı türü",
-                  selectedValue: applicantProvider.applicantProfile!.caretakerType,
-                  data: const {
-                    "0": "Bebek Bakıcısı",
-                    "1": "Yaşlı Bakıcısı",
-                  },
-                  onChange: (p0) {},
-                ),
-                SearchCaretakerCriteriaForm(
-                  text: "Çalışma şekli",
-                  selectedValue: applicantProvider.applicantProfile!.shiftSystems,
-                  data: const {
-                    "0": "Gündüzlü",
-                    "1": "Akşamcı",
-                  },
-                  onChange: (p0) {},
-                ),
-                SearchCaretakerCriteriaForm(
-                  text: "Deneyim",
-                  selectedValue: applicantProvider.applicantProfile!.experience,
-                  data: const {
-                    "0": "1-3 Yıl",
-                    "1": "3-5 Yıl",
-                  },
-                  onChange: (p0) {},
-                ),
-                SearchCaretakerCriteriaForm(
-                  text: "Uyruk",
-                  selectedValue: applicantProvider.applicantProfile!.nationality,
-                  data: const {
-                    "0": "Türkmenistan",
-                    "1": "Rus",
-                  },
-                  onChange: (p0) {},
-                ),
-                SearchCaretakerCriteriaForm(
-                  text: "Yaş",
-                  selectedValue: applicantProvider.applicantProfile!.age,
-                  data: const {
-                    "0": "25-34",
-                    "1": "34-45",
-                  },
-                  onChange: (p0) {},
-                ),
-                const PlatformLabel(
-                  text: "Başlık",
-                ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-                  child: TextFormField(
-                    controller: TextEditingController()..text = applicantProvider.applicantProfile!.descTitle!,
-                    decoration: const InputDecoration(
-                      hintText: 'Başlık',
-                      contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
-                    ),
-                  ),
-                ),
-                const PlatformLabel(
-                  text: "Kendinizi kısace tanıtınız",
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-                  child: TextFormField(
-                    maxLines: 4,
-                    controller: TextEditingController()..text = applicantProvider.applicantProfile!.desc!,
-                    decoration: const InputDecoration(
-                      hintText: '',
-                      contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: PlatformCancelButton(
+                      buttonText: "Galeriye git",
+                      onPressed: () async {
+                        final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                        if (image == null) return;
+                        applicantProvider.setProfileImage(image.path).then((value) => Navigator.of(context).pop());
+                      },
                     ),
                   ),
                 ),
               ],
-            ),
-          ),
-          bottomNavigationBar: Container(
-            height: 100,
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                PlatformDimensionFoundations.sizeXXL,
-                PlatformDimensionFoundations.sizeXL,
-                PlatformDimensionFoundations.sizeXXL,
-                PlatformDimensionFoundations.sizeXL,
-              ),
-              child: PlatformSubmitButton(
-                buttonText: "Kaydet",
-                onPressed: () {},
-              ),
             ),
           ),
         );

@@ -18,7 +18,7 @@ class JobPostingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
       create: (context) =>
-          JobPostingProvider(jobPostingRepository, otherRepository,secureLocalRepository,PageType.fetch),
+          JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.fetch),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: PlatformColor.offWhiteColor2,
@@ -31,8 +31,8 @@ class JobPostingPage extends StatelessWidget {
             actions: [
               GestureDetector(
                 onTap: () async {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamed("/job_filter");
+                  //Navigator.of(context, rootNavigator: true).pushNamed("/confirm_sms");
+                  Navigator.of(context, rootNavigator: true).pushNamed("/job_filter");
                 },
                 child: const SizedBox(
                   child: Padding(

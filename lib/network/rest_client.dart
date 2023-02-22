@@ -28,7 +28,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';
 
-@RestApi(baseUrl: "https://070f6af2-2bf4-403f-843f-a6c2e2452664.mock.pstmn.io")
+@RestApi(baseUrl: "https://c6951e70-592c-41a6-b285-536d6d204f6a.mock.pstmn.io")
 abstract class RestClient {
   @factoryMethod
   factory RestClient(Dio dio) = _RestClient;
@@ -56,17 +56,7 @@ abstract class RestClient {
   );
 
   @GET("/job_postings")
-  Future<List<JobPosting>> fetchJobPostingsFilter( @Queries() Map<String,String> queries);
-      /*
-      @Query("pageNumber") int pageNumber,
-      @Query("pageSize") int pageSize,
-      @Query("city") String city,
-      @Query("district") String district,
-      @Query("caretakerType") String caretakerType,
-      @Query("shiftSystems") String shiftSystems,
-      @Query("experience") int experience,
-      @Query("nationality") String nationality,
-      @Query("gender") bool gender);*/
+  Future<List<JobPosting>> fetchJobPostingsFilter(@Queries() Map<String, String> queries);
 
   @GET("/job_postings/{id}")
   Future<JobDetail> fetchJobPosting(@Path("id") int jobId);
@@ -137,7 +127,7 @@ abstract class RestClient {
   );
 
   @GET("/applicant_requests/{id}/apply")
-  Future<ApplicantRequest> applypplicantRequest();
+  Future<ApplicantRequest> applyApplicantRequest();
 
   @GET("/applicant_requests/{id}/reject")
   Future<ApplicantRequest> rejectApplicantRequests();
@@ -147,7 +137,7 @@ abstract class RestClient {
 
   @POST('/applicant_profile')
   @MultiPart()
-  Future<dynamic> createApplicantProfile({
+  Future<SuccessResponse> createApplicantProfile({
     @Part() required String name,
     @Part() required String gender,
     @Part() required String city,
@@ -158,15 +148,15 @@ abstract class RestClient {
     @Part() required String experience,
     @Part() required String nationality,
     @Part() required String age,
-    @Part() required int description,
-    @Part() required int smoking,
-    @Part() required int travelRestriction,
+    @Part() required String description,
+    @Part() required bool smoking,
+    @Part() required bool travelRestriction,
     @Part() File? thumbnail,
   });
 
   @PUT('/applicant_profile')
   @MultiPart()
-  Future<dynamic> updateApplicantProfile({
+  Future<SuccessResponse> updateApplicantProfile({
     @Part() required String name,
     @Part() required String gender,
     @Part() required String city,
@@ -177,9 +167,9 @@ abstract class RestClient {
     @Part() required String experience,
     @Part() required String nationality,
     @Part() required String age,
-    @Part() required int description,
-    @Part() required int smoking,
-    @Part() required int travelRestriction,
+    @Part() required String description,
+    @Part() required bool smoking,
+    @Part() required bool travelRestriction,
     @Part() File? thumbnail,
   });
 
