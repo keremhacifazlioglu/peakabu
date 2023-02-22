@@ -11,7 +11,8 @@ Token _$TokenFromJson(Map<String, dynamic> json) => Token(
       isUserRegistered: json['isUserRegistered'] as bool?,
       message: json['message'] as String?,
       status: json['status'] as int?,
-    )..isSuccess = json['isSuccess'] as bool?;
+      isSuccess: json['isSuccess'] as bool?,
+    );
 
 Map<String, dynamic> _$TokenToJson(Token instance) => <String, dynamic>{
       'status': instance.status,

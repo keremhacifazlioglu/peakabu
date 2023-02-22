@@ -61,9 +61,11 @@ class AuthRepository implements IAuthRepository {
     Token token = Token();
     try {
       token = await _restClient.token(tokenRequest);
+      token.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       token.message = e.text;
-      token.status = e.response!.statusCode;
+      token.status = e.response != null ? e.response!.statusCode : e.statusCode;
+      token.isSuccess = false;
     }
     return token;
   }

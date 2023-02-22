@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform/config/locator.dart';
 import 'package:platform/ui/molecules/redirect/choose_redirect_button.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:platform/ui/tokens/sizes.dart';

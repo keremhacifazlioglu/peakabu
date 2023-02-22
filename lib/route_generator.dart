@@ -11,6 +11,7 @@ import 'package:platform/ui/pages/confirm_sms_page.dart';
 import 'package:platform/ui/pages/create_account_page.dart';
 import 'package:platform/ui/pages/redirect_page.dart';
 import 'package:platform/ui/pages/root_page.dart';
+import 'package:platform/ui/pages/splash_page.dart';
 
 import 'ui/pages/applicant/job_posting_detail_page.dart';
 import 'ui/pages/applicant/job_posting_page.dart';
@@ -27,6 +28,10 @@ class RouteGenerator {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case 'splash':
+        return MaterialPageRoute(
+          builder: (_) => const SplashPage(),
+        );
       case '/':
         return MaterialPageRoute(
           builder: (_) => const RootPage(),
@@ -73,7 +78,7 @@ class RouteGenerator {
         );
       case '/create_account':
         return MaterialPageRoute(
-          builder: (_) => const CreateAccountPage(),
+          builder: (_) => CreateAccountPage(),
         );
       case '/confirm_sms':
         return MaterialPageRoute(

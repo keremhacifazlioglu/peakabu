@@ -12,10 +12,10 @@ class AuthProvider with ChangeNotifier {
   final SecureLocalRepository _secureLocalRepository;
   NetworkStatus networkStatus = NetworkStatus.none;
   String? phoneNumber;
-  bool? isKvkkCheck;
+  //bool? isKvkkCheck;
   FocusScopeNode? node = FocusScopeNode();
   String smsPin = "";
-  bool resend = false;
+  bool isKvkkCheck = false,resend = false,privacyPolicy=false,termOfUse=false;
   int second = 10;
   List<TextEditingController> textEditingControllerList = [
     TextEditingController(),
@@ -96,6 +96,23 @@ class AuthProvider with ChangeNotifier {
 
   Future activateResendMessage() async {
     resend = true;
+    notifyListeners();
+  }
+
+  Future enablePrivacyPolicy() async {
+    privacyPolicy = true;
+    termOfUse = false;
+    notifyListeners();
+  }
+
+  Future enableTermOfUse() async {
+    privacyPolicy = false;
+    termOfUse = true;
+    notifyListeners();
+  }
+
+  Future enableKvkk() async {
+    isKvkkCheck = !isKvkkCheck!;
     notifyListeners();
   }
 }

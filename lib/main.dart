@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      initialRoute: "redirect",
+      initialRoute: "splash",
       navigatorKey: RouteGenerator.mainNavigatorKey,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
