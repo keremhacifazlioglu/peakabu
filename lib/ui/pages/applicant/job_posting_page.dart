@@ -31,7 +31,6 @@ class JobPostingPage extends StatelessWidget {
             actions: [
               GestureDetector(
                 onTap: () async {
-                  //Navigator.of(context, rootNavigator: true).pushNamed("/confirm_sms");
                   Navigator.of(context, rootNavigator: true).pushNamed("/job_filter");
                 },
                 child: const SizedBox(

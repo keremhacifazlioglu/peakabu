@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/splash_provider.dart';
-import 'package:platform/ui/organisms/custom_alert_dialog.dart';
 import 'package:platform/ui/organisms/custom_show_dialog.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
@@ -22,14 +21,16 @@ class SplashPage extends StatelessWidget {
           body: Consumer<SplashProvider>(
             builder: (context, provider, child) {
               if (provider.networkStatus == NetworkStatus.success) {
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  Navigator.of(context).pushReplacementNamed("redirect");
-                });
-
+                SchedulerBinding.instance.addPostFrameCallback(
+                  (_) {
+                    Navigator.of(context).pushReplacementNamed("redirect");
+                  },
+                );
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
-                  const CustomShowDialog().showDialog(context,"Hata" ,"Teknik bir arıza sebbiyle hizmet verememekteyiz");
+                  const CustomShowDialog()
+                      .showDialog(context, "Hata", "Teknik bir arıza sebbiyle hizmet verememekteyiz");
                 });
               }
               return Center(

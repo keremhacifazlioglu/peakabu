@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:platform/domain/request/auth/confirm_sms_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
 import 'package:platform/domain/response/success_response.dart';
@@ -6,6 +7,8 @@ import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/auth_repository.dart';
 import 'package:platform/storage/secure_local_repository.dart';
 import 'package:platform/storage/storage_item.dart';
+import 'package:platform/util/logger.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 
 class AuthProvider with ChangeNotifier {
   final AuthRepository _authRepository;
@@ -14,7 +17,7 @@ class AuthProvider with ChangeNotifier {
   String? phoneNumber;
   FocusScopeNode? node = FocusScopeNode();
   String smsPin = "";
-  bool isKvkkCheck = false,resend = false,privacyPolicy=false,termOfUse=false;
+  bool isKvkkCheck = false, resend = false, privacyPolicy = false, termOfUse = false;
   int second = 10;
   List<TextEditingController> textEditingControllerList = [
     TextEditingController(),
@@ -23,17 +26,29 @@ class AuthProvider with ChangeNotifier {
     TextEditingController()
   ];
 
-  AuthProvider(this._authRepository, this._secureLocalRepository);
+  AuthProvider(this._authRepository, this._secureLocalRepository){
+    getDeviceId();
+  }
 
   Future<SuccessResponse> sendSms() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
-    SuccessResponse successResponse = await _authRepository.sendSms(
-      SendSmsRequest(phoneNumber: phoneNumber!),
-    );
+    SuccessResponse successResponse = SuccessResponse();
+    if(phoneNumber == null || phoneNumber!.isEmpty){
+      successResponse.success = false;
+      successResponse.message = "Lütfen telefon numarası giriniz.";
+      networkStatus = NetworkStatus.error;
+    }else{
+      successResponse = await _authRepository.sendSms(
+        SendSmsRequest(
+          phoneNumber: phoneNumber!,
+          isKvkk: isKvkkCheck,
+        ),
+      );
+    }
+
     if (successResponse.success!) {
-      _secureLocalRepository
-          .writeSecureData(StorageItem("phoneNumber", phoneNumber!));
+      _secureLocalRepository.writeSecureData(StorageItem("phoneNumber", phoneNumber!));
       networkStatus = NetworkStatus.success;
     } else {
       networkStatus = NetworkStatus.error;
@@ -45,8 +60,7 @@ class AuthProvider with ChangeNotifier {
   Future<SuccessResponse> resendSms() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
-    String? phoneNumber =
-        await _secureLocalRepository.readSecureData("phoneNumber");
+    String? phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber");
     SuccessResponse successResponse = await _authRepository.sendSms(
       SendSmsRequest(phoneNumber: phoneNumber!),
     );
@@ -66,13 +80,12 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
     SuccessResponse successResponse = SuccessResponse();
     if (smsPin.isNotEmpty) {
-      String? phoneNumber =
-          await _secureLocalRepository.readSecureData("phoneNumber");
+      String? phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber");
       successResponse = await _authRepository.confirmSms(
         ConfirmSmsRequest(phone: phoneNumber, code: smsPin),
       );
       if (successResponse.isSuccess!) {
-        _secureLocalRepository.writeSecureData(StorageItem("uuid", smsPin));
+        _secureLocalRepository.writeSecureData(StorageItem("smsPin", smsPin));
         networkStatus = NetworkStatus.success;
       } else {
         networkStatus = NetworkStatus.error;
@@ -86,9 +99,18 @@ class AuthProvider with ChangeNotifier {
     return successResponse;
   }
 
+  Future<void> getDeviceId() async {
+    String? deviceId;
+    try {
+      deviceId = await PlatformDeviceId.getDeviceId;
+      await _secureLocalRepository.writeSecureData(StorageItem("uuid", deviceId!));
+    } on PlatformException {
+      deviceId = 'Failed to get deviceId.';
+    }
+  }
+
   Future prepareSmsPin() async {
-    for (TextEditingController textEditingController
-        in textEditingControllerList) {
+    for (TextEditingController textEditingController in textEditingControllerList) {
       smsPin += textEditingController.text.toString();
     }
   }
@@ -111,7 +133,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future enableKvkk() async {
-    isKvkkCheck = !isKvkkCheck!;
+    isKvkkCheck = !isKvkkCheck;
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/auth_provider.dart';
@@ -108,15 +109,19 @@ class CreateAccountPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-                      child: TextFormField(
-                        keyboardType: TextInputType.phone,
+                      child: IntlPhoneField(
                         decoration: const InputDecoration(
-                          hintText: 'Adınız',
-                          contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
+                          labelText: 'Telefon numarası',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(),
+                          ),
                         ),
-                        onChanged: (value) {
-                          authProvider.phoneNumber = value;
+                        onChanged: (phone) {
+                          authProvider.phoneNumber =phone.completeNumber;
                         },
+                        countries: const ["TR"],
+                        initialCountryCode: "TR",
+                        keyboardType: TextInputType.phone,
                       ),
                     ),
                     Padding(
@@ -125,7 +130,7 @@ class CreateAccountPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Checkbox(
-                            value: authProvider.isKvkkCheck ?? false,
+                            value: authProvider.isKvkkCheck,
                             onChanged: (value) {
                               authProvider.enableKvkk();
                             },
@@ -181,7 +186,11 @@ class CreateAccountPage extends StatelessWidget {
                       child: PlatformSubmitButton(
                         buttonText: "Devam et",
                         onPressed: () async {
-                          await sendSms(authProvider, context);
+
+                          authProvider.isKvkkCheck
+                              ? await sendSms(authProvider, context)
+                              : const CustomShowDialog()
+                                  .showDialog(context, "Uyarı", "Lütfen yasal metinleri okuyup onaylayınız.");
                         },
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform/config/locator.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/applicant/job_posting/job_posting_list_item.dart';
@@ -20,14 +21,21 @@ class JobPostingList extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            Navigator.of(context, rootNavigator: true).pushNamed(
-              "/create_account",
-              //arguments: jobPostings![index],
-            );
-            /*Navigator.of(context, rootNavigator: true).pushNamed(
-              "/job_posting_detail",
-              arguments: jobPostings![index],
-            );*/
+            secureLocalRepository.readSecureData("token").then((value) => {
+                  if (value != null && value.isNotEmpty)
+                    {
+                      Navigator.of(context, rootNavigator: true).pushNamed(
+                        "/job_posting_detail",
+                        arguments: jobPostings![index],
+                      ),
+                    }
+                  else
+                    {
+                      Navigator.of(context, rootNavigator: true).pushNamed(
+                        "/create_account",
+                      ),
+                    }
+                });
           },
           child: Container(
             width: double.infinity,
