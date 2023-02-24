@@ -39,6 +39,7 @@ class JobPostingDetailCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20, bottom: 16),
                 child: JobPostingListItem(
+                  //addFavoriteJobTap: addFavoriteJobTap,
                   jobPosting: jobPosting!,
                 ),
               ),

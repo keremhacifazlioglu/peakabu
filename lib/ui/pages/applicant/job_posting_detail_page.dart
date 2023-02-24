@@ -11,12 +11,12 @@ import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/organisms/applicant/job_posting/job_posting_detail_card.dart';
 import 'package:platform/ui/organisms/applicant/job_posting/job_posting_detail_skill_card.dart';
-import 'package:platform/ui/organisms/custom_alert_dialog.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class JobPostingDetailPage extends StatelessWidget {
   final JobPosting? jobPosting;
+
   const JobPostingDetailPage({
     Key? key,
     this.jobPosting,
@@ -26,7 +26,7 @@ class JobPostingDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
       create: (context) =>
-          JobPostingProvider(jobPostingRepository,secureLocalRepository,otherService, PageType.detail),
+          JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.detail),
       builder: (context, child) {
         return Scaffold(
           appBar: AppBar(
@@ -47,6 +47,7 @@ class JobPostingDetailPage extends StatelessWidget {
                       JobPostingDetailCard(
                         jobDetail: provider.jobDetail,
                         jobPosting: jobPosting,
+
                       ),
                       JobPostingDetailSkillCard(jobDetail: provider.jobDetail),
                     ],
@@ -55,7 +56,7 @@ class JobPostingDetailPage extends StatelessWidget {
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 return const Center(
-                  child: Text("Uyarı çıakrtılacak."),
+                  child: Text("Uyarı çıkartılacak."),
                 );
               }
               return const Center(
@@ -84,8 +85,18 @@ class JobPostingDetailPage extends StatelessWidget {
                   child: PlatformSubmitButton(
                     buttonText: "Başvur",
                     onPressed: () {
-                      const CustomAlertDialog().showDialog(context,
-                          "Değişiklikleri kaydetmek istediğinizden emin misiniz?");
+                      provider.applyJobPosting().then(
+                            (value) => {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: PlatformDefaultText(
+                                  text: value.isSuccess! ? 'Talep iletilmiştir' : value.message,
+                                  color: PlatformColor.offWhiteColor,
+                                  fontSize: 14,
+                                )),
+                              ),
+                            },
+                          );
                     },
                   ),
                 ),

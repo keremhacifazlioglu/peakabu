@@ -38,7 +38,9 @@ class JobFilterFormPage extends StatelessWidget {
                       ),
                       ChooseGenderRow(
                         onSelected: provider.otherService.gender,
-                        onTap: (p0) {},
+                        onTap: (p0) {
+                          provider.setSelectedGender(p0);
+                        },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Şehir",

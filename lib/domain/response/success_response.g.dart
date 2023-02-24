@@ -9,6 +9,7 @@ part of 'success_response.dart';
 SuccessResponse _$SuccessResponseFromJson(Map<String, dynamic> json) =>
     SuccessResponse(
       success: json['success'] as bool?,
+      follow: json['follow'] as bool?,
       message: json['message'] as String?,
       isSuccess: json['isSuccess'] as bool?,
     )..status = json['status'] as int?;
@@ -19,4 +20,5 @@ Map<String, dynamic> _$SuccessResponseToJson(SuccessResponse instance) =>
       'message': instance.message,
       'isSuccess': instance.isSuccess,
       'success': instance.success,
+      'follow': instance.follow,
     };

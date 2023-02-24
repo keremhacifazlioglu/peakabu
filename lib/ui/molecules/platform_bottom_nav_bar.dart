@@ -51,14 +51,14 @@ class PlatformBottomNavBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: PlatformIcon(
-            svgPath: "assets/icons/star.svg",
+            svgPath: "assets/icons/empty_star.svg",
             height: 30,
             width: 30,
             color: PlatformColor.grayLightColor,
           ),
           label: 'Follow',
           activeIcon: PlatformIcon(
-            svgPath: "assets/icons/star.svg",
+            svgPath: "assets/icons/empty_star.svg",
             height: 30,
             width: 30,
             color: PlatformColor.primaryColor,

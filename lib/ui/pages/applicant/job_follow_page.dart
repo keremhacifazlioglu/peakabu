@@ -14,7 +14,7 @@ class JobFollowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
       create: (context) =>
-          JobPostingProvider(jobPostingRepository,secureLocalRepository,otherService,PageType.fetch),
+          JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.fetch),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: PlatformColor.offWhiteColor2,
@@ -35,7 +35,8 @@ class JobFollowPage extends StatelessWidget {
                     return true;
                   },
                   child: JobPostingList(
-                      jobPostings: provider.allFavoriteJobPosting),
+                    jobPostings: provider.allFavoriteJobPosting,
+                  ),
                 );
               }
               if (provider.networkStatus == NetworkStatus.error) {

@@ -4,6 +4,7 @@ import 'package:platform/cons/page_type.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
+import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/job_posting_repository.dart';
 import 'package:platform/service/other_service.dart';
@@ -21,6 +22,7 @@ class JobPostingProvider with ChangeNotifier {
   NetworkStatus networkStatus = NetworkStatus.none;
   JobDetail? jobDetail;
   Map<String, String> filterData = {};
+
 
   JobPostingProvider(
       this._jobPostingRepository,this._secureLocalRepository, this.otherService, @factoryParam PageType pageType) {
@@ -105,6 +107,32 @@ class JobPostingProvider with ChangeNotifier {
     return jobDetail!;
   }
 
+  Future<SuccessResponse> applyJobPosting() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _jobPostingRepository.applyJobPosting(jobDetail!.id!.toInt());
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future<SuccessResponse> addFavoriteJob(JobPosting jobPosting) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _jobPostingRepository.favoriteJobPosting(1);
+    jobPosting.follow = successResponse.follow;
+
+    if(!successResponse.follow! && allJobPostings.isNotEmpty){
+      allFavoriteJobPosting.remove(jobPosting);
+    }
+    if(!successResponse.follow! && allFavoriteJobPosting.isNotEmpty){
+      allFavoriteJobPosting.remove(jobPosting);
+    }
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
   Future fetchAllOtherData() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
@@ -167,7 +195,7 @@ class JobPostingProvider with ChangeNotifier {
       StorageItem("nationality", otherService.selectedNationality ?? ""),
       StorageItem("city", otherService.selectedCity ?? ""),
       StorageItem("age", otherService.selectedAge ?? ""),
-      StorageItem("gender", otherService.gender ? "Kadın" : "Erkek"),
+      StorageItem("gender", otherService.gender ? "female" : "male"),
     ];
     for (var item in storageItems) {
       _secureLocalRepository.writeSecureData(item);
@@ -179,4 +207,7 @@ class JobPostingProvider with ChangeNotifier {
     notifyListeners();
     return otherService.gender;
   }
+
+
+
 }

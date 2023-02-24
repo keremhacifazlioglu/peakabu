@@ -6,9 +6,11 @@ part 'success_response.g.dart';
 @JsonSerializable()
 class SuccessResponse extends ExceptionError {
   bool? success;
+  bool? follow;
 
   SuccessResponse({
     this.success,
+    this.follow,
     String? message,
     int? statusCode,
     bool? isSuccess,

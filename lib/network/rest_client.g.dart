@@ -13,7 +13,7 @@ class _RestClient implements RestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://c6951e70-592c-41a6-b285-536d6d204f6a.mock.pstmn.io';
+    baseUrl ??= 'https://f994f3cd-23f7-4da5-bb22-3100783007bc.mock.pstmn.io';
   }
 
   final Dio _dio;
@@ -938,24 +938,25 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<dynamic> jobPostingAddFavorite(jobId) async {
+  Future<SuccessResponse> jobPostingAddFavorite(jobId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/job_postings/${jobId}/favorite',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              '/job_postings/${jobId}/favorite',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 

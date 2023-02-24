@@ -26,6 +26,7 @@ class RootPage extends StatelessWidget {
               } else {
                 s.setCurrentIndex(p0);
               }
+              s.refreshPage();
             },
           ),
         ),

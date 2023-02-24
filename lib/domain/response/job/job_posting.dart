@@ -11,6 +11,7 @@ class JobPosting extends ExceptionError {
   String? city;
   String? district;
   String? createdAt;
+  bool? follow;
 
   JobPosting({
     this.title,
@@ -19,8 +20,10 @@ class JobPosting extends ExceptionError {
     this.city,
     this.district,
     this.createdAt,
+    this.follow,
     String? message,
     int? status,
+
   }) : super(message: message, status: status);
 
   Map<String, dynamic> toJson() => _$JobPostingToJson(this);

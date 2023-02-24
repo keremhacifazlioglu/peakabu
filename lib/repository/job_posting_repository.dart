@@ -154,6 +154,7 @@ class JobPostingRepository extends IJobPostingRepository {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse = await _restClient.jobPostingApply(jobId);
+      successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
@@ -216,5 +217,19 @@ class JobPostingRepository extends IJobPostingRepository {
       recruiterJobPosting.isSuccess = false;
     }
     return recruiterJobPosting;
+  }
+
+  @override
+  Future<SuccessResponse> favoriteJobPosting(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.jobPostingAddFavorite(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
   }
 }

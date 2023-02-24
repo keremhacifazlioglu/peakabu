@@ -28,7 +28,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';
 
-@RestApi(baseUrl: "https://c6951e70-592c-41a6-b285-536d6d204f6a.mock.pstmn.io")
+@RestApi(baseUrl: "https://f994f3cd-23f7-4da5-bb22-3100783007bc.mock.pstmn.io")
 abstract class RestClient {
   @factoryMethod
   factory RestClient(Dio dio) = _RestClient;
@@ -184,7 +184,7 @@ abstract class RestClient {
   Future addFavoriteApplicantProfile(@Path() int jobId);
 
   @POST("/job_postings/{jobId}/favorite")
-  Future jobPostingAddFavorite(@Path() int jobId);
+  Future<SuccessResponse> jobPostingAddFavorite(@Path() int jobId);
 
   // todo Other
 

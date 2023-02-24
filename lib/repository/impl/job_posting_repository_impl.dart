@@ -34,4 +34,6 @@ abstract class IJobPostingRepository {
   Future<SuccessResponse> updateRecruiterJobPosting(RecruiterJobPostingUpdate recruiterJobPostingUpdate);
 
   Future<BaseListResponse> fetchFilterJobPostings(Map<String, String> queries);
+
+  Future<SuccessResponse> favoriteJobPosting(int id);
 }
