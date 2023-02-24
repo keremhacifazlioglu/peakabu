@@ -209,7 +209,7 @@ class CreateAccountPage extends StatelessWidget {
           (value) => {
             if (value.success!)
               {
-                Navigator.of(context).pushNamed("/confirm_sms"),
+                Navigator.of(context).pushReplacementNamed("/confirm_sms"),
               }
             else
               {

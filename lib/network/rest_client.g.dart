@@ -689,8 +689,6 @@ class _RestClient implements RestClient {
     required nationality,
     required age,
     required description,
-    required smoking,
-    required travelRestriction,
     thumbnail,
   }) async {
     const _extra = <String, dynamic>{};
@@ -741,14 +739,6 @@ class _RestClient implements RestClient {
     _data.fields.add(MapEntry(
       'description',
       description,
-    ));
-    _data.fields.add(MapEntry(
-      'smoking',
-      smoking.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'travelRestriction',
-      travelRestriction.toString(),
     ));
     if (thumbnail != null) {
       _data.files.add(MapEntry(
@@ -790,8 +780,6 @@ class _RestClient implements RestClient {
     required nationality,
     required age,
     required description,
-    required smoking,
-    required travelRestriction,
     thumbnail,
   }) async {
     const _extra = <String, dynamic>{};
@@ -842,14 +830,6 @@ class _RestClient implements RestClient {
     _data.fields.add(MapEntry(
       'description',
       description,
-    ));
-    _data.fields.add(MapEntry(
-      'smoking',
-      smoking.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'travelRestriction',
-      travelRestriction.toString(),
     ));
     if (thumbnail != null) {
       _data.files.add(MapEntry(

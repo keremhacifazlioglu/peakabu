@@ -72,37 +72,55 @@ class ApplicantProfilePage extends StatelessWidget {
                         text: "Şehir",
                         selectedValue: applicantProvider.applicantProfile!.city,
                         data: applicantProvider.otherService.cities,
-                        onChange: (p0) {},
+                        onChange: (p0) async {
+                          applicantProvider.applicantProfile!.city = p0;
+                          await applicantProvider.refresh();
+                        },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Yardımcı türü",
                         selectedValue: applicantProvider.applicantProfile!.caretakerType,
                         data: applicantProvider.otherService.caretakerTypes,
-                        onChange: (p0) {},
+                        onChange: (p0) async {
+                          applicantProvider.applicantProfile!.caretakerType = p0;
+                          await applicantProvider.refresh();
+                        },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Çalışma şekli",
                         selectedValue: applicantProvider.applicantProfile!.shiftSystems,
                         data: applicantProvider.otherService.shiftSystems,
-                        onChange: (p0) {},
+                        onChange: (p0) async {
+                          applicantProvider.applicantProfile!.shiftSystems = p0;
+                          await applicantProvider.refresh();
+                        },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Deneyim",
                         selectedValue: applicantProvider.applicantProfile!.experience,
                         data: applicantProvider.otherService.experiences,
-                        onChange: (p0) {},
+                        onChange: (p0) async {
+                          applicantProvider.applicantProfile!.experience = p0;
+                          await applicantProvider.refresh();
+                        },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Uyruk",
                         selectedValue: applicantProvider.applicantProfile!.nationality,
                         data: applicantProvider.otherService.nationalities,
-                        onChange: (p0) {},
+                        onChange: (p0) async {
+                          applicantProvider.applicantProfile!.nationality = p0;
+                          await applicantProvider.refresh();
+                        },
                       ),
                       SearchCaretakerCriteriaForm(
                         text: "Yaş",
                         selectedValue: applicantProvider.applicantProfile!.age,
                         data: applicantProvider.otherService.ages,
-                        onChange: (p0) {},
+                        onChange: (p0) async {
+                          applicantProvider.applicantProfile!.age = p0;
+                          await applicantProvider.refresh();
+                        },
                       ),
                       const PlatformLabel(
                         text: "Başlık",

@@ -31,12 +31,12 @@ class ApplicantProvider with ChangeNotifier {
     return applicantProfile!;
   }
 
-  Future createApplicantProfile() async {
+  Future<SuccessResponse> createApplicantProfile() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     Map<String, dynamic> queries = {
-      "name": "asdf",
-      "gender":"female",
+      "name": name,
+      "gender": "female",
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
       "district": otherService.selectedCity!,
@@ -46,21 +46,20 @@ class ApplicantProvider with ChangeNotifier {
       "caretakerType": otherService.selectedCaretakerType!,
       "title": title ?? applicantProfile!.descTitle!,
       "description": description ?? applicantProfile!.desc!,
-      "smoking": false,
-      "travelRestriction": false,
       "thumbnail": file,
     };
     SuccessResponse successResponse = await _applicantRepository.createApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
     notifyListeners();
+    return successResponse;
   }
 
-  Future updateApplicantProfile() async {
+  Future<SuccessResponse>  updateApplicantProfile() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     Map<String, dynamic> queries = {
       "name": "asdf",
-      "gender":"female",
+      "gender": "female",
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
       "district": otherService.selectedCity!,
@@ -70,13 +69,12 @@ class ApplicantProvider with ChangeNotifier {
       "caretakerType": otherService.selectedCaretakerType!,
       "title": title ?? applicantProfile!.descTitle!,
       "description": description ?? applicantProfile!.desc!,
-      "smoking": false,
-      "travelRestriction": false,
       "thumbnail": file,
     };
     SuccessResponse successResponse = await _applicantRepository.updateApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
     notifyListeners();
+    return successResponse;
   }
 
   Future fetchAllOtherData() async {
@@ -94,6 +92,10 @@ class ApplicantProvider with ChangeNotifier {
 
   Future setProfileImage(String imagePath) async {
     file = File(imagePath);
+    notifyListeners();
+  }
+
+  Future refresh() async{
     notifyListeners();
   }
 }

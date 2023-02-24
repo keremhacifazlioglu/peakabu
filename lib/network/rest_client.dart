@@ -149,8 +149,6 @@ abstract class RestClient {
     @Part() required String nationality,
     @Part() required String age,
     @Part() required String description,
-    @Part() required bool smoking,
-    @Part() required bool travelRestriction,
     @Part() File? thumbnail,
   });
 
@@ -168,8 +166,6 @@ abstract class RestClient {
     @Part() required String nationality,
     @Part() required String age,
     @Part() required String description,
-    @Part() required bool smoking,
-    @Part() required bool travelRestriction,
     @Part() File? thumbnail,
   });
 

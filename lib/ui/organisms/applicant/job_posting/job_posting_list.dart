@@ -21,21 +21,23 @@ class JobPostingList extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            secureLocalRepository.readSecureData("token").then((value) => {
-                  if (value != null && value.isNotEmpty)
-                    {
-                      Navigator.of(context, rootNavigator: true).pushNamed(
-                        "/job_posting_detail",
-                        arguments: jobPostings![index],
-                      ),
-                    }
-                  else
-                    {
-                      Navigator.of(context, rootNavigator: true).pushNamed(
-                        "/create_account",
-                      ),
-                    }
-                });
+            secureLocalRepository.readSecureData("token").then(
+                  (value) => {
+                    if (value != null && value.isNotEmpty)
+                      {
+                        Navigator.of(context, rootNavigator: true).pushNamed(
+                          "/job_posting_detail",
+                          arguments: jobPostings![index],
+                        ),
+                      }
+                    else
+                      {
+                        Navigator.of(context, rootNavigator: true).pushNamed(
+                          "/create_account",
+                        ),
+                      }
+                  },
+                );
           },
           child: Container(
             width: double.infinity,

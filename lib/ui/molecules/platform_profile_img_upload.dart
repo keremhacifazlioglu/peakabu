@@ -44,20 +44,28 @@ class PlatformProfileImgUpload extends StatelessWidget {
                             height: 150,
                             width: 150,
                           )
-                        : Image.file(file!,fit: BoxFit.cover,),
+                        : Image.file(
+                            file!,
+                            fit: BoxFit.cover,
+                          ),
                   )
-                :  Padding(
-                    padding: const EdgeInsets.all(32.0),
-                    child: GestureDetector(
-                      onTap: onTap!,
-                      child: const PlatformIcon(
-                        height: 50,
-                        width: 50,
-                        svgPath: "assets/icons/camera.svg",
-                        color: PlatformColor.grayLightColor,
+                : file != null
+                    ? ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(80),
+                        ),
+                        child: Image.file(
+                          file!,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: onTap!,
+                        child: const PlatformIcon(
+                          svgPath: "assets/icons/camera.svg",
+                          color: PlatformColor.grayLightColor,
+                        ),
                       ),
-                    ),
-                  ),
           ),
         ),
         if (!isFirst!)

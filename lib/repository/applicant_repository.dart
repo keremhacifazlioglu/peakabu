@@ -42,8 +42,6 @@ class ApplicantRepository implements IApplicantRepository {
         nationality: queries['nationality'],
         age: queries['age'],
         description: queries['description'],
-        smoking: queries['smoking'],
-        travelRestriction: queries['travelRestriction'],
       );
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
@@ -70,8 +68,6 @@ class ApplicantRepository implements IApplicantRepository {
         nationality: queries['nationality'],
         age: queries['age'],
         description: queries['description'],
-        smoking: queries['smoking'],
-        travelRestriction: queries['travelRestriction'],
       );
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
