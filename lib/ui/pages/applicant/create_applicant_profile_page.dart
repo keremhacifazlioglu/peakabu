@@ -85,8 +85,11 @@ class CreateApplicantProfilePage extends StatelessWidget {
                           text: "Cinsiyet",
                         ),
                         ChooseGenderRow(
-                          onSelected: applicantProvider.applicantProfile!.gender! == "Kadın",
-                          onTap: (p0) {},
+                          onSelected: applicantProvider.applicantProfile!.gender! == "female",
+                          onTap: (p0) {
+                            applicantProvider.applicantProfile!.gender = p0 ? "female" : "male";
+                            applicantProvider.refresh();
+                          },
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Şehir",

@@ -70,17 +70,18 @@ class ApplicantProfileBody extends StatelessWidget {
                       thickness: 0.5,
                     ),
                     ApplicantSkillItem(
-                      skillPlatformLabel: "Sigara içiyor musunuz ?",
-                      skillDescription: applicantProfile!.smoking! ? "Evet" : "Hayır",
+                      skillPlatformLabel: "Yaş",
+                      skillDescription: applicantProfile!.age!,
                     ),
                     const Divider(
                       color: PlatformColor.grayLightColor,
                       thickness: 0.5,
                     ),
                     ApplicantSkillItem(
-                      skillPlatformLabel: "Seyehat engeliniz var mı ?",
-                      skillDescription: applicantProfile!.travelRestriction! ? "Evet" : "Hayır",
+                      skillPlatformLabel: "Yardımcı türü",
+                      skillDescription: applicantProfile!.caretakerType!,
                     ),
+
                   ],
                 ),
               ),

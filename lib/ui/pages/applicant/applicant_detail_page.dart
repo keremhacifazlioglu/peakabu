@@ -15,8 +15,9 @@ class ApplicantDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ApplicantProvider>(
-        create: (context) => ApplicantProvider(applicantRepository,otherService),
+        create: (context) => ApplicantProvider(applicantRepository, otherService),
         builder: (context, child) {
+          var applicantProvider = Provider.of<ApplicantProvider>(context);
           return Scaffold(
             appBar: AppBar(
               title: const Text("Profilim"),
@@ -31,7 +32,7 @@ class ApplicantDetailPage extends StatelessWidget {
                         width: double.infinity,
                         height: 1100,
                         child: Stack(
-                          children:  [
+                          children: [
                             Positioned(
                               left: 0,
                               right: 0,
@@ -79,8 +80,12 @@ class ApplicantDetailPage extends StatelessWidget {
                 child: PlatformSubmitButton(
                   buttonText: "Düzenle",
                   onPressed: () {
-                    Navigator.of(context, rootNavigator: true)
-                        .pushNamed("/applicant_profile");
+                    Navigator.of(context, rootNavigator: true).pushNamed("/applicant_profile").then(
+                          (value) => {
+                            applicantProvider.fetchProfile(),
+                            applicantProvider.fetchAllOtherData(),
+                          },
+                        );
                   },
                 ),
               ),

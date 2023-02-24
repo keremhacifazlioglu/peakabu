@@ -66,7 +66,7 @@ class RouteGenerator {
         );
       case '/applicant_profile':
         return MaterialPageRoute(
-          builder: (_) => const ApplicantProfilePage(),
+          builder: (_) => ApplicantProfilePage(),
         );
       case '/create_applicant_profile':
         return MaterialPageRoute(

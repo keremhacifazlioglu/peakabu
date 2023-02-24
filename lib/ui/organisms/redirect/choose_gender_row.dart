@@ -21,7 +21,9 @@ class ChooseGenderRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: PlatformDimension.sizeXL),
           child: GestureDetector(
-            onTap: onTap!(true),
+            onTap: () {
+              onTap!(true);
+            },
             child: PlatformGenderButton(
               selectedColor: onSelected! ? PlatformColor.primaryColor : PlatformColor.grayLightColor ,
               text: "Kadın",
@@ -32,7 +34,9 @@ class ChooseGenderRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: PlatformDimension.sizeXL),
           child: GestureDetector(
-            onTap: onTap!(false),
+            onTap: () {
+              onTap!(false);
+            },
             child: PlatformGenderButton(
               selectedColor: !onSelected! ? PlatformColor.primaryColor : PlatformColor.grayLightColor,
               text: "Erkek",

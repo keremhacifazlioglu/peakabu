@@ -35,8 +35,8 @@ class ApplicantProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     Map<String, dynamic> queries = {
-      "name": name,
-      "gender": "female",
+      "name": applicantProfile!.name,
+      "gender": applicantProfile!.gender!,
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
       "district": otherService.selectedCity!,
@@ -58,8 +58,8 @@ class ApplicantProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     Map<String, dynamic> queries = {
-      "name": "asdf",
-      "gender": "female",
+      "name": applicantProfile!.name,
+      "gender": applicantProfile!.gender!,
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
       "district": otherService.selectedCity!,
@@ -69,7 +69,7 @@ class ApplicantProvider with ChangeNotifier {
       "caretakerType": otherService.selectedCaretakerType!,
       "title": title ?? applicantProfile!.descTitle!,
       "description": description ?? applicantProfile!.desc!,
-      "thumbnail": file,
+      "thumbnail": file??"" ,
     };
     SuccessResponse successResponse = await _applicantRepository.updateApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
