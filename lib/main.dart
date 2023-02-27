@@ -6,6 +6,7 @@ import 'package:platform/config/injection.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/firebase_options.dart';
 import 'package:platform/providers/other_provider.dart';
+import 'package:platform/providers/root_ambassador_provider.dart';
 import 'package:platform/providers/root_provider.dart';
 import 'package:platform/route_generator.dart';
 import 'package:platform/ui/theme.dart';
@@ -29,6 +30,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider<RootProvider>(
           create: (_) => RootProvider(),
+        ),
+        ChangeNotifierProvider<RootAmbassadorProvider>(
+          create: (_) => RootAmbassadorProvider(),
         ),
         ChangeNotifierProvider<OtherProvider>(
           create: (_) => OtherProvider(otherRepository),

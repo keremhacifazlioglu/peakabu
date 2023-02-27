@@ -477,6 +477,33 @@ class _RestClient implements RestClient {
   }
 
   @override
+  Future<List<ApplicantProfile>> fetchApplicantProfilesFilter(queries) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(queries);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<ApplicantProfile>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/applicant_profiles',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map(
+            (dynamic i) => ApplicantProfile.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<ApplicantProfile> fetchApplicantProfile(applicantId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -890,9 +917,15 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile() async {
+  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile(
+    pageNumber,
+    pageSize,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNumber': pageNumber,
+      r'pageSize': pageSize,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio

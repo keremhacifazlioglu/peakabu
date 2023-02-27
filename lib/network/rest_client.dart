@@ -105,6 +105,9 @@ abstract class RestClient {
     @Query("pageSize") int pageSize,
   );
 
+  @GET("/applicant_profiles")
+  Future<List<ApplicantProfile>> fetchApplicantProfilesFilter(@Queries() Map<String, String> queries);
+
   @GET("/applicant_profiles/{id}")
   Future<ApplicantProfile> fetchApplicantProfile(@Path("id") int applicantId);
 
@@ -178,7 +181,10 @@ abstract class RestClient {
   );
 
   @GET("/favorite_applicant_profiles")
-  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile();
+  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile(
+    @Query("pageNumber") int pageNumber,
+    @Query("pageSize") int pageSize,
+  );
 
   @POST("/applicant_profiles/{jobId}/favorite")
   Future addFavoriteApplicantProfile(@Path() int jobId);

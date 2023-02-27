@@ -18,8 +18,7 @@ class ApplicantProfile extends ExceptionError {
   String? nationality;
   String? experience;
   String? age;
-  bool? smoking;
-  bool? travelRestriction;
+  bool? favorite;
 
   ApplicantProfile({
     this.image,
@@ -32,8 +31,7 @@ class ApplicantProfile extends ExceptionError {
     this.descTitle,
     this.desc,
     this.gender,
-    this.smoking,
-    this.travelRestriction,
+    this.favorite,
     this.nationality,
     this.experience,
     this.age,

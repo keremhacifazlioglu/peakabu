@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
+import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/interceptor/error_interceptor.dart';
 import 'package:platform/repository/impl/applicant_repository_impl.dart';
@@ -76,5 +77,50 @@ class ApplicantRepository implements IApplicantRepository {
       successResponse.isSuccess = false;
     }
     return successResponse;
+  }
+
+  @override
+  Future<BaseListResponse> fetchApplicantProfiles(int pageNumber, int pageSize) async {
+    BaseListResponse baseListResponse = BaseListResponse();
+    try {
+      List<ApplicantProfile> response = await _restClient.fetchApplicantProfiles(pageNumber, pageSize);
+      baseListResponse.data = response;
+      baseListResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      baseListResponse.message = e.text;
+      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
+    }
+    return baseListResponse;
+  }
+
+  @override
+  Future<BaseListResponse> fetchFavoriteApplicantProfiles(int pageNumber, int pageSize) async {
+    BaseListResponse baseListResponse = BaseListResponse();
+    try {
+      List<ApplicantProfile> response = await _restClient.fetchFavoriteApplicantProfile(pageNumber, pageSize);
+      baseListResponse.data = response;
+      baseListResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      baseListResponse.message = e.text;
+      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
+    }
+    return baseListResponse;
+  }
+
+  @override
+  Future<BaseListResponse> fetchFilterApplicantProfiles(Map<String, String> queries) async {
+    BaseListResponse<ApplicantProfile> baseListResponse = BaseListResponse();
+    try {
+      List<ApplicantProfile> response = await _restClient.fetchApplicantProfilesFilter(queries);
+      baseListResponse.data = response;
+      baseListResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      baseListResponse.message = e.text;
+      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.isSuccess = false;
+    }
+    return baseListResponse;
   }
 }

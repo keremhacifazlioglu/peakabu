@@ -13,35 +13,35 @@ class SpecialForMeList extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed("/applicant_detail");
+                  .pushNamed("/job_posting_detail");
             },
             child: const SpecialForMeItem(
-                svgPath: "assets/icons/user.svg", title: "Aday Profilim"),
+                svgPath: "assets/icons/job_notfy.svg", title: "İş ilanım"),
           ),
           GestureDetector(
             onTap: () {
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed("job_request", arguments: false);
+                  .pushNamed("applicant_request", arguments: true);
             },
             child: const SpecialForMeItem(
-                svgPath: "assets/icons/iconMegaphone.svg",
-                title: "İletişim Talepleri"),
+                svgPath: "assets/icons/user_groups.svg",
+                title: "İş Başvuruları",),
           ),
           GestureDetector(
             onTap: () {
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed("job_request", arguments: true);
+                  .pushNamed("applicant_request", arguments: false);
             },
             child: const SpecialForMeItem(
-                svgPath: "assets/icons/iconSend.svg", title: "İş Başvurularım"),
+                svgPath: "assets/icons/iconSend.svg", title: "İletişim talepleri"),
           ),
           GestureDetector(
             onTap: () {
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed("job_follow");
+                  .pushNamed("applicant_follow");
             },
             child: const SpecialForMeItem(
-                svgPath: "assets/icons/empty_star.svg", title: "Favori İş İlanlarım"),
+                svgPath: "assets/icons/empty_star.svg", title: "Favori Adaylarım"),
           ),
           const SpecialForMeItem(
               svgPath: "assets/icons/iconSettings.svg", title: "Ayarlar"),

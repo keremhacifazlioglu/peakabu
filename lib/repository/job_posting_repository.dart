@@ -57,6 +57,7 @@ class JobPostingRepository extends IJobPostingRepository {
       List<JobPosting> response =
       await _restClient.fetchJobPostingsFilter(queries);
       baseListResponse.data = response;
+      baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
       baseListResponse.status = e.response!.statusCode;
@@ -141,6 +142,7 @@ class JobPostingRepository extends IJobPostingRepository {
       List<JobRequest> response =
           await _restClient.findJobPostings(pageNumber, pageSize);
       baseListResponse.data = response;
+      baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
       baseListResponse.status = e.response!.statusCode;

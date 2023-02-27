@@ -18,8 +18,7 @@ ApplicantProfile _$ApplicantProfileFromJson(Map<String, dynamic> json) =>
       descTitle: json['descTitle'] as String?,
       desc: json['desc'] as String?,
       gender: json['gender'] as String?,
-      smoking: json['smoking'] as bool?,
-      travelRestriction: json['travelRestriction'] as bool?,
+      favorite: json['favorite'] as bool?,
       nationality: json['nationality'] as String?,
       experience: json['experience'] as String?,
       age: json['age'] as String?,
@@ -46,6 +45,5 @@ Map<String, dynamic> _$ApplicantProfileToJson(ApplicantProfile instance) =>
       'nationality': instance.nationality,
       'experience': instance.experience,
       'age': instance.age,
-      'smoking': instance.smoking,
-      'travelRestriction': instance.travelRestriction,
+      'favorite': instance.favorite,
     };

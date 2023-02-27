@@ -47,7 +47,6 @@ class JobPostingDetailPage extends StatelessWidget {
                       JobPostingDetailCard(
                         jobDetail: provider.jobDetail,
                         jobPosting: jobPosting,
-
                       ),
                       JobPostingDetailSkillCard(jobDetail: provider.jobDetail),
                     ],

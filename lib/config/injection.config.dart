@@ -67,9 +67,15 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i6.SecureLocalRepository>(),
           gh<_i8.AuthRepository>(),
         ));
-    gh.factory<_i15.ApplicantProvider>(() => _i15.ApplicantProvider(
+    gh.factoryParam<_i15.ApplicantProvider, _i11.PageType, dynamic>((
+      pageType,
+      _,
+    ) =>
+        _i15.ApplicantProvider(
           gh<_i7.ApplicantRepository>(),
+          gh<_i6.SecureLocalRepository>(),
           gh<_i13.OtherService>(),
+          pageType,
         ));
     gh.factoryParam<_i16.JobPostingProvider, _i11.PageType, dynamic>((
       pageType,

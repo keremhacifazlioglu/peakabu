@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:platform/route_generator.dart';
 import 'package:platform/storage/secure_local_repository.dart';
 
-class RootProvider extends ChangeNotifier {
+class RootAmbassadorProvider extends ChangeNotifier {
   final Map<String, GlobalKey<NavigatorState>> _routes = {
-    "job_posting": GlobalKey<NavigatorState>(),
-    "job_follow": GlobalKey<NavigatorState>(),
-    "job_request": GlobalKey<NavigatorState>(),
-    "special_for_me": GlobalKey<NavigatorState>(),
+    "applicants": GlobalKey<NavigatorState>(),
+    "applicant_follow": GlobalKey<NavigatorState>(),
+    "applicant_request": GlobalKey<NavigatorState>(),
+    "ambassador_special_for_me": GlobalKey<NavigatorState>(),
   };
 
   GlobalKey<NavigatorState> get navigatorState => _routes.entries.toList()[_currentIndex].value;
@@ -15,7 +15,7 @@ class RootProvider extends ChangeNotifier {
 
   List<Widget> get pages => _pages;
 
-  RootProvider() {
+  RootAmbassadorProvider() {
     prepareRootPage();
     notifyListeners();
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
+import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_provider.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
@@ -15,7 +16,7 @@ class ApplicantDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ApplicantProvider>(
-        create: (context) => ApplicantProvider(applicantRepository, otherService),
+        create: (context) => ApplicantProvider(applicantRepository, secureLocalRepository,otherService, PageType.detail),
         builder: (context, child) {
           var applicantProvider = Provider.of<ApplicantProvider>(context);
           return Scaffold(

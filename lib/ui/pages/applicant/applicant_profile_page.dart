@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:platform/config/locator.dart';
+import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_provider.dart';
 import 'package:platform/ui/atoms/platform_cancel_button.dart';
@@ -22,7 +23,7 @@ class ApplicantProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ApplicantProvider>(
-      create: (context) => ApplicantProvider(applicantRepository, otherService),
+      create: (context) => ApplicantProvider(applicantRepository, secureLocalRepository,otherService, PageType.update),
       builder: (context, child) {
         var applicantProvider = Provider.of<ApplicantProvider>(context);
         return Scaffold(
