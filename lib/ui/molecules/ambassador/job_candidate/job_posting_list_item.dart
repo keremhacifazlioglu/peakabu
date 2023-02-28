@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
+import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_like_button.dart';
@@ -9,12 +9,12 @@ import 'package:platform/ui/molecules/platform_icon_label.dart';
 import 'package:provider/provider.dart';
 
 class JobPostingListItem extends StatelessWidget {
-  final JobPosting? jobPosting;
+  final JobDetail? jobDetail;
 
 
   const JobPostingListItem({
     Key? key,
-    this.jobPosting,
+    this.jobDetail,
   }) : super(key: key);
 
   @override
@@ -32,30 +32,10 @@ class JobPostingListItem extends StatelessWidget {
                   top: 16,
                 ),
                 child: PlatformDefaultText(
-                  text: jobPosting!.title!,
+                  text: jobDetail!.title!,
                   color: PlatformColorFoundation.textColor,
                   fontWeight: FontWeight.w600,
                   fontSize: PlatformTypographyFoundation.bodyLarge,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () async {
-                  await jobPostingProvider.addFavoriteJob(jobPosting!);
-                }, //addFavoriteJobTap,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 16,
-                    ),
-                    child: PlatformLikeButton(
-                      width: 36,
-                      height: 36,
-                      isLike: jobPosting!.follow,
-                    ),
-                  ),
                 ),
               ),
             ),
@@ -67,7 +47,7 @@ class JobPostingListItem extends StatelessWidget {
           ),
           child: PlatformIconLabel(
             labelIconPath: "assets/icons/group.svg",
-            labelText: "${jobPosting!.caretakerType!}/${jobPosting!.shiftSystem!}",
+            labelText: "${jobDetail!.caretakerType!}/${jobDetail!.shiftSystem!}",
           ),
         ),
         Padding(
@@ -76,7 +56,7 @@ class JobPostingListItem extends StatelessWidget {
           ),
           child: PlatformIconLabel(
             labelIconPath: "assets/icons/location.svg",
-            labelText: jobPosting!.district!,
+            labelText: jobDetail!.district!,
           ),
         ),
         Padding(
@@ -92,7 +72,7 @@ class JobPostingListItem extends StatelessWidget {
                 color: PlatformColorFoundation.textColor,
               ),
               PlatformDefaultText(
-                text: jobPosting!.createdAt,
+                text: jobDetail!.createdAt,
                 fontWeight: FontWeight.w400,
                 fontSize: PlatformTypographyFoundation.bodyMedium,
                 color: Colors.red,

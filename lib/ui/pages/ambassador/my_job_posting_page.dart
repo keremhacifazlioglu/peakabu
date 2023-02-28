@@ -5,19 +5,19 @@ import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/organisms/applicant/job_posting/job_posting_detail_card.dart';
-import 'package:platform/ui/organisms/applicant/job_posting/job_posting_detail_skill_card.dart';
+import 'package:platform/ui/organisms/ambassador/job_candidate/my_job_posting_detail_card.dart';
+import 'package:platform/ui/organisms/ambassador/job_candidate/my_job_posting_detail_skill_card.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
-class JobPostingDetailPage extends StatelessWidget {
+import '../../organisms/applicant/job_posting/job_posting_detail_skill_card.dart';
+
+class MyJobPostingPage extends StatelessWidget {
   final JobPosting? jobPosting;
 
-  const JobPostingDetailPage({
+  const MyJobPostingPage({
     Key? key,
     this.jobPosting,
   }) : super(key: key);
@@ -40,15 +40,14 @@ class JobPostingDetailPage extends StatelessWidget {
           ),
           body: Consumer<JobPostingProvider>(
             builder: (context, provider, child) {
-              if (provider.networkStatus == NetworkStatus.success && provider.jobDetail != null) {
+              if (provider.networkStatus == NetworkStatus.success) {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      JobPostingDetailCard(
+                      MyJobPostingDetailCard(
                         jobDetail: provider.jobDetail,
-                        jobPosting: jobPosting,
                       ),
-                      JobPostingDetailSkillCard(jobDetail: provider.jobDetail),
+                      MyJobPostingDetailSkillCard(jobDetail: provider.jobDetail),
                     ],
                   ),
                 );
@@ -64,39 +63,6 @@ class JobPostingDetailPage extends StatelessWidget {
                   height: 80,
                   child: CircularProgressIndicator(
                     color: PlatformColor.primaryColor,
-                  ),
-                ),
-              );
-            },
-          ),
-          bottomNavigationBar: Consumer<JobPostingProvider>(
-            builder: (context, provider, child) {
-              return Container(
-                height: 100,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    PlatformDimensionFoundations.sizeXXL,
-                    PlatformDimensionFoundations.sizeXL,
-                    PlatformDimensionFoundations.sizeXXL,
-                    PlatformDimensionFoundations.sizeXL,
-                  ),
-                  child: PlatformSubmitButton(
-                    buttonText: "Başvur",
-                    onPressed: () {
-                      provider.applyJobPosting().then(
-                            (value) => {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: PlatformDefaultText(
-                                  text: value.isSuccess! ? 'Talep iletilmiştir' : value.message,
-                                  color: PlatformColor.offWhiteColor,
-                                  fontSize: 14,
-                                )),
-                              ),
-                            },
-                          );
-                    },
                   ),
                 ),
               );

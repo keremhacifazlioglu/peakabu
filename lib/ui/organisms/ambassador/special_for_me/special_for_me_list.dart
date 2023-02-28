@@ -13,7 +13,7 @@ class SpecialForMeList extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed("/job_posting_detail");
+                  .pushNamed("/my_job_posting_detail");
             },
             child: const SpecialForMeItem(
                 svgPath: "assets/icons/job_notfy.svg", title: "İş ilanım"),

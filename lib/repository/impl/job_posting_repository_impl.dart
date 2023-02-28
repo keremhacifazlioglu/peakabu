@@ -27,7 +27,7 @@ abstract class IJobPostingRepository {
 
   Future<SuccessResponse> rejectHireJob(int hireId);
 
-  Future<RecruiterJobPosting> fetchRecruiterJobPosting();
+  Future<JobDetail> fetchRecruiterJobPosting();
 
   Future<SuccessResponse> createRecruiterJobPosting(RecruiterJobPostingRequest recruiterJobPostingRequest);
 

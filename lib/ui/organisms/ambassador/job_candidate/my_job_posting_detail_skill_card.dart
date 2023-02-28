@@ -3,10 +3,10 @@ import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/applicant/applicant_skill_item.dart';
 
-class JobPostingDetailSkillCard extends StatelessWidget {
+class MyJobPostingDetailSkillCard extends StatelessWidget {
   final JobDetail? jobDetail;
 
-  const JobPostingDetailSkillCard({
+  const MyJobPostingDetailSkillCard({
     Key? key,
     this.jobDetail,
   }) : super(key: key);

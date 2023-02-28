@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
-import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_like_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/molecules/platform_icon_label.dart';
-import 'package:provider/provider.dart';
 
 class ApplicantListItem extends StatelessWidget {
   final ApplicantProfile? applicantProfile;
@@ -25,12 +22,12 @@ class ApplicantListItem extends StatelessWidget {
         Expanded(
           flex: 2,
           child: Padding(
-            padding: const EdgeInsets.only(top: 15,right: 16,left: 20,bottom: 15),
+            padding: const EdgeInsets.only(top: 15, right: 16, left: 20, bottom: 15),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(
                 Radius.circular(8),
               ),
-              child:  Image.network(
+              child: Image.network(
                 "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
                 fit: BoxFit.cover,
                 height: 90,
@@ -68,10 +65,7 @@ class ApplicantListItem extends StatelessWidget {
                       }, //addFavoriteJobTap,
                       child: Center(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 16,
-                            right: 12
-                          ),
+                          padding: const EdgeInsets.only(top: 16, right: 12),
                           child: PlatformLikeButton(
                             width: 36,
                             height: 36,
@@ -83,14 +77,9 @@ class ApplicantListItem extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                ),
-                child: PlatformIconLabel(
-                  labelIconPath: "assets/icons/group.svg",
-                  labelText: "${applicantProfile!.caretakerType!}/${applicantProfile!.shiftSystems!}",
-                ),
+              PlatformIconLabel(
+                labelIconPath: "assets/icons/group.svg",
+                labelText: "${applicantProfile!.caretakerType!}/${applicantProfile!.shiftSystems!}",
               ),
               Padding(
                 padding: const EdgeInsets.only(

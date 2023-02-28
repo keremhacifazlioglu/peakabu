@@ -9,7 +9,7 @@ class JobDetail extends ExceptionError {
   String? title;
   String? gender;
   String? caretakerType;
-  String? shiftSystems;
+  String? shiftSystem;
   String? city;
   String? district;
   String? createdAt;
@@ -24,7 +24,7 @@ class JobDetail extends ExceptionError {
     this.title,
     this.gender,
     this.caretakerType,
-    this.shiftSystems,
+    this.shiftSystem,
     this.city,
     this.district,
     this.createdAt,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
+import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/applicant/job_posting/job_posting_list_item.dart';
 import 'package:platform/ui/tokens/colors.dart';
@@ -25,6 +26,7 @@ class JobPostingList extends StatelessWidget {
                   (value) => {
                     if (value != null && value.isNotEmpty)
                       {
+                        secureLocalRepository.writeSecureData(StorageItem("jobPostingId", jobPostings![index].id.toString())),
                         Navigator.of(context, rootNavigator: true).pushNamed(
                           "/job_posting_detail",
                           arguments: jobPostings![index],

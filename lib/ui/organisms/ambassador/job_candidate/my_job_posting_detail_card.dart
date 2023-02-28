@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/ui/foundations/colors.dart';
+import 'package:platform/ui/molecules/ambassador/job_candidate/job_posting_list_item.dart';
 import 'package:platform/ui/molecules/applicant/job_posting/job_posting_detail_description_item.dart';
-import 'package:platform/ui/molecules/applicant/job_posting/job_posting_list_item.dart';
 
-class JobPostingDetailCard extends StatelessWidget {
-  final JobPosting? jobPosting;
+class MyJobPostingDetailCard extends StatelessWidget {
   final JobDetail? jobDetail;
 
-  const JobPostingDetailCard({
+  const MyJobPostingDetailCard({
     Key? key,
-    this.jobPosting,
     this.jobDetail,
   }) : super(key: key);
 
@@ -39,7 +36,7 @@ class JobPostingDetailCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20, bottom: 16),
                 child: JobPostingListItem(
-                  jobPosting: jobPosting!,
+                  jobDetail: jobDetail!,
                 ),
               ),
               const Padding(

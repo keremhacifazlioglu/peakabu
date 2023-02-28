@@ -29,7 +29,7 @@ class ApplicantFollowPage extends StatelessWidget {
                 return NotificationListener<ScrollNotification>(
                   onNotification: (ScrollNotification scrollInfo) {
                     if (scrollInfo is ScrollEndNotification) {
-                      provider.fetchFavoriteJobPostingsWithPagination();
+                      provider.fetchFavoriteApplicantWithPagination();
                     }
                     return true;
                   },

@@ -22,7 +22,8 @@ RecruiterJobPosting _$RecruiterJobPostingFromJson(Map<String, dynamic> json) =>
       desc: json['desc'] as String?,
       message: json['message'] as String?,
       status: json['status'] as int?,
-    )..isSuccess = json['isSuccess'] as bool?;
+      isSuccess: json['isSuccess'] as bool?,
+    );
 
 Map<String, dynamic> _$RecruiterJobPostingToJson(
         RecruiterJobPosting instance) =>

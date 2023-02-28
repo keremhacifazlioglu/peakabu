@@ -4,6 +4,7 @@ import 'package:platform/cons/page_type.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
+import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/job_posting_repository.dart';
@@ -31,6 +32,7 @@ class JobPostingProvider with ChangeNotifier {
       fetchFavoriteJobPostingsWithPagination();
     } else if (pageType == PageType.detail) {
       fetchJobPostingDetail();
+      fetchMyJobPostingDetail();
     } else if (pageType == PageType.filterForm) {
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
@@ -101,7 +103,17 @@ class JobPostingProvider with ChangeNotifier {
   Future<JobDetail> fetchJobPostingDetail() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
-    jobDetail = await _jobPostingRepository.fetchJobPosting(1);
+    String? id = await _secureLocalRepository.readSecureData("jobPostingId");
+    jobDetail = await _jobPostingRepository.fetchJobPosting(int.parse(id!));
+    networkStatus = jobDetail!.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return jobDetail!;
+  }
+
+  Future<JobDetail> fetchMyJobPostingDetail() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    jobDetail = await _jobPostingRepository.fetchRecruiterJobPosting();
     networkStatus = jobDetail!.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
     notifyListeners();
     return jobDetail!;

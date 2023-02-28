@@ -9,14 +9,12 @@ import 'package:platform/domain/request/auth/token_request.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/domain/response/applicant/find_applicant.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
 import 'package:platform/domain/response/auth/token.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/job_request.dart';
-import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/other/age.dart';
 import 'package:platform/domain/response/other/caretaker_type.dart';
 import 'package:platform/domain/response/other/city.dart';
@@ -89,7 +87,7 @@ abstract class RestClient {
   Future<SuccessResponse> rejectHireJob(@Path("id") int hireId);
 
   @GET("/my_job_posting")
-  Future<RecruiterJobPosting> fetchMyJobPosting();
+  Future<JobDetail> fetchMyJobPosting();
 
   @POST("/my_job_posting")
   Future<SuccessResponse> createMyJobPosting(@Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
@@ -118,7 +116,7 @@ abstract class RestClient {
   Future<ApplicantProfile> me();
 
   @GET("/find_applicants")
-  Future<List<FindApplicant>> findApplicants(
+  Future<List<ApplicantRequest>> findApplicants(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );

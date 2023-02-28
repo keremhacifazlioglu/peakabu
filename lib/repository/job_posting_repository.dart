@@ -209,16 +209,17 @@ class JobPostingRepository extends IJobPostingRepository {
   }
 
   @override
-  Future<RecruiterJobPosting> fetchRecruiterJobPosting() async {
-    RecruiterJobPosting recruiterJobPosting = RecruiterJobPosting();
+  Future<JobDetail> fetchRecruiterJobPosting() async {
+    JobDetail jobDetail = JobDetail();
     try {
-      recruiterJobPosting = await _restClient.fetchMyJobPosting();
+      jobDetail = await _restClient.fetchMyJobPosting();
+      jobDetail.isSuccess = true;
     } on CustomGenericDioError catch (e) {
-      recruiterJobPosting.message = e.text;
-      recruiterJobPosting.status = e.response!.statusCode;
-      recruiterJobPosting.isSuccess = false;
+      jobDetail.message = e.text;
+      jobDetail.status = e.response!.statusCode;
+      jobDetail.isSuccess = false;
     }
-    return recruiterJobPosting;
+    return jobDetail;
   }
 
   @override

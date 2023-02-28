@@ -29,15 +29,17 @@ class ApplicantProvider with ChangeNotifier {
   ApplicantProvider(this._applicantRepository,this._secureLocalRepository, this.otherService , @factoryParam PageType pageType) {
     if (pageType == PageType.fetch) {
       fetchApplicantProfilesWithPagination();
-      fetchFavoriteJobPostingsWithPagination();
+      fetchFavoriteApplicantWithPagination();
     } else if (pageType == PageType.detail) {
       fetchProfile();
     } else if (pageType == PageType.filterForm) {
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
       fetchFilterJobPostingsWithPagination();
+    } else if (pageType == PageType.update){
+      fetchProfile();
+      fetchAllOtherData();
     }
-    //fetchAllOtherData();
   }
 
   Future<ApplicantProfile> fetchProfile() async {
@@ -69,7 +71,7 @@ class ApplicantProvider with ChangeNotifier {
     return allApplicantProfile;
   }
 
-  Future fetchFavoriteJobPostingsWithPagination() async {
+  Future fetchFavoriteApplicantWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     if (!isFavoriteLastPage) {

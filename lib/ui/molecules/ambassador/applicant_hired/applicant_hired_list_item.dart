@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platform/cons/request_job_status.dart';
+import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
 import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/foundations/colors.dart';
@@ -7,11 +8,11 @@ import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/molecules/platform_icon_label.dart';
 
 class ApplicantHiredListItem extends StatelessWidget {
-  final JobRequest? jobRequest;
+  final ApplicantRequest? applicantRequest;
 
   const ApplicantHiredListItem({
     Key? key,
-    this.jobRequest,
+    this.applicantRequest,
   }) : super(key: key);
 
   @override
@@ -51,7 +52,7 @@ class ApplicantHiredListItem extends StatelessWidget {
                       top: 8,
                     ),
                     child: PlatformDefaultText(
-                      text: jobRequest!.title!.split(" ").first,
+                      text: applicantRequest!.title!.split(" ").first,
                       color: PlatformColorFoundation.textColor,
                       fontWeight: FontWeight.w600,
                       fontSize: PlatformTypographyFoundation.bodyLarge,
@@ -68,7 +69,7 @@ class ApplicantHiredListItem extends StatelessWidget {
                         ),
                         child: PlatformIconLabel(
                           labelIconPath: "assets/icons/group.svg",
-                          labelText: "${jobRequest!.caretakerType!}/${jobRequest!.workType!}",
+                          labelText: "${applicantRequest!.caretakerType!}/${applicantRequest!.workType!}",
                         ),
                       ),
                     ],
@@ -83,12 +84,12 @@ class ApplicantHiredListItem extends StatelessWidget {
                       borderRadius: const BorderRadius.all(
                         Radius.circular(5),
                       ),
-                      color: getColor(jobRequest!.status!)!.withOpacity(0.15),
+                      color: getColor(applicantRequest!.status!)!.withOpacity(0.15),
                     ),
                     child: Center(
                       child: PlatformDefaultText(
-                        text: requestJobStatus[jobRequest!.status],
-                        color: getColor(jobRequest!.status!),
+                        text: requestJobStatus[applicantRequest!.status],
+                        color: getColor(applicantRequest!.status!),
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                       ),

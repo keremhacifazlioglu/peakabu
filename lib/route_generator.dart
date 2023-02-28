@@ -4,6 +4,7 @@ import 'package:platform/ui/pages/ambassador/applicant_filter_page.dart';
 import 'package:platform/ui/pages/ambassador/applicant_follow_page.dart';
 import 'package:platform/ui/pages/ambassador/applicant_hired_page.dart';
 import 'package:platform/ui/pages/ambassador/applicants_page.dart';
+import 'package:platform/ui/pages/ambassador/my_job_posting_page.dart';
 import 'package:platform/ui/pages/applicant/applicant_detail_page.dart';
 import 'package:platform/ui/pages/applicant/applicant_profile_page.dart';
 import 'package:platform/ui/pages/applicant/create_applicant_profile_page.dart';
@@ -92,6 +93,12 @@ class RouteGenerator {
       case '/job_posting_detail':
         return MaterialPageRoute(
           builder: (_) => JobPostingDetailPage(
+            jobPosting: settings.routeArgs(),
+          ),
+        );
+      case '/my_job_posting_detail':
+        return MaterialPageRoute(
+          builder: (_) => MyJobPostingPage(
             jobPosting: settings.routeArgs(),
           ),
         );

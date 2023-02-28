@@ -374,13 +374,13 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<RecruiterJobPosting> fetchMyJobPosting() async {
+  Future<JobDetail> fetchMyJobPosting() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<RecruiterJobPosting>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<JobDetail>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -392,7 +392,7 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RecruiterJobPosting.fromJson(_result.data!);
+    final value = JobDetail.fromJson(_result.data!);
     return value;
   }
 
@@ -573,7 +573,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<List<FindApplicant>> findApplicants(
+  Future<List<ApplicantRequest>> findApplicants(
     pageNumber,
     pageSize,
   ) async {
@@ -585,7 +585,7 @@ class _RestClient implements RestClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<FindApplicant>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<ApplicantRequest>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -598,7 +598,8 @@ class _RestClient implements RestClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => FindApplicant.fromJson(i as Map<String, dynamic>))
+        .map(
+            (dynamic i) => ApplicantRequest.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

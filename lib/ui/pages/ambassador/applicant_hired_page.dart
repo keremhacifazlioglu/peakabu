@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
-import 'package:platform/providers/job_requests_provider.dart';
+import 'package:platform/providers/applicant_hired_provider.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/platform_tab_menu.dart';
 import 'package:platform/ui/organisms/ambassador/job_hired/applicant_hired_list.dart';
-import 'package:platform/ui/organisms/applicant/job_request/job_request_list.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +19,8 @@ class ApplicantRequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<JobRequestsProvider>(
-      create: (context) => JobRequestsProvider(jobPostingRepository, PageType.fetch, selectedTab: selectedTab ?? true),
+    return ChangeNotifierProvider<ApplicantHiredProvider>(
+      create: (context) => ApplicantHiredProvider(applicantRepository, PageType.fetch, selectedTab: selectedTab ?? false),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -51,7 +50,7 @@ class ApplicantRequestPage extends StatelessWidget {
                           width: 1,
                         ),
                       ),
-                      child: Consumer<JobRequestsProvider>(
+                      child: Consumer<ApplicantHiredProvider>(
                         builder: (context, provider, child) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +60,7 @@ class ApplicantRequestPage extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () async {
                                     await provider.selectedHireJob();
-                                    await provider.fetchHireJobPostingsWithPagination();
+                                    await provider.fetchHireApplicantWithPagination();
                                   },
                                   child: PlatformTabMenu(
                                     width: (MediaQuery.of(context).size.width - 64) / 2,
@@ -83,7 +82,7 @@ class ApplicantRequestPage extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () async {
                                     await provider.selectedFindJob();
-                                    await provider.fetchFindJobPostingsWithPagination();
+                                    await provider.fetchFindApplicantWithPagination();
                                   },
                                   child: PlatformTabMenu(
                                     width: (MediaQuery.of(context).size.width - 64) / 2,
@@ -114,23 +113,23 @@ class ApplicantRequestPage extends StatelessWidget {
               ),
               Expanded(
                 flex: 4,
-                child: Consumer<JobRequestsProvider>(
+                child: Consumer<ApplicantHiredProvider>(
                   builder: (context, provider, child) {
                     if (provider.networkStatus == NetworkStatus.success) {
                       return NotificationListener<ScrollNotification>(
                         onNotification: (ScrollNotification scrollInfo) {
                           if (scrollInfo is ScrollEndNotification) {
                             if (provider.isSelectedFindJob) {
-                              provider.fetchFindJobPostingsWithPagination();
+                              provider.fetchFindApplicantWithPagination();
                             }
                             if (provider.isSelectedHireJob) {
-                              provider.fetchHireJobPostingsWithPagination();
+                              provider.fetchHireApplicantWithPagination();
                             }
                           }
                           return true;
                         },
                         child: ApplicantHiredList(
-                          jobRequests:
+                          applicantRequests:
                               provider.isSelectedFindJob ? provider.allFindJobPostings : provider.allHireJobPosting,
                         ),
                       );

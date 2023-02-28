@@ -33,7 +33,8 @@ class RecruiterJobPosting extends ExceptionError {
     this.desc,
     String? message,
     int? status,
-  }) : super(message: message, status: status);
+    bool? isSuccess,
+  }) : super(message: message, status: status, isSuccess: isSuccess );
 
   factory RecruiterJobPosting.fromJson(Map<String, dynamic> json) {
     return _$RecruiterJobPostingFromJson(json);

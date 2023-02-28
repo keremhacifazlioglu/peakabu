@@ -10,7 +10,7 @@ class ApplicantRequest {
   String? city;
   String? district;
   String? createdAt;
-  bool? follow;
+  String? status;
 
   ApplicantRequest({
     this.title,
@@ -19,7 +19,7 @@ class ApplicantRequest {
     this.city,
     this.district,
     this.createdAt,
-    this.follow,
+    this.status,
   });
 
   factory ApplicantRequest.fromJson(Map<String, dynamic> json) {
