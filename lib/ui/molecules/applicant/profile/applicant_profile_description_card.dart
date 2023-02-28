@@ -5,7 +5,13 @@ import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/tokens/colors.dart';
 
 class ApplicantProfileDescriptionCard extends StatelessWidget {
-  const ApplicantProfileDescriptionCard({Key? key}) : super(key: key);
+  final String? descTitle, desc;
+
+  const ApplicantProfileDescriptionCard({
+    Key? key,
+    this.desc,
+    this.descTitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +22,17 @@ class ApplicantProfileDescriptionCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             PlatformDefaultText(
-              text: "Çocuklarınızı kendi çocuklarımdan ayırmam.",
+              text: descTitle,
               fontWeight: FontWeight.w600,
               fontSize: PlatformTypographyFoundation.titleSmall,
               color: PlatformColorFoundation.textColor,
             ),
             Padding(
-              padding: EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 16),
               child: PlatformDefaultText(
-                text:
-                    "Merhaba ben Fatma. 11 yıl 2 ay deneyimim var. Bir ailenin yeni doğmuş bebeğine 11 yaşına kadar annelik yaptım. 6 yaşına geldiğinde bir kardeşi oldu. Çocuklarla ilgilenmekten keyif alıyorum, hiç yorulmuyorum. Daha sonra Mira bebeğe de 6 yıl baktım. Okula başladıkları için ayrıldım hepsinden ama hala görüşüyorum.",
+                text: desc,
                 fontWeight: FontWeight.w400,
                 fontSize: PlatformTypographyFoundation.bodyMedium + 1,
                 color: PlatformColor.grayLightColor,

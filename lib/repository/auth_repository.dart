@@ -1,14 +1,13 @@
 import 'package:injectable/injectable.dart';
 import 'package:platform/domain/response/auth/token.dart';
-import 'package:platform/domain/response/auth/confirm_sms.dart';
 import 'package:platform/domain/request/auth/token_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
 import 'package:platform/domain/request/auth/register_request.dart';
 import 'package:platform/domain/request/auth/confirm_sms_request.dart';
+import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/interceptor/error_interceptor.dart';
 import 'package:platform/network/rest_client.dart';
 import 'package:platform/repository/impl/auth_repository_impl.dart';
-import 'package:platform/util/logger.dart';
 
 @injectable
 class AuthRepository implements IAuthRepository {
@@ -17,18 +16,44 @@ class AuthRepository implements IAuthRepository {
   AuthRepository(this._restClient);
 
   @override
-  Future<ConfirmSms> confirmSms(ConfirmSmsRequest confirmSmsRequest) async {
-    return await _restClient.sendConfirmSms(confirmSmsRequest);
-  }
-
-  @override
   Future<Token> register(RegisterRequest registerRequest) async {
-    return await _restClient.register(registerRequest);
+    Token token = Token();
+    try {
+      token = await _restClient.register(registerRequest);
+    } on CustomGenericDioError catch (e) {
+      token.message = e.text;
+      token.status = e.response!.statusCode;
+    }
+    return token;
   }
 
   @override
-  Future<bool> sendSms(SendSmsRequest sendSmsRequest) async {
-    return await _restClient.sendSms(sendSmsRequest);
+  Future<SuccessResponse> sendSms(SendSmsRequest sendSmsRequest) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.sendSms(sendSmsRequest);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+  @override
+  Future<SuccessResponse> confirmSms(
+      ConfirmSmsRequest confirmSmsRequest) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.sendConfirmSms(confirmSmsRequest);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
   }
 
   @override
@@ -36,9 +61,11 @@ class AuthRepository implements IAuthRepository {
     Token token = Token();
     try {
       token = await _restClient.token(tokenRequest);
-    } on BaseError catch (e) {
+      token.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
       token.message = e.text;
-      token.status = e.response!.statusCode;
+      token.status = e.response != null ? e.response!.statusCode : e.statusCode;
+      token.isSuccess = false;
     }
     return token;
   }

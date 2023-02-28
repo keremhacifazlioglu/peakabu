@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:platform/providers/root_ambassador_provider.dart';
 import 'package:platform/providers/root_provider.dart';
 import 'package:platform/ui/molecules/platform_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
-class RootPage extends StatelessWidget {
-  const RootPage({Key? key}) : super(key: key);
+class RootAmbassadorPage extends StatelessWidget {
+  const RootAmbassadorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RootProvider>(
+    return Consumer<RootAmbassadorProvider>(
       builder: (c, s, w) => WillPopScope(
         onWillPop: () async {
           return !await s.navigatorState.currentState!.maybePop();
@@ -26,6 +27,7 @@ class RootPage extends StatelessWidget {
               } else {
                 s.setCurrentIndex(p0);
               }
+              s.refreshPage();
             },
           ),
         ),

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:platform/config/injection.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/firebase_options.dart';
-import 'package:platform/providers/job_posting_provider.dart';
+import 'package:platform/providers/other_provider.dart';
+import 'package:platform/providers/root_ambassador_provider.dart';
 import 'package:platform/providers/root_provider.dart';
 import 'package:platform/route_generator.dart';
 import 'package:platform/ui/theme.dart';
@@ -30,8 +31,11 @@ void main() async {
         ChangeNotifierProvider<RootProvider>(
           create: (_) => RootProvider(),
         ),
-        ChangeNotifierProvider<JobPostingProvider>(
-          create: (_) => JobPostingProvider(authRepository),
+        ChangeNotifierProvider<RootAmbassadorProvider>(
+          create: (_) => RootAmbassadorProvider(),
+        ),
+        ChangeNotifierProvider<OtherProvider>(
+          create: (_) => OtherProvider(otherRepository),
         ),
       ],
       child: const MyApp(),
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      initialRoute: "/",
+      initialRoute: "splash",
       navigatorKey: RouteGenerator.mainNavigatorKey,
       onGenerateRoute: RouteGenerator.generateRoute,
     );

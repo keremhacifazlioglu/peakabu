@@ -1,14 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:platform/domain/exception_error.dart';
 
 part 'job_detail.g.dart';
 
 @JsonSerializable()
-class JobDetail {
+class JobDetail extends ExceptionError {
   int? id;
   String? title;
   String? gender;
   String? caretakerType;
-  String? shiftSystems;
+  String? shiftSystem;
   String? city;
   String? district;
   String? createdAt;
@@ -17,14 +18,13 @@ class JobDetail {
   String? experience;
   String? nationality;
   String? age;
-  String? status;
 
   JobDetail({
     this.id,
     this.title,
     this.gender,
     this.caretakerType,
-    this.shiftSystems,
+    this.shiftSystem,
     this.city,
     this.district,
     this.createdAt,
@@ -33,8 +33,10 @@ class JobDetail {
     this.experience,
     this.nationality,
     this.age,
-    this.status,
-  });
+    String? message,
+    int? status,
+    bool? isSuccess,
+  }) : super(message: message, status: status, isSuccess: isSuccess);
 
   factory JobDetail.fromJson(Map<String, dynamic> json) {
     return _$JobDetailFromJson(json);
