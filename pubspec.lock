@@ -169,6 +169,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "0b0036e8cccbfbe0555fd83c1d31a6f30b77a96b598b35a5d36dd41f718695e9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3+4"
   crypto:
     dependency: transitive
     description:
@@ -193,6 +201,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.4"
+  device_info:
+    dependency: transitive
+    description:
+      name: device_info
+      sha256: f4a8156cb7b7480d969cb734907d18b333c8f0bc0b1ad0b342cdcecf30d62c48
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
+  device_info_platform_interface:
+    dependency: transitive
+    description:
+      name: device_info_platform_interface
+      sha256: b148e0bf9640145d09a4f8dea96614076f889e7f7f8b5ecab1c7e5c2dbc73c1b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   dio:
     dependency: "direct main"
     description:
@@ -331,6 +355,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "60fc7b78455b94e6de2333d2f95196d32cf5c22f4b0b0520a628804cb463503b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -392,6 +424,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_timer_countdown:
+    dependency: "direct main"
+    description:
+      name: flutter_timer_countdown
+      sha256: "95afd180ad88f446e5f90615e07d7b759730d86076fcef5982afed3e07d917c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -437,6 +477,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: "6aa2946395183537c8b880962d935877325d6a09a2867c3970c05c0fed6ac482"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.5"
   http_multi_server:
     dependency: transitive
     description:
@@ -453,6 +501,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      sha256: d39cc12402dab8365fe5b5370e64694ae0223d675c36b15ff0490b7cc3d32551
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.6+2"
+  image_picker_android:
+    dependency: transitive
+    description:
+      name: image_picker_android
+      sha256: "385f12ee9c7288575572c7873a332016ec45ebd092e1c2f6bd421b4a9ad21f1d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.5+6"
+  image_picker_for_web:
+    dependency: transitive
+    description:
+      name: image_picker_for_web
+      sha256: "7d319fb74955ca46d9bf7011497860e3923bb67feebcf068f489311065863899"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.10"
+  image_picker_ios:
+    dependency: transitive
+    description:
+      name: image_picker_ios
+      sha256: "884ed71165bc01ffe1b0b7813e6fa17e1e9442da974656f99b79a292371303d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.6+8"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      sha256: "7cef2f28f4f2fef99180f636c3d446b4ccbafd6ba0fad2adc9a80c4040f656b8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.2"
   injectable:
     dependency: "direct main"
     description:
@@ -477,6 +565,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.17.0"
+  intl_phone_field:
+    dependency: "direct main"
+    description:
+      name: intl_phone_field
+      sha256: "0d2b35d148ed28a454d50797e6c2fb297f0a295feab84641b02d3dd32294b3f3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   io:
     dependency: transitive
     description:
@@ -605,6 +701,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
+  platform_device_id:
+    dependency: "direct main"
+    description:
+      name: platform_device_id
+      sha256: "7a12ec84de4a823bb10eba2f0e1ad29e2365abba17790489a0d78029904f562e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  platform_device_id_linux:
+    dependency: transitive
+    description:
+      name: platform_device_id_linux
+      sha256: "994b1608593e527a629af2d5aeb241c60d308d3434bc78b0f6fcb3c1a02dff43"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  platform_device_id_macos:
+    dependency: transitive
+    description:
+      name: platform_device_id_macos
+      sha256: "968db2a504c611294b12a031b3734432d6df10553a0d3ae3b33ed21abfdbaba0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  platform_device_id_platform_interface:
+    dependency: transitive
+    description:
+      name: platform_device_id_platform_interface
+      sha256: c61607594252aaddacf3e4c4371ab08f2ef85ff427817fa6e48a169429610c46
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  platform_device_id_web:
+    dependency: transitive
+    description:
+      name: platform_device_id_web
+      sha256: "58e124594e1165db7f108395a780b1d1e1cd403021978e5228cf4289fbe736d5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  platform_device_id_windows:
+    dependency: transitive
+    description:
+      name: platform_device_id_windows
+      sha256: dbf8dcf03ad8555320ebae2403a3081b79f137f37661874e161fe2de0a84eeeb
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   plugin_platform_interface:
     dependency: transitive
     description:

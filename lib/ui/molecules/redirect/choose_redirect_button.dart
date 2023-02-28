@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:platform/ui/atoms/platform_icon.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/foundations/typography.dart';
+import 'package:platform/ui/tokens/colors.dart';
 
 class ChooseRedirectButton extends StatelessWidget {
   final String? svgPath, text;
@@ -21,6 +22,7 @@ class ChooseRedirectButton extends StatelessWidget {
       height: 144,
       child: Card(
         elevation: 0,
+        color: PlatformColor.offWhiteColor2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0),
           side: BorderSide(

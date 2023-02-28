@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/molecules/applicant/profile/applicant_profile_description_card.dart';
+import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/ui/molecules/applicant/applicant_skill_item.dart';
+import 'package:platform/ui/molecules/applicant/profile/applicant_profile_description_card.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:platform/ui/tokens/sizes.dart';
 
 class ApplicantProfileBody extends StatelessWidget {
-  const ApplicantProfileBody({Key? key}) : super(key: key);
+  final ApplicantProfile? applicantProfile;
+
+  const ApplicantProfileBody({
+    Key? key,
+    this.applicantProfile,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,18 +19,21 @@ class ApplicantProfileBody extends StatelessWidget {
       height: 600,
       child: Stack(
         children: [
-          const Positioned(
+          Positioned(
             top: 0,
             left: 0,
             right: 0,
-            child: ApplicantProfileDescriptionCard(),
+            child: ApplicantProfileDescriptionCard(
+              desc: applicantProfile!.desc!,
+              descTitle: applicantProfile!.descTitle!,
+            ),
           ),
           Positioned(
             top: 240,
             left: 0,
             right: 0,
             child: Container(
-              height: 330,
+              height: 250,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(
                   Radius.circular(PlatformDimension.sizeXS),
@@ -35,59 +44,44 @@ class ApplicantProfileBody extends StatelessWidget {
                 padding: const EdgeInsets.all(PlatformDimension.sizeLG),
                 child: ListView(
                   physics: const NeverScrollableScrollPhysics(),
-                  children: const [
-                    ApplicantSkillItem(
-                      skillPlatformLabel: "Referanslar",
-                      skillDescription: "2 referansı var",
-                    ),
-                    Divider(
-                      color: PlatformColor.grayLightColor,
-                      thickness: 0.5,
-                    ),
+                  children: [
                     ApplicantSkillItem(
                       skillPlatformLabel: "Uyruk",
-                      skillDescription: "Türkmenistan",
+                      skillDescription: applicantProfile!.district!,
                     ),
-                    Divider(
+                    const Divider(
                       color: PlatformColor.grayLightColor,
                       thickness: 0.5,
                     ),
                     ApplicantSkillItem(
                       skillPlatformLabel: "Çalışma şekli",
-                      skillDescription: "Gündüzlü",
+                      skillDescription: applicantProfile!.shiftSystems!,
                     ),
-                    Divider(
+                    const Divider(
                       color: PlatformColor.grayLightColor,
                       thickness: 0.5,
                     ),
                     ApplicantSkillItem(
                       skillPlatformLabel: "Deneyim",
-                      skillDescription: "10+ yıl",
+                      skillDescription: applicantProfile!.experience!,
                     ),
-                    Divider(
+                    const Divider(
                       color: PlatformColor.grayLightColor,
                       thickness: 0.5,
                     ),
                     ApplicantSkillItem(
-                      skillPlatformLabel: "Sigara içiyor musunuz ?",
-                      skillDescription: "Hayır",
+                      skillPlatformLabel: "Yaş",
+                      skillDescription: applicantProfile!.age!,
                     ),
-                    Divider(
+                    const Divider(
                       color: PlatformColor.grayLightColor,
                       thickness: 0.5,
                     ),
                     ApplicantSkillItem(
-                      skillPlatformLabel: "Çocuğunuz var mı ?",
-                      skillDescription: "Hayır",
+                      skillPlatformLabel: "Yardımcı türü",
+                      skillDescription: applicantProfile!.caretakerType!,
                     ),
-                    Divider(
-                      color: PlatformColor.grayLightColor,
-                      thickness: 0.5,
-                    ),
-                    ApplicantSkillItem(
-                      skillPlatformLabel: "Seyehat engeliniz var mı ?",
-                      skillDescription: "Hayır",
-                    ),
+
                   ],
                 ),
               ),

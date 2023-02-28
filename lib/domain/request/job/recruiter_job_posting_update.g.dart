@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'my_job_posting_update.dart';
+part of 'recruiter_job_posting_update.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MyJobPostingUpdate _$MyJobPostingUpdateFromJson(Map<String, dynamic> json) =>
-    MyJobPostingUpdate(
+RecruiterJobPostingUpdate _$RecruiterJobPostingUpdateFromJson(
+        Map<String, dynamic> json) =>
+    RecruiterJobPostingUpdate(
       title: json['title'] as String?,
       gender: json['gender'] as String?,
       city: json['city'] as String?,
@@ -21,7 +22,8 @@ MyJobPostingUpdate _$MyJobPostingUpdateFromJson(Map<String, dynamic> json) =>
       desc: json['desc'] as String?,
     );
 
-Map<String, dynamic> _$MyJobPostingUpdateToJson(MyJobPostingUpdate instance) =>
+Map<String, dynamic> _$RecruiterJobPostingUpdateToJson(
+        RecruiterJobPostingUpdate instance) =>
     <String, dynamic>{
       'title': instance.title,
       'gender': instance.gender,

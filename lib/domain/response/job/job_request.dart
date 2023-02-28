@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'find_job.g.dart';
+part 'job_request.g.dart';
 
 @JsonSerializable()
-class FindJob {
+class JobRequest {
   String? title;
   String? caretakerType;
   String? workType;
@@ -12,7 +12,7 @@ class FindJob {
   String? createdAt;
   String? status;
 
-  FindJob({
+  JobRequest({
     this.title,
     this.caretakerType,
     this.workType,
@@ -22,9 +22,9 @@ class FindJob {
     this.status,
   });
 
-  factory FindJob.fromJson(Map<String, dynamic> json) {
-    return _$FindJobFromJson(json);
+  factory JobRequest.fromJson(Map<String, dynamic> json) {
+    return _$JobRequestFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$FindJobToJson(this);
+  Map<String, dynamic> toJson() => _$JobRequestToJson(this);
 }

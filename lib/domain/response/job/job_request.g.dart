@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'hire_job.dart';
+part of 'job_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HireJob _$HireJobFromJson(Map<String, dynamic> json) => HireJob(
+JobRequest _$JobRequestFromJson(Map<String, dynamic> json) => JobRequest(
       title: json['title'] as String?,
       caretakerType: json['caretakerType'] as String?,
       workType: json['workType'] as String?,
@@ -16,7 +16,8 @@ HireJob _$HireJobFromJson(Map<String, dynamic> json) => HireJob(
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$HireJobToJson(HireJob instance) => <String, dynamic>{
+Map<String, dynamic> _$JobRequestToJson(JobRequest instance) =>
+    <String, dynamic>{
       'title': instance.title,
       'caretakerType': instance.caretakerType,
       'workType': instance.workType,

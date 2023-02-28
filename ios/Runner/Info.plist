@@ -47,5 +47,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Uygulama, profil resmi için galerine erişmesi gerekmektedir.</string>
+
+    <key>NSCameraUsageDescription</key>
+    <string>Uygulama, profil fotoğrafı çekebilmek için kameraya erişmesi gerekmektedir. </string>
 </dict>
 </plist>

@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:platform/domain/response/job/job_posting.dart';
+import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_like_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/molecules/platform_icon_label.dart';
+import 'package:provider/provider.dart';
 
 class JobPostingListItem extends StatelessWidget {
-  const JobPostingListItem({Key? key}) : super(key: key);
+  final JobPosting? jobPosting;
+
+
+  const JobPostingListItem({
+    Key? key,
+    this.jobPosting,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var jobPostingProvider = Provider.of<JobPostingProvider>(context);
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             Expanded(
               flex: 4,
               child: Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   top: 16,
                 ),
                 child: PlatformDefaultText(
-                  text:
-                      "İstanbul Beşiktaş'ta ÇOKKKK ACİLLLL Temizlikçi Arıyorum",
+                  text: jobPosting!.title!,
                   color: PlatformColorFoundation.textColor,
                   fontWeight: FontWeight.w600,
                   fontSize: PlatformTypographyFoundation.bodyLarge,
@@ -32,36 +41,42 @@ class JobPostingListItem extends StatelessWidget {
             ),
             Expanded(
               flex: 1,
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: 16,
-                  ),
-                  child: PlatformLikeButton(
-                    width: 36,
-                    height: 36,
+              child: GestureDetector(
+                onTap: () async {
+                  await jobPostingProvider.addFavoriteJob(jobPosting!);
+                }, //addFavoriteJobTap,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 16,
+                    ),
+                    child: PlatformLikeButton(
+                      width: 36,
+                      height: 36,
+                      isLike: jobPosting!.follow,
+                    ),
                   ),
                 ),
               ),
             ),
           ],
         ),
-        const Padding(
-          padding: EdgeInsets.only(
+        Padding(
+          padding: const EdgeInsets.only(
             top: 10,
           ),
           child: PlatformIconLabel(
             labelIconPath: "assets/icons/group.svg",
-            labelText: "Ev Yardımcısı/Yatılı",
+            labelText: "${jobPosting!.caretakerType!}/${jobPosting!.shiftSystem!}",
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(
+        Padding(
+          padding: const EdgeInsets.only(
             top: 4,
           ),
           child: PlatformIconLabel(
             labelIconPath: "assets/icons/location.svg",
-            labelText: "Kadıköy",
+            labelText: jobPosting!.district!,
           ),
         ),
         Padding(
@@ -69,15 +84,15 @@ class JobPostingListItem extends StatelessWidget {
             top: 10,
           ),
           child: Row(
-            children: const [
-              PlatformDefaultText(
+            children: [
+              const PlatformDefaultText(
                 text: "Son Giriş Tarihi : ",
                 fontWeight: FontWeight.w400,
                 fontSize: PlatformTypographyFoundation.bodyMedium,
                 color: PlatformColorFoundation.textColor,
               ),
               PlatformDefaultText(
-                text: "27.01.2023",
+                text: jobPosting!.createdAt,
                 fontWeight: FontWeight.w400,
                 fontSize: PlatformTypographyFoundation.bodyMedium,
                 color: Colors.red,

@@ -6,12 +6,14 @@ import 'package:platform/ui/tokens/sizes.dart';
 
 class CustomDropdownMenu extends StatelessWidget {
   final Map<String, String>? data;
+  final String? selectedValue;
   final Function(String)? onChange;
 
   const CustomDropdownMenu({
     Key? key,
     this.data,
     this.onChange,
+    this.selectedValue,
   }) : super(key: key);
 
   @override
@@ -29,22 +31,27 @@ class CustomDropdownMenu extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: PlatformDimension.sizeXS),
-            child: PlatformDropdown(
-              data: data!,
-              onChange: (p0) => onChange!(p0),
+          Expanded(
+            flex: 4,
+            child: Padding(
+              padding: const EdgeInsets.only(left: PlatformDimension.sizeXS),
+              child: PlatformDropdown(
+                data: data!,
+                selectedValue: selectedValue,
+                onChange: (p0) => onChange!(p0),
+              ),
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(right: PlatformDimension.sizeSL),
-            child: PlatformIcon(
-              color: PlatformColor.grayLightColor,
-              width: 15,
-              height: 15,
-              svgPath: "assets/icons/down_arrow.svg",
-            ),
+              padding: EdgeInsets.only(right: PlatformDimension.sizeSL),
+              child: PlatformIcon(
+                color: PlatformColor.grayLightColor,
+                width: 15,
+                height: 15,
+                svgPath: "assets/icons/down_arrow.svg",
+              ),
           ),
         ],
       ),

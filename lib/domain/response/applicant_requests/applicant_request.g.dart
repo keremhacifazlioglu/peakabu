@@ -14,7 +14,7 @@ ApplicantRequest _$ApplicantRequestFromJson(Map<String, dynamic> json) =>
       city: json['city'] as String?,
       district: json['district'] as String?,
       createdAt: json['createdAt'] as String?,
-      follow: json['follow'] as bool?,
+      status: json['status'] as String?,
     );
 
 Map<String, dynamic> _$ApplicantRequestToJson(ApplicantRequest instance) =>
@@ -25,5 +25,5 @@ Map<String, dynamic> _$ApplicantRequestToJson(ApplicantRequest instance) =>
       'city': instance.city,
       'district': instance.district,
       'createdAt': instance.createdAt,
-      'follow': instance.follow,
+      'status': instance.status,
     };

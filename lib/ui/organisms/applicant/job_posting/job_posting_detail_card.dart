@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:platform/domain/response/job/job_detail.dart';
+import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/applicant/job_posting/job_posting_detail_description_item.dart';
 import 'package:platform/ui/molecules/applicant/job_posting/job_posting_list_item.dart';
 
 class JobPostingDetailCard extends StatelessWidget {
-  const JobPostingDetailCard({Key? key}) : super(key: key);
+  final JobPosting? jobPosting;
+  final JobDetail? jobDetail;
+
+  const JobPostingDetailCard({
+    Key? key,
+    this.jobPosting,
+    this.jobDetail,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +35,23 @@ class JobPostingDetailCard extends StatelessWidget {
             ),
           ),
           child: Column(
-            children: const [
+            children: [
               Padding(
-                padding: EdgeInsets.only(left: 20, bottom: 16),
-                child: JobPostingListItem(),
+                padding: const EdgeInsets.only(left: 20, bottom: 16),
+                child: JobPostingListItem(
+                  jobPosting: jobPosting!,
+                ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Divider(
                   thickness: 1,
                   color: PlatformColorFoundation.dividerColor,
                 ),
               ),
-              JobPostingDetailDescriptionItem(),
+              JobPostingDetailDescriptionItem(
+                jobPostingDescription: jobDetail!.desc!,
+              ),
             ],
           ),
         ),

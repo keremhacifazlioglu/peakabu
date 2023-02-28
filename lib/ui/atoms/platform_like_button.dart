@@ -4,12 +4,9 @@ import 'package:platform/ui/tokens/colors.dart';
 
 class PlatformLikeButton extends StatelessWidget {
   final double? width, height;
+  final bool? isLike;
 
-  const PlatformLikeButton({
-    Key? key,
-    this.height,
-    this.width,
-  }) : super(key: key);
+  const PlatformLikeButton({Key? key, this.height, this.width, this.isLike}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +21,10 @@ class PlatformLikeButton extends StatelessWidget {
       ),
       child: Center(
         child: SvgPicture.asset(
-          "assets/icons/star.svg",
+          isLike! ? "assets/icons/star.svg" : "assets/icons/empty_star.svg",
           width: width! - 16,
           height: height! - 16,
-          color: Colors.white,
+          color: !isLike! ? PlatformColor.offWhiteColor : null,
         ),
       ),
     );
