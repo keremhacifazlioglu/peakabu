@@ -37,7 +37,7 @@ class CreateApplicantProfilePage extends StatelessWidget {
           ),
           body: Consumer<ApplicantProvider>(
             builder: (context, provider, child) {
-              if (provider.networkStatus == NetworkStatus.success && applicantProvider.applicantProfile != null) {
+              if (provider.networkStatus == NetworkStatus.success) {
                 return SingleChildScrollView(
                   child: Form(
                     key: _formKey,
@@ -56,7 +56,7 @@ class CreateApplicantProfilePage extends StatelessWidget {
                         PlatformProfileImgUpload(
                           isFirst: true,
                           file: provider.file,
-                          imageUrl: applicantProvider.applicantProfile!.image ?? "",
+                          imageUrl:  "",
                           onTap: () {
                             showUpdateProfileImage(context, provider);
                           },
@@ -86,7 +86,7 @@ class CreateApplicantProfilePage extends StatelessWidget {
                           text: "Cinsiyet",
                         ),
                         ChooseGenderRow(
-                          onSelected: applicantProvider.applicantProfile!.gender! == "female",
+                          onSelected: true,
                           onTap: (p0) {
                             applicantProvider.applicantProfile!.gender = p0 ? "female" : "male";
                             applicantProvider.refresh();
@@ -94,55 +94,55 @@ class CreateApplicantProfilePage extends StatelessWidget {
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Şehir",
-                          selectedValue: applicantProvider.applicantProfile!.city,
+                          selectedValue: applicantProvider.otherService.selectedCity,
                           data: applicantProvider.otherService.cities,
                           onChange: (p0) {
-                            applicantProvider.applicantProfile!.city = p0;
+                            applicantProvider.otherService.selectedCity = p0;
                             applicantProvider.refresh();
                           },
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Yardımcı türü",
-                          selectedValue: applicantProvider.applicantProfile!.caretakerType,
+                          selectedValue: applicantProvider.otherService.selectedCaretakerType,
                           data: applicantProvider.otherService.caretakerTypes,
                           onChange: (p0) {
-                            applicantProvider.applicantProfile!.caretakerType = p0;
+                            applicantProvider.otherService.selectedCaretakerType = p0;
                             applicantProvider.refresh();
                           },
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Çalışma şekli",
-                          selectedValue: applicantProvider.applicantProfile!.shiftSystems,
+                          selectedValue: applicantProvider.otherService.selectedShiftSystem,
                           data: applicantProvider.otherService.shiftSystems,
                           onChange: (p0) {
-                            applicantProvider.applicantProfile!.shiftSystems = p0;
+                            applicantProvider.otherService.selectedShiftSystem = p0;
                             applicantProvider.refresh();
                           },
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Deneyim",
-                          selectedValue: applicantProvider.applicantProfile!.experience,
+                          selectedValue: applicantProvider.otherService.selectedExperience,
                           data: applicantProvider.otherService.experiences,
                           onChange: (p0) {
-                            applicantProvider.applicantProfile!.experience = p0;
+                            applicantProvider.otherService.selectedExperience = p0;
                             applicantProvider.refresh();
                           },
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Uyruk",
-                          selectedValue: applicantProvider.applicantProfile!.nationality,
+                          selectedValue: applicantProvider.otherService.selectedNationality,
                           data: applicantProvider.otherService.nationalities,
                           onChange: (p0) {
-                            applicantProvider.applicantProfile!.nationality = p0;
+                            applicantProvider.otherService.selectedNationality = p0;
                             applicantProvider.refresh();
                           },
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Yaş",
-                          selectedValue: applicantProvider.applicantProfile!.age,
+                          selectedValue: applicantProvider.otherService.selectedAge,
                           data: applicantProvider.otherService.ages,
                           onChange: (p0) {
-                            applicantProvider.applicantProfile!.age = p0;
+                            applicantProvider.otherService.selectedAge = p0;
                             applicantProvider.refresh();
                           },
                         ),
@@ -180,7 +180,7 @@ class CreateApplicantProfilePage extends StatelessWidget {
                             ),
                             textInputAction: TextInputAction.done,
                             onChanged: (value) {
-                              applicantProvider.description = value;
+                              provider.description = value;
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {

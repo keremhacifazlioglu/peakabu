@@ -5,14 +5,14 @@ import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
+import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
+import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/organisms/ambassador/job_candidate/my_job_posting_detail_card.dart';
 import 'package:platform/ui/organisms/ambassador/job_candidate/my_job_posting_detail_skill_card.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
-
-import '../../organisms/applicant/job_posting/job_posting_detail_skill_card.dart';
 
 class MyJobPostingPage extends StatelessWidget {
   final JobPosting? jobPosting;
@@ -67,6 +67,24 @@ class MyJobPostingPage extends StatelessWidget {
                 ),
               );
             },
+          ),
+          bottomNavigationBar: Container(
+            height: 100,
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                PlatformDimensionFoundations.sizeXXL,
+                PlatformDimensionFoundations.sizeXL,
+                PlatformDimensionFoundations.sizeXXL,
+                PlatformDimensionFoundations.sizeXL,
+              ),
+              child: PlatformSubmitButton(
+                buttonText: "İlan Düzenle",
+                onPressed: () async {
+                  Navigator.of(context).pushReplacementNamed("/update_my_job_posting");
+                },
+              ),
+            ),
           ),
         );
       },

@@ -1,7 +1,6 @@
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
-import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/success_response.dart';
 
 abstract class IApplicantRepository {

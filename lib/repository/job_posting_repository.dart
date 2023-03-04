@@ -1,10 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
+import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_request.dart';
-import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/success_response.dart';
@@ -185,6 +184,7 @@ class JobPostingRepository extends IJobPostingRepository {
     try {
       successResponse =
           await _restClient.createMyJobPosting(recruiterJobPostingRequest);
+      successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;
@@ -195,11 +195,12 @@ class JobPostingRepository extends IJobPostingRepository {
 
   @override
   Future<SuccessResponse> updateRecruiterJobPosting(
-      RecruiterJobPostingUpdate recruiterJobPostingUpdate) async {
+      RecruiterJobPostingRequest recruiterJobPostingUpdate) async {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse =
           await _restClient.updateMyJobPosting(recruiterJobPostingUpdate);
+      successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
       successResponse.status = e.response!.statusCode;

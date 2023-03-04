@@ -7,7 +7,6 @@ import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/auth_repository.dart';
 import 'package:platform/storage/secure_local_repository.dart';
 import 'package:platform/storage/storage_item.dart';
-import 'package:platform/util/logger.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
 class AuthProvider with ChangeNotifier {

@@ -5,21 +5,29 @@ part 'recruiter_job_posting_request.g.dart';
 @JsonSerializable()
 class RecruiterJobPostingRequest {
   String? title;
-  String? caretakerType;
-  String? workType;
+  String? gender;
   String? city;
   String? district;
-  String? createdAt;
-  bool? follow;
+  String? caretakerType;
+  String? shiftSystems;
+  String? experience;
+  String? nationality;
+  String? age;
+  String? listingDate;
+  String? desc;
 
   RecruiterJobPostingRequest({
     this.title,
-    this.caretakerType,
-    this.workType,
+    this.gender,
     this.city,
     this.district,
-    this.createdAt,
-    this.follow,
+    this.caretakerType,
+    this.shiftSystems,
+    this.experience,
+    this.nationality,
+    this.age,
+    this.listingDate,
+    this.desc,
   });
 
   factory RecruiterJobPostingRequest.fromJson(Map<String, dynamic> json) {

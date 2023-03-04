@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
+import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_like_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/molecules/platform_icon_label.dart';
+import 'package:provider/provider.dart';
 
 class ApplicantListItem extends StatelessWidget {
   final ApplicantProfile? applicantProfile;
@@ -16,7 +18,7 @@ class ApplicantListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var jobPostingProvider = Provider.of<JobPostingProvider>(context);
+    var jobPostingProvider = Provider.of<JobPostingProvider>(context);
     return Row(
       children: [
         Expanded(
@@ -61,7 +63,7 @@ class ApplicantListItem extends StatelessWidget {
                     flex: 1,
                     child: GestureDetector(
                       onTap: () async {
-                        //await jobPostingProvider.addFavoriteJob(jobPosting!);
+                        //await jobPostingProvider.addFavoriteJob();
                       }, //addFavoriteJobTap,
                       child: Center(
                         child: Padding(

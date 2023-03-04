@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:platform/route_generator.dart';
-import 'package:platform/storage/secure_local_repository.dart';
 
 class RootProvider extends ChangeNotifier {
   final Map<String, GlobalKey<NavigatorState>> _routes = {

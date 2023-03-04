@@ -10,22 +10,30 @@ RecruiterJobPostingRequest _$RecruiterJobPostingRequestFromJson(
         Map<String, dynamic> json) =>
     RecruiterJobPostingRequest(
       title: json['title'] as String?,
-      caretakerType: json['caretakerType'] as String?,
-      workType: json['workType'] as String?,
+      gender: json['gender'] as String?,
       city: json['city'] as String?,
       district: json['district'] as String?,
-      createdAt: json['createdAt'] as String?,
-      follow: json['follow'] as bool?,
+      caretakerType: json['caretakerType'] as String?,
+      shiftSystems: json['shiftSystems'] as String?,
+      experience: json['experience'] as String?,
+      nationality: json['nationality'] as String?,
+      age: json['age'] as String?,
+      listingDate: json['listingDate'] as String?,
+      desc: json['desc'] as String?,
     );
 
 Map<String, dynamic> _$RecruiterJobPostingRequestToJson(
         RecruiterJobPostingRequest instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'caretakerType': instance.caretakerType,
-      'workType': instance.workType,
+      'gender': instance.gender,
       'city': instance.city,
       'district': instance.district,
-      'createdAt': instance.createdAt,
-      'follow': instance.follow,
+      'caretakerType': instance.caretakerType,
+      'shiftSystems': instance.shiftSystems,
+      'experience': instance.experience,
+      'nationality': instance.nationality,
+      'age': instance.age,
+      'listingDate': instance.listingDate,
+      'desc': instance.desc,
     };

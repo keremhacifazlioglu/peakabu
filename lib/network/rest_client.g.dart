@@ -13,7 +13,7 @@ class _RestClient implements RestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://f994f3cd-23f7-4da5-bb22-3100783007bc.mock.pstmn.io';
+    baseUrl ??= 'https://e751fcd2-f00a-41e1-bb42-fe8543de6b3e.mock.pstmn.io';
   }
 
   final Dio _dio;
@@ -425,8 +425,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(recruiterJobPostingUpdate.toJson());
+    final _data = recruiterJobPostingUpdate;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'PUT',

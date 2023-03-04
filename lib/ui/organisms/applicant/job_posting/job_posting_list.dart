@@ -26,6 +26,7 @@ class JobPostingList extends StatelessWidget {
                   (value) => {
                     if (value != null && value.isNotEmpty)
                       {
+
                         secureLocalRepository.writeSecureData(StorageItem("jobPostingId", jobPostings![index].id.toString())),
                         Navigator.of(context, rootNavigator: true).pushNamed(
                           "/job_posting_detail",

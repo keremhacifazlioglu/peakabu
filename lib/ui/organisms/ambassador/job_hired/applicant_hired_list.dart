@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
-import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/ambassador/applicant_hired/applicant_hired_list_item.dart';
 

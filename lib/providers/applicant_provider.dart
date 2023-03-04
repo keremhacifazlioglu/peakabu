@@ -26,7 +26,8 @@ class ApplicantProvider with ChangeNotifier {
 
   Map<String, String> filterData = {};
 
-  ApplicantProvider(this._applicantRepository,this._secureLocalRepository, this.otherService , @factoryParam PageType pageType) {
+  ApplicantProvider(
+      this._applicantRepository, this._secureLocalRepository, this.otherService, @factoryParam PageType pageType) {
     if (pageType == PageType.fetch) {
       fetchApplicantProfilesWithPagination();
       fetchFavoriteApplicantWithPagination();
@@ -36,8 +37,10 @@ class ApplicantProvider with ChangeNotifier {
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
       fetchFilterJobPostingsWithPagination();
-    } else if (pageType == PageType.update){
+    } else if (pageType == PageType.update) {
       fetchProfile();
+      fetchAllOtherData();
+    }else if (pageType == PageType.create) {
       fetchAllOtherData();
     }
   }

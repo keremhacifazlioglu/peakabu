@@ -24,7 +24,11 @@ class ApplicantList extends StatelessWidget {
             secureLocalRepository.readSecureData("token").then(
                   (value) => {
                     if (value != null && value.isNotEmpty)
-                      {}
+                      {
+                        Navigator.of(context, rootNavigator: true).pushNamed(
+                          "/create_my_job_posting",
+                        ),
+                      }
                     else
                       {
                         Navigator.of(context, rootNavigator: true).pushNamed(

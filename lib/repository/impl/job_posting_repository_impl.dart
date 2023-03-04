@@ -1,9 +1,8 @@
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
-import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
+import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
-import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/success_response.dart';
 
 abstract class IJobPostingRepository {
@@ -31,7 +30,7 @@ abstract class IJobPostingRepository {
 
   Future<SuccessResponse> createRecruiterJobPosting(RecruiterJobPostingRequest recruiterJobPostingRequest);
 
-  Future<SuccessResponse> updateRecruiterJobPosting(RecruiterJobPostingUpdate recruiterJobPostingUpdate);
+  Future<SuccessResponse> updateRecruiterJobPosting(RecruiterJobPostingRequest recruiterJobPostingUpdate);
 
   Future<BaseListResponse> fetchFilterJobPostings(Map<String, String> queries);
 

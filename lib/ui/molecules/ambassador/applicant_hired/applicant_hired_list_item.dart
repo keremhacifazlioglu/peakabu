@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platform/cons/request_job_status.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
-import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/typography.dart';

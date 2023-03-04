@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:platform/cons/page_type.dart';
+import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
-import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/job_posting_repository.dart';
@@ -18,15 +19,16 @@ class JobPostingProvider with ChangeNotifier {
   final SecureLocalRepository _secureLocalRepository;
   final OtherService otherService;
   List<JobPosting> allJobPostings = [], allFavoriteJobPosting = [], allFilterJobPosting = [];
-  bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false;
+  bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false, gender = true;
   int pagingSize = 10, pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
+  String? title, description;
+  JobPosting? jobPosting;
   JobDetail? jobDetail;
   Map<String, String> filterData = {};
 
-
   JobPostingProvider(
-      this._jobPostingRepository,this._secureLocalRepository, this.otherService, @factoryParam PageType pageType) {
+      this._jobPostingRepository, this._secureLocalRepository, this.otherService, @factoryParam PageType pageType) {
     if (pageType == PageType.fetch) {
       fetchJobPostingsWithPagination();
       fetchFavoriteJobPostingsWithPagination();
@@ -37,6 +39,11 @@ class JobPostingProvider with ChangeNotifier {
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
       fetchFilterJobPostingsWithPagination();
+    } else if (pageType == PageType.update) {
+      fetchMyJobPostingDetail();
+      fetchAllOtherData();
+    } else if (pageType == PageType.create) {
+      fetchAllOtherData();
     }
   }
 
@@ -134,10 +141,10 @@ class JobPostingProvider with ChangeNotifier {
     SuccessResponse successResponse = await _jobPostingRepository.favoriteJobPosting(1);
     jobPosting.follow = successResponse.follow;
 
-    if(!successResponse.follow! && allJobPostings.isNotEmpty){
+    if (!successResponse.follow! && allJobPostings.isNotEmpty) {
       allFavoriteJobPosting.remove(jobPosting);
     }
-    if(!successResponse.follow! && allFavoriteJobPosting.isNotEmpty){
+    if (!successResponse.follow! && allFavoriteJobPosting.isNotEmpty) {
       allFavoriteJobPosting.remove(jobPosting);
     }
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
@@ -220,6 +227,50 @@ class JobPostingProvider with ChangeNotifier {
     return otherService.gender;
   }
 
+  Future<SuccessResponse> createJobPosting() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    RecruiterJobPostingRequest? recruiterJobPostingRequest = RecruiterJobPostingRequest();
+    recruiterJobPostingRequest.title = title;
+    recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
+    recruiterJobPostingRequest.city = otherService.selectedCity;
+    recruiterJobPostingRequest.district = otherService.selectedCity;
+    recruiterJobPostingRequest.shiftSystems = otherService.selectedShiftSystem;
+    recruiterJobPostingRequest.gender = !gender ? "female" : "male";
+    recruiterJobPostingRequest.age = otherService.selectedAge;
+    recruiterJobPostingRequest.nationality = otherService.selectedNationality;
+    recruiterJobPostingRequest.desc = description;
+    recruiterJobPostingRequest.title = title;
+    recruiterJobPostingRequest.experience = otherService.selectedExperience;
 
+    SuccessResponse successResponse = await _jobPostingRepository.createRecruiterJobPosting(recruiterJobPostingRequest);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
 
+  Future updateJobPosting() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    RecruiterJobPostingRequest? recruiterJobPostingRequest = RecruiterJobPostingRequest();
+    recruiterJobPostingRequest.title = title;
+    recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
+    recruiterJobPostingRequest.city = otherService.selectedCity;
+    recruiterJobPostingRequest.district = otherService.selectedCity;
+    recruiterJobPostingRequest.shiftSystems = otherService.selectedShiftSystem;
+    recruiterJobPostingRequest.gender = gender ? "female" : "male";
+    recruiterJobPostingRequest.age = otherService.selectedAge;
+    recruiterJobPostingRequest.nationality = otherService.selectedNationality;
+    recruiterJobPostingRequest.desc = description;
+    recruiterJobPostingRequest.experience = otherService.selectedExperience;
+
+    SuccessResponse successResponse = await _jobPostingRepository.updateRecruiterJobPosting(recruiterJobPostingRequest);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future refresh() async {
+    notifyListeners();
+  }
 }

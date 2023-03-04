@@ -7,7 +7,7 @@ import 'package:platform/domain/request/auth/register_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
 import 'package:platform/domain/request/auth/token_request.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
-import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
+import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
 import 'package:platform/domain/response/auth/token.dart';
@@ -26,7 +26,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';
 
-@RestApi(baseUrl: "https://f994f3cd-23f7-4da5-bb22-3100783007bc.mock.pstmn.io")
+@RestApi(baseUrl: "https://e751fcd2-f00a-41e1-bb42-fe8543de6b3e.mock.pstmn.io")
 abstract class RestClient {
   @factoryMethod
   factory RestClient(Dio dio) = _RestClient;
@@ -93,7 +93,7 @@ abstract class RestClient {
   Future<SuccessResponse> createMyJobPosting(@Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
 
   @PUT("/my_job_posting")
-  Future<SuccessResponse> updateMyJobPosting(@Body() RecruiterJobPostingUpdate recruiterJobPostingUpdate);
+  Future<SuccessResponse> updateMyJobPosting(@Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
 
   // todo Applicant
 
