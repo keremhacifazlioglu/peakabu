@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:platform/providers/root_provider.dart';
 import 'package:platform/ui/molecules/platform_bottom_nav_bar.dart';
@@ -14,9 +16,21 @@ class RootApplicantPage extends StatelessWidget {
           return !await s.navigatorState.currentState!.maybePop();
         },
         child: Scaffold(
-          body: IndexedStack(
-            index: s.currentIndex,
-            children: s.pages,
+          body: GestureDetector(
+            onHorizontalDragUpdate: (details) {
+              if (Platform.isIOS) {
+                int sensitivity = 8;
+                if (details.delta.dx > sensitivity) {
+                  // Right Swipe
+                  Navigator.of(context).pop();
+                  //timerController.startTimer();
+                }
+              }
+            },
+            child: IndexedStack(
+              index: s.currentIndex,
+              children: s.pages,
+            ),
           ),
           bottomNavigationBar: PlatformBottomNavBar(
             currentIndex: s.currentIndex,

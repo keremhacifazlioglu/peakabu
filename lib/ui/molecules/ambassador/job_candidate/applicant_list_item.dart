@@ -18,7 +18,6 @@ class ApplicantListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var jobPostingProvider = Provider.of<JobPostingProvider>(context);
     return Row(
       children: [
         Expanded(
