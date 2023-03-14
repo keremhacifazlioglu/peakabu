@@ -6,8 +6,10 @@ part 'confirm_sms_request.g.dart';
 class ConfirmSmsRequest {
   String? phone;
   String? code;
+  String? uuid;
+  String? smsId;
 
-  ConfirmSmsRequest({this.phone, this.code});
+  ConfirmSmsRequest({this.phone, this.code,this.smsId,this.uuid});
 
   factory ConfirmSmsRequest.fromJson(Map<String, dynamic> json) {
     return _$ConfirmSmsRequestFromJson(json);

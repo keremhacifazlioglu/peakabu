@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/pages/ambassador/applicant_filter_form_page.dart';
-import 'package:platform/ui/pages/ambassador/applicant_filter_page.dart';
-import 'package:platform/ui/pages/ambassador/applicant_follow_page.dart';
-import 'package:platform/ui/pages/ambassador/applicant_hired_page.dart';
-import 'package:platform/ui/pages/ambassador/applicants_page.dart';
-import 'package:platform/ui/pages/ambassador/create_job_posting.dart';
-import 'package:platform/ui/pages/ambassador/my_job_posting_page.dart';
-import 'package:platform/ui/pages/ambassador/special_for_me_page.dart' as ambassador;
+import 'package:platform/ui/pages/recruiter/applicant_filter_form_page.dart';
+import 'package:platform/ui/pages/recruiter/applicant_filter_page.dart';
+import 'package:platform/ui/pages/recruiter/applicant_follow_page.dart';
+import 'package:platform/ui/pages/recruiter/applicant_hired_page.dart';
+import 'package:platform/ui/pages/recruiter/applicants_page.dart';
+import 'package:platform/ui/pages/recruiter/create_job_posting.dart';
+import 'package:platform/ui/pages/recruiter/my_job_posting_page.dart';
+import 'package:platform/ui/pages/recruiter/special_for_me_page.dart' as ambassador;
 import 'package:platform/ui/pages/applicant/applicant_detail_page.dart';
 import 'package:platform/ui/pages/applicant/applicant_profile_page.dart';
 import 'package:platform/ui/pages/applicant/create_applicant_profile_page.dart';
@@ -22,7 +22,7 @@ import 'package:platform/ui/pages/root_ambassador_page.dart';
 import 'package:platform/ui/pages/root_applicant_page.dart';
 import 'package:platform/ui/pages/splash_page.dart';
 
-import 'ui/pages/ambassador/update_job_posting.dart';
+import 'ui/pages/recruiter/update_job_posting.dart';
 import 'ui/pages/applicant/job_posting_detail_page.dart';
 import 'ui/pages/applicant/job_posting_page.dart';
 
