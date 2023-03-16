@@ -18,7 +18,7 @@ import 'package:platform/ui/pages/applicant/special_for_me_page.dart';
 import 'package:platform/ui/pages/confirm_sms_page.dart';
 import 'package:platform/ui/pages/create_account_page.dart';
 import 'package:platform/ui/pages/redirect_page.dart';
-import 'package:platform/ui/pages/root_ambassador_page.dart';
+import 'package:platform/ui/pages/root_recruiter_page.dart';
 import 'package:platform/ui/pages/root_applicant_page.dart';
 import 'package:platform/ui/pages/splash_page.dart';
 
@@ -49,7 +49,7 @@ class RouteGenerator {
         );
       case '/ambassador':
         return MaterialPageRoute(
-          builder: (_) => const RootAmbassadorPage(),
+          builder: (_) => const RootRecruiterPage(),
         );
       case 'redirect':
         return MaterialPageRoute(

@@ -5,7 +5,7 @@ import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_hired_provider.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/platform_tab_menu.dart';
-import 'package:platform/ui/organisms/ambassador/job_hired/applicant_hired_list.dart';
+import 'package:platform/ui/organisms/recruiter/job_hired/applicant_hired_list.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 

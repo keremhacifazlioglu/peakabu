@@ -20,9 +20,9 @@ class SplashProvider with ChangeNotifier {
   }
 
   Future autoLogin() async {
-    String phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber") ?? "";
-    String uuid = await _secureLocalRepository.readSecureData("uuid") ?? "";
-    Token? token = await _authRepository.token(TokenRequest(phoneNumber: phoneNumber,uuid: uuid));
+    String phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber") ?? "+905434774173";
+    String uuid = await _secureLocalRepository.readSecureData("uuid") ?? "b472efc2-c105-4b95-964a-f0547db20903";
+    Token? token = await _authRepository.token(TokenRequest(phone: phoneNumber,uuid: uuid));
 
     if(token != null && token.isSuccess!){
       if(token.isUserRegistered!){

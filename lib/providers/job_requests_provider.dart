@@ -32,7 +32,7 @@ class JobRequestsProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     if (!isLastPage) {
-      BaseListResponse response = await _jobPostingRepository.findJobPostings(
+      BaseListResponse response = await _jobPostingRepository.findRequestJobPostings(
           pagingSize, pageFindJobNumber);
       if (response.isSuccess!) {
         isLastPage = response.data!.length < pagingSize;

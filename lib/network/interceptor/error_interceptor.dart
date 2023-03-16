@@ -21,7 +21,7 @@ class ErrorInterceptor extends Interceptor {
           Log.e("Hata Mesajı çözülemedi");
         }
         if (message != null) {
-          throw CustomGenericDioError(message, err.response?.data?["statusCode"], err.requestOptions);
+          throw CustomGenericDioError(message, err.response?.data?["status"], err.requestOptions);
         }
         switch (err.response?.statusCode) {
           case 400:

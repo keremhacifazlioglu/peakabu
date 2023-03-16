@@ -3,7 +3,7 @@ import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_provider.dart';
-import 'package:platform/ui/organisms/ambassador/job_candidate/applicant_list.dart';
+import 'package:platform/ui/organisms/recruiter/job_candidate/applicant_list.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 

@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:platform/config/locator.dart';
 
 class TokenInterceptor extends QueuedInterceptorsWrapper {
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     options.headers['Accept'] = 'application/vnd.pikabuu-api.v1+json';
-    options.headers['Authorization'] =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYjQ3MmVmYzItYzEwNS00Yjk1LTk2NGEtZjA1NDdkYjIwOTAzIn0.M4xAgra7KIycDugECk07dOaB1RhFqDSStPXuJmPi578 ";
+    options.headers['Content-Type'] = 'application/json';
+    String? token = await secureLocalRepository.readSecureData("token");
+    if (token != null && token.isNotEmpty) {
+      options.headers['Authorization'] = "Bearer ${await secureLocalRepository.readSecureData("token")}";
+    }
     return handler.next(options);
   }
 }

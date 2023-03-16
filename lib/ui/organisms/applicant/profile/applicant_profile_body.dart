@@ -25,7 +25,7 @@ class ApplicantProfileBody extends StatelessWidget {
             right: 0,
             child: ApplicantProfileDescriptionCard(
               desc: applicantProfile!.desc!,
-              descTitle: applicantProfile!.descTitle!,
+              descTitle: applicantProfile!.title??"",
             ),
           ),
           Positioned(
@@ -55,7 +55,7 @@ class ApplicantProfileBody extends StatelessWidget {
                     ),
                     ApplicantSkillItem(
                       skillPlatformLabel: "Çalışma şekli",
-                      skillDescription: applicantProfile!.shiftSystems!,
+                      skillDescription: applicantProfile!.shiftSystem!,
                     ),
                     const Divider(
                       color: PlatformColor.grayLightColor,

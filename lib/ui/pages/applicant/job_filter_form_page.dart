@@ -48,6 +48,15 @@ class JobFilterFormPage extends StatelessWidget {
                         data: provider.otherService.cities,
                         onChange: (p0) async {
                           await provider.setSelectedCity(p0);
+                          await provider.updateDistrictByCity(p0);
+                        },
+                      ),
+                      SearchCaretakerCriteriaForm(
+                        text: "İlçe",
+                        selectedValue: provider.otherService.selectedDistrict ?? provider.otherService.districts["1"],
+                        data: provider.otherService.districts,
+                        onChange: (p0) async {
+                          await provider.setSelectedDistrict(p0);
                         },
                       ),
                       SearchCaretakerCriteriaForm(

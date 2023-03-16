@@ -107,10 +107,10 @@ class ApplicantProfilePage extends StatelessWidget {
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Çalışma şekli",
-                          selectedValue: applicantProvider.applicantProfile!.shiftSystems,
+                          selectedValue: applicantProvider.applicantProfile!.shiftSystem,
                           data: applicantProvider.otherService.shiftSystems,
                           onChange: (p0) async {
-                            applicantProvider.applicantProfile!.shiftSystems = p0;
+                            applicantProvider.applicantProfile!.shiftSystem = p0;
                             await applicantProvider.refresh();
                           },
                         ),
@@ -147,14 +147,14 @@ class ApplicantProfilePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
                           child: TextFormField(
-                            controller: TextEditingController()..text = applicantProvider.applicantProfile!.descTitle!,
+                            controller: TextEditingController()..text = applicantProvider.applicantProfile!.title!,
                             decoration: const InputDecoration(
                               hintText: 'Başlık',
                               contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
                             ),
                             cursorColor: PlatformColor.offBlackColor,
                             onChanged: (value) {
-                              applicantProvider.applicantProfile!.descTitle = value;
+                              applicantProvider.applicantProfile!.title = value;
                               //applicantProvider.refresh();
                             },
                             validator: (value) {

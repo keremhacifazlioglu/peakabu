@@ -28,7 +28,7 @@ class RootProvider extends ChangeNotifier {
   }
 
   void refreshPage(){
-    if(_currentIndex != 0 && _currentIndex != 3){
+    if(_currentIndex != 3){
       _pages[_currentIndex] = _buildOffstageNavigator(_routes.keys.toList()[_currentIndex], GlobalKey<NavigatorState>());
     }
   }

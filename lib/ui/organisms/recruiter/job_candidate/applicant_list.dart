@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/molecules/ambassador/job_candidate/applicant_list_item.dart';
+import 'package:platform/ui/molecules/recruiter/job_candidate/applicant_list_item.dart';
 import 'package:platform/ui/tokens/colors.dart';
 
 class ApplicantList extends StatelessWidget {

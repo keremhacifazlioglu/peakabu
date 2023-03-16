@@ -129,7 +129,7 @@ class ApplicantProvider with ChangeNotifier {
       "nationality": otherService.selectedNationality!,
       "experience": otherService.selectedExperience!,
       "caretakerType": otherService.selectedCaretakerType!,
-      "title": title ?? applicantProfile!.descTitle!,
+      "title": title ?? applicantProfile!.title!,
       "description": description ?? applicantProfile!.desc!,
       "thumbnail": file,
     };
@@ -152,7 +152,7 @@ class ApplicantProvider with ChangeNotifier {
       "nationality": otherService.selectedNationality!,
       "experience": otherService.selectedExperience!,
       "caretakerType": otherService.selectedCaretakerType!,
-      "title": title ?? applicantProfile!.descTitle!,
+      "title": title ?? applicantProfile!.title!,
       "description": description ?? applicantProfile!.desc!,
       "thumbnail": file ?? "",
     };
@@ -171,6 +171,7 @@ class ApplicantProvider with ChangeNotifier {
     await otherService.fetchExperiences();
     await otherService.fetchNationalities();
     await otherService.fetchCities();
+    await otherService.fetchDistricts("Adana");
     networkStatus = NetworkStatus.success;
     notifyListeners();
   }
@@ -181,6 +182,7 @@ class ApplicantProvider with ChangeNotifier {
     filterData["experience"] = (await _secureLocalRepository.readSecureData("experience"))!;
     filterData["nationality"] = (await _secureLocalRepository.readSecureData("nationality"))!;
     filterData["city"] = (await _secureLocalRepository.readSecureData("city"))!;
+    filterData["district"] = (await _secureLocalRepository.readSecureData("district"))!;
     filterData["age"] = (await _secureLocalRepository.readSecureData("age"))!;
     filterData["gender"] = (await _secureLocalRepository.readSecureData("gender"))!;
     filterData["pagingSize"] = pagingSize.toString();

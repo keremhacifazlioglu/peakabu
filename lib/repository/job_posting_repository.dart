@@ -135,11 +135,11 @@ class JobPostingRepository extends IJobPostingRepository {
   }
 
   @override
-  Future<BaseListResponse> findJobPostings(int pageSize, int pageNumber) async {
+  Future<BaseListResponse> findRequestJobPostings(int pageSize, int pageNumber) async {
     BaseListResponse baseListResponse = BaseListResponse();
     try {
       List<JobRequest> response =
-          await _restClient.findJobPostings(pageNumber, pageSize);
+          await _restClient.findRequestJobPostings(pageNumber, pageSize);
       baseListResponse.data = response;
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
@@ -228,6 +228,20 @@ class JobPostingRepository extends IJobPostingRepository {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse = await _restClient.jobPostingAddFavorite(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+  @override
+  Future<SuccessResponse> removeFavoriteJobPosting(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.jobPostingRemoveFavorite(id);
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;

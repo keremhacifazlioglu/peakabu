@@ -54,7 +54,7 @@ class JobRequestListItem extends StatelessWidget {
                       child: PlatformIconLabel(
                         labelIconPath: "assets/icons/group.svg",
                         labelText:
-                            "${jobRequest!.caretakerType!}/${jobRequest!.workType!}",
+                            "${jobRequest!.caretakerType!}/${jobRequest!.shiftSystem!}",
                       ),
                     ),
                     Padding(
@@ -70,18 +70,18 @@ class JobRequestListItem extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 125,
+                width: 120,
                 height: 26,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(5),
                   ),
-                  color: getColor(jobRequest!.status!)!.withOpacity(0.15),
+                  color: getColor(jobRequest!.status?? "sent_job")!.withOpacity(0.15),
                 ),
                 child: Center(
                   child: PlatformDefaultText(
-                    text: requestJobStatus[jobRequest!.status],
-                    color: getColor(jobRequest!.status!),
+                    text: requestJobStatus[jobRequest!.status??"sent_job"],
+                    color: getColor(jobRequest!.status?? "sent_job"),
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
                   ),

@@ -43,7 +43,11 @@ class JobPostingListItem extends StatelessWidget {
               flex: 1,
               child: GestureDetector(
                 onTap: () async {
-                  await jobPostingProvider.addFavoriteJob(jobPosting!);
+                  if(jobPosting!.favorite!){
+                    await jobPostingProvider.deleteFavoriteJob(jobPosting!);
+                  }else{
+                    await jobPostingProvider.addFavoriteJob(jobPosting!);
+                  }
                 }, //addFavoriteJobTap,
                 child: Center(
                   child: Padding(
@@ -53,7 +57,7 @@ class JobPostingListItem extends StatelessWidget {
                     child: PlatformLikeButton(
                       width: 36,
                       height: 36,
-                      isLike: jobPosting!.follow,
+                      isLike: jobPosting!.favorite,
                     ),
                   ),
                 ),

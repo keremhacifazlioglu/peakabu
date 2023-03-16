@@ -9,8 +9,8 @@ import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/organisms/ambassador/job_candidate/my_job_posting_detail_card.dart';
-import 'package:platform/ui/organisms/ambassador/job_candidate/my_job_posting_detail_skill_card.dart';
+import 'package:platform/ui/organisms/recruiter/job_candidate/my_job_posting_detail_card.dart';
+import 'package:platform/ui/organisms/recruiter/job_candidate/my_job_posting_detail_skill_card.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 

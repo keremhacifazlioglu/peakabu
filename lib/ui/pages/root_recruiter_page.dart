@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:platform/providers/root_ambassador_provider.dart';
+import 'package:platform/providers/root_recruiter_provider.dart';
 import 'package:platform/ui/molecules/platform_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
-class RootAmbassadorPage extends StatelessWidget {
-  const RootAmbassadorPage({Key? key}) : super(key: key);
+class RootRecruiterPage extends StatelessWidget {
+  const RootRecruiterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

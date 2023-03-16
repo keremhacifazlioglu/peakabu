@@ -138,19 +138,34 @@ class JobPostingProvider with ChangeNotifier {
   Future<SuccessResponse> addFavoriteJob(JobPosting jobPosting) async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
-    SuccessResponse successResponse = await _jobPostingRepository.favoriteJobPosting(1);
-    jobPosting.follow = successResponse.follow;
-
-    if (!successResponse.follow! && allJobPostings.isNotEmpty) {
-      allFavoriteJobPosting.remove(jobPosting);
-    }
-    if (!successResponse.follow! && allFavoriteJobPosting.isNotEmpty) {
-      allFavoriteJobPosting.remove(jobPosting);
-    }
+    SuccessResponse successResponse = await _jobPostingRepository.favoriteJobPosting(jobPosting.id!);
+    jobPosting.favorite = true;
+    await removeFavoriteJobPostingTheList(jobPosting);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
     notifyListeners();
     return successResponse;
   }
+
+  Future<SuccessResponse> deleteFavoriteJob(JobPosting jobPosting) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _jobPostingRepository.removeFavoriteJobPosting(jobPosting.id!);
+    jobPosting.favorite = false;
+    await removeFavoriteJobPostingTheList(jobPosting);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future removeFavoriteJobPostingTheList(JobPosting jobPosting) async {
+    if (allJobPostings.isNotEmpty) {
+      allFavoriteJobPosting.remove(jobPosting);
+    }
+    if (allFavoriteJobPosting.isNotEmpty) {
+      allFavoriteJobPosting.remove(jobPosting);
+    }
+  }
+
 
   Future fetchAllOtherData() async {
     networkStatus = NetworkStatus.waiting;
@@ -161,6 +176,7 @@ class JobPostingProvider with ChangeNotifier {
     await otherService.fetchExperiences();
     await otherService.fetchNationalities();
     await otherService.fetchCities();
+    await otherService.fetchDistricts("Adana");
     networkStatus = NetworkStatus.success;
     notifyListeners();
   }
@@ -195,12 +211,24 @@ class JobPostingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future setSelectedDistrict(String value) async {
+    otherService.selectedDistrict = value;
+    notifyListeners();
+  }
+
+  Future updateDistrictByCity(String city) async {
+    otherService.districts.clear();
+    await otherService.fetchDistricts(city);
+    notifyListeners();
+  }
+
   Future prepareFilterData() async {
     filterData["caretakerType"] = (await _secureLocalRepository.readSecureData("caretakerType"))!;
     filterData["shiftSystem"] = (await _secureLocalRepository.readSecureData("shiftSystem"))!;
     filterData["experience"] = (await _secureLocalRepository.readSecureData("experience"))!;
     filterData["nationality"] = (await _secureLocalRepository.readSecureData("nationality"))!;
     filterData["city"] = (await _secureLocalRepository.readSecureData("city"))!;
+    filterData["district"] = (await _secureLocalRepository.readSecureData("district"))!;
     filterData["age"] = (await _secureLocalRepository.readSecureData("age"))!;
     filterData["gender"] = (await _secureLocalRepository.readSecureData("gender"))!;
     filterData["pagingSize"] = pagingSize.toString();
@@ -215,6 +243,7 @@ class JobPostingProvider with ChangeNotifier {
       StorageItem("city", otherService.selectedCity ?? ""),
       StorageItem("age", otherService.selectedAge ?? ""),
       StorageItem("gender", otherService.gender ? "female" : "male"),
+      StorageItem("district", otherService.selectedDistrict ?? ""),
     ];
     for (var item in storageItems) {
       _secureLocalRepository.writeSecureData(item);

@@ -6,7 +6,7 @@ part 'job_request.g.dart';
 class JobRequest {
   String? title;
   String? caretakerType;
-  String? workType;
+  String? shiftSystem;
   String? city;
   String? district;
   String? createdAt;
@@ -15,7 +15,7 @@ class JobRequest {
   JobRequest({
     this.title,
     this.caretakerType,
-    this.workType,
+    this.shiftSystem,
     this.city,
     this.district,
     this.createdAt,

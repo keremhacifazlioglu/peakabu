@@ -7,12 +7,12 @@ part of 'token_request.dart';
 // **************************************************************************
 
 TokenRequest _$TokenRequestFromJson(Map<String, dynamic> json) => TokenRequest(
-      phoneNumber: json['phoneNumber'] as String?,
+      phone: json['phone'] as String?,
       uuid: json['uuid'] as String?,
     );
 
 Map<String, dynamic> _$TokenRequestToJson(TokenRequest instance) =>
     <String, dynamic>{
-      'phoneNumber': instance.phoneNumber,
+      'phone': instance.phone,
       'uuid': instance.uuid,
     };

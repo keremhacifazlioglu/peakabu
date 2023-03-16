@@ -7,7 +7,6 @@ import 'package:platform/domain/request/auth/register_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
 import 'package:platform/domain/request/auth/token_request.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
-import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
 import 'package:platform/domain/response/auth/token.dart';
@@ -18,6 +17,7 @@ import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/domain/response/other/age.dart';
 import 'package:platform/domain/response/other/caretaker_type.dart';
 import 'package:platform/domain/response/other/city.dart';
+import 'package:platform/domain/response/other/district.dart';
 import 'package:platform/domain/response/other/experience.dart';
 import 'package:platform/domain/response/other/nationality.dart';
 import 'package:platform/domain/response/other/shift_system.dart';
@@ -26,7 +26,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';
 
-@RestApi(baseUrl: "https://e751fcd2-f00a-41e1-bb42-fe8543de6b3e.mock.pstmn.io")
+@RestApi(baseUrl: "http://api.pikabu.io/api/v1")
 abstract class RestClient {
   @factoryMethod
   factory RestClient(Dio dio) = _RestClient;
@@ -47,34 +47,34 @@ abstract class RestClient {
 
   // todo Job
 
-  @GET("/job_postings")
+  @GET("/applicant/recruiter_jobs")
   Future<List<JobPosting>> fetchJobPostings(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @GET("/job_postings")
+  @GET("/applicant/recruiter_jobs")
   Future<List<JobPosting>> fetchJobPostingsFilter(@Queries() Map<String, String> queries);
 
-  @GET("/job_postings/{id}")
+  @GET("/applicant/recruiter_jobs/{id}")
   Future<JobDetail> fetchJobPosting(@Path("id") int jobId);
 
-  @GET("/job_posting/{id}/get_phone")
+  @GET("/applicant/recruiter_jobs/{id}/get_phone")
   Future<JobPhone> fetchJobPostingPhone(@Path("id") int jobId);
 
-  @GET("/find_jobs")
-  Future<List<JobRequest>> findJobPostings(
+  @GET("/applicant/recruiter_jobs/requested")
+  Future<List<JobRequest>> findRequestJobPostings(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @POST("/job_postings/{jobId}/apply")
+  @POST("/applicant/recruiter_jobs/{jobId}/apply")
   Future<SuccessResponse> jobPostingApply(@Path() int jobId);
 
-  @POST("/job_postings/{jobId}/reject")
+  @POST("/applicant/recruiter_jobs/{jobId}/reject")
   Future<SuccessResponse> jobPostingReject(@Path() int jobId);
 
-  @GET("/hire_jobs")
+  @GET("/applicant/recruiter_jobs/invited")
   Future<List<JobRequest>> findHirePostings(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
@@ -112,7 +112,7 @@ abstract class RestClient {
   @GET("/applicant_profiles/{id}/get_phone")
   Future<ApplicantProfile> fetchApplicantPhone(@Path("id") int applicantId);
 
-  @GET("/applicant_profile")
+  @GET("/applicant/applicant_profiles/me")
   Future<ApplicantProfile> me();
 
   @GET("/find_applicants")
@@ -172,11 +172,17 @@ abstract class RestClient {
 
   // todo Favorite
 
-  @GET("/favorite_job_postings")
+  @GET("/applicant/recruiter_jobs/favorites")
   Future<List<JobPosting>> fetchFavoriteJobPosting(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
+
+  @POST("/applicant/recruiter_jobs/{jobId}/favorite")
+  Future<SuccessResponse> jobPostingAddFavorite(@Path() int jobId);
+
+  @DELETE("/applicant/recruiter_jobs/{jobId}/favorite")
+  Future<SuccessResponse> jobPostingRemoveFavorite(@Path() int jobId);
 
   @GET("/favorite_applicant_profiles")
   Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile(
@@ -186,9 +192,6 @@ abstract class RestClient {
 
   @POST("/applicant_profiles/{jobId}/favorite")
   Future addFavoriteApplicantProfile(@Path() int jobId);
-
-  @POST("/job_postings/{jobId}/favorite")
-  Future<SuccessResponse> jobPostingAddFavorite(@Path() int jobId);
 
   // todo Other
 
@@ -209,4 +212,7 @@ abstract class RestClient {
 
   @GET("/cities")
   Future<List<City>> fetchCity();
+
+  @GET("/districts")
+  Future<List<District>> fetchDistricts(@Query("city") String city);
 }

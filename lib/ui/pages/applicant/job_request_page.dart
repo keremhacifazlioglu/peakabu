@@ -20,9 +20,7 @@ class JobRequestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobRequestsProvider>(
-      create: (context) => JobRequestsProvider(
-          jobPostingRepository, PageType.fetch,
-          selectedTab: selectedTab ?? true),
+      create: (context) => JobRequestsProvider(jobPostingRepository, PageType.fetch, selectedTab: selectedTab ?? true),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -62,13 +60,10 @@ class JobRequestPage extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () async {
                                     await provider.selectedFindJob();
-                                    await provider
-                                        .fetchFindJobPostingsWithPagination();
+                                    await provider.fetchFindJobPostingsWithPagination();
                                   },
                                   child: PlatformTabMenu(
-                                    width: (MediaQuery.of(context).size.width -
-                                            64) /
-                                        2,
+                                    width: (MediaQuery.of(context).size.width - 64) / 2,
                                     color: provider.isSelectedFindJob
                                         ? PlatformColor.primaryColor
                                         : PlatformColor.offWhiteColor,
@@ -87,13 +82,10 @@ class JobRequestPage extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () async {
                                     await provider.selectedHireJob();
-                                    await provider
-                                        .fetchHireJobPostingsWithPagination();
+                                    await provider.fetchHireJobPostingsWithPagination();
                                   },
                                   child: PlatformTabMenu(
-                                    width: (MediaQuery.of(context).size.width -
-                                            64) /
-                                        2,
+                                    width: (MediaQuery.of(context).size.width - 64) / 2,
                                     color: provider.isSelectedHireJob
                                         ? PlatformColor.primaryColor
                                         : PlatformColor.offWhiteColor,
@@ -137,9 +129,8 @@ class JobRequestPage extends StatelessWidget {
                           return true;
                         },
                         child: JobRequestList(
-                          jobRequests: provider.isSelectedFindJob
-                              ? provider.allFindJobPostings
-                              : provider.allHireJobPosting,
+                          jobRequests:
+                              provider.isSelectedFindJob ? provider.allFindJobPostings : provider.allHireJobPosting,
                         ),
                       );
                     }
