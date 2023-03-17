@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job_phone.dart';
+part of 'send_sms.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-JobPhone _$JobPhoneFromJson(Map<String, dynamic> json) => JobPhone(
-      phone: json['phone'] as String?,
+SendSms _$SendSmsFromJson(Map<String, dynamic> json) => SendSms(
+      smsId: json['smsId'] as String?,
       message: json['message'] as String?,
-      isSuccess: json['isSuccess'] as bool?,
       status: json['status'] as int?,
+      isSuccess: json['isSuccess'] as bool?,
     );
 
-Map<String, dynamic> _$JobPhoneToJson(JobPhone instance) => <String, dynamic>{
+Map<String, dynamic> _$SendSmsToJson(SendSms instance) => <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
       'isSuccess': instance.isSuccess,
-      'phone': instance.phone,
+      'smsId': instance.smsId,
     };

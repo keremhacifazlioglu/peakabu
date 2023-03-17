@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:platform/domain/request/auth/confirm_sms_request.dart';
+import 'package:platform/domain/request/auth/register_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
+import 'package:platform/domain/response/auth/send_sms.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/auth_repository.dart';
@@ -25,10 +27,50 @@ class AuthProvider with ChangeNotifier {
     TextEditingController()
   ];
 
-  AuthProvider(this._authRepository, this._secureLocalRepository){
+  AuthProvider(this._authRepository, this._secureLocalRepository) {
     getDeviceId();
   }
 
+  Future register() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = SuccessResponse();
+    if (phoneNumber == null || phoneNumber!.isEmpty) {
+      successResponse.success = false;
+      successResponse.message = "Lütfen telefon numarası giriniz.";
+      networkStatus = NetworkStatus.error;
+    } else {
+      successResponse = await _authRepository.register(
+        RegisterRequest(
+          phone: phoneNumber!,
+          userType: "applicant",
+          uuid: await _secureLocalRepository.readSecureData("uuid"),
+        ),
+      );
+    }
+
+    if (successResponse.isSuccess!) {
+      _secureLocalRepository.writeSecureData(StorageItem("phoneNumber", phoneNumber!));
+      SendSms sendSms = await _authRepository.sendSms(
+        SendSmsRequest(
+          phone: phoneNumber!,
+          uuid: await _secureLocalRepository.readSecureData("uuid"),
+        ),
+      );
+      if (sendSms.isSuccess!) {
+        await _secureLocalRepository.writeSecureData(StorageItem("smsId", sendSms.smsId!));
+        networkStatus = NetworkStatus.success;
+      } else {
+        networkStatus = NetworkStatus.error;
+      }
+    } else {
+      networkStatus = NetworkStatus.error;
+    }
+    notifyListeners();
+    return successResponse;
+  }
+
+/*
   Future<SuccessResponse> sendSms() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
@@ -38,10 +80,10 @@ class AuthProvider with ChangeNotifier {
       successResponse.message = "Lütfen telefon numarası giriniz.";
       networkStatus = NetworkStatus.error;
     }else{
-      successResponse = await _authRepository.sendSms(
+      SendSms sendSms = await _authRepository.sendSms(
         SendSmsRequest(
-          phoneNumber: phoneNumber!,
-          isKvkk: isKvkkCheck,
+          phone: phoneNumber!,
+          uuid: await _secureLocalRepository.readSecureData("uuid"),
         ),
       );
     }
@@ -55,15 +97,15 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
     return successResponse;
   }
-
-  Future<SuccessResponse> resendSms() async {
+*/
+  Future<SendSms> resendSms() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     String? phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber");
-    SuccessResponse successResponse = await _authRepository.sendSms(
-      SendSmsRequest(phoneNumber: phoneNumber!),
+    SendSms successResponse = await _authRepository.sendSms(
+      SendSmsRequest(phone: phoneNumber!),
     );
-    if (successResponse.success!) {
+    if (successResponse.isSuccess!) {
       smsPin = "";
       resend = false;
       networkStatus = NetworkStatus.success;
@@ -80,8 +122,10 @@ class AuthProvider with ChangeNotifier {
     SuccessResponse successResponse = SuccessResponse();
     if (smsPin.isNotEmpty) {
       String? phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber");
+      String? uuid = await _secureLocalRepository.readSecureData("uuid");
+      String? smsId = await _secureLocalRepository.readSecureData("smsId");
       successResponse = await _authRepository.confirmSms(
-        ConfirmSmsRequest(phone: phoneNumber, code: smsPin),
+        ConfirmSmsRequest(phone: phoneNumber, code: smsPin, uuid: uuid, smsId: smsId),
       );
       if (successResponse.isSuccess!) {
         _secureLocalRepository.writeSecureData(StorageItem("smsPin", smsPin));

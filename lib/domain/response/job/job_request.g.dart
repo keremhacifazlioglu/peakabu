@@ -13,7 +13,8 @@ JobRequest _$JobRequestFromJson(Map<String, dynamic> json) => JobRequest(
       city: json['city'] as String?,
       district: json['district'] as String?,
       createdAt: json['createdAt'] as String?,
-      status: json['status'] as String?,
+      requestStatus: json['requestStatus'] as String?,
+      favorite: json['favorite'] as bool?,
     );
 
 Map<String, dynamic> _$JobRequestToJson(JobRequest instance) =>
@@ -24,5 +25,6 @@ Map<String, dynamic> _$JobRequestToJson(JobRequest instance) =>
       'city': instance.city,
       'district': instance.district,
       'createdAt': instance.createdAt,
-      'status': instance.status,
+      'requestStatus': instance.requestStatus,
+      'favorite': instance.favorite,
     };

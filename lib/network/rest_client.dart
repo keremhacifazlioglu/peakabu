@@ -9,6 +9,7 @@ import 'package:platform/domain/request/auth/token_request.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
+import 'package:platform/domain/response/auth/send_sms.dart';
 import 'package:platform/domain/response/auth/token.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
@@ -37,10 +38,10 @@ abstract class RestClient {
   Future<Token> token(@Body() TokenRequest tokenRequest);
 
   @POST("/register")
-  Future<Token> register(@Body() RegisterRequest registerRequest);
+  Future<SuccessResponse> register(@Body() RegisterRequest registerRequest);
 
   @POST("/send_sms")
-  Future<SuccessResponse> sendSms(@Body() SendSmsRequest sendSmsRequest);
+  Future<SendSms> sendSms(@Body() SendSmsRequest sendSmsRequest);
 
   @POST("/confirm_sms")
   Future<SuccessResponse> sendConfirmSms(@Body() ConfirmSmsRequest confirmSmsRequest);
@@ -67,6 +68,9 @@ abstract class RestClient {
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
+
+  @POST("/applicant/recruiter_jobs/{jobId}/request")
+  Future<SuccessResponse> confirmJobPosting(@Path() int jobId);
 
   @POST("/applicant/recruiter_jobs/{jobId}/apply")
   Future<SuccessResponse> jobPostingApply(@Path() int jobId);

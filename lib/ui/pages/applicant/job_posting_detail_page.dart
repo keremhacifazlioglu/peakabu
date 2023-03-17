@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
@@ -16,11 +17,9 @@ import 'package:provider/provider.dart';
 
 class JobPostingDetailPage extends StatelessWidget {
   final JobPosting? jobPosting;
+  final bool? isAccepted;
 
-  const JobPostingDetailPage({
-    Key? key,
-    this.jobPosting,
-  }) : super(key: key);
+  const JobPostingDetailPage({Key? key, this.jobPosting, this.isAccepted}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,25 +81,93 @@ class JobPostingDetailPage extends StatelessWidget {
                     PlatformDimensionFoundations.sizeXL,
                   ),
                   child: PlatformSubmitButton(
-                    buttonText: "Başvur",
+                    buttonText: isAccepted! ? "İletişim Bilgilerini Gör" : "Başvur",
                     onPressed: () {
-                      provider.applyJobPosting().then(
-                            (value) => {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                      if (!isAccepted!) {
+                        provider.confirmJobPosting().then(
+                              (value) => {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
                                     content: PlatformDefaultText(
-                                  text: value.isSuccess! ? 'Talep iletilmiştir' : value.message,
-                                  color: PlatformColor.offWhiteColor,
-                                  fontSize: 14,
-                                )),
-                              ),
-                            },
-                          );
+                                      text: value.isSuccess! ? 'Talep iletilmiştir' : value.message,
+                                      color: PlatformColor.offWhiteColor,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              },
+                            );
+                      } else {
+                        provider.fetchJobPostingPhone(provider.jobDetail!.id!).then(
+                              (value) => {
+                                showGetPhoneDialog(context, value.phone!),
+                              },
+                            );
+                      }
                     },
                   ),
                 ),
               );
             },
+          ),
+        );
+      },
+    );
+  }
+
+  void showGetPhoneDialog(BuildContext context, String phoneNumber) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: PlatformColor.offWhiteColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const PlatformDefaultText(
+                text: "İlan Sahibi İletişim Bilgileri",
+                maxLine: 2,
+                fontWeight: FontWeight.w600,
+                fontSize: PlatformDimensionFoundations.sizeMD,
+                color: PlatformColor.offBlackColor,
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                child: Divider(
+                  thickness: 0.5,
+                  color: PlatformColor.grayLightColor,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32.0, 8, 32, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset("assets/icons/icon_mobile.svg"),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+                      child: PlatformDefaultText(
+                        text: phoneNumber,
+                        maxLine: 1,
+                        fontWeight: FontWeight.w400,
+                        fontSize: PlatformDimensionFoundations.sizeMD,
+                        color: PlatformColor.offBlackColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32, 16, 32, 8),
+                child: PlatformSubmitButton(
+                  buttonText: "Şimdi Ara",
+                  onPressed: () {},
+                ),
+              )
+            ],
           ),
         );
       },

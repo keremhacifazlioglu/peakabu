@@ -95,6 +95,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => JobPostingDetailPage(
             jobPosting: settings.routeArgs(),
+            isAccepted: false,
+          ),
+        );
+      case '/acceptable_job_posting_detail':
+        return MaterialPageRoute(
+          builder: (_) => JobPostingDetailPage(
+            jobPosting: settings.routeArgs(),
+            isAccepted: true,
           ),
         );
       case '/my_job_posting_detail':

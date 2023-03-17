@@ -18,6 +18,7 @@ class JobPostingDetailDescriptionItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const PlatformDefaultText(
             text: "İlan Detayları",

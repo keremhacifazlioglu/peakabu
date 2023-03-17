@@ -84,6 +84,7 @@ class JobPostingRepository extends IJobPostingRepository {
     JobPhone jobPhone = JobPhone();
     try {
       jobPhone = await _restClient.fetchJobPostingPhone(jobId);
+      jobPhone.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       jobPhone.message = e.text;
       jobPhone.status = e.response!.statusCode;
@@ -165,6 +166,20 @@ class JobPostingRepository extends IJobPostingRepository {
   }
 
   @override
+  Future<SuccessResponse> confirmJobPosting(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.confirmJobPosting(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response!.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+  @override
   Future<SuccessResponse> rejectJobPosting(int jobId) async {
     SuccessResponse successResponse = SuccessResponse();
     try {
@@ -222,6 +237,7 @@ class JobPostingRepository extends IJobPostingRepository {
     }
     return jobDetail;
   }
+
 
   @override
   Future<SuccessResponse> favoriteJobPosting(int id) async {

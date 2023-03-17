@@ -186,9 +186,8 @@ class CreateAccountPage extends StatelessWidget {
                       child: PlatformSubmitButton(
                         buttonText: "Devam et",
                         onPressed: () async {
-
                           authProvider.isKvkkCheck
-                              ? await sendSms(authProvider, context)
+                              ? await register(authProvider, context)
                               : const CustomShowDialog()
                                   .showDialog(context, "Uyarı", "Lütfen yasal metinleri okuyup onaylayınız.");
                         },
@@ -204,10 +203,10 @@ class CreateAccountPage extends StatelessWidget {
     );
   }
 
-  Future sendSms(AuthProvider authProvider, BuildContext context) async {
-    authProvider.sendSms().then(
+  Future register(AuthProvider authProvider, BuildContext context) async {
+    authProvider.register().then(
           (value) => {
-            if (value.success!)
+            if (value.isSuccess!)
               {
                 Navigator.of(context).pushReplacementNamed("/confirm_sms"),
               }

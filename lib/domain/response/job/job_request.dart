@@ -10,7 +10,8 @@ class JobRequest {
   String? city;
   String? district;
   String? createdAt;
-  String? status;
+  String? requestStatus;
+  bool? favorite;
 
   JobRequest({
     this.title,
@@ -19,7 +20,8 @@ class JobRequest {
     this.city,
     this.district,
     this.createdAt,
-    this.status,
+    this.requestStatus,
+    this.favorite,
   });
 
   factory JobRequest.fromJson(Map<String, dynamic> json) {

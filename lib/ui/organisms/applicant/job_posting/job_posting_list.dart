@@ -18,7 +18,6 @@ class JobPostingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       key: const PageStorageKey<String>("JobPosting"),
-      addAutomaticKeepAlives: true,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
@@ -26,7 +25,6 @@ class JobPostingList extends StatelessWidget {
                   (value) => {
                     if (value != null && value.isNotEmpty)
                       {
-
                         secureLocalRepository.writeSecureData(StorageItem("jobPostingId", jobPostings![index].id.toString())),
                         Navigator.of(context, rootNavigator: true).pushNamed(
                           "/job_posting_detail",

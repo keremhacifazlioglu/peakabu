@@ -31,6 +31,11 @@ class JobRequestsProvider with ChangeNotifier {
   Future fetchFindJobPostingsWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
+    if(allFindJobPostings.length < pagingSize){
+      isLastPage = false;
+      pageFindJobNumber = 1;
+      allFindJobPostings.clear();
+    }
     if (!isLastPage) {
       BaseListResponse response = await _jobPostingRepository.findRequestJobPostings(
           pagingSize, pageFindJobNumber);
@@ -51,6 +56,11 @@ class JobRequestsProvider with ChangeNotifier {
   Future fetchHireJobPostingsWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
+    if(allHireJobPosting.length < pagingSize){
+      isHireLastPage = false;
+      pageHireJobNumber = 1;
+      allHireJobPosting.clear();
+    }
     if (!isHireLastPage) {
       BaseListResponse response = await _jobPostingRepository.findHirePostings(
           pagingSize, pageHireJobNumber);

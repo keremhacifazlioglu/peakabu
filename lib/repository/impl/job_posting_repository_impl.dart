@@ -37,4 +37,7 @@ abstract class IJobPostingRepository {
 
   Future<SuccessResponse> removeFavoriteJobPosting(int id);
 
+  Future<SuccessResponse> confirmJobPosting(int id);
+
+
 }

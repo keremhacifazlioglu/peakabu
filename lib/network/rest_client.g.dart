@@ -45,14 +45,14 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Token> register(registerRequest) async {
+  Future<SuccessResponse> register(registerRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerRequest.toJson());
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Token>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -64,19 +64,19 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Token.fromJson(_result.data!);
+    final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<SuccessResponse> sendSms(sendSmsRequest) async {
+  Future<SendSms> sendSms(sendSmsRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(sendSmsRequest.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<SendSms>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -88,7 +88,7 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SuccessResponse.fromJson(_result.data!);
+    final value = SendSms.fromJson(_result.data!);
     return value;
   }
 
@@ -247,6 +247,29 @@ class _RestClient implements RestClient {
     var value = _result.data!
         .map((dynamic i) => JobRequest.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<SuccessResponse> confirmJobPosting(jobId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/applicant/recruiter_jobs/${jobId}/request',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 
