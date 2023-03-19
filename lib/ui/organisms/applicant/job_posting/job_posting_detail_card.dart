@@ -51,8 +51,11 @@ class JobPostingDetailCard extends StatelessWidget {
                   color: PlatformColorFoundation.dividerColor,
                 ),
               ),
-              JobPostingDetailDescriptionItem(
-                jobPostingDescription: jobDetail!.desc!,
+              SizedBox(
+                width: double.infinity,
+                child: JobPostingDetailDescriptionItem(
+                  jobPostingDescription: jobDetail!.desc!,
+                ),
               ),
             ],
           ),

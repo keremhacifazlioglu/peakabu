@@ -10,7 +10,7 @@ class RootRecruiterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RootAmbassadorProvider>(
+    return Consumer<RootRecruiterProvider>(
       builder: (c, s, w) => WillPopScope(
         onWillPop: () async {
           return !await s.navigatorState.currentState!.maybePop();

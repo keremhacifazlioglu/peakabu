@@ -8,6 +8,7 @@ part of 'applicant_profile.dart';
 
 ApplicantProfile _$ApplicantProfileFromJson(Map<String, dynamic> json) =>
     ApplicantProfile(
+      id: json['id'] as int?,
       image: json['image'] as String?,
       name: json['name'] as String?,
       city: json['city'] as String?,
@@ -32,6 +33,7 @@ Map<String, dynamic> _$ApplicantProfileToJson(ApplicantProfile instance) =>
       'status': instance.status,
       'message': instance.message,
       'isSuccess': instance.isSuccess,
+      'id': instance.id,
       'image': instance.image,
       'name': instance.name,
       'city': instance.city,

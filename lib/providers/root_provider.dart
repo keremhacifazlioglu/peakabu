@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:platform/route_generator.dart';
+import 'package:platform/storage/secure_local_repository.dart';
 
+@injectable
 class RootProvider extends ChangeNotifier {
+  final SecureLocalRepository _secureLocalRepository;
   final Map<String, GlobalKey<NavigatorState>> _routes = {
     "job_posting": GlobalKey<NavigatorState>(),
     "job_follow": GlobalKey<NavigatorState>(),
@@ -13,8 +17,10 @@ class RootProvider extends ChangeNotifier {
   List<Widget> _pages = [];
 
   List<Widget> get pages => _pages;
+  bool? hasToken;
 
-  RootProvider() {
+  RootProvider(this._secureLocalRepository) {
+    checkToken();
     prepareRootPage();
     notifyListeners();
   }
@@ -44,5 +50,11 @@ class RootProvider extends ChangeNotifier {
       initialRoute: routeName,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
+  }
+
+  Future<bool> checkToken() async {
+    String? token = await _secureLocalRepository.readSecureData("token");
+    hasToken = token!.isEmpty;
+    return hasToken!;
   }
 }

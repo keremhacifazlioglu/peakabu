@@ -47,7 +47,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const RootApplicantPage(),
         );
-      case '/ambassador':
+      case '/recruiter':
         return MaterialPageRoute(
           builder: (_) => const RootRecruiterPage(),
         );
@@ -73,7 +73,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const SpecialForMePage(),
         );
-      case 'ambassador_special_for_me':
+      case 'recruiter_special_for_me':
         return MaterialPageRoute(
           builder: (_) => const ambassador.SpecialForMePage(),
         );

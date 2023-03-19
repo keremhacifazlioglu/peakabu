@@ -9,7 +9,7 @@ class RecruiterJobPostingRequest {
   String? city;
   String? district;
   String? caretakerType;
-  String? shiftSystems;
+  String? shiftSystem;
   String? experience;
   String? nationality;
   String? age;
@@ -22,7 +22,7 @@ class RecruiterJobPostingRequest {
     this.city,
     this.district,
     this.caretakerType,
-    this.shiftSystems,
+    this.shiftSystem,
     this.experience,
     this.nationality,
     this.age,

@@ -23,7 +23,7 @@ class JobPostingProvider with ChangeNotifier {
   bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false, gender = true;
   int pagingSize = 10, pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
-  String? title, description;
+  String? title, description, userType;
   JobPosting? jobPosting;
   JobDetail? jobDetail;
   Map<String, String> filterData = {};
@@ -34,8 +34,7 @@ class JobPostingProvider with ChangeNotifier {
       fetchJobPostingsWithPagination();
       fetchFavoriteJobPostingsWithPagination();
     } else if (pageType == PageType.detail) {
-      fetchJobPostingDetail();
-      fetchMyJobPostingDetail();
+      fetchJobPostingDetailByUserType();
     } else if (pageType == PageType.filterForm) {
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
@@ -185,7 +184,6 @@ class JobPostingProvider with ChangeNotifier {
     }
   }
 
-
   Future fetchAllOtherData() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
@@ -194,8 +192,8 @@ class JobPostingProvider with ChangeNotifier {
     await otherService.fetchAges();
     await otherService.fetchExperiences();
     await otherService.fetchNationalities();
+    await otherService.fetchDistricts(jobDetail != null ? jobDetail!.city! : "Adana");
     await otherService.fetchCities();
-    await otherService.fetchDistricts("Adana");
     networkStatus = NetworkStatus.success;
     notifyListeners();
   }
@@ -237,7 +235,8 @@ class JobPostingProvider with ChangeNotifier {
 
   Future updateDistrictByCity(String city) async {
     otherService.districts.clear();
-    await otherService.fetchDistricts(city);
+    Map<String, String> resp = await otherService.fetchDistricts(city);
+    jobDetail!.district = resp.values.first;
     notifyListeners();
   }
 
@@ -275,7 +274,7 @@ class JobPostingProvider with ChangeNotifier {
     return otherService.gender;
   }
 
-  Future<SuccessResponse> createJobPosting() async {
+  Future<JobPosting> createJobPosting() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     RecruiterJobPostingRequest? recruiterJobPostingRequest = RecruiterJobPostingRequest();
@@ -283,7 +282,7 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
     recruiterJobPostingRequest.city = otherService.selectedCity;
     recruiterJobPostingRequest.district = otherService.selectedCity;
-    recruiterJobPostingRequest.shiftSystems = otherService.selectedShiftSystem;
+    recruiterJobPostingRequest.shiftSystem = otherService.selectedShiftSystem;
     recruiterJobPostingRequest.gender = !gender ? "female" : "male";
     recruiterJobPostingRequest.age = otherService.selectedAge;
     recruiterJobPostingRequest.nationality = otherService.selectedNationality;
@@ -291,10 +290,11 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.title = title;
     recruiterJobPostingRequest.experience = otherService.selectedExperience;
 
-    SuccessResponse successResponse = await _jobPostingRepository.createRecruiterJobPosting(recruiterJobPostingRequest);
-    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    JobPosting jobPosting = await _jobPostingRepository.createRecruiterJobPosting(recruiterJobPostingRequest);
+    networkStatus = jobPosting.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    _secureLocalRepository.writeSecureData(StorageItem("jobPostingId", jobPosting.id!.toString()));
     notifyListeners();
-    return successResponse;
+    return jobPosting;
   }
 
   Future updateJobPosting() async {
@@ -305,7 +305,7 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
     recruiterJobPostingRequest.city = otherService.selectedCity;
     recruiterJobPostingRequest.district = otherService.selectedCity;
-    recruiterJobPostingRequest.shiftSystems = otherService.selectedShiftSystem;
+    recruiterJobPostingRequest.shiftSystem = otherService.selectedShiftSystem;
     recruiterJobPostingRequest.gender = gender ? "female" : "male";
     recruiterJobPostingRequest.age = otherService.selectedAge;
     recruiterJobPostingRequest.nationality = otherService.selectedNationality;
@@ -320,5 +320,14 @@ class JobPostingProvider with ChangeNotifier {
 
   Future refresh() async {
     notifyListeners();
+  }
+
+  Future fetchJobPostingDetailByUserType() async {
+    userType = await _secureLocalRepository.readSecureData("userType");
+    if (userType == "applicant") {
+      await fetchJobPostingDetail();
+    } else {
+      await fetchMyJobPostingDetail();
+    }
   }
 }

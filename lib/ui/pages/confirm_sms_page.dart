@@ -178,7 +178,19 @@ class ConfirmSmsPage extends StatelessWidget {
                                 (value) => {
                                   if (value.isSuccess!)
                                     {
-                                      Navigator.of(context).pushReplacementNamed("/create_applicant_profile"),
+                                      authProvider.isApplicant().then(
+                                            (value) => {
+                                              if (value)
+                                                {
+                                                  Navigator.of(context)
+                                                      .pushReplacementNamed("/create_applicant_profile"),
+                                                }
+                                              else
+                                                {
+                                                  Navigator.of(context).pushReplacementNamed("/create_my_job_posting"),
+                                                }
+                                            },
+                                          ),
                                     }
                                   else
                                     {

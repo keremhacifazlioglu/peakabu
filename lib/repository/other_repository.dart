@@ -26,7 +26,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -40,7 +40,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -54,7 +54,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -68,7 +68,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -82,7 +82,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -96,7 +96,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -110,7 +110,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;

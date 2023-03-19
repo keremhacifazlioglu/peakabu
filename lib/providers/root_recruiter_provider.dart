@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:platform/route_generator.dart';
 
-class RootAmbassadorProvider extends ChangeNotifier {
+class RootRecruiterProvider extends ChangeNotifier {
   final Map<String, GlobalKey<NavigatorState>> _routes = {
     "applicants": GlobalKey<NavigatorState>(),
     "applicant_follow": GlobalKey<NavigatorState>(),
     "applicant_request": GlobalKey<NavigatorState>(),
-    "ambassador_special_for_me": GlobalKey<NavigatorState>(),
+    "recruiter_special_for_me": GlobalKey<NavigatorState>(),
   };
 
   GlobalKey<NavigatorState> get navigatorState => _routes.entries.toList()[_currentIndex].value;
@@ -14,7 +14,7 @@ class RootAmbassadorProvider extends ChangeNotifier {
 
   List<Widget> get pages => _pages;
 
-  RootAmbassadorProvider() {
+  RootRecruiterProvider() {
     prepareRootPage();
     notifyListeners();
   }

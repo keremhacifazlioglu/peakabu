@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/job_request.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/applicant/job_request/job_request_list_item.dart';
-import 'package:platform/ui/tokens/colors.dart';
 
 class JobRequestList extends StatelessWidget {
   final List<JobRequest>? jobRequests;

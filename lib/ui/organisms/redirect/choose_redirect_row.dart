@@ -31,9 +31,9 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
                   selectedColorApplicant = PlatformColor.grayLightColor;
                 });
                 secureLocalRepository.writeSecureData(
-                  StorageItem("userType", "ambasador"),
+                  StorageItem("userType", "recruiter"),
                 );
-                Navigator.of(context).pushNamed("/ambassador");
+                Navigator.of(context).pushNamed("/recruiter");
               },
               child:  ChooseRedirectButton(
                 selectedColor: selectedColorAmbassador,

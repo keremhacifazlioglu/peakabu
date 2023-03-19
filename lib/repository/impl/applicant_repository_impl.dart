@@ -9,6 +9,7 @@ abstract class IApplicantRepository {
   Future<SuccessResponse>  updateApplicantProfile(Map<String,dynamic> queries);
   Future<SuccessResponse>  createApplicantProfile(Map<String,dynamic> queries);
   Future<BaseListResponse> fetchApplicantProfiles(int pageNumber,int pageSize);
+  Future<ApplicantProfile> fetchApplicantProfile(int id);
   Future<BaseListResponse> fetchFavoriteApplicantProfiles(int pageNumber,int pageSize);
   Future<BaseListResponse> fetchFilterApplicantProfiles(Map<String,String> queries);
   Future<BaseListResponse> findApplicants(int pageNumber,int pageSize);

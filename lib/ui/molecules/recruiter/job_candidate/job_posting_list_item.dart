@@ -43,7 +43,7 @@ class JobPostingListItem extends StatelessWidget {
           ),
           child: PlatformIconLabel(
             labelIconPath: "assets/icons/group.svg",
-            labelText: "${jobDetail!.caretakerType!}/${jobDetail!.shiftSystem!}",
+            labelText: "${jobDetail!.caretakerType!}/${jobDetail!.shiftSystem??""}",
           ),
         ),
         Padding(

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:platform/cons/register_status.dart';
 import 'package:platform/domain/request/auth/confirm_sms_request.dart';
 import 'package:platform/domain/request/auth/register_request.dart';
 import 'package:platform/domain/request/auth/send_sms_request.dart';
+import 'package:platform/domain/request/auth/token_request.dart';
 import 'package:platform/domain/response/auth/send_sms.dart';
+import 'package:platform/domain/response/auth/token.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/auth_repository.dart';
@@ -43,12 +46,11 @@ class AuthProvider with ChangeNotifier {
       successResponse = await _authRepository.register(
         RegisterRequest(
           phone: phoneNumber!,
-          userType: "applicant",
+          userType: await _secureLocalRepository.readSecureData("userType"),
           uuid: await _secureLocalRepository.readSecureData("uuid"),
         ),
       );
     }
-
     if (successResponse.isSuccess!) {
       _secureLocalRepository.writeSecureData(StorageItem("phoneNumber", phoneNumber!));
       SendSms sendSms = await _authRepository.sendSms(
@@ -70,40 +72,15 @@ class AuthProvider with ChangeNotifier {
     return successResponse;
   }
 
-/*
-  Future<SuccessResponse> sendSms() async {
-    networkStatus = NetworkStatus.waiting;
-    notifyListeners();
-    SuccessResponse successResponse = SuccessResponse();
-    if(phoneNumber == null || phoneNumber!.isEmpty){
-      successResponse.success = false;
-      successResponse.message = "Lütfen telefon numarası giriniz.";
-      networkStatus = NetworkStatus.error;
-    }else{
-      SendSms sendSms = await _authRepository.sendSms(
-        SendSmsRequest(
-          phone: phoneNumber!,
-          uuid: await _secureLocalRepository.readSecureData("uuid"),
-        ),
-      );
-    }
-
-    if (successResponse.success!) {
-      _secureLocalRepository.writeSecureData(StorageItem("phoneNumber", phoneNumber!));
-      networkStatus = NetworkStatus.success;
-    } else {
-      networkStatus = NetworkStatus.error;
-    }
-    notifyListeners();
-    return successResponse;
-  }
-*/
   Future<SendSms> resendSms() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     String? phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber");
     SendSms successResponse = await _authRepository.sendSms(
-      SendSmsRequest(phone: phoneNumber!),
+      SendSmsRequest(
+        phone: phoneNumber!,
+        uuid: await _secureLocalRepository.readSecureData("uuid"),
+      ),
     );
     if (successResponse.isSuccess!) {
       smsPin = "";
@@ -120,6 +97,7 @@ class AuthProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     SuccessResponse successResponse = SuccessResponse();
+    await prepareSmsPin();
     if (smsPin.isNotEmpty) {
       String? phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber");
       String? uuid = await _secureLocalRepository.readSecureData("uuid");
@@ -129,7 +107,7 @@ class AuthProvider with ChangeNotifier {
       );
       if (successResponse.isSuccess!) {
         _secureLocalRepository.writeSecureData(StorageItem("smsPin", smsPin));
-        networkStatus = NetworkStatus.success;
+        login();
       } else {
         networkStatus = NetworkStatus.error;
       }
@@ -140,6 +118,26 @@ class AuthProvider with ChangeNotifier {
     }
     notifyListeners();
     return successResponse;
+  }
+
+
+  Future login() async {
+    String? phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber");
+    String? uuid = await _secureLocalRepository.readSecureData("uuid");
+    Token? token = await _authRepository.token(TokenRequest(phone: phoneNumber,uuid: uuid));
+
+    if(token != null && token.isSuccess!){
+      if(token.isUserRegistered!){
+        _secureLocalRepository.writeSecureData(StorageItem("isRegisterStatus",RegisterStatus.isRegister.toShortUpperString()));
+        _secureLocalRepository.writeSecureData(StorageItem("token",token.token!));
+      }else{
+        _secureLocalRepository.writeSecureData(StorageItem("isRegisterStatus",RegisterStatus.unRegister.toShortUpperString()));
+      }
+      networkStatus = NetworkStatus.success;
+    }else{
+      networkStatus = NetworkStatus.error;
+    }
+    notifyListeners();
   }
 
   Future<void> getDeviceId() async {
@@ -153,6 +151,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future prepareSmsPin() async {
+    smsPin = "";
     for (TextEditingController textEditingController in textEditingControllerList) {
       smsPin += textEditingController.text.toString();
     }
@@ -179,4 +178,11 @@ class AuthProvider with ChangeNotifier {
     isKvkkCheck = !isKvkkCheck;
     notifyListeners();
   }
+
+  Future<bool> isApplicant() async {
+    String? userType = await _secureLocalRepository.readSecureData("userType");
+    return userType! == "applicant";
+  }
+
+
 }

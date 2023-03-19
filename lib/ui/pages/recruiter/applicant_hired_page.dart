@@ -136,7 +136,7 @@ class ApplicantRequestPage extends StatelessWidget {
                     }
                     if (provider.networkStatus == NetworkStatus.error) {
                       return const Center(
-                        child: Text("Uyarı çıkartılacak."),
+                        child: Text(""),
                       );
                     }
                     return const Center(

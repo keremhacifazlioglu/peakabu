@@ -19,7 +19,7 @@ class ApplicantProvider with ChangeNotifier {
   ApplicantProfile? applicantProfile;
   List<ApplicantProfile> allApplicantProfile = [], allFavoriteApplicantProfile = [], allFilterApplicantProfile = [];
   NetworkStatus networkStatus = NetworkStatus.none;
-  String? title, description, name;
+  String? title, description, name,userType ;
   File? file;
   int pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1, pagingSize = 10;
   bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false;
@@ -32,7 +32,7 @@ class ApplicantProvider with ChangeNotifier {
       fetchApplicantProfilesWithPagination();
       fetchFavoriteApplicantWithPagination();
     } else if (pageType == PageType.detail) {
-      fetchProfile();
+      fetchApplicantDetailByUserType();
     } else if (pageType == PageType.filterForm) {
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
@@ -49,6 +49,16 @@ class ApplicantProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     applicantProfile = await _applicantRepository.me();
+    networkStatus = applicantProfile!.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return applicantProfile!;
+  }
+
+  Future<ApplicantProfile> fetchApplicantProfile() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    String? id = await _secureLocalRepository.readSecureData("applicantId");
+    applicantProfile = await _applicantRepository.fetchApplicantProfile(int.parse(id!));
     networkStatus = applicantProfile!.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
     notifyListeners();
     return applicantProfile!;
@@ -124,7 +134,7 @@ class ApplicantProvider with ChangeNotifier {
       "gender": applicantProfile!.gender!,
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
-      "district": otherService.selectedCity!,
+      "district": otherService.selectedDistrict!,
       "shiftSystem": otherService.selectedShiftSystem!,
       "nationality": otherService.selectedNationality!,
       "experience": otherService.selectedExperience!,
@@ -147,7 +157,7 @@ class ApplicantProvider with ChangeNotifier {
       "gender": applicantProfile!.gender!,
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
-      "district": otherService.selectedCity!,
+      "district": otherService.selectedDistrict!,
       "shiftSystem": otherService.selectedShiftSystem!,
       "nationality": otherService.selectedNationality!,
       "experience": otherService.selectedExperience!,
@@ -171,7 +181,7 @@ class ApplicantProvider with ChangeNotifier {
     await otherService.fetchExperiences();
     await otherService.fetchNationalities();
     await otherService.fetchCities();
-    await otherService.fetchDistricts("Adana");
+    await otherService.fetchDistricts(applicantProfile != null ? applicantProfile!.city! : "Adana");
     networkStatus = NetworkStatus.success;
     notifyListeners();
   }
@@ -196,4 +206,20 @@ class ApplicantProvider with ChangeNotifier {
   Future refresh() async {
     notifyListeners();
   }
+
+  Future fetchApplicantDetailByUserType() async{
+    userType = await _secureLocalRepository.readSecureData("userType");
+    if(userType == "applicant"){
+      await fetchProfile();
+    }else{
+     await fetchApplicantProfile();
+    }
+  }
+
+  Future updateDistrictByCity(String city) async {
+    otherService.districts.clear();
+    await otherService.fetchDistricts(city);
+    notifyListeners();
+  }
+
 }

@@ -84,63 +84,63 @@ abstract class RestClient {
     @Query("pageSize") int pageSize,
   );
 
-  @POST("/hire_jobs/{id}/apply")
+  @POST("/recruiter/applicant_profiles/{id}/apply")
   Future<SuccessResponse> applyHireJob(@Path("id") int hireId);
 
-  @POST("/hire_jobs/{id}/reject")
+  @POST("/recruiter/applicant_profiles/{id}/reject")
   Future<SuccessResponse> rejectHireJob(@Path("id") int hireId);
 
-  @GET("/my_job_posting")
+  @GET("/recruiter/recruiter_jobs/me")
   Future<JobDetail> fetchMyJobPosting();
 
-  @POST("/my_job_posting")
-  Future<SuccessResponse> createMyJobPosting(@Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
+  @POST("/recruiter/recruiter_jobs")
+  Future<JobPosting> createMyJobPosting(@Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
 
-  @PUT("/my_job_posting")
+  @PUT("/recruiter/recruiter_jobs/me")
   Future<SuccessResponse> updateMyJobPosting(@Body() RecruiterJobPostingRequest recruiterJobPostingRequest);
 
   // todo Applicant
 
-  @GET("/applicant_profiles")
+  @GET("/recruiter/applicant_profiles")
   Future<List<ApplicantProfile>> fetchApplicantProfiles(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @GET("/applicant_profiles")
+  @GET("/recruiter/applicant_profiles")
   Future<List<ApplicantProfile>> fetchApplicantProfilesFilter(@Queries() Map<String, String> queries);
 
-  @GET("/applicant_profiles/{id}")
+  @GET("/recruiter/applicant_profiles/{id}")
   Future<ApplicantProfile> fetchApplicantProfile(@Path("id") int applicantId);
 
-  @GET("/applicant_profiles/{id}/get_phone")
+  @GET("/recruiter/applicant_profiles/{id}/get_phone")
   Future<ApplicantProfile> fetchApplicantPhone(@Path("id") int applicantId);
 
   @GET("/applicant/applicant_profiles/me")
   Future<ApplicantProfile> me();
 
-  @GET("/find_applicants")
+  @GET("/recruiter/applicant_profiles/requested")
   Future<List<ApplicantRequest>> findApplicants(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @GET("/applicant_requests")
+  @GET("/recruiter/applicant_profiles/invited")
   Future<List<ApplicantRequest>> fetchApplicantRequests(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @GET("/applicant_requests/{id}/apply")
+  @GET("/recruiter/applicant_profiles/{id}/apply")
   Future<ApplicantRequest> applyApplicantRequest();
 
-  @GET("/applicant_requests/{id}/reject")
+  @GET("/recruiter/applicant_profiles/{id}/reject")
   Future<ApplicantRequest> rejectApplicantRequests();
 
-  @POST("/applicant_profiles/{jobId}/request")
+  @POST("/recruiter/applicant_profiles/{jobId}/request")
   Future applicantProfileRequest(@Path() int jobId);
 
-  @POST('/applicant_profile')
+  @POST('/applicant/applicant_profiles')
   @MultiPart()
   Future<SuccessResponse> createApplicantProfile({
     @Part() required String name,
@@ -157,7 +157,7 @@ abstract class RestClient {
     @Part() File? thumbnail,
   });
 
-  @PUT('/applicant_profile')
+  @PUT('/applicant/applicant_profiles')
   @MultiPart()
   Future<SuccessResponse> updateApplicantProfile({
     @Part() required String name,
@@ -188,13 +188,13 @@ abstract class RestClient {
   @DELETE("/applicant/recruiter_jobs/{jobId}/favorite")
   Future<SuccessResponse> jobPostingRemoveFavorite(@Path() int jobId);
 
-  @GET("/favorite_applicant_profiles")
+  @GET("/recruiter/applicant_profiles/favorites")
   Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile(
     @Query("pageNumber") int pageNumber,
     @Query("pageSize") int pageSize,
   );
 
-  @POST("/applicant_profiles/{jobId}/favorite")
+  @POST("/recruiter/applicant_profiles/{jobId}/favorite")
   Future addFavoriteApplicantProfile(@Path() int jobId);
 
   // todo Other

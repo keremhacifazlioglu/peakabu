@@ -39,7 +39,7 @@ class JobFilterPage extends StatelessWidget {
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 return const Center(
-                  child: Text("Uyarı çıakrtılacak."),
+                  child: Text(""),
                 );
               }
               return const Center(

@@ -98,6 +98,16 @@ class CreateApplicantProfilePage extends StatelessWidget {
                           data: applicantProvider.otherService.cities,
                           onChange: (p0) {
                             applicantProvider.otherService.selectedCity = p0;
+                            applicantProvider.updateDistrictByCity(p0);
+                            applicantProvider.refresh();
+                          },
+                        ),
+                        SearchCaretakerCriteriaForm(
+                          text: "İlçe",
+                          selectedValue: applicantProvider.otherService.selectedDistrict,
+                          data: applicantProvider.otherService.districts,
+                          onChange: (p0) {
+                            applicantProvider.otherService.selectedDistrict = p0;
                             applicantProvider.refresh();
                           },
                         ),
@@ -197,7 +207,7 @@ class CreateApplicantProfilePage extends StatelessWidget {
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 return const Center(
-                  child: Text("Uyarı çıkartılacak."),
+                  child: Text(""),
                 );
               }
               return const Center(

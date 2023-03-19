@@ -35,7 +35,7 @@ class UpdateJobPostingPage extends StatelessWidget {
           ),
           body: Consumer<JobPostingProvider>(
             builder: (context, provider, child) {
-              if (provider.networkStatus == NetworkStatus.success) {
+              if (provider.networkStatus == NetworkStatus.success && provider.otherService.selectedDistrict != null) {
                 return SingleChildScrollView(
                   child: Form(
                     key: _formKey,
@@ -87,8 +87,18 @@ class UpdateJobPostingPage extends StatelessWidget {
                           text: "Şehir",
                           selectedValue: provider.jobDetail!.city,
                           data: provider.otherService.cities,
-                          onChange: (p0) {
+                          onChange: (p0) async {
                             provider.jobDetail!.city = p0;
+                            await provider.updateDistrictByCity(p0);
+                            provider.refresh();
+                          },
+                        ),
+                        SearchCaretakerCriteriaForm(
+                          text: "İlçe",
+                          selectedValue: provider.jobDetail!.district,
+                          data: provider.otherService.districts,
+                          onChange: (p0) {
+                            provider.jobDetail!.district = p0;
                             provider.refresh();
                           },
                         ),
@@ -168,7 +178,7 @@ class UpdateJobPostingPage extends StatelessWidget {
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 return const Center(
-                  child: Text("Uyarı çıkartılacak."),
+                  child: Text(""),
                 );
               }
               return const Center(

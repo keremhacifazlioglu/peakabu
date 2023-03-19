@@ -364,7 +364,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/hire_jobs/${hireId}/apply',
+              '/recruiter/applicant_profiles/${hireId}/apply',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -387,7 +387,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/hire_jobs/${hireId}/reject',
+              '/recruiter/applicant_profiles/${hireId}/reject',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -410,7 +410,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/my_job_posting',
+              '/recruiter/recruiter_jobs/me',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -420,26 +420,26 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<SuccessResponse> createMyJobPosting(recruiterJobPostingRequest) async {
+  Future<JobPosting> createMyJobPosting(recruiterJobPostingRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(recruiterJobPostingRequest.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<JobPosting>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/my_job_posting',
+              '/recruiter/recruiter_jobs',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SuccessResponse.fromJson(_result.data!);
+    final value = JobPosting.fromJson(_result.data!);
     return value;
   }
 
@@ -458,7 +458,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/my_job_posting',
+              '/recruiter/recruiter_jobs/me',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -487,7 +487,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profiles',
+              '/recruiter/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -514,7 +514,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profiles',
+              '/recruiter/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -540,7 +540,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profiles/${applicantId}',
+              '/recruiter/applicant_profiles/${applicantId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -563,7 +563,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profiles/${applicantId}/get_phone',
+              '/recruiter/applicant_profiles/${applicantId}/get_phone',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -615,7 +615,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/find_applicants',
+              '/recruiter/applicant_profiles/requested',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -647,7 +647,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requests',
+              '/recruiter/applicant_profiles/invited',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -673,7 +673,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requests/{id}/apply',
+              '/recruiter/applicant_profiles/{id}/apply',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -696,7 +696,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requests/{id}/reject',
+              '/recruiter/applicant_profiles/{id}/reject',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -718,7 +718,7 @@ class _RestClient implements RestClient {
     )
         .compose(
           _dio.options,
-          '/applicant_profiles/${jobId}/request',
+          '/recruiter/applicant_profiles/${jobId}/request',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -809,7 +809,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profile',
+              '/applicant/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -900,7 +900,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profile',
+              '/applicant/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1006,7 +1006,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/favorite_applicant_profiles',
+              '/recruiter/applicant_profiles/favorites',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1031,7 +1031,7 @@ class _RestClient implements RestClient {
     )
         .compose(
           _dio.options,
-          '/applicant_profiles/${jobId}/favorite',
+          '/recruiter/applicant_profiles/${jobId}/favorite',
           queryParameters: queryParameters,
           data: _data,
         )

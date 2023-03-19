@@ -60,7 +60,13 @@ class ApplicantListItem extends StatelessWidget {
                     flex: 1,
                     child: GestureDetector(
                       onTap: () async {
+                        // todo like işlemleri
                         //await jobPostingProvider.addFavoriteJob();
+                        /*if(jobPosting!.favorite!){
+                          await jobPostingProvider.deleteFavoriteJob(jobPosting!);
+                        }else{
+                          await jobPostingProvider.addFavoriteJob(jobPosting!);
+                        }*/
                       }, //addFavoriteJobTap,
                       child: Center(
                         child: Padding(

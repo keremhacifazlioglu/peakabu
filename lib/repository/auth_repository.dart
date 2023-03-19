@@ -24,7 +24,7 @@ class AuthRepository implements IAuthRepository {
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -38,7 +38,7 @@ class AuthRepository implements IAuthRepository {
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -52,7 +52,7 @@ class AuthRepository implements IAuthRepository {
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -66,7 +66,7 @@ class AuthRepository implements IAuthRepository {
       token.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       token.message = e.text;
-      token.status = e.response != null ? e.response!.statusCode : e.statusCode;
+      token.status = e.response.statusCode;
       token.isSuccess = false;
     }
     return token;

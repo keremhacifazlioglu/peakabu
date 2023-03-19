@@ -23,7 +23,7 @@ class ApplicantRepository implements IApplicantRepository {
       applicantProfile.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       applicantProfile.message = e.text;
-      applicantProfile.status = e.response!.statusCode;
+      applicantProfile.status = e.response.statusCode;
       applicantProfile.isSuccess = false;
     }
     return applicantProfile;
@@ -49,7 +49,7 @@ class ApplicantRepository implements IApplicantRepository {
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -75,7 +75,7 @@ class ApplicantRepository implements IApplicantRepository {
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -90,7 +90,7 @@ class ApplicantRepository implements IApplicantRepository {
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -105,7 +105,7 @@ class ApplicantRepository implements IApplicantRepository {
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -120,7 +120,7 @@ class ApplicantRepository implements IApplicantRepository {
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -135,7 +135,7 @@ class ApplicantRepository implements IApplicantRepository {
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -150,7 +150,7 @@ class ApplicantRepository implements IApplicantRepository {
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -164,9 +164,23 @@ class ApplicantRepository implements IApplicantRepository {
       jobDetail.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       jobDetail.message = e.text;
-      jobDetail.status = e.response!.statusCode;
+      jobDetail.status = e.response.statusCode;
       jobDetail.isSuccess = false;
     }
     return jobDetail;
+  }
+
+  @override
+  Future<ApplicantProfile> fetchApplicantProfile(int id) async {
+    ApplicantProfile applicantProfile = ApplicantProfile();
+    try {
+      applicantProfile = await _restClient.fetchApplicantProfile(id);
+      applicantProfile.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      applicantProfile.message = e.text;
+      applicantProfile.status = e.response.statusCode;
+      applicantProfile.isSuccess = false;
+    }
+    return applicantProfile;
   }
 }

@@ -29,10 +29,10 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<RootProvider>(
-          create: (_) => RootProvider(),
+          create: (_) => RootProvider(secureLocalRepository),
         ),
-        ChangeNotifierProvider<RootAmbassadorProvider>(
-          create: (_) => RootAmbassadorProvider(),
+        ChangeNotifierProvider<RootRecruiterProvider>(
+          create: (_) => RootRecruiterProvider(),
         ),
         ChangeNotifierProvider<OtherProvider>(
           create: (_) => OtherProvider(otherRepository),

@@ -3,6 +3,7 @@ import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/job_posting_provider.dart';
+import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/atoms/platform_head_text.dart';
 import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
@@ -23,7 +24,8 @@ class CreateJobPostingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
-      create: (context) => JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.create),
+      create: (context) =>
+          JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.create),
       builder: (context, child) {
         var jobPostingProvider = Provider.of<JobPostingProvider>(context);
         return Scaffold(
@@ -165,7 +167,7 @@ class CreateJobPostingPage extends StatelessWidget {
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 return const Center(
-                  child: Text("Uyarı çıkartılacak."),
+                  child: Text(""),
                 );
               }
               return const Center(
@@ -193,14 +195,18 @@ class CreateJobPostingPage extends StatelessWidget {
                 buttonText: "İlan Oluştur",
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    jobPostingProvider.createJobPosting().then((value) => {
-                          if (value.isSuccess!)
-                            {Navigator.of(context).pushReplacementNamed("/my_job_posting_detail")}
-                          else
-                            {
-                              const CustomShowDialog().showDialog(context, "Uyarı", value.message!),
-                            }
-                        });
+                    jobPostingProvider.createJobPosting().then(
+                          (value) => {
+                            if (value.isSuccess!)
+                              {
+                                Navigator.of(context).pushReplacementNamed("/my_job_posting_detail",arguments: value),
+                              }
+                            else
+                              {
+                                const CustomShowDialog().showDialog(context, "Uyarı", value.message!),
+                              }
+                          },
+                        );
                   }
                 },
               ),
@@ -210,5 +216,4 @@ class CreateJobPostingPage extends StatelessWidget {
       },
     );
   }
-
 }
