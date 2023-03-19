@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:platform/route_generator.dart';
+import 'package:platform/storage/secure_local_repository.dart';
 
+@injectable
 class RootRecruiterProvider extends ChangeNotifier {
   final Map<String, GlobalKey<NavigatorState>> _routes = {
     "applicants": GlobalKey<NavigatorState>(),
@@ -8,13 +11,13 @@ class RootRecruiterProvider extends ChangeNotifier {
     "applicant_request": GlobalKey<NavigatorState>(),
     "recruiter_special_for_me": GlobalKey<NavigatorState>(),
   };
-
+  final SecureLocalRepository _secureLocalRepository;
   GlobalKey<NavigatorState> get navigatorState => _routes.entries.toList()[_currentIndex].value;
   List<Widget> _pages = [];
 
   List<Widget> get pages => _pages;
 
-  RootRecruiterProvider() {
+  RootRecruiterProvider(this._secureLocalRepository) {
     prepareRootPage();
     notifyListeners();
   }
@@ -45,4 +48,10 @@ class RootRecruiterProvider extends ChangeNotifier {
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
+
+  Future<bool> checkToken() async {
+    String? token = await _secureLocalRepository.readSecureData("token");
+    return token != null && token.isNotEmpty;
+  }
+
 }

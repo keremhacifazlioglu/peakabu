@@ -39,12 +39,28 @@ class RootApplicantPage extends StatelessWidget {
               bottomNavigationBar: PlatformBottomNavBar(
                 currentIndex: s.currentIndex,
                 onTap: (p0){
-                  //bool hasToken = await s.checkToken();
-                  if (p0 == s.currentIndex) {
-                    s.navigatorState.currentState!.maybePop();
-                  } else {
-                    s.setCurrentIndex(p0);
-                  }
+                  s.checkToken().then(
+                        (value) => {
+                      if (value)
+                        {
+                          if (p0 == s.currentIndex)
+                            {
+                              s.navigatorState.currentState!.maybePop(),
+                            }
+                          else
+                            {
+                              s.setCurrentIndex(p0),
+                            }
+                        }
+                      else
+                        {
+                          if (p0 != 0)
+                            {
+                              Navigator.of(context).pushNamed("/create_account"),
+                            }
+                        }
+                    },
+                  );
                   s.refreshPage();
                 },
               ),

@@ -281,7 +281,7 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.title = title;
     recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
     recruiterJobPostingRequest.city = otherService.selectedCity;
-    recruiterJobPostingRequest.district = otherService.selectedCity;
+    recruiterJobPostingRequest.district = otherService.selectedDistrict;
     recruiterJobPostingRequest.shiftSystem = otherService.selectedShiftSystem;
     recruiterJobPostingRequest.gender = !gender ? "female" : "male";
     recruiterJobPostingRequest.age = otherService.selectedAge;
@@ -304,7 +304,7 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.title = title;
     recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
     recruiterJobPostingRequest.city = otherService.selectedCity;
-    recruiterJobPostingRequest.district = otherService.selectedCity;
+    recruiterJobPostingRequest.district = otherService.selectedDistrict;
     recruiterJobPostingRequest.shiftSystem = otherService.selectedShiftSystem;
     recruiterJobPostingRequest.gender = gender ? "female" : "male";
     recruiterJobPostingRequest.age = otherService.selectedAge;

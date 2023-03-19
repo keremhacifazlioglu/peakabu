@@ -89,6 +89,16 @@ class CreateJobPostingPage extends StatelessWidget {
                           data: provider.otherService.cities,
                           onChange: (p0) {
                             provider.otherService.selectedCity = p0;
+                            provider.updateDistrictByCity(p0);
+                            provider.refresh();
+                          },
+                        ),
+                        SearchCaretakerCriteriaForm(
+                          text: "İlçe",
+                          selectedValue: provider.otherService.selectedDistrict,
+                          data: provider.otherService.districts,
+                          onChange: (p0) {
+                            provider.otherService.selectedDistrict = p0;
                             provider.refresh();
                           },
                         ),

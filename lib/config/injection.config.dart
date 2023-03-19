@@ -9,16 +9,17 @@ import 'package:dio/dio.dart' as _i3;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:platform/config/module.dart' as _i20;
+import 'package:platform/config/module.dart' as _i21;
 import 'package:platform/cons/page_type.dart' as _i11;
 import 'package:platform/network/rest_client.dart' as _i5;
-import 'package:platform/providers/applicant_hired_provider.dart' as _i16;
-import 'package:platform/providers/applicant_provider.dart' as _i17;
-import 'package:platform/providers/job_posting_provider.dart' as _i18;
+import 'package:platform/providers/applicant_hired_provider.dart' as _i17;
+import 'package:platform/providers/applicant_provider.dart' as _i18;
+import 'package:platform/providers/job_posting_provider.dart' as _i19;
 import 'package:platform/providers/job_requests_provider.dart' as _i10;
-import 'package:platform/providers/other_provider.dart' as _i19;
+import 'package:platform/providers/other_provider.dart' as _i20;
 import 'package:platform/providers/root_provider.dart' as _i14;
-import 'package:platform/providers/splash_provider.dart' as _i15;
+import 'package:platform/providers/root_recruiter_provider.dart' as _i15;
+import 'package:platform/providers/splash_provider.dart' as _i16;
 import 'package:platform/repository/applicant_repository.dart' as _i7;
 import 'package:platform/repository/auth_repository.dart' as _i8;
 import 'package:platform/repository/job_posting_repository.dart' as _i9;
@@ -67,43 +68,45 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i13.OtherService(gh<_i12.OtherRepository>()));
     gh.factory<_i14.RootProvider>(
         () => _i14.RootProvider(gh<_i6.SecureLocalRepository>()));
-    gh.factory<_i15.SplashProvider>(() => _i15.SplashProvider(
+    gh.factory<_i15.RootRecruiterProvider>(
+        () => _i15.RootRecruiterProvider(gh<_i6.SecureLocalRepository>()));
+    gh.factory<_i16.SplashProvider>(() => _i16.SplashProvider(
           gh<_i6.SecureLocalRepository>(),
           gh<_i8.AuthRepository>(),
         ));
-    gh.factoryParam<_i16.ApplicantHiredProvider, _i11.PageType, dynamic>((
+    gh.factoryParam<_i17.ApplicantHiredProvider, _i11.PageType, dynamic>((
       pageType,
       _,
     ) =>
-        _i16.ApplicantHiredProvider(
+        _i17.ApplicantHiredProvider(
           gh<_i7.ApplicantRepository>(),
           pageType,
           selectedTab: gh<bool>(),
         ));
-    gh.factoryParam<_i17.ApplicantProvider, _i11.PageType, dynamic>((
+    gh.factoryParam<_i18.ApplicantProvider, _i11.PageType, dynamic>((
       pageType,
       _,
     ) =>
-        _i17.ApplicantProvider(
+        _i18.ApplicantProvider(
           gh<_i7.ApplicantRepository>(),
           gh<_i6.SecureLocalRepository>(),
           gh<_i13.OtherService>(),
           pageType,
         ));
-    gh.factoryParam<_i18.JobPostingProvider, _i11.PageType, dynamic>((
+    gh.factoryParam<_i19.JobPostingProvider, _i11.PageType, dynamic>((
       pageType,
       _,
     ) =>
-        _i18.JobPostingProvider(
+        _i19.JobPostingProvider(
           gh<_i9.JobPostingRepository>(),
           gh<_i6.SecureLocalRepository>(),
           gh<_i13.OtherService>(),
           pageType,
         ));
-    gh.factory<_i19.OtherProvider>(
-        () => _i19.OtherProvider(gh<_i12.OtherRepository>()));
+    gh.factory<_i20.OtherProvider>(
+        () => _i20.OtherProvider(gh<_i12.OtherRepository>()));
     return this;
   }
 }
 
-class _$AppModule extends _i20.AppModule {}
+class _$AppModule extends _i21.AppModule {}

@@ -32,7 +32,7 @@ void main() async {
           create: (_) => RootProvider(secureLocalRepository),
         ),
         ChangeNotifierProvider<RootRecruiterProvider>(
-          create: (_) => RootRecruiterProvider(),
+          create: (_) => RootRecruiterProvider(secureLocalRepository),
         ),
         ChangeNotifierProvider<OtherProvider>(
           create: (_) => OtherProvider(otherRepository),

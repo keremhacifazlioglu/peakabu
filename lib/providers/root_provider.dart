@@ -54,7 +54,6 @@ class RootProvider extends ChangeNotifier {
 
   Future<bool> checkToken() async {
     String? token = await _secureLocalRepository.readSecureData("token");
-    hasToken = token!.isEmpty;
-    return hasToken!;
+    return token != null && token.isNotEmpty;
   }
 }
