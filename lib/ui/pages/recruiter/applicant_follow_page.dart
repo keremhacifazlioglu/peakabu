@@ -13,7 +13,7 @@ class ApplicantFollowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ApplicantProvider>(
-      create: (context) => ApplicantProvider(applicantRepository, secureLocalRepository, otherService, PageType.fetch),
+      create: (context) => ApplicantProvider(applicantRepository, secureLocalRepository, otherService, PageType.applicantFollow),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: PlatformColor.offWhiteColor2,
@@ -29,7 +29,7 @@ class ApplicantFollowPage extends StatelessWidget {
                 return NotificationListener<ScrollNotification>(
                   onNotification: (ScrollNotification scrollInfo) {
                     if (scrollInfo is ScrollEndNotification) {
-                      provider.fetchFavoriteApplicantWithPagination();
+                       provider.fetchFavoriteApplicantWithPagination();
                     }
                     return true;
                   },

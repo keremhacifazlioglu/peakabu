@@ -20,7 +20,6 @@ class RootProvider extends ChangeNotifier {
   bool? hasToken;
 
   RootProvider(this._secureLocalRepository) {
-    checkToken();
     prepareRootPage();
     notifyListeners();
   }

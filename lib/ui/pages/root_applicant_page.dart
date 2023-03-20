@@ -50,18 +50,19 @@ class RootApplicantPage extends StatelessWidget {
                           else
                             {
                               s.setCurrentIndex(p0),
-                            }
+                            },
+                          s.refreshPage(),
                         }
                       else
                         {
                           if (p0 != 0)
                             {
                               Navigator.of(context).pushNamed("/create_account"),
-                            }
+                            },
+                          s.setCurrentIndex(p0),
                         }
                     },
                   );
-                  s.refreshPage();
                 },
               ),
             ),

@@ -189,13 +189,13 @@ abstract class RestClient {
   Future<SuccessResponse> jobPostingRemoveFavorite(@Path() int jobId);
 
   @GET("/recruiter/applicant_profiles/favorites")
-  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile(
-    @Query("pageNumber") int pageNumber,
-    @Query("pageSize") int pageSize,
-  );
+  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile();
 
   @POST("/recruiter/applicant_profiles/{jobId}/favorite")
-  Future addFavoriteApplicantProfile(@Path() int jobId);
+  Future<SuccessResponse> addFavoriteApplicantProfile(@Path() int jobId);
+
+  @DELETE("/recruiter/applicant_profiles/{jobId}/favorite")
+  Future<SuccessResponse> removeFavoriteApplicantProfile(@Path() int jobId);
 
   // todo Other
 

@@ -58,7 +58,7 @@ class ApplicantsPage extends StatelessWidget {
                     }
                     return true;
                   },
-                  child: ApplicantList(applicantProfiles: provider.allApplicantProfile),
+                  child: ApplicantList(applicantProfiles: provider.allApplicantProfiles),
                 );
               }
               if (provider.networkStatus == NetworkStatus.error) {

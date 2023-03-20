@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:platform/route_generator.dart';
@@ -32,6 +34,7 @@ class RootRecruiterProvider extends ChangeNotifier {
 
   void refreshPage(){
     if(_currentIndex != 3){
+      log(_routes.keys.toList()[_currentIndex]);
       _pages[_currentIndex] = _buildOffstageNavigator(_routes.keys.toList()[_currentIndex], GlobalKey<NavigatorState>());
     }
   }

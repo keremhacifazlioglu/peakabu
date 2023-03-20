@@ -100,7 +100,7 @@ class ApplicantRepository implements IApplicantRepository {
   Future<BaseListResponse> fetchFavoriteApplicantProfiles(int pageNumber, int pageSize) async {
     BaseListResponse baseListResponse = BaseListResponse();
     try {
-      List<ApplicantProfile> response = await _restClient.fetchFavoriteApplicantProfile(pageNumber, pageSize);
+      List<ApplicantProfile> response = await _restClient.fetchFavoriteApplicantProfile();
       baseListResponse.data = response;
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
@@ -183,4 +183,35 @@ class ApplicantRepository implements IApplicantRepository {
     }
     return applicantProfile;
   }
+
+
+
+  @override
+  Future<SuccessResponse> favoriteApplicantProfile(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.addFavoriteApplicantProfile(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+  @override
+  Future<SuccessResponse> removeFavoriteApplicantProfile(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.removeFavoriteApplicantProfile(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
 }

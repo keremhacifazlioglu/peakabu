@@ -17,9 +17,10 @@ class ApplicantProvider with ChangeNotifier {
   final SecureLocalRepository _secureLocalRepository;
   final OtherService otherService;
   ApplicantProfile? applicantProfile;
-  List<ApplicantProfile> allApplicantProfile = [], allFavoriteApplicantProfile = [], allFilterApplicantProfile = [];
+  List<ApplicantProfile> allApplicantProfiles = [], allFavoriteApplicantProfile = [], allFilterApplicantProfile = [];
   NetworkStatus networkStatus = NetworkStatus.none;
-  String? title, description, name,userType ;
+  String? title, description, name, userType;
+
   File? file;
   int pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1, pagingSize = 10;
   bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false;
@@ -27,9 +28,14 @@ class ApplicantProvider with ChangeNotifier {
   Map<String, String> filterData = {};
 
   ApplicantProvider(
-      this._applicantRepository, this._secureLocalRepository, this.otherService, @factoryParam PageType pageType) {
+    this._applicantRepository,
+    this._secureLocalRepository,
+    this.otherService,
+    @factoryParam PageType pageType,
+  ) {
     if (pageType == PageType.fetch) {
       fetchApplicantProfilesWithPagination();
+    } else if (pageType == PageType.applicantFollow) {
       fetchFavoriteApplicantWithPagination();
     } else if (pageType == PageType.detail) {
       fetchApplicantDetailByUserType();
@@ -40,7 +46,7 @@ class ApplicantProvider with ChangeNotifier {
     } else if (pageType == PageType.update) {
       fetchProfile();
       fetchAllOtherData();
-    }else if (pageType == PageType.create) {
+    } else if (pageType == PageType.create) {
       fetchAllOtherData();
     }
   }
@@ -72,7 +78,7 @@ class ApplicantProvider with ChangeNotifier {
       if (response.isSuccess!) {
         isLastPage = response.data!.length < pagingSize;
         pageNumber++;
-        allApplicantProfile.addAll(response.data! as List<ApplicantProfile>);
+        allApplicantProfiles.addAll(response.data! as List<ApplicantProfile>);
         networkStatus = NetworkStatus.success;
       } else {
         networkStatus = NetworkStatus.error;
@@ -81,7 +87,7 @@ class ApplicantProvider with ChangeNotifier {
       networkStatus = NetworkStatus.success;
     }
     notifyListeners();
-    return allApplicantProfile;
+    return allApplicantProfiles;
   }
 
   Future fetchFavoriteApplicantWithPagination() async {
@@ -207,12 +213,12 @@ class ApplicantProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchApplicantDetailByUserType() async{
+  Future fetchApplicantDetailByUserType() async {
     userType = await _secureLocalRepository.readSecureData("userType");
-    if(userType == "applicant"){
+    if (userType == "applicant") {
       await fetchProfile();
-    }else{
-     await fetchApplicantProfile();
+    } else {
+      await fetchApplicantProfile();
     }
   }
 
@@ -222,4 +228,34 @@ class ApplicantProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future deleteFavoriteApplicant(ApplicantProfile? applicantProfile) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.removeFavoriteApplicantProfile(applicantProfile!.id!);
+    applicantProfile.favorite = false;
+    await removeFavoriteJobPostingTheList(applicantProfile);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future addFavoriteApplicant(ApplicantProfile applicantProfile) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.favoriteApplicantProfile(applicantProfile.id!);
+    applicantProfile.favorite = true;
+    await removeFavoriteJobPostingTheList(applicantProfile);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future removeFavoriteJobPostingTheList(ApplicantProfile applicantProfile) async {
+    if (allFavoriteApplicantProfile.isNotEmpty) {
+      allFavoriteApplicantProfile.remove(applicantProfile);
+    }
+    if (allApplicantProfiles.isNotEmpty) {
+      allFavoriteApplicantProfile.remove(applicantProfile);
+    }
+  }
 }

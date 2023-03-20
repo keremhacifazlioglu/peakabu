@@ -15,6 +15,8 @@ abstract class IApplicantRepository {
   Future<BaseListResponse> findApplicants(int pageNumber,int pageSize);
   Future<BaseListResponse> applicantRequests(int pageNumber,int pageSize);
   Future<JobDetail> fetchMyJobPosting();
+  Future<SuccessResponse> favoriteApplicantProfile(int id);
+  Future<SuccessResponse> removeFavoriteApplicantProfile(int id);
 
 
 
