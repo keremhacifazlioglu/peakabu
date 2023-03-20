@@ -19,8 +19,7 @@ class ApplicantProvider with ChangeNotifier {
   ApplicantProfile? applicantProfile;
   List<ApplicantProfile> allApplicantProfiles = [], allFavoriteApplicantProfile = [], allFilterApplicantProfile = [];
   NetworkStatus networkStatus = NetworkStatus.none;
-  String? title, description, name, userType;
-
+  String? title, description, name, userType, gender;
   File? file;
   int pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1, pagingSize = 10;
   bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false;
@@ -136,8 +135,8 @@ class ApplicantProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     Map<String, dynamic> queries = {
-      "name": applicantProfile!.name,
-      "gender": applicantProfile!.gender!,
+      "name": name,
+      "gender": gender,
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
       "district": otherService.selectedDistrict!,
@@ -146,8 +145,8 @@ class ApplicantProvider with ChangeNotifier {
       "experience": otherService.selectedExperience!,
       "caretakerType": otherService.selectedCaretakerType!,
       "title": title ?? applicantProfile!.title!,
-      "description": description ?? applicantProfile!.desc!,
-      "thumbnail": file,
+      "desc": description ?? applicantProfile!.desc!,
+      "image": file,
     };
     SuccessResponse successResponse = await _applicantRepository.createApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
@@ -169,8 +168,8 @@ class ApplicantProvider with ChangeNotifier {
       "experience": otherService.selectedExperience!,
       "caretakerType": otherService.selectedCaretakerType!,
       "title": title ?? applicantProfile!.title!,
-      "description": description ?? applicantProfile!.desc!,
-      "thumbnail": file ?? "",
+      "desc": description ?? applicantProfile!.desc!,
+      "image": file ?? "",
     };
     SuccessResponse successResponse = await _applicantRepository.updateApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;

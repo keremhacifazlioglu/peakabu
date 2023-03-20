@@ -735,12 +735,12 @@ class _RestClient implements RestClient {
     required title,
     required district,
     required caretakerType,
-    required shiftSystems,
+    required shiftSystem,
     required experience,
     required nationality,
     required age,
-    required description,
-    thumbnail,
+    required desc,
+    image,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -772,8 +772,8 @@ class _RestClient implements RestClient {
       caretakerType,
     ));
     _data.fields.add(MapEntry(
-      'shiftSystems',
-      shiftSystems,
+      'shiftSystem',
+      shiftSystem,
     ));
     _data.fields.add(MapEntry(
       'experience',
@@ -788,15 +788,15 @@ class _RestClient implements RestClient {
       age,
     ));
     _data.fields.add(MapEntry(
-      'description',
-      description,
+      'desc',
+      desc,
     ));
-    if (thumbnail != null) {
+    if (image != null) {
       _data.files.add(MapEntry(
-        'thumbnail',
+        'image',
         MultipartFile.fromFileSync(
-          thumbnail.path,
-          filename: thumbnail.path.split(Platform.pathSeparator).last,
+          image.path,
+          filename: image.path.split(Platform.pathSeparator).last,
         ),
       ));
     }
@@ -826,12 +826,12 @@ class _RestClient implements RestClient {
     required title,
     required district,
     required caretakerType,
-    required shiftSystems,
+    required shiftSystem,
     required experience,
     required nationality,
     required age,
-    required description,
-    thumbnail,
+    required desc,
+    image,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -863,8 +863,8 @@ class _RestClient implements RestClient {
       caretakerType,
     ));
     _data.fields.add(MapEntry(
-      'shiftSystems',
-      shiftSystems,
+      'shiftSystem',
+      shiftSystem,
     ));
     _data.fields.add(MapEntry(
       'experience',
@@ -879,15 +879,15 @@ class _RestClient implements RestClient {
       age,
     ));
     _data.fields.add(MapEntry(
-      'description',
-      description,
+      'desc',
+      desc,
     ));
-    if (thumbnail != null) {
+    if (image != null) {
       _data.files.add(MapEntry(
-        'thumbnail',
+        'image',
         MultipartFile.fromFileSync(
-          thumbnail.path,
-          filename: thumbnail.path.split(Platform.pathSeparator).last,
+          image.path,
+          filename: image.path.split(Platform.pathSeparator).last,
         ),
       ));
     }

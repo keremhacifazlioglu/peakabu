@@ -60,7 +60,7 @@ class RootRecruiterPage extends StatelessWidget {
                                 {
                                   Navigator.of(context).pushNamed("/create_account"),
                                 },
-                              s.setCurrentIndex(p0),
+                              //s.setCurrentIndex(p0),
                             }
                         },
                       );

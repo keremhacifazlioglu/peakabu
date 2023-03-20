@@ -40,11 +40,12 @@ class ApplicantRepository implements IApplicantRepository {
         title: queries['title'],
         district: queries['district'],
         caretakerType: queries['caretakerType'],
-        shiftSystems: queries['shiftSystem'],
+        shiftSystem: queries['shiftSystem'],
         experience: queries['experience'],
         nationality: queries['nationality'],
         age: queries['age'],
-        description: queries['description'],
+        desc: queries['description'],
+        image: queries['image'],
       );
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
@@ -60,18 +61,18 @@ class ApplicantRepository implements IApplicantRepository {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse = await _restClient.createApplicantProfile(
-        name: queries['name'],
-        gender: queries['gender'],
-        city: queries['city'],
-        title: queries['title'],
-        district: queries['district'],
-        caretakerType: queries['caretakerType'],
-        shiftSystems: queries['shiftSystem'],
-        experience: queries['experience'],
-        nationality: queries['nationality'],
-        age: queries['age'],
-        description: queries['description'],
-      );
+          name: queries['name'],
+          gender: queries['gender'],
+          city: queries['city'],
+          title: queries['title'],
+          district: queries['district'],
+          caretakerType: queries['caretakerType'],
+          shiftSystem: queries['shiftSystem'],
+          experience: queries['experience'],
+          nationality: queries['nationality'],
+          age: queries['age'],
+          desc: queries['desc'],
+          image: queries['image']);
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
@@ -130,7 +131,7 @@ class ApplicantRepository implements IApplicantRepository {
   Future<BaseListResponse> applicantRequests(int pageNumber, int pageSize) async {
     BaseListResponse<ApplicantRequest> baseListResponse = BaseListResponse();
     try {
-      List<ApplicantRequest> response = await _restClient.fetchApplicantRequests(pageNumber,pageSize);
+      List<ApplicantRequest> response = await _restClient.fetchApplicantRequests(pageNumber, pageSize);
       baseListResponse.data = response;
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
@@ -145,7 +146,7 @@ class ApplicantRepository implements IApplicantRepository {
   Future<BaseListResponse> findApplicants(int pageNumber, int pageSize) async {
     BaseListResponse<ApplicantRequest> baseListResponse = BaseListResponse();
     try {
-      List<ApplicantRequest> response = await _restClient.findApplicants(pageNumber,pageSize);
+      List<ApplicantRequest> response = await _restClient.findApplicants(pageNumber, pageSize);
       baseListResponse.data = response;
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
@@ -160,7 +161,7 @@ class ApplicantRepository implements IApplicantRepository {
   Future<JobDetail> fetchMyJobPosting() async {
     JobDetail jobDetail = JobDetail();
     try {
-      jobDetail= await _restClient.fetchMyJobPosting();
+      jobDetail = await _restClient.fetchMyJobPosting();
       jobDetail.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       jobDetail.message = e.text;
@@ -183,8 +184,6 @@ class ApplicantRepository implements IApplicantRepository {
     }
     return applicantProfile;
   }
-
-
 
   @override
   Future<SuccessResponse> favoriteApplicantProfile(int id) async {
@@ -213,5 +212,4 @@ class ApplicantRepository implements IApplicantRepository {
     }
     return successResponse;
   }
-
 }

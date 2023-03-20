@@ -3,7 +3,6 @@ import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/job_posting_provider.dart';
-import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/atoms/platform_head_text.dart';
 import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';

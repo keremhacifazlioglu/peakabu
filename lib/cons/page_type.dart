@@ -6,5 +6,6 @@ enum PageType {
   filter,
   filterForm,
   applicantFollow,
+  jobFollow,
 
 }

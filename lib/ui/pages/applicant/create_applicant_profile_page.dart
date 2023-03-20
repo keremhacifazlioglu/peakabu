@@ -86,9 +86,9 @@ class CreateApplicantProfilePage extends StatelessWidget {
                           text: "Cinsiyet",
                         ),
                         ChooseGenderRow(
-                          onSelected: true,
+                          onSelected: applicantProvider.gender != null || applicantProvider.gender == "female" ,
                           onTap: (p0) {
-                            applicantProvider.applicantProfile!.gender = p0 ? "female" : "male";
+                            applicantProvider.gender = p0 ? "female" : "male";
                             applicantProvider.refresh();
                           },
                         ),

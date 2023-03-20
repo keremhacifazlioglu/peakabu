@@ -149,12 +149,12 @@ abstract class RestClient {
     @Part() required String title,
     @Part() required String district,
     @Part() required String caretakerType,
-    @Part() required String shiftSystems,
+    @Part() required String shiftSystem,
     @Part() required String experience,
     @Part() required String nationality,
     @Part() required String age,
-    @Part() required String description,
-    @Part() File? thumbnail,
+    @Part() required String desc,
+    @Part() File? image,
   });
 
   @PUT('/applicant/applicant_profiles')
@@ -166,12 +166,12 @@ abstract class RestClient {
     @Part() required String title,
     @Part() required String district,
     @Part() required String caretakerType,
-    @Part() required String shiftSystems,
+    @Part() required String shiftSystem,
     @Part() required String experience,
     @Part() required String nationality,
     @Part() required String age,
-    @Part() required String description,
-    @Part() File? thumbnail,
+    @Part() required String desc,
+    @Part() File? image,
   });
 
   // todo Favorite

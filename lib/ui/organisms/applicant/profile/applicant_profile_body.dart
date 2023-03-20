@@ -24,7 +24,7 @@ class ApplicantProfileBody extends StatelessWidget {
             left: 0,
             right: 0,
             child: ApplicantProfileDescriptionCard(
-              desc: applicantProfile!.desc!,
+              desc: applicantProfile!.desc??"",
               descTitle: applicantProfile!.title??"",
             ),
           ),

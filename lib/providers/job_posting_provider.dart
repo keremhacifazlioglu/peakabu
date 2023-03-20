@@ -32,6 +32,7 @@ class JobPostingProvider with ChangeNotifier {
       this._jobPostingRepository, this._secureLocalRepository, this.otherService, @factoryParam PageType pageType) {
     if (pageType == PageType.fetch) {
       fetchJobPostingsWithPagination();
+    } else if (pageType == PageType.jobFollow) {
       fetchFavoriteJobPostingsWithPagination();
     } else if (pageType == PageType.detail) {
       fetchJobPostingDetailByUserType();
