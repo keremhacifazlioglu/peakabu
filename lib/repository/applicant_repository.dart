@@ -3,6 +3,7 @@ import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
+import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/interceptor/error_interceptor.dart';
 import 'package:platform/repository/impl/applicant_repository_impl.dart';
@@ -212,4 +213,48 @@ class ApplicantRepository implements IApplicantRepository {
     }
     return successResponse;
   }
+
+
+  @override
+  Future<SuccessResponse> applyHireJob(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.applyHireJob(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+  @override
+  Future<SuccessResponse> rejectHireJob(int jobId) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.rejectHireJob(jobId);
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+
+  @override
+  Future<JobPhone> findApplicantPhone(int jobId) async {
+    JobPhone jobPhone = JobPhone();
+    try {
+      jobPhone = await _restClient.fetchApplicantPhone(jobId);
+      jobPhone.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      jobPhone.message = e.text;
+      jobPhone.status = e.response.statusCode;
+      jobPhone.isSuccess = false;
+    }
+    return jobPhone;
+  }
+
 }

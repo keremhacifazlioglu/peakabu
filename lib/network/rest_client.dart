@@ -114,7 +114,7 @@ abstract class RestClient {
   Future<ApplicantProfile> fetchApplicantProfile(@Path("id") int applicantId);
 
   @GET("/recruiter/applicant_profiles/{id}/get_phone")
-  Future<ApplicantProfile> fetchApplicantPhone(@Path("id") int applicantId);
+  Future<JobPhone> fetchApplicantPhone(@Path("id") int applicantId);
 
   @GET("/applicant/applicant_profiles/me")
   Future<ApplicantProfile> me();

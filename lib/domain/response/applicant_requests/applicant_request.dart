@@ -4,22 +4,24 @@ part 'applicant_request.g.dart';
 
 @JsonSerializable()
 class ApplicantRequest {
+  int? id;
   String? title;
   String? caretakerType;
-  String? workType;
+  String? shiftSystem;
   String? city;
   String? district;
   String? createdAt;
-  String? status;
+  String? requestStatus;
 
   ApplicantRequest({
+    this.id,
     this.title,
     this.caretakerType,
-    this.workType,
+    this.shiftSystem,
     this.city,
     this.district,
     this.createdAt,
-    this.status,
+    this.requestStatus,
   });
 
   factory ApplicantRequest.fromJson(Map<String, dynamic> json) {

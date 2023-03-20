@@ -4,6 +4,7 @@ part 'job_request.g.dart';
 
 @JsonSerializable()
 class JobRequest {
+  int? id;
   String? title;
   String? caretakerType;
   String? shiftSystem;
@@ -14,6 +15,7 @@ class JobRequest {
   bool? favorite;
 
   JobRequest({
+    this.id,
     this.title,
     this.caretakerType,
     this.shiftSystem,

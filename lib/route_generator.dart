@@ -22,6 +22,7 @@ import 'package:platform/ui/pages/root_recruiter_page.dart';
 import 'package:platform/ui/pages/root_applicant_page.dart';
 import 'package:platform/ui/pages/splash_page.dart';
 
+import 'ui/pages/recruiter/acceptable_applicant_detail_page.dart';
 import 'ui/pages/recruiter/update_job_posting.dart';
 import 'ui/pages/applicant/job_posting_detail_page.dart';
 import 'ui/pages/applicant/job_posting_page.dart';
@@ -130,6 +131,10 @@ class RouteGenerator {
       case '/applicant_detail':
         return MaterialPageRoute(
           builder: (_) => const ApplicantDetailPage(),
+        );
+      case '/acceptable_applicant_detail':
+        return MaterialPageRoute(
+          builder: (_) => const AcceptableApplicantDetailPage(),
         );
       case '/create_account':
         return MaterialPageRoute(

@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_provider.dart';
+import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/organisms/applicant/profile/applicant_profile_body.dart';
@@ -12,8 +14,9 @@ import 'package:platform/ui/organisms/applicant/profile/applicant_profile_header
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
-class ApplicantDetailPage extends StatelessWidget {
-  const ApplicantDetailPage({Key? key}) : super(key: key);
+// Todo Bu sayfa kaldırılmak üzere yazılmıştır.
+class AcceptableApplicantDetailPage extends StatelessWidget {
+  const AcceptableApplicantDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class ApplicantDetailPage extends StatelessWidget {
         var applicantProvider = Provider.of<ApplicantProvider>(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Profilim"),
+            title: const Text("Aday Profili"),
             centerTitle: true,
           ),
           body: Consumer<ApplicantProvider>(
@@ -81,21 +84,75 @@ class ApplicantDetailPage extends StatelessWidget {
                 PlatformDimensionFoundations.sizeXL,
               ),
               child: PlatformSubmitButton(
-                buttonText: applicantProvider.userType == "applicant" ? "Düzenle" : "İletişime geç",
+                buttonText: "İletişim bilgilerini gör",
                 onPressed: () {
-                  if (applicantProvider.userType == "applicant") {
-                    Navigator.of(context, rootNavigator: true).pushNamed("/applicant_profile").then(
-                          (value) => {
-                            applicantProvider.fetchProfile(),
-                            applicantProvider.fetchAllOtherData(),
-                          },
-                        );
-                  } else {
-                    log("İletişime geç");
-                  }
+                  applicantProvider.fetchApplicantPhone(applicantProvider.applicantProfile!.id!).then(
+                        (value) => {
+                      showGetPhoneDialog(context, value.phone!),
+                    },
+                  );
                 },
               ),
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showGetPhoneDialog(BuildContext context, String phoneNumber) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: PlatformColor.offWhiteColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const PlatformDefaultText(
+                text: "Aday İletişim Bilgileri",
+                maxLine: 2,
+                fontWeight: FontWeight.w600,
+                fontSize: PlatformDimensionFoundations.sizeMD,
+                color: PlatformColor.offBlackColor,
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                child: Divider(
+                  thickness: 0.5,
+                  color: PlatformColor.grayLightColor,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32.0, 8, 32, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset("assets/icons/icon_mobile.svg"),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+                      child: PlatformDefaultText(
+                        text: phoneNumber,
+                        maxLine: 1,
+                        fontWeight: FontWeight.w400,
+                        fontSize: PlatformDimensionFoundations.sizeMD,
+                        color: PlatformColor.offBlackColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32, 16, 32, 8),
+                child: PlatformSubmitButton(
+                  buttonText: "Şimdi Ara",
+                  onPressed: () {},
+                ),
+              )
+            ],
           ),
         );
       },

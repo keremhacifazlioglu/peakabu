@@ -59,6 +59,29 @@ class ApplicantRequestPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(2),
                                 child: GestureDetector(
                                   onTap: () async {
+                                    await provider.selectedFindJob();
+                                    await provider.fetchFindApplicantWithPagination();
+
+                                  },
+                                  child: PlatformTabMenu(
+                                    width: (MediaQuery.of(context).size.width - 64) / 2,
+                                    color: provider.isSelectedFindJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
+                                    borderColor: provider.isSelectedFindJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
+                                    text: "İletişim Taleplerim",
+                                    textColor: provider.isSelectedFindJob
+                                        ? PlatformColor.offWhiteColor
+                                        : PlatformColor.grayLightColor,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: GestureDetector(
+                                  onTap: () async {
                                     await provider.selectedHireJob();
                                     await provider.fetchHireApplicantWithPagination();
                                   },
@@ -70,30 +93,8 @@ class ApplicantRequestPage extends StatelessWidget {
                                     borderColor: provider.isSelectedHireJob
                                         ? PlatformColor.primaryColor
                                         : PlatformColor.offWhiteColor,
-                                    text: "İletişim Taleplerim",
-                                    textColor: provider.isSelectedHireJob
-                                        ? PlatformColor.offWhiteColor
-                                        : PlatformColor.grayLightColor,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2),
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    await provider.selectedFindJob();
-                                    await provider.fetchFindApplicantWithPagination();
-                                  },
-                                  child: PlatformTabMenu(
-                                    width: (MediaQuery.of(context).size.width - 64) / 2,
-                                    color: provider.isSelectedFindJob
-                                        ? PlatformColor.primaryColor
-                                        : PlatformColor.offWhiteColor,
-                                    borderColor: provider.isSelectedFindJob
-                                        ? PlatformColor.primaryColor
-                                        : PlatformColor.offWhiteColor,
                                     text: "İş Başvuruları",
-                                    textColor: provider.isSelectedFindJob
+                                    textColor: provider.isSelectedHireJob
                                         ? PlatformColor.offWhiteColor
                                         : PlatformColor.grayLightColor,
                                   ),

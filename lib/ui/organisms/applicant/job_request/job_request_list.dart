@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/job_request.dart';
+import 'package:platform/providers/job_requests_provider.dart';
+import 'package:platform/ui/atoms/platform_cancel_button.dart';
+import 'package:platform/ui/atoms/platform_default_text.dart';
+import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
+import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/molecules/applicant/job_request/job_request_list_item.dart';
+import 'package:platform/ui/tokens/colors.dart';
+import 'package:provider/provider.dart';
 
 class JobRequestList extends StatelessWidget {
   final List<JobRequest>? jobRequests;
@@ -14,6 +21,7 @@ class JobRequestList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var jobRequestProvider = Provider.of<JobRequestsProvider>(context);
     return ListView.separated(
       key: const PageStorageKey<String>("JobRequestList"),
       addAutomaticKeepAlives: true,
@@ -26,6 +34,8 @@ class JobRequestList extends StatelessWidget {
               if (jobRequests![index].requestStatus == "accepted") {
                 Navigator.of(context, rootNavigator: true).pushNamed("/acceptable_job_posting_detail",
                     arguments: JobPosting.fromJson(jobRequests![index].toJson()));
+              } else if(jobRequests![index].requestStatus == "pending" && jobRequestProvider.isSelectedFindJob){
+                showConfirmRequestDialog(context, jobRequestProvider, jobRequests![index]);
               }
             },
             child: JobRequestListItem(
@@ -38,6 +48,78 @@ class JobRequestList extends StatelessWidget {
         return const Divider(
           thickness: 1,
           color: PlatformColorFoundation.dividerColor,
+        );
+      },
+    );
+  }
+
+  void showConfirmRequestDialog(BuildContext context, JobRequestsProvider jobRequestsProvider, JobRequest jobRequest) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 180,
+          color: PlatformColor.offWhiteColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const PlatformDefaultText(
+                text: "İş ilanı için iletişim talebi aldınız.",
+                maxLine: 2,
+                fontWeight: FontWeight.w600,
+                fontSize: PlatformDimensionFoundations.sizeMD,
+                color: PlatformColor.offBlackColor,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 12,
+                ),
+                child: PlatformDefaultText(
+                  text: "İletişim talebini kabul ediyor musunuz ?",
+                  maxLine: 2,
+                  fontWeight: FontWeight.w400,
+                  fontSize: PlatformDimensionFoundations.sizeMD,
+                  color: PlatformColor.offBlackColor,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: (MediaQuery.of(context).size.width - 32) / 2,
+                    height: 70,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(27, 16, 8, 8),
+                      child: PlatformSubmitButton(
+                        buttonText: "Kabul Et",
+                        onPressed: () {
+                          jobRequestsProvider.applyJobRequest(jobRequest.id!).then((value) => {
+                                Navigator.of(context).pop(),
+                              });
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: (MediaQuery.of(context).size.width - 32) / 2,
+                    height: 70,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 16, 27, 8),
+                      child: PlatformCancelButton(
+                        buttonText: "Reddet",
+                        onPressed: () {
+                          jobRequestsProvider.rejectJobRequest(jobRequest.id!).then((value) => {
+                                Navigator.of(context).pop(),
+                              });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       },
     );

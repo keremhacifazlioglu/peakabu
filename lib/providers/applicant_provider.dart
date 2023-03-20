@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
+import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/applicant_repository.dart';
@@ -257,4 +258,33 @@ class ApplicantProvider with ChangeNotifier {
       allFavoriteApplicantProfile.remove(applicantProfile);
     }
   }
+
+  Future applyHiredRequest(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.applyHireJob(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future rejectHiredRequest(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.rejectHireJob(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future<JobPhone> fetchApplicantPhone(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    JobPhone jobPhone = await _applicantRepository.findApplicantPhone(jobId);
+    networkStatus = jobPhone.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return jobPhone;
+  }
+
+
 }

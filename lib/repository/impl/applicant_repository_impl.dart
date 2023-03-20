@@ -1,6 +1,7 @@
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
+import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/success_response.dart';
 
 abstract class IApplicantRepository {
@@ -17,6 +18,9 @@ abstract class IApplicantRepository {
   Future<JobDetail> fetchMyJobPosting();
   Future<SuccessResponse> favoriteApplicantProfile(int id);
   Future<SuccessResponse> removeFavoriteApplicantProfile(int id);
+  Future<SuccessResponse> applyHireJob(int id);
+  Future<SuccessResponse> rejectHireJob(int id);
+  Future<JobPhone> findApplicantPhone(int jobId);
 
 
 
