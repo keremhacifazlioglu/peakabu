@@ -138,7 +138,7 @@ abstract class RestClient {
   Future<ApplicantRequest> rejectApplicantRequests();
 
   @POST("/recruiter/applicant_profiles/{jobId}/request")
-  Future applicantProfileRequest(@Path() int jobId);
+  Future<SuccessResponse> applicantProfileRequest(@Path() int jobId);
 
   @POST('/applicant/applicant_profiles')
   @MultiPart()

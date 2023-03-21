@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform/config/locator.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/providers/applicant_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
@@ -30,7 +31,7 @@ class ApplicantListItem extends StatelessWidget {
                 Radius.circular(8),
               ),
               child: Image.network(
-                applicantProfile!.image ??"https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
+                applicantProfile!.image ?? "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
                 fit: BoxFit.cover,
                 height: 90,
                 width: 90,
@@ -63,13 +64,27 @@ class ApplicantListItem extends StatelessWidget {
                     flex: 1,
                     child: GestureDetector(
                       onTap: () async {
-                        // todo like işlemleri
-                        //await jobPostingProvider.addFavoriteJob();
-                        if(applicantProfile!.favorite!){
-                          await applicantProvider.deleteFavoriteApplicant(applicantProfile);
-                        }else{
-                          await applicantProvider.addFavoriteApplicant(applicantProfile!);
-                        }
+                        secureLocalRepository.readSecureData("token").then(
+                              (value) => {
+                                if (value != null && value.isNotEmpty)
+                                  {
+                                    if (applicantProfile!.favorite!)
+                                      {
+                                        applicantProvider.deleteFavoriteApplicant(applicantProfile),
+                                      }
+                                    else
+                                      {
+                                        applicantProvider.addFavoriteApplicant(applicantProfile!),
+                                      }
+                                  }
+                                else
+                                  {
+                                    Navigator.of(context, rootNavigator: true).pushNamed(
+                                      "/create_account",
+                                    ),
+                                  }
+                              },
+                            );
                       }, //addFavoriteJobTap,
                       child: Center(
                         child: Padding(

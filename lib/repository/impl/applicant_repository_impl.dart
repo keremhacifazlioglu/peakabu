@@ -21,6 +21,7 @@ abstract class IApplicantRepository {
   Future<SuccessResponse> applyHireJob(int id);
   Future<SuccessResponse> rejectHireJob(int id);
   Future<JobPhone> findApplicantPhone(int jobId);
+  Future<SuccessResponse> applicantProfileRequest(int jobId);
 
 
 

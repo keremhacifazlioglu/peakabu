@@ -20,7 +20,8 @@ class ApplicantProvider with ChangeNotifier {
   ApplicantProfile? applicantProfile;
   List<ApplicantProfile> allApplicantProfiles = [], allFavoriteApplicantProfile = [], allFilterApplicantProfile = [];
   NetworkStatus networkStatus = NetworkStatus.none;
-  String? title, description, name, userType, gender;
+  String? title, description, name, userType;
+  String gender = "female";
   File? file;
   int pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1, pagingSize = 10;
   bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false;
@@ -285,6 +286,17 @@ class ApplicantProvider with ChangeNotifier {
     notifyListeners();
     return jobPhone;
   }
+
+  Future<SuccessResponse> sendRequestApplicant(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.applicantProfileRequest(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+
 
 
 }

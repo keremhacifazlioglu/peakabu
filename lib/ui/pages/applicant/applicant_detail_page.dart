@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_provider.dart';
+import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/organisms/applicant/profile/applicant_profile_body.dart';
@@ -91,7 +90,17 @@ class ApplicantDetailPage extends StatelessWidget {
                           },
                         );
                   } else {
-                    log("İletişime geç");
+                    applicantProvider.sendRequestApplicant(applicantProvider.applicantProfile!.id!).then(
+                          (value) => {
+                            SnackBar(
+                              content: PlatformDefaultText(
+                                text: value.isSuccess! ? 'Talep iletilmiştir' : value.message,
+                                color: PlatformColor.offWhiteColor,
+                                fontSize: 14,
+                              ),
+                            ),
+                          },
+                        );
                   }
                 },
               ),

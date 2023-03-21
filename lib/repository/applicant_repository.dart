@@ -144,6 +144,21 @@ class ApplicantRepository implements IApplicantRepository {
   }
 
   @override
+  Future<SuccessResponse> applicantProfileRequest(int jobId) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      SuccessResponse successResponse = await _restClient.applicantProfileRequest(jobId);
+    successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+    successResponse.message = e.text;
+    successResponse.status = e.response.statusCode;
+    successResponse.isSuccess = false;
+    }
+    return
+    successResponse;
+  }
+
+  @override
   Future<BaseListResponse> findApplicants(int pageNumber, int pageSize) async {
     BaseListResponse<ApplicantRequest> baseListResponse = BaseListResponse();
     try {
