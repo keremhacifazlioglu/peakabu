@@ -13,7 +13,7 @@ class _RestClient implements RestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://f994f3cd-23f7-4da5-bb22-3100783007bc.mock.pstmn.io';
+    baseUrl ??= 'http://api.pikabu.io/api/v1';
   }
 
   final Dio _dio;
@@ -45,14 +45,14 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Token> register(registerRequest) async {
+  Future<SuccessResponse> register(registerRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerRequest.toJson());
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Token>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -64,19 +64,19 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Token.fromJson(_result.data!);
+    final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<SuccessResponse> sendSms(sendSmsRequest) async {
+  Future<SendSms> sendSms(sendSmsRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(sendSmsRequest.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<SendSms>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -88,7 +88,7 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SuccessResponse.fromJson(_result.data!);
+    final value = SendSms.fromJson(_result.data!);
     return value;
   }
 
@@ -136,7 +136,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_postings',
+              '/applicant/recruiter_jobs',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -162,7 +162,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_postings',
+              '/applicant/recruiter_jobs',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -187,7 +187,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_postings/${jobId}',
+              '/applicant/recruiter_jobs/${jobId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -210,7 +210,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_posting/${jobId}/get_phone',
+              '/applicant/recruiter_jobs/${jobId}/get_phone',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -220,7 +220,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<List<JobRequest>> findJobPostings(
+  Future<List<JobRequest>> findRequestJobPostings(
     pageNumber,
     pageSize,
   ) async {
@@ -239,7 +239,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/find_jobs',
+              '/applicant/recruiter_jobs/requested',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -247,6 +247,29 @@ class _RestClient implements RestClient {
     var value = _result.data!
         .map((dynamic i) => JobRequest.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<SuccessResponse> confirmJobPosting(jobId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/applicant/recruiter_jobs/${jobId}/request',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -264,7 +287,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_postings/${jobId}/apply',
+              '/applicant/recruiter_jobs/${jobId}/apply',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -287,7 +310,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_postings/${jobId}/reject',
+              '/applicant/recruiter_jobs/${jobId}/reject',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -316,7 +339,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/hire_jobs',
+              '/applicant/recruiter_jobs/invited',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -341,7 +364,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/hire_jobs/${hireId}/apply',
+              '/recruiter/applicant_profiles/${hireId}/apply',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -364,7 +387,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/hire_jobs/${hireId}/reject',
+              '/recruiter/applicant_profiles/${hireId}/reject',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -387,7 +410,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/my_job_posting',
+              '/recruiter/recruiter_jobs/me',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -397,36 +420,36 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<SuccessResponse> createMyJobPosting(recruiterJobPostingRequest) async {
+  Future<JobPosting> createMyJobPosting(recruiterJobPostingRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(recruiterJobPostingRequest.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<JobPosting>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/my_job_posting',
+              '/recruiter/recruiter_jobs',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SuccessResponse.fromJson(_result.data!);
+    final value = JobPosting.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<SuccessResponse> updateMyJobPosting(recruiterJobPostingUpdate) async {
+  Future<SuccessResponse> updateMyJobPosting(recruiterJobPostingRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(recruiterJobPostingUpdate.toJson());
+    _data.addAll(recruiterJobPostingRequest.toJson());
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'PUT',
@@ -435,7 +458,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/my_job_posting',
+              '/recruiter/recruiter_jobs/me',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -464,7 +487,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profiles',
+              '/recruiter/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -491,7 +514,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profiles',
+              '/recruiter/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -517,7 +540,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profiles/${applicantId}',
+              '/recruiter/applicant_profiles/${applicantId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -527,25 +550,25 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<ApplicantProfile> fetchApplicantPhone(applicantId) async {
+  Future<JobPhone> fetchApplicantPhone(applicantId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ApplicantProfile>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<JobPhone>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/applicant_profiles/${applicantId}/get_phone',
+              '/recruiter/applicant_profiles/${applicantId}/get_phone',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ApplicantProfile.fromJson(_result.data!);
+    final value = JobPhone.fromJson(_result.data!);
     return value;
   }
 
@@ -563,7 +586,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profile',
+              '/applicant/applicant_profiles/me',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -592,7 +615,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/find_applicants',
+              '/recruiter/applicant_profiles/requested',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -624,7 +647,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requests',
+              '/recruiter/applicant_profiles/invited',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -650,7 +673,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requests/{id}/apply',
+              '/recruiter/applicant_profiles/{id}/apply',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -673,7 +696,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_requests/{id}/reject',
+              '/recruiter/applicant_profiles/{id}/reject',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -683,24 +706,25 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<dynamic> applicantProfileRequest(jobId) async {
+  Future<SuccessResponse> applicantProfileRequest(jobId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/applicant_profiles/${jobId}/request',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              '/recruiter/applicant_profiles/${jobId}/request',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -712,12 +736,12 @@ class _RestClient implements RestClient {
     required title,
     required district,
     required caretakerType,
-    required shiftSystems,
+    required shiftSystem,
     required experience,
     required nationality,
     required age,
-    required description,
-    thumbnail,
+    required desc,
+    image,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -749,8 +773,8 @@ class _RestClient implements RestClient {
       caretakerType,
     ));
     _data.fields.add(MapEntry(
-      'shiftSystems',
-      shiftSystems,
+      'shiftSystem',
+      shiftSystem,
     ));
     _data.fields.add(MapEntry(
       'experience',
@@ -765,15 +789,15 @@ class _RestClient implements RestClient {
       age,
     ));
     _data.fields.add(MapEntry(
-      'description',
-      description,
+      'desc',
+      desc,
     ));
-    if (thumbnail != null) {
+    if (image != null) {
       _data.files.add(MapEntry(
-        'thumbnail',
+        'image',
         MultipartFile.fromFileSync(
-          thumbnail.path,
-          filename: thumbnail.path.split(Platform.pathSeparator).last,
+          image.path,
+          filename: image.path.split(Platform.pathSeparator).last,
         ),
       ));
     }
@@ -786,7 +810,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profile',
+              '/applicant/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -803,12 +827,12 @@ class _RestClient implements RestClient {
     required title,
     required district,
     required caretakerType,
-    required shiftSystems,
+    required shiftSystem,
     required experience,
     required nationality,
     required age,
-    required description,
-    thumbnail,
+    required desc,
+    image,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -840,8 +864,8 @@ class _RestClient implements RestClient {
       caretakerType,
     ));
     _data.fields.add(MapEntry(
-      'shiftSystems',
-      shiftSystems,
+      'shiftSystem',
+      shiftSystem,
     ));
     _data.fields.add(MapEntry(
       'experience',
@@ -856,15 +880,15 @@ class _RestClient implements RestClient {
       age,
     ));
     _data.fields.add(MapEntry(
-      'description',
-      description,
+      'desc',
+      desc,
     ));
-    if (thumbnail != null) {
+    if (image != null) {
       _data.files.add(MapEntry(
-        'thumbnail',
+        'image',
         MultipartFile.fromFileSync(
-          thumbnail.path,
-          filename: thumbnail.path.split(Platform.pathSeparator).last,
+          image.path,
+          filename: image.path.split(Platform.pathSeparator).last,
         ),
       ));
     }
@@ -877,7 +901,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/applicant_profile',
+              '/applicant/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -906,7 +930,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/favorite_job_postings',
+              '/applicant/recruiter_jobs/favorites',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -914,60 +938,6 @@ class _RestClient implements RestClient {
     var value = _result.data!
         .map((dynamic i) => JobPosting.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
-  }
-
-  @override
-  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile(
-    pageNumber,
-    pageSize,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize,
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<ApplicantProfile>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/favorite_applicant_profiles',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map(
-            (dynamic i) => ApplicantProfile.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
-  Future<dynamic> addFavoriteApplicantProfile(jobId) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/applicant_profiles/${jobId}/favorite',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
     return value;
   }
 
@@ -985,7 +955,102 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/job_postings/${jobId}/favorite',
+              '/applicant/recruiter_jobs/${jobId}/favorite',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccessResponse> jobPostingRemoveFavorite(jobId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/applicant/recruiter_jobs/${jobId}/favorite',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<ApplicantProfile>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/recruiter/applicant_profiles/favorites',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map(
+            (dynamic i) => ApplicantProfile.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<SuccessResponse> addFavoriteApplicantProfile(jobId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/recruiter/applicant_profiles/${jobId}/favorite',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccessResponse> removeFavoriteApplicantProfile(jobId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/recruiter/applicant_profiles/${jobId}/favorite',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1140,6 +1205,31 @@ class _RestClient implements RestClient {
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) => City.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<District>> fetchDistricts(city) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'city': city};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<District>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/districts',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => District.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

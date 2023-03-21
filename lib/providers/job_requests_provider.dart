@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_request.dart';
+import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/job_posting_repository.dart';
 
@@ -31,8 +32,13 @@ class JobRequestsProvider with ChangeNotifier {
   Future fetchFindJobPostingsWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
+    if(allFindJobPostings.length < pagingSize){
+      isLastPage = false;
+      pageFindJobNumber = 1;
+      allFindJobPostings.clear();
+    }
     if (!isLastPage) {
-      BaseListResponse response = await _jobPostingRepository.findJobPostings(
+      BaseListResponse response = await _jobPostingRepository.findRequestJobPostings(
           pagingSize, pageFindJobNumber);
       if (response.isSuccess!) {
         isLastPage = response.data!.length < pagingSize;
@@ -51,6 +57,11 @@ class JobRequestsProvider with ChangeNotifier {
   Future fetchHireJobPostingsWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
+    if(allHireJobPosting.length < pagingSize){
+      isHireLastPage = false;
+      pageHireJobNumber = 1;
+      allHireJobPosting.clear();
+    }
     if (!isHireLastPage) {
       BaseListResponse response = await _jobPostingRepository.findHirePostings(
           pagingSize, pageHireJobNumber);
@@ -67,6 +78,25 @@ class JobRequestsProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future applyJobRequest(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _jobPostingRepository.applyJobPosting(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future rejectJobRequest(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _jobPostingRepository.rejectJobPosting(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
 
   Future selectedTabMenu(bool selectedTab) async {
     isSelectedFindJob = selectedTab;

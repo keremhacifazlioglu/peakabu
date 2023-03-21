@@ -1,8 +1,7 @@
 const requestJobStatus = {
-  "wait_request": "Cevap Bekliyor",
-  "accept_request": "Talep Kabul Edildi",
-  "reject_request": "Talep Reddedildi",
+  "pending": "Cevap Bekliyor",
+  "accepted": "Talep Kabul Edildi",
+  "rejected": "Talep Reddedildi",
   "sent_job": "Başvuru Gönderildi",
-  "accept_job": "Başvuru Kabul Edildi",
-  "reject_job": "Başvuru Reddedildi.",
+  "wait_request": "Cevap Bekleniyor",
 };

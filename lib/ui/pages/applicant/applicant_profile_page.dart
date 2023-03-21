@@ -23,7 +23,7 @@ class ApplicantProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ApplicantProvider>(
-      create: (context) => ApplicantProvider(applicantRepository, secureLocalRepository,otherService, PageType.update),
+      create: (context) => ApplicantProvider(applicantRepository, secureLocalRepository, otherService, PageType.update),
       builder: (context, child) {
         var applicantProvider = Provider.of<ApplicantProvider>(context);
         return Scaffold(
@@ -93,6 +93,16 @@ class ApplicantProfilePage extends StatelessWidget {
                           data: applicantProvider.otherService.cities,
                           onChange: (p0) async {
                             applicantProvider.applicantProfile!.city = p0;
+                            await applicantProvider.updateDistrictByCity(p0);
+                            await applicantProvider.refresh();
+                          },
+                        ),
+                        SearchCaretakerCriteriaForm(
+                          text: "Şehir",
+                          selectedValue: applicantProvider.applicantProfile!.district,
+                          data: applicantProvider.otherService.districts,
+                          onChange: (p0) async {
+                            applicantProvider.applicantProfile!.district = p0;
                             await applicantProvider.refresh();
                           },
                         ),
@@ -107,10 +117,10 @@ class ApplicantProfilePage extends StatelessWidget {
                         ),
                         SearchCaretakerCriteriaForm(
                           text: "Çalışma şekli",
-                          selectedValue: applicantProvider.applicantProfile!.shiftSystems,
+                          selectedValue: applicantProvider.applicantProfile!.shiftSystem,
                           data: applicantProvider.otherService.shiftSystems,
                           onChange: (p0) async {
-                            applicantProvider.applicantProfile!.shiftSystems = p0;
+                            applicantProvider.applicantProfile!.shiftSystem = p0;
                             await applicantProvider.refresh();
                           },
                         ),
@@ -147,14 +157,14 @@ class ApplicantProfilePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
                           child: TextFormField(
-                            controller: TextEditingController()..text = applicantProvider.applicantProfile!.descTitle!,
+                            controller: TextEditingController()..text = applicantProvider.applicantProfile!.title!,
                             decoration: const InputDecoration(
                               hintText: 'Başlık',
                               contentPadding: EdgeInsets.fromLTRB(24, 8, 8, 8),
                             ),
                             cursorColor: PlatformColor.offBlackColor,
                             onChanged: (value) {
-                              applicantProvider.applicantProfile!.descTitle = value;
+                              applicantProvider.applicantProfile!.title = value;
                               //applicantProvider.refresh();
                             },
                             validator: (value) {
@@ -197,7 +207,7 @@ class ApplicantProfilePage extends StatelessWidget {
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 return const Center(
-                  child: Text("Uyarı çıkartılacak."),
+                  child: Text(""),
                 );
               }
               return const Center(

@@ -4,6 +4,7 @@ import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/other/age.dart';
 import 'package:platform/domain/response/other/caretaker_type.dart';
 import 'package:platform/domain/response/other/city.dart';
+import 'package:platform/domain/response/other/district.dart';
 import 'package:platform/domain/response/other/experience.dart';
 import 'package:platform/domain/response/other/nationality.dart';
 import 'package:platform/domain/response/other/shift_system.dart';
@@ -18,12 +19,14 @@ class OtherService {
       experiences = {},
       nationalities = {},
       cities = {},
+      districts = {},
       filterData = {};
   String? selectedCaretakerType,
       selectedShiftSystem,
       selectedExperience,
       selectedNationality,
       selectedCity,
+      selectedDistrict,
       selectedAge;
   bool gender = true;
 
@@ -92,5 +95,15 @@ class OtherService {
       cities[item.key!] = item.value!;
     }
     return cities;
+  }
+
+  Future<Map<String, String>> fetchDistricts(String city) async {
+    BaseListResponse baseListResponse = await _otherRepository.fetchDistricts(city);
+    var response = baseListResponse.data! as List<District>;
+    selectedDistrict = response.first.value;
+    for (var item in response) {
+      districts[item.key!] = item.value!;
+    }
+    return districts;
   }
 }

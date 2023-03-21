@@ -27,7 +27,7 @@ class ApplicantSkillItem extends StatelessWidget {
             color: PlatformColorFoundation.textColor,
           ),
           PlatformDefaultText(
-            text: skillDescription!,
+            text: skillDescription??"",
             fontWeight: FontWeight.w400,
             fontSize: PlatformTypographyFoundation.bodyLarge,
             color: PlatformColor.grayLightColor,

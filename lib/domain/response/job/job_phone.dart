@@ -5,13 +5,14 @@ part 'job_phone.g.dart';
 
 @JsonSerializable()
 class JobPhone extends ExceptionError {
-  String? phoneNumber;
+  String? phone;
 
   JobPhone({
-    this.phoneNumber,
+    this.phone,
     String? message,
+    bool? isSuccess,
     int? status,
-  }) : super(message: message, status: status);
+  }) : super(message: message, status: status,isSuccess: isSuccess);
 
   factory JobPhone.fromJson(Map<String, dynamic> json) {
     return _$JobPhoneFromJson(json);

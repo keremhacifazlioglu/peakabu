@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:platform/config/locator.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
+import 'package:platform/providers/applicant_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_like_button.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/molecules/platform_icon_label.dart';
+import 'package:provider/provider.dart';
 
 class ApplicantListItem extends StatelessWidget {
   final ApplicantProfile? applicantProfile;
@@ -16,7 +19,7 @@ class ApplicantListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var jobPostingProvider = Provider.of<JobPostingProvider>(context);
+    var applicantProvider = Provider.of<ApplicantProvider>(context);
     return Row(
       children: [
         Expanded(
@@ -28,7 +31,7 @@ class ApplicantListItem extends StatelessWidget {
                 Radius.circular(8),
               ),
               child: Image.network(
-                "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
+                applicantProfile!.image ?? "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
                 fit: BoxFit.cover,
                 height: 90,
                 width: 90,
@@ -61,7 +64,27 @@ class ApplicantListItem extends StatelessWidget {
                     flex: 1,
                     child: GestureDetector(
                       onTap: () async {
-                        //await jobPostingProvider.addFavoriteJob(jobPosting!);
+                        secureLocalRepository.readSecureData("token").then(
+                              (value) => {
+                                if (value != null && value.isNotEmpty)
+                                  {
+                                    if (applicantProfile!.favorite!)
+                                      {
+                                        applicantProvider.deleteFavoriteApplicant(applicantProfile),
+                                      }
+                                    else
+                                      {
+                                        applicantProvider.addFavoriteApplicant(applicantProfile!),
+                                      }
+                                  }
+                                else
+                                  {
+                                    Navigator.of(context, rootNavigator: true).pushNamed(
+                                      "/create_account",
+                                    ),
+                                  }
+                              },
+                            );
                       }, //addFavoriteJobTap,
                       child: Center(
                         child: Padding(
@@ -79,7 +102,7 @@ class ApplicantListItem extends StatelessWidget {
               ),
               PlatformIconLabel(
                 labelIconPath: "assets/icons/group.svg",
-                labelText: "${applicantProfile!.caretakerType!}/${applicantProfile!.shiftSystems!}",
+                labelText: "${applicantProfile!.caretakerType!}/${applicantProfile!.shiftSystem!}",
               ),
               Padding(
                 padding: const EdgeInsets.only(

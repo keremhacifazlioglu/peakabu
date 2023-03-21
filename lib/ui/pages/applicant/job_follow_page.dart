@@ -14,7 +14,7 @@ class JobFollowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<JobPostingProvider>(
       create: (context) =>
-          JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.fetch),
+          JobPostingProvider(jobPostingRepository, secureLocalRepository, otherService, PageType.jobFollow),
       builder: (context, child) {
         return Scaffold(
           backgroundColor: PlatformColor.offWhiteColor2,
@@ -41,7 +41,7 @@ class JobFollowPage extends StatelessWidget {
               }
               if (provider.networkStatus == NetworkStatus.error) {
                 return const Center(
-                  child: Text("Uyarı çıakrtılacak."),
+                  child: Text(""),
                 );
               }
               return const Center(

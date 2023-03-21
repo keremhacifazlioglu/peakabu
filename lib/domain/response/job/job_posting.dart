@@ -12,7 +12,9 @@ class JobPosting extends ExceptionError {
   String? city;
   String? district;
   String? createdAt;
-  bool? follow;
+  bool? favorite;
+  String? desc;
+
 
   JobPosting({
     this.id,
@@ -22,7 +24,8 @@ class JobPosting extends ExceptionError {
     this.city,
     this.district,
     this.createdAt,
-    this.follow,
+    this.favorite,
+    this.desc,
     String? message,
     int? status,
     bool? isSuccess,

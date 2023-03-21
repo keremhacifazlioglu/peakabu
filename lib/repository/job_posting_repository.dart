@@ -1,10 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:platform/domain/request/job/recruiter_job_posting_update.dart';
 import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/job/job_detail.dart';
 import 'package:platform/domain/response/job/job_request.dart';
-import 'package:platform/domain/response/job/recruiter_job_posting.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/success_response.dart';
@@ -28,7 +26,7 @@ class JobPostingRepository extends IJobPostingRepository {
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -44,7 +42,7 @@ class JobPostingRepository extends IJobPostingRepository {
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -60,7 +58,7 @@ class JobPostingRepository extends IJobPostingRepository {
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -74,7 +72,7 @@ class JobPostingRepository extends IJobPostingRepository {
       jobDetail.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       jobDetail.message = e.text;
-      jobDetail.status = e.response!.statusCode;
+      jobDetail.status = e.response.statusCode;
       jobDetail.isSuccess = false;
     }
     return jobDetail;
@@ -85,9 +83,10 @@ class JobPostingRepository extends IJobPostingRepository {
     JobPhone jobPhone = JobPhone();
     try {
       jobPhone = await _restClient.fetchJobPostingPhone(jobId);
+      jobPhone.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       jobPhone.message = e.text;
-      jobPhone.status = e.response!.statusCode;
+      jobPhone.status = e.response.statusCode;
       jobPhone.isSuccess = false;
     }
     return jobPhone;
@@ -103,7 +102,7 @@ class JobPostingRepository extends IJobPostingRepository {
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -116,7 +115,7 @@ class JobPostingRepository extends IJobPostingRepository {
       successResponse = await _restClient.applyHireJob(hireId);
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -129,23 +128,23 @@ class JobPostingRepository extends IJobPostingRepository {
       successResponse = await _restClient.rejectHireJob(hireId);
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
   }
 
   @override
-  Future<BaseListResponse> findJobPostings(int pageSize, int pageNumber) async {
+  Future<BaseListResponse> findRequestJobPostings(int pageSize, int pageNumber) async {
     BaseListResponse baseListResponse = BaseListResponse();
     try {
       List<JobRequest> response =
-          await _restClient.findJobPostings(pageNumber, pageSize);
+          await _restClient.findRequestJobPostings(pageNumber, pageSize);
       baseListResponse.data = response;
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -159,7 +158,21 @@ class JobPostingRepository extends IJobPostingRepository {
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+  @override
+  Future<SuccessResponse> confirmJobPosting(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.confirmJobPosting(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -172,37 +185,39 @@ class JobPostingRepository extends IJobPostingRepository {
       successResponse = await _restClient.jobPostingReject(jobId);
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
   }
 
   @override
-  Future<SuccessResponse> createRecruiterJobPosting(
+  Future<JobPosting> createRecruiterJobPosting(
       RecruiterJobPostingRequest recruiterJobPostingRequest) async {
-    SuccessResponse successResponse = SuccessResponse();
+    JobPosting jobPosting = JobPosting();
     try {
-      successResponse =
+      jobPosting =
           await _restClient.createMyJobPosting(recruiterJobPostingRequest);
+      jobPosting.isSuccess = true;
     } on CustomGenericDioError catch (e) {
-      successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
-      successResponse.isSuccess = false;
+      jobPosting.message = e.text;
+      jobPosting.status = e.response.statusCode;
+      jobPosting.isSuccess = false;
     }
-    return successResponse;
+    return jobPosting;
   }
 
   @override
   Future<SuccessResponse> updateRecruiterJobPosting(
-      RecruiterJobPostingUpdate recruiterJobPostingUpdate) async {
+      RecruiterJobPostingRequest recruiterJobPostingUpdate) async {
     SuccessResponse successResponse = SuccessResponse();
     try {
       successResponse =
           await _restClient.updateMyJobPosting(recruiterJobPostingUpdate);
+      successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;
@@ -216,11 +231,12 @@ class JobPostingRepository extends IJobPostingRepository {
       jobDetail.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       jobDetail.message = e.text;
-      jobDetail.status = e.response!.statusCode;
+      jobDetail.status = e.response.statusCode;
       jobDetail.isSuccess = false;
     }
     return jobDetail;
   }
+
 
   @override
   Future<SuccessResponse> favoriteJobPosting(int id) async {
@@ -230,7 +246,21 @@ class JobPostingRepository extends IJobPostingRepository {
       successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
       successResponse.message = e.text;
-      successResponse.status = e.response!.statusCode;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+  @override
+  Future<SuccessResponse> removeFavoriteJobPosting(int id) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.jobPostingRemoveFavorite(id);
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
       successResponse.isSuccess = false;
     }
     return successResponse;

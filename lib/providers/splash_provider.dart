@@ -20,9 +20,10 @@ class SplashProvider with ChangeNotifier {
   }
 
   Future autoLogin() async {
+    _secureLocalRepository.deleteAllSecureData();
     String phoneNumber = await _secureLocalRepository.readSecureData("phoneNumber") ?? "";
     String uuid = await _secureLocalRepository.readSecureData("uuid") ?? "";
-    Token? token = await _authRepository.token(TokenRequest(phoneNumber: phoneNumber,uuid: uuid));
+    Token? token = await _authRepository.token(TokenRequest(phone: phoneNumber,uuid: uuid));
 
     if(token != null && token.isSuccess!){
       if(token.isUserRegistered!){
@@ -36,5 +37,10 @@ class SplashProvider with ChangeNotifier {
       networkStatus = NetworkStatus.error;
     }
     notifyListeners();
+  }
+
+  Future<String> getUserType() async {
+    String? userType = await _secureLocalRepository.readSecureData("userType");
+    return userType??"";
   }
 }

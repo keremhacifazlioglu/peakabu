@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platform/cons/request_job_status.dart';
 import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
-import 'package:platform/domain/response/job/job_request.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/typography.dart';
@@ -69,7 +68,7 @@ class ApplicantHiredListItem extends StatelessWidget {
                         ),
                         child: PlatformIconLabel(
                           labelIconPath: "assets/icons/group.svg",
-                          labelText: "${applicantRequest!.caretakerType!}/${applicantRequest!.workType!}",
+                          labelText: "${applicantRequest!.caretakerType!}/${applicantRequest!.shiftSystem!}",
                         ),
                       ),
                     ],
@@ -84,12 +83,12 @@ class ApplicantHiredListItem extends StatelessWidget {
                       borderRadius: const BorderRadius.all(
                         Radius.circular(5),
                       ),
-                      color: getColor(applicantRequest!.status!)!.withOpacity(0.15),
+                      color: getColor(applicantRequest!.requestStatus!)!.withOpacity(0.15),
                     ),
                     child: Center(
                       child: PlatformDefaultText(
-                        text: requestJobStatus[applicantRequest!.status],
-                        color: getColor(applicantRequest!.status!),
+                        text: requestJobStatus[applicantRequest!.requestStatus],
+                        color: getColor(applicantRequest!.requestStatus!),
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                       ),
@@ -107,17 +106,17 @@ class ApplicantHiredListItem extends StatelessWidget {
   Color? getColor(String status) {
     Color? jobRequestTextColor;
     switch (status) {
-      case "sent_job":
+      case "pending":
         {
           jobRequestTextColor = const Color.fromRGBO(54, 120, 253, 1);
           break;
         }
-      case "accept_job":
+      case "accepted":
         {
           jobRequestTextColor = const Color.fromRGBO(14, 191, 119, 1);
           break;
         }
-      case "reject_job":
+      case "rejected":
         {
           jobRequestTextColor = const Color.fromRGBO(248, 86, 86, 1);
           break;
@@ -125,16 +124,6 @@ class ApplicantHiredListItem extends StatelessWidget {
       case "wait_request":
         {
           jobRequestTextColor = const Color.fromRGBO(153, 153, 153, 1);
-          break;
-        }
-      case "accept_request":
-        {
-          jobRequestTextColor = const Color.fromRGBO(14, 191, 119, 1);
-          break;
-        }
-      case "reject_request":
-        {
-          jobRequestTextColor = const Color.fromRGBO(248, 86, 86, 1);
           break;
         }
       default:
