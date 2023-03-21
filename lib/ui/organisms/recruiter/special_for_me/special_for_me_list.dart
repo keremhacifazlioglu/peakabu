@@ -21,7 +21,7 @@ class SpecialForMeList extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed("applicant_request", arguments: true);
+                  .pushNamed("applicant_request", arguments: false);
             },
             child: const SpecialForMeItem(
                 svgPath: "assets/icons/user_groups.svg",
@@ -30,7 +30,7 @@ class SpecialForMeList extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed("applicant_request", arguments: false);
+                  .pushNamed("applicant_request", arguments: true);
             },
             child: const SpecialForMeItem(
                 svgPath: "assets/icons/iconSend.svg", title: "İletişim talepleri"),

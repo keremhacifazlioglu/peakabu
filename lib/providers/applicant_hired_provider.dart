@@ -36,7 +36,7 @@ class ApplicantHiredProvider with ChangeNotifier {
       allFindJobPostings.clear();
     }
     if (!isLastPage) {
-      BaseListResponse response = await _applicantRepository.findApplicants(pagingSize, pageFindJobNumber);
+      BaseListResponse response = await _applicantRepository.findApplicants(pageFindJobNumber,pagingSize);
       if (response.isSuccess!) {
         isLastPage = response.data!.length < pagingSize;
         pageFindJobNumber++;

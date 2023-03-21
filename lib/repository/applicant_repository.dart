@@ -147,15 +147,14 @@ class ApplicantRepository implements IApplicantRepository {
   Future<SuccessResponse> applicantProfileRequest(int jobId) async {
     SuccessResponse successResponse = SuccessResponse();
     try {
-      SuccessResponse successResponse = await _restClient.applicantProfileRequest(jobId);
-    successResponse.isSuccess = true;
+      successResponse = await _restClient.applicantProfileRequest(jobId);
+      successResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {
-    successResponse.message = e.text;
-    successResponse.status = e.response.statusCode;
-    successResponse.isSuccess = false;
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
     }
-    return
-    successResponse;
+    return successResponse;
   }
 
   @override
@@ -229,7 +228,6 @@ class ApplicantRepository implements IApplicantRepository {
     return successResponse;
   }
 
-
   @override
   Future<SuccessResponse> applyHireJob(int id) async {
     SuccessResponse successResponse = SuccessResponse();
@@ -257,7 +255,6 @@ class ApplicantRepository implements IApplicantRepository {
     return successResponse;
   }
 
-
   @override
   Future<JobPhone> findApplicantPhone(int jobId) async {
     JobPhone jobPhone = JobPhone();
@@ -271,5 +268,4 @@ class ApplicantRepository implements IApplicantRepository {
     }
     return jobPhone;
   }
-
 }
