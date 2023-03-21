@@ -14,7 +14,8 @@ JobPosting _$JobPostingFromJson(Map<String, dynamic> json) => JobPosting(
       city: json['city'] as String?,
       district: json['district'] as String?,
       createdAt: json['createdAt'] as String?,
-      follow: json['follow'] as bool?,
+      favorite: json['favorite'] as bool?,
+      desc: json['desc'] as String?,
       message: json['message'] as String?,
       status: json['status'] as int?,
       isSuccess: json['isSuccess'] as bool?,
@@ -32,5 +33,6 @@ Map<String, dynamic> _$JobPostingToJson(JobPosting instance) =>
       'city': instance.city,
       'district': instance.district,
       'createdAt': instance.createdAt,
-      'follow': instance.follow,
+      'favorite': instance.favorite,
+      'desc': instance.desc,
     };

@@ -5,7 +5,7 @@ import 'package:platform/network/network_status.dart';
 import 'package:platform/providers/applicant_hired_provider.dart';
 import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/molecules/platform_tab_menu.dart';
-import 'package:platform/ui/organisms/ambassador/job_hired/applicant_hired_list.dart';
+import 'package:platform/ui/organisms/recruiter/job_hired/applicant_hired_list.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -59,6 +59,29 @@ class ApplicantRequestPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(2),
                                 child: GestureDetector(
                                   onTap: () async {
+                                    await provider.selectedFindJob();
+                                    await provider.fetchFindApplicantWithPagination();
+
+                                  },
+                                  child: PlatformTabMenu(
+                                    width: (MediaQuery.of(context).size.width - 64) / 2,
+                                    color: provider.isSelectedFindJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
+                                    borderColor: provider.isSelectedFindJob
+                                        ? PlatformColor.primaryColor
+                                        : PlatformColor.offWhiteColor,
+                                    text: "İletişim Taleplerim",
+                                    textColor: provider.isSelectedFindJob
+                                        ? PlatformColor.offWhiteColor
+                                        : PlatformColor.grayLightColor,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: GestureDetector(
+                                  onTap: () async {
                                     await provider.selectedHireJob();
                                     await provider.fetchHireApplicantWithPagination();
                                   },
@@ -70,30 +93,8 @@ class ApplicantRequestPage extends StatelessWidget {
                                     borderColor: provider.isSelectedHireJob
                                         ? PlatformColor.primaryColor
                                         : PlatformColor.offWhiteColor,
-                                    text: "İletişim Taleplerim",
-                                    textColor: provider.isSelectedHireJob
-                                        ? PlatformColor.offWhiteColor
-                                        : PlatformColor.grayLightColor,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2),
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    await provider.selectedFindJob();
-                                    await provider.fetchFindApplicantWithPagination();
-                                  },
-                                  child: PlatformTabMenu(
-                                    width: (MediaQuery.of(context).size.width - 64) / 2,
-                                    color: provider.isSelectedFindJob
-                                        ? PlatformColor.primaryColor
-                                        : PlatformColor.offWhiteColor,
-                                    borderColor: provider.isSelectedFindJob
-                                        ? PlatformColor.primaryColor
-                                        : PlatformColor.offWhiteColor,
                                     text: "İş Başvuruları",
-                                    textColor: provider.isSelectedFindJob
+                                    textColor: provider.isSelectedHireJob
                                         ? PlatformColor.offWhiteColor
                                         : PlatformColor.grayLightColor,
                                   ),
@@ -136,7 +137,7 @@ class ApplicantRequestPage extends StatelessWidget {
                     }
                     if (provider.networkStatus == NetworkStatus.error) {
                       return const Center(
-                        child: Text("Uyarı çıkartılacak."),
+                        child: Text(""),
                       );
                     }
                     return const Center(

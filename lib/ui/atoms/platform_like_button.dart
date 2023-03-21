@@ -21,7 +21,7 @@ class PlatformLikeButton extends StatelessWidget {
       ),
       child: Center(
         child: SvgPicture.asset(
-          isLike! ? "assets/icons/star.svg" : "assets/icons/empty_star.svg",
+          isLike != null && isLike! ? "assets/icons/star.svg" : "assets/icons/empty_star.svg",
           width: width! - 16,
           height: height! - 16,
           color: !isLike! ? PlatformColor.offWhiteColor : null,

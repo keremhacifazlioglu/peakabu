@@ -3,6 +3,7 @@ import 'package:platform/domain/response/job/base_list_response.dart';
 import 'package:platform/domain/response/other/age.dart';
 import 'package:platform/domain/response/other/caretaker_type.dart';
 import 'package:platform/domain/response/other/city.dart';
+import 'package:platform/domain/response/other/district.dart';
 import 'package:platform/domain/response/other/experience.dart';
 import 'package:platform/domain/response/other/nationality.dart';
 import 'package:platform/domain/response/other/shift_system.dart';
@@ -25,7 +26,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -39,7 +40,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -53,7 +54,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -67,7 +68,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -81,7 +82,7 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;
@@ -95,7 +96,21 @@ class OtherRepository implements IOtherRepository{
       baseListResponse.data = response;
     } on CustomGenericDioError catch (e) {
       baseListResponse.message = e.text;
-      baseListResponse.status = e.response!.statusCode;
+      baseListResponse.status = e.response.statusCode;
+      baseListResponse.isSuccess = false;
+    }
+    return baseListResponse;
+  }
+
+  @override
+  Future<BaseListResponse> fetchDistricts(String city) async {
+    BaseListResponse<District> baseListResponse = BaseListResponse<District>();
+    try {
+      List<District> response = await _restClient.fetchDistricts(city);
+      baseListResponse.data = response;
+    } on CustomGenericDioError catch (e) {
+      baseListResponse.message = e.text;
+      baseListResponse.status = e.response.statusCode;
       baseListResponse.isSuccess = false;
     }
     return baseListResponse;

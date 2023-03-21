@@ -13,4 +13,6 @@ abstract class IOtherRepository {
   Future<BaseListResponse> fetchAges();
 
   Future<BaseListResponse> fetchCities();
+
+  Future<BaseListResponse> fetchDistricts(String city);
 }

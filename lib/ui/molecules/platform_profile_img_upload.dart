@@ -61,9 +61,12 @@ class PlatformProfileImgUpload extends StatelessWidget {
                       )
                     : GestureDetector(
                         onTap: onTap!,
-                        child: const PlatformIcon(
-                          svgPath: "assets/icons/camera.svg",
-                          color: PlatformColor.grayLightColor,
+                        child: const Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: PlatformIcon(
+                            svgPath: "assets/icons/camera.svg",
+                            color: PlatformColor.grayLightColor,
+                          ),
                         ),
                       ),
           ),

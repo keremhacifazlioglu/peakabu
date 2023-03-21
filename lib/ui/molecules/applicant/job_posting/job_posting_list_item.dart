@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform/config/locator.dart';
 import 'package:platform/domain/response/job/job_posting.dart';
 import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
@@ -10,7 +11,6 @@ import 'package:provider/provider.dart';
 
 class JobPostingListItem extends StatelessWidget {
   final JobPosting? jobPosting;
-
 
   const JobPostingListItem({
     Key? key,
@@ -43,7 +43,27 @@ class JobPostingListItem extends StatelessWidget {
               flex: 1,
               child: GestureDetector(
                 onTap: () async {
-                  await jobPostingProvider.addFavoriteJob(jobPosting!);
+                  secureLocalRepository.readSecureData("token").then(
+                        (value) => {
+                          if (value != null && value.isNotEmpty)
+                            {
+                              if (jobPosting!.favorite!)
+                                {
+                                  jobPostingProvider.deleteFavoriteJob(jobPosting!),
+                                }
+                              else
+                                {
+                                  jobPostingProvider.addFavoriteJob(jobPosting!),
+                                }
+                            }
+                          else
+                            {
+                              Navigator.of(context, rootNavigator: true).pushNamed(
+                                "/create_account",
+                              ),
+                            }
+                        },
+                      );
                 }, //addFavoriteJobTap,
                 child: Center(
                   child: Padding(
@@ -53,7 +73,7 @@ class JobPostingListItem extends StatelessWidget {
                     child: PlatformLikeButton(
                       width: 36,
                       height: 36,
-                      isLike: jobPosting!.follow,
+                      isLike: jobPosting!.favorite,
                     ),
                   ),
                 ),

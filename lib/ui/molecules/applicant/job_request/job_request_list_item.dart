@@ -54,7 +54,7 @@ class JobRequestListItem extends StatelessWidget {
                       child: PlatformIconLabel(
                         labelIconPath: "assets/icons/group.svg",
                         labelText:
-                            "${jobRequest!.caretakerType!}/${jobRequest!.workType!}",
+                            "${jobRequest!.caretakerType!}/${jobRequest!.shiftSystem!}",
                       ),
                     ),
                     Padding(
@@ -70,18 +70,18 @@ class JobRequestListItem extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 125,
+                width: 120,
                 height: 26,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(5),
                   ),
-                  color: getColor(jobRequest!.status!)!.withOpacity(0.15),
+                  color: getColor(jobRequest!.requestStatus!)!.withOpacity(0.15),
                 ),
                 child: Center(
                   child: PlatformDefaultText(
-                    text: requestJobStatus[jobRequest!.status],
-                    color: getColor(jobRequest!.status!),
+                    text: requestJobStatus[jobRequest!.requestStatus],
+                    color: getColor(jobRequest!.requestStatus!),
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
                   ),
@@ -97,17 +97,17 @@ class JobRequestListItem extends StatelessWidget {
   Color? getColor(String status) {
     Color? jobRequestTextColor;
     switch (status) {
-      case "sent_job":
+      case "pending":
         {
           jobRequestTextColor = const Color.fromRGBO(54, 120, 253, 1);
           break;
         }
-      case "accept_job":
+      case "accepted":
         {
           jobRequestTextColor = const Color.fromRGBO(14, 191, 119, 1);
           break;
         }
-      case "reject_job":
+      case "rejected":
         {
           jobRequestTextColor = const Color.fromRGBO(248, 86, 86, 1);
           break;
@@ -115,16 +115,6 @@ class JobRequestListItem extends StatelessWidget {
       case "wait_request":
         {
           jobRequestTextColor = const Color.fromRGBO(153, 153, 153, 1);
-          break;
-        }
-      case "accept_request":
-        {
-          jobRequestTextColor = const Color.fromRGBO(14, 191, 119, 1);
-          break;
-        }
-      case "reject_request":
-        {
-          jobRequestTextColor = const Color.fromRGBO(248, 86, 86, 1);
           break;
         }
       default:

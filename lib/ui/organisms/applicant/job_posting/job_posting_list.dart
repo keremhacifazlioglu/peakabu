@@ -18,7 +18,6 @@ class JobPostingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       key: const PageStorageKey<String>("JobPosting"),
-      addAutomaticKeepAlives: true,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {

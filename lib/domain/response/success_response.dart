@@ -7,10 +7,12 @@ part 'success_response.g.dart';
 class SuccessResponse extends ExceptionError {
   bool? success;
   bool? follow;
+  int? id;
 
   SuccessResponse({
     this.success,
     this.follow,
+    this.id,
     String? message,
     int? statusCode,
     bool? isSuccess,

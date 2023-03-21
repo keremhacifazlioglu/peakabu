@@ -6,8 +6,9 @@ part 'register_request.g.dart';
 class RegisterRequest {
   String? uuid;
   String? phone;
+  String? userType;
 
-  RegisterRequest({this.uuid, this.phone});
+  RegisterRequest({this.uuid, this.phone,this.userType});
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) {
     return _$RegisterRequestFromJson(json);

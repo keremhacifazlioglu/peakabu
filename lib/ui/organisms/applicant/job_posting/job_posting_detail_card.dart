@@ -35,6 +35,8 @@ class JobPostingDetailCard extends StatelessWidget {
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20, bottom: 16),
@@ -49,8 +51,11 @@ class JobPostingDetailCard extends StatelessWidget {
                   color: PlatformColorFoundation.dividerColor,
                 ),
               ),
-              JobPostingDetailDescriptionItem(
-                jobPostingDescription: jobDetail!.desc!,
+              SizedBox(
+                width: double.infinity,
+                child: JobPostingDetailDescriptionItem(
+                  jobPostingDescription: jobDetail!.desc!,
+                ),
               ),
             ],
           ),

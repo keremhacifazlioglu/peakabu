@@ -32,7 +32,7 @@ class ApplicantProfileHeaderCard extends StatelessWidget {
                   child: SizedBox(
                     width: 200,
                     child: PlatformDefaultText(
-                      text: applicantProfile!.name!,
+                      text: applicantProfile!.name??"",
                       fontWeight: FontWeight.w600,
                       fontSize: PlatformTypographyFoundation.titleMedium,
                       color: PlatformColorFoundation.textColor,
@@ -70,7 +70,7 @@ class ApplicantProfileHeaderCard extends StatelessWidget {
                   color: PlatformColorFoundation.textColor,
                 ),
                 PlatformDefaultText(
-                  text: applicantProfile!.lastSignedAt!,
+                  text: applicantProfile!.lastSignedAt??"",
                   fontWeight: FontWeight.w400,
                   fontSize: PlatformTypographyFoundation.bodyLarge,
                   color: Colors.red,

@@ -4,13 +4,11 @@ part 'send_sms_request.g.dart';
 
 @JsonSerializable()
 class SendSmsRequest {
-  String? phoneNumber;
+  String? phone;
   String? uuid;
-  bool? isKvkk;
 
   SendSmsRequest({
-    this.phoneNumber,
-    this.isKvkk,
+    this.phone,
     this.uuid
   });
 

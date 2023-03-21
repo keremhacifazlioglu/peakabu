@@ -5,14 +5,15 @@ part 'applicant_profile.g.dart';
 
 @JsonSerializable()
 class ApplicantProfile extends ExceptionError {
+  int? id;
   String? image;
   String? name;
   String? city;
   String? district;
   String? caretakerType;
-  String? shiftSystems;
+  String? shiftSystem;
   String? lastSignedAt;
-  String? descTitle;
+  String? title;
   String? desc;
   String? gender;
   String? nationality;
@@ -21,14 +22,15 @@ class ApplicantProfile extends ExceptionError {
   bool? favorite;
 
   ApplicantProfile({
+    this.id,
     this.image,
     this.name,
     this.city,
     this.district,
     this.caretakerType,
-    this.shiftSystems,
+    this.shiftSystem,
     this.lastSignedAt,
-    this.descTitle,
+    this.title,
     this.desc,
     this.gender,
     this.favorite,

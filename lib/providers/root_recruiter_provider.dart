@@ -1,21 +1,25 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:platform/route_generator.dart';
 import 'package:platform/storage/secure_local_repository.dart';
 
-class RootAmbassadorProvider extends ChangeNotifier {
+@injectable
+class RootRecruiterProvider extends ChangeNotifier {
   final Map<String, GlobalKey<NavigatorState>> _routes = {
     "applicants": GlobalKey<NavigatorState>(),
     "applicant_follow": GlobalKey<NavigatorState>(),
     "applicant_request": GlobalKey<NavigatorState>(),
-    "ambassador_special_for_me": GlobalKey<NavigatorState>(),
+    "recruiter_special_for_me": GlobalKey<NavigatorState>(),
   };
-
+  final SecureLocalRepository _secureLocalRepository;
   GlobalKey<NavigatorState> get navigatorState => _routes.entries.toList()[_currentIndex].value;
   List<Widget> _pages = [];
 
   List<Widget> get pages => _pages;
 
-  RootAmbassadorProvider() {
+  RootRecruiterProvider(this._secureLocalRepository) {
     prepareRootPage();
     notifyListeners();
   }
@@ -29,7 +33,8 @@ class RootAmbassadorProvider extends ChangeNotifier {
   }
 
   void refreshPage(){
-    if(_currentIndex != 0 && _currentIndex != 3){
+    if(_currentIndex != 3){
+      log(_routes.keys.toList()[_currentIndex]);
       _pages[_currentIndex] = _buildOffstageNavigator(_routes.keys.toList()[_currentIndex], GlobalKey<NavigatorState>());
     }
   }
@@ -46,4 +51,10 @@ class RootAmbassadorProvider extends ChangeNotifier {
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
+
+  Future<bool> checkToken() async {
+    String? token = await _secureLocalRepository.readSecureData("token");
+    return token != null && token.isNotEmpty;
+  }
+
 }

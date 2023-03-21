@@ -4,10 +4,10 @@ part 'token_request.g.dart';
 
 @JsonSerializable()
 class TokenRequest {
-  String? phoneNumber;
+  String? phone;
   String? uuid;
 
-  TokenRequest({this.phoneNumber, this.uuid});
+  TokenRequest({this.phone, this.uuid});
 
   factory TokenRequest.fromJson(Map<String, dynamic> json) {
     return _$TokenRequestFromJson(json);

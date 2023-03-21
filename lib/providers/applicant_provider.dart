@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:platform/cons/page_type.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
 import 'package:platform/domain/response/job/base_list_response.dart';
+import 'package:platform/domain/response/job/job_phone.dart';
 import 'package:platform/domain/response/success_response.dart';
 import 'package:platform/network/network_status.dart';
 import 'package:platform/repository/applicant_repository.dart';
@@ -17,27 +18,36 @@ class ApplicantProvider with ChangeNotifier {
   final SecureLocalRepository _secureLocalRepository;
   final OtherService otherService;
   ApplicantProfile? applicantProfile;
-  List<ApplicantProfile> allApplicantProfile = [], allFavoriteApplicantProfile = [], allFilterApplicantProfile = [];
+  List<ApplicantProfile> allApplicantProfiles = [], allFavoriteApplicantProfile = [], allFilterApplicantProfile = [];
   NetworkStatus networkStatus = NetworkStatus.none;
-  String? title, description, name;
+  String? title, description, name, userType;
+  String gender = "female";
   File? file;
   int pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1, pagingSize = 10;
   bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false;
 
   Map<String, String> filterData = {};
 
-  ApplicantProvider(this._applicantRepository,this._secureLocalRepository, this.otherService , @factoryParam PageType pageType) {
+  ApplicantProvider(
+    this._applicantRepository,
+    this._secureLocalRepository,
+    this.otherService,
+    @factoryParam PageType pageType,
+  ) {
     if (pageType == PageType.fetch) {
       fetchApplicantProfilesWithPagination();
+    } else if (pageType == PageType.applicantFollow) {
       fetchFavoriteApplicantWithPagination();
     } else if (pageType == PageType.detail) {
-      fetchProfile();
+      fetchApplicantDetailByUserType();
     } else if (pageType == PageType.filterForm) {
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
       fetchFilterJobPostingsWithPagination();
-    } else if (pageType == PageType.update){
+    } else if (pageType == PageType.update) {
       fetchProfile();
+      fetchAllOtherData();
+    } else if (pageType == PageType.create) {
       fetchAllOtherData();
     }
   }
@@ -51,6 +61,16 @@ class ApplicantProvider with ChangeNotifier {
     return applicantProfile!;
   }
 
+  Future<ApplicantProfile> fetchApplicantProfile() async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    String? id = await _secureLocalRepository.readSecureData("applicantId");
+    applicantProfile = await _applicantRepository.fetchApplicantProfile(int.parse(id!));
+    networkStatus = applicantProfile!.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return applicantProfile!;
+  }
+
   Future<List<ApplicantProfile>> fetchApplicantProfilesWithPagination() async {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
@@ -59,7 +79,7 @@ class ApplicantProvider with ChangeNotifier {
       if (response.isSuccess!) {
         isLastPage = response.data!.length < pagingSize;
         pageNumber++;
-        allApplicantProfile.addAll(response.data! as List<ApplicantProfile>);
+        allApplicantProfiles.addAll(response.data! as List<ApplicantProfile>);
         networkStatus = NetworkStatus.success;
       } else {
         networkStatus = NetworkStatus.error;
@@ -68,7 +88,7 @@ class ApplicantProvider with ChangeNotifier {
       networkStatus = NetworkStatus.success;
     }
     notifyListeners();
-    return allApplicantProfile;
+    return allApplicantProfiles;
   }
 
   Future fetchFavoriteApplicantWithPagination() async {
@@ -117,18 +137,18 @@ class ApplicantProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     Map<String, dynamic> queries = {
-      "name": applicantProfile!.name,
-      "gender": applicantProfile!.gender!,
+      "name": name,
+      "gender": gender,
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
-      "district": otherService.selectedCity!,
+      "district": otherService.selectedDistrict!,
       "shiftSystem": otherService.selectedShiftSystem!,
       "nationality": otherService.selectedNationality!,
       "experience": otherService.selectedExperience!,
       "caretakerType": otherService.selectedCaretakerType!,
-      "title": title ?? applicantProfile!.descTitle!,
-      "description": description ?? applicantProfile!.desc!,
-      "thumbnail": file,
+      "title": title ?? applicantProfile!.title!,
+      "desc": description ?? applicantProfile!.desc!,
+      "image": file,
     };
     SuccessResponse successResponse = await _applicantRepository.createApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
@@ -144,14 +164,14 @@ class ApplicantProvider with ChangeNotifier {
       "gender": applicantProfile!.gender!,
       "age": otherService.selectedAge!,
       "city": otherService.selectedCity!,
-      "district": otherService.selectedCity!,
+      "district": otherService.selectedDistrict!,
       "shiftSystem": otherService.selectedShiftSystem!,
       "nationality": otherService.selectedNationality!,
       "experience": otherService.selectedExperience!,
       "caretakerType": otherService.selectedCaretakerType!,
-      "title": title ?? applicantProfile!.descTitle!,
-      "description": description ?? applicantProfile!.desc!,
-      "thumbnail": file ?? "",
+      "title": title ?? applicantProfile!.title!,
+      "desc": description ?? applicantProfile!.desc!,
+      "image": file ?? "",
     };
     SuccessResponse successResponse = await _applicantRepository.updateApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
@@ -168,6 +188,7 @@ class ApplicantProvider with ChangeNotifier {
     await otherService.fetchExperiences();
     await otherService.fetchNationalities();
     await otherService.fetchCities();
+    await otherService.fetchDistricts(applicantProfile != null ? applicantProfile!.city! : "Adana");
     networkStatus = NetworkStatus.success;
     notifyListeners();
   }
@@ -178,6 +199,7 @@ class ApplicantProvider with ChangeNotifier {
     filterData["experience"] = (await _secureLocalRepository.readSecureData("experience"))!;
     filterData["nationality"] = (await _secureLocalRepository.readSecureData("nationality"))!;
     filterData["city"] = (await _secureLocalRepository.readSecureData("city"))!;
+    filterData["district"] = (await _secureLocalRepository.readSecureData("district"))!;
     filterData["age"] = (await _secureLocalRepository.readSecureData("age"))!;
     filterData["gender"] = (await _secureLocalRepository.readSecureData("gender"))!;
     filterData["pagingSize"] = pagingSize.toString();
@@ -191,4 +213,90 @@ class ApplicantProvider with ChangeNotifier {
   Future refresh() async {
     notifyListeners();
   }
+
+  Future fetchApplicantDetailByUserType() async {
+    userType = await _secureLocalRepository.readSecureData("userType");
+    if (userType == "applicant") {
+      await fetchProfile();
+    } else {
+      await fetchApplicantProfile();
+    }
+  }
+
+  Future updateDistrictByCity(String city) async {
+    otherService.districts.clear();
+    await otherService.fetchDistricts(city);
+    notifyListeners();
+  }
+
+  Future deleteFavoriteApplicant(ApplicantProfile? applicantProfile) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.removeFavoriteApplicantProfile(applicantProfile!.id!);
+    applicantProfile.favorite = false;
+    await removeFavoriteJobPostingTheList(applicantProfile);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future addFavoriteApplicant(ApplicantProfile applicantProfile) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.favoriteApplicantProfile(applicantProfile.id!);
+    applicantProfile.favorite = true;
+    await removeFavoriteJobPostingTheList(applicantProfile);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future removeFavoriteJobPostingTheList(ApplicantProfile applicantProfile) async {
+    if (allFavoriteApplicantProfile.isNotEmpty) {
+      allFavoriteApplicantProfile.remove(applicantProfile);
+    }
+    if (allApplicantProfiles.isNotEmpty) {
+      allFavoriteApplicantProfile.remove(applicantProfile);
+    }
+  }
+
+  Future applyHiredRequest(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.applyHireJob(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future rejectHiredRequest(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.rejectHireJob(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+  Future<JobPhone> fetchApplicantPhone(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    JobPhone jobPhone = await _applicantRepository.findApplicantPhone(jobId);
+    networkStatus = jobPhone.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return jobPhone;
+  }
+
+  Future<SuccessResponse> sendRequestApplicant(int jobId) async {
+    networkStatus = NetworkStatus.waiting;
+    notifyListeners();
+    SuccessResponse successResponse = await _applicantRepository.applicantProfileRequest(jobId);
+    networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
+    notifyListeners();
+    return successResponse;
+  }
+
+
+
+
 }

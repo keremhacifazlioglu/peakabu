@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/organisms/ambassador/special_for_me/special_for_me_list.dart';
+import 'package:platform/ui/organisms/recruiter/special_for_me/special_for_me_list.dart';
 import 'package:platform/ui/tokens/colors.dart';
 
 class SpecialForMePage extends StatelessWidget {

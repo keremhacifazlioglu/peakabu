@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/domain/response/applicant/applicant_profile.dart';
+import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/molecules/ambassador/job_candidate/applicant_list_item.dart';
+import 'package:platform/ui/molecules/recruiter/job_candidate/applicant_list_item.dart';
 import 'package:platform/ui/tokens/colors.dart';
 
 class ApplicantList extends StatelessWidget {
@@ -24,7 +25,12 @@ class ApplicantList extends StatelessWidget {
             secureLocalRepository.readSecureData("token").then(
                   (value) => {
                     if (value != null && value.isNotEmpty)
-                      {}
+                      {
+                        secureLocalRepository.writeSecureData(StorageItem("applicantId", applicantProfiles![index].id!.toString())),
+                        Navigator.of(context, rootNavigator: true).pushNamed(
+                          "/applicant_detail",
+                        ),
+                      }
                     else
                       {
                         Navigator.of(context, rootNavigator: true).pushNamed(
