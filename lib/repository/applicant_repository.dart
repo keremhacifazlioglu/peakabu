@@ -45,7 +45,7 @@ class ApplicantRepository implements IApplicantRepository {
         experience: queries['experience'],
         nationality: queries['nationality'],
         age: queries['age'],
-        desc: queries['description'],
+        desc: queries['desc'],
         image: queries['image'],
       );
       successResponse.isSuccess = true;
@@ -102,7 +102,7 @@ class ApplicantRepository implements IApplicantRepository {
   Future<BaseListResponse> fetchFavoriteApplicantProfiles(int pageNumber, int pageSize) async {
     BaseListResponse baseListResponse = BaseListResponse();
     try {
-      List<ApplicantProfile> response = await _restClient.fetchFavoriteApplicantProfile();
+      List<ApplicantProfile> response = await _restClient.fetchFavoriteApplicantProfile(pageNumber, pageSize);
       baseListResponse.data = response;
       baseListResponse.isSuccess = true;
     } on CustomGenericDioError catch (e) {

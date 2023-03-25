@@ -29,7 +29,11 @@ class JobPostingProvider with ChangeNotifier {
   Map<String, String> filterData = {};
 
   JobPostingProvider(
-      this._jobPostingRepository, this._secureLocalRepository, this.otherService, @factoryParam PageType pageType) {
+    this._jobPostingRepository,
+    this._secureLocalRepository,
+    this.otherService,
+    @factoryParam PageType pageType,
+  ) {
     if (pageType == PageType.fetch) {
       fetchJobPostingsWithPagination();
     } else if (pageType == PageType.jobFollow) {
@@ -193,8 +197,8 @@ class JobPostingProvider with ChangeNotifier {
     await otherService.fetchAges();
     await otherService.fetchExperiences();
     await otherService.fetchNationalities();
-    await otherService.fetchDistricts(jobDetail != null ? jobDetail!.city! : "Adana");
     await otherService.fetchCities();
+    await otherService.fetchDistricts(jobDetail != null ? jobDetail!.city! : "Adana");
     networkStatus = NetworkStatus.success;
     notifyListeners();
   }
@@ -237,7 +241,7 @@ class JobPostingProvider with ChangeNotifier {
   Future updateDistrictByCity(String city) async {
     otherService.districts.clear();
     Map<String, String> resp = await otherService.fetchDistricts(city);
-    jobDetail!.district = resp.values.first;
+    //jobDetail!.district = resp.values.first;
     notifyListeners();
   }
 
@@ -279,7 +283,7 @@ class JobPostingProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     RecruiterJobPostingRequest? recruiterJobPostingRequest = RecruiterJobPostingRequest();
-    recruiterJobPostingRequest.title = title;
+    recruiterJobPostingRequest.title = title?? jobDetail!.title;
     recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
     recruiterJobPostingRequest.city = otherService.selectedCity;
     recruiterJobPostingRequest.district = otherService.selectedDistrict;
@@ -288,7 +292,6 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.age = otherService.selectedAge;
     recruiterJobPostingRequest.nationality = otherService.selectedNationality;
     recruiterJobPostingRequest.desc = description;
-    recruiterJobPostingRequest.title = title;
     recruiterJobPostingRequest.experience = otherService.selectedExperience;
 
     JobPosting jobPosting = await _jobPostingRepository.createRecruiterJobPosting(recruiterJobPostingRequest);
@@ -302,7 +305,7 @@ class JobPostingProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     RecruiterJobPostingRequest? recruiterJobPostingRequest = RecruiterJobPostingRequest();
-    recruiterJobPostingRequest.title = title;
+    recruiterJobPostingRequest.title = title?? jobDetail!.title;
     recruiterJobPostingRequest.caretakerType = otherService.selectedCaretakerType;
     recruiterJobPostingRequest.city = otherService.selectedCity;
     recruiterJobPostingRequest.district = otherService.selectedDistrict;
@@ -310,7 +313,7 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.gender = gender ? "female" : "male";
     recruiterJobPostingRequest.age = otherService.selectedAge;
     recruiterJobPostingRequest.nationality = otherService.selectedNationality;
-    recruiterJobPostingRequest.desc = description;
+    recruiterJobPostingRequest.desc = description?? jobDetail!.desc;
     recruiterJobPostingRequest.experience = otherService.selectedExperience;
 
     SuccessResponse successResponse = await _jobPostingRepository.updateRecruiterJobPosting(recruiterJobPostingRequest);

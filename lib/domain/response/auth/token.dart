@@ -7,8 +7,9 @@ part 'token.g.dart';
 class Token extends ExceptionError {
   String? token;
   bool? isUserRegistered;
+  String? userType;
 
-  Token({this.token, this.isUserRegistered, String? message, int? status, bool? isSuccess})
+  Token({this.token, this.isUserRegistered,this.userType, String? message, int? status, bool? isSuccess})
       : super(message: message, status: status, isSuccess: isSuccess);
 
   factory Token.fromJson(Map<String, dynamic> json) => _$TokenFromJson(json);

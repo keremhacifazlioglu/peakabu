@@ -23,22 +23,23 @@ class SplashPage extends StatelessWidget {
               if (provider.networkStatus == NetworkStatus.success) {
                 SchedulerBinding.instance.addPostFrameCallback(
                   (_) {
-                    provider.getUserType().then(
+                    Navigator.of(context).pushReplacementNamed("redirect");
+                    /*provider.getUserType().then(
                           (value) => {
                             if (value.isEmpty)
                               {
-                                Navigator.of(context).pushReplacementNamed("redirect"),
+                                Navigator.of(context).pushNamed("redirect"),
                               }
                             else if (value == "applicant")
                               {
-                                Navigator.of(context).pushReplacementNamed("/applicant"),
+                                Navigator.of(context,rootNavigator: true).pushNamed("/applicant"),
                               }
                             else if (value == "recruiter")
                               {
-                                Navigator.of(context).pushReplacementNamed("/recruiter"),
+                                Navigator.of(context,rootNavigator: true).pushNamed("/recruiter"),
                               }
                           },
-                        );
+                        );*/
                   },
                 );
               }

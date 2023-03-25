@@ -75,7 +75,7 @@ class ApplicantProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     if (!isLastPage) {
-      BaseListResponse response = await _applicantRepository.fetchApplicantProfiles(pagingSize, pageNumber);
+      BaseListResponse response = await _applicantRepository.fetchApplicantProfiles(pageNumber, pagingSize);
       if (response.isSuccess!) {
         isLastPage = response.data!.length < pagingSize;
         pageNumber++;
@@ -96,7 +96,7 @@ class ApplicantProvider with ChangeNotifier {
     notifyListeners();
     if (!isFavoriteLastPage) {
       BaseListResponse response =
-          await _applicantRepository.fetchFavoriteApplicantProfiles(pagingSize, pageFavoriteNumber);
+          await _applicantRepository.fetchFavoriteApplicantProfiles(pageFavoriteNumber,pagingSize);
       if (response.isSuccess!) {
         isFavoriteLastPage = response.data!.length < pagingSize;
         pageFavoriteNumber++;
@@ -171,7 +171,7 @@ class ApplicantProvider with ChangeNotifier {
       "caretakerType": otherService.selectedCaretakerType!,
       "title": title ?? applicantProfile!.title!,
       "desc": description ?? applicantProfile!.desc!,
-      "image": file ?? "",
+      "image": file,
     };
     SuccessResponse successResponse = await _applicantRepository.updateApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;

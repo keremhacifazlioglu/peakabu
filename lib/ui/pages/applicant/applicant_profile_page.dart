@@ -98,7 +98,7 @@ class ApplicantProfilePage extends StatelessWidget {
                           },
                         ),
                         SearchCaretakerCriteriaForm(
-                          text: "Şehir",
+                          text: "İlçe",
                           selectedValue: applicantProvider.applicantProfile!.district,
                           data: applicantProvider.otherService.districts,
                           onChange: (p0) async {

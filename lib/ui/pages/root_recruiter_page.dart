@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:platform/cons/register_status.dart';
 import 'package:platform/providers/root_recruiter_provider.dart';
+import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/molecules/platform_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -26,9 +28,7 @@ class RootRecruiterPage extends StatelessWidget {
                   if (Platform.isIOS) {
                     int sensitivity = 8;
                     if (details.delta.dx > sensitivity) {
-                      // Right Swipe
                       Navigator.of(context).pop();
-                      //timerController.startTimer();
                     }
                   }
                 },

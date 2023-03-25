@@ -988,9 +988,15 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile() async {
+  Future<List<ApplicantProfile>> fetchFavoriteApplicantProfile(
+    pageNumber,
+    pageSize,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNumber': pageNumber,
+      r'pageSize': pageSize,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio

@@ -130,8 +130,11 @@ class AuthProvider with ChangeNotifier {
       if(token.isUserRegistered!){
         _secureLocalRepository.writeSecureData(StorageItem("isRegisterStatus",RegisterStatus.isRegister.toShortUpperString()));
         _secureLocalRepository.writeSecureData(StorageItem("token",token.token!));
+        _secureLocalRepository.writeSecureData(StorageItem("userType", token.userType!));
+        _secureLocalRepository.writeSecureData(StorageItem("userType2", token.userType!));
       }else{
         _secureLocalRepository.writeSecureData(StorageItem("isRegisterStatus",RegisterStatus.unRegister.toShortUpperString()));
+        _secureLocalRepository.writeSecureData(StorageItem("userType2", ""));
       }
       networkStatus = NetworkStatus.success;
     }else{

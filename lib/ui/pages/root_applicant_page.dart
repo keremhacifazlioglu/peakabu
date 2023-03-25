@@ -27,7 +27,6 @@ class RootApplicantPage extends StatelessWidget {
                     if (details.delta.dx > sensitivity) {
                       // Right Swipe
                       Navigator.of(context).pop();
-                      //timerController.startTimer();
                     }
                   }
                 },
