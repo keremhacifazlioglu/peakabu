@@ -12,6 +12,7 @@ class ApplicantRequest {
   String? district;
   String? createdAt;
   String? requestStatus;
+  String? image;
 
   ApplicantRequest({
     this.id,
@@ -22,6 +23,7 @@ class ApplicantRequest {
     this.district,
     this.createdAt,
     this.requestStatus,
+    this.image,
   });
 
   factory ApplicantRequest.fromJson(Map<String, dynamic> json) {

@@ -30,7 +30,7 @@ class ApplicantHiredListItem extends StatelessWidget {
                   Radius.circular(8),
                 ),
                 child: Image.network(
-                  "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
+                  applicantRequest!.image!,
                   fit: BoxFit.cover,
                   height: 90,
                   width: 90,

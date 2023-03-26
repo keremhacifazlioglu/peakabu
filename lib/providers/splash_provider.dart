@@ -40,7 +40,7 @@ class SplashProvider with ChangeNotifier {
   }
 
   Future<String> getUserType() async {
-    String? userType = await _secureLocalRepository.readSecureData("userType");
+    String? userType = await _secureLocalRepository.readSecureData("userType2");
     return userType??"";
   }
 }

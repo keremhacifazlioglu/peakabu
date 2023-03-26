@@ -25,7 +25,6 @@ class RootApplicantPage extends StatelessWidget {
                   if (Platform.isIOS) {
                     int sensitivity = 8;
                     if (details.delta.dx > sensitivity) {
-                      // Right Swipe
                       Navigator.of(context).pop();
                     }
                   }

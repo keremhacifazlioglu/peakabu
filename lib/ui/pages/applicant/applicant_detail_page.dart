@@ -22,7 +22,7 @@ class ApplicantDetailPage extends StatelessWidget {
         var applicantProvider = Provider.of<ApplicantProvider>(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Profilim"),
+            title: Text(applicantProvider.userType == "applicant" ? "Profilim" : "Aday Profili"),
             centerTitle: true,
           ),
           body: Consumer<ApplicantProvider>(
@@ -92,11 +92,13 @@ class ApplicantDetailPage extends StatelessWidget {
                   } else {
                     applicantProvider.sendRequestApplicant(applicantProvider.applicantProfile!.id!).then(
                           (value) => {
-                            SnackBar(
-                              content: PlatformDefaultText(
-                                text: value.isSuccess! ? 'Talep iletilmiştir' : value.message,
-                                color: PlatformColor.offWhiteColor,
-                                fontSize: 14,
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: PlatformDefaultText(
+                                  text: value.isSuccess! ? 'Talep iletilmiştir' : value.message,
+                                  color: PlatformColor.offWhiteColor,
+                                  fontSize: 14,
+                                ),
                               ),
                             ),
                           },

@@ -53,7 +53,7 @@ class ApplicantListItem extends StatelessWidget {
                         top: 16,
                       ),
                       child: PlatformDefaultText(
-                        text: applicantProfile!.name!,
+                        text: applicantProfile!.name?? "",
                         color: PlatformColorFoundation.textColor,
                         fontWeight: FontWeight.w600,
                         fontSize: PlatformTypographyFoundation.bodyLarge,

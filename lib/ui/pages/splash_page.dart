@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,23 +25,30 @@ class SplashPage extends StatelessWidget {
               if (provider.networkStatus == NetworkStatus.success) {
                 SchedulerBinding.instance.addPostFrameCallback(
                   (_) {
-                    Navigator.of(context).pushReplacementNamed("redirect");
-                    /*provider.getUserType().then(
+                    provider.getUserType().then(
                           (value) => {
                             if (value.isEmpty)
                               {
-                                Navigator.of(context).pushNamed("redirect"),
+                                Navigator.of(context).pushReplacementNamed("redirect"),
                               }
                             else if (value == "applicant")
                               {
-                                Navigator.of(context,rootNavigator: true).pushNamed("/applicant"),
+                                Navigator.of(context).pushReplacementNamed("/applicant").then(
+                                      (value) => {
+                                        exit(0),
+                                      },
+                                    )
                               }
                             else if (value == "recruiter")
                               {
-                                Navigator.of(context,rootNavigator: true).pushNamed("/recruiter"),
+                                Navigator.of(context).pushReplacementNamed("/recruiter").then(
+                                      (value) => {
+                                        exit(0),
+                                      },
+                                    ),
                               }
                           },
-                        );*/
+                        );
                   },
                 );
               }

@@ -16,6 +16,7 @@ ApplicantRequest _$ApplicantRequestFromJson(Map<String, dynamic> json) =>
       district: json['district'] as String?,
       createdAt: json['createdAt'] as String?,
       requestStatus: json['requestStatus'] as String?,
+      image: json['image'] as String?,
     );
 
 Map<String, dynamic> _$ApplicantRequestToJson(ApplicantRequest instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$ApplicantRequestToJson(ApplicantRequest instance) =>
       'district': instance.district,
       'createdAt': instance.createdAt,
       'requestStatus': instance.requestStatus,
+      'image': instance.image,
     };
