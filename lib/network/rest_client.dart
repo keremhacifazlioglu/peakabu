@@ -157,7 +157,7 @@ abstract class RestClient {
     @Part() File? image,
   });
 
-  @PUT('/applicant/applicant_profiles')
+  @PUT('/applicant/applicant_profiles/me')
   @MultiPart()
   Future<SuccessResponse> updateApplicantProfile({
     @Part() required String name,
@@ -172,6 +172,21 @@ abstract class RestClient {
     @Part() required String age,
     @Part() required String desc,
     @Part() File? image,
+  });
+
+  @PUT('/applicant/applicant_profiles')
+  Future<SuccessResponse> updateApplicantProfileNonImage({
+    @Part() required String name,
+    @Part() required String gender,
+    @Part() required String city,
+    @Part() required String title,
+    @Part() required String district,
+    @Part() required String caretakerType,
+    @Part() required String shiftSystem,
+    @Part() required String experience,
+    @Part() required String nationality,
+    @Part() required String age,
+    @Part() required String desc,
   });
 
   // todo Favorite

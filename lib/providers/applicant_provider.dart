@@ -96,7 +96,7 @@ class ApplicantProvider with ChangeNotifier {
     notifyListeners();
     if (!isFavoriteLastPage) {
       BaseListResponse response =
-          await _applicantRepository.fetchFavoriteApplicantProfiles(pageFavoriteNumber,pagingSize);
+          await _applicantRepository.fetchFavoriteApplicantProfiles(pageFavoriteNumber, pagingSize);
       if (response.isSuccess!) {
         isFavoriteLastPage = response.data!.length < pagingSize;
         pageFavoriteNumber++;
@@ -157,6 +157,7 @@ class ApplicantProvider with ChangeNotifier {
   }
 
   Future<SuccessResponse> updateApplicantProfile() async {
+    SuccessResponse successResponse;
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     Map<String, dynamic> queries = {
@@ -171,9 +172,18 @@ class ApplicantProvider with ChangeNotifier {
       "caretakerType": otherService.selectedCaretakerType!,
       "title": title ?? applicantProfile!.title!,
       "desc": description ?? applicantProfile!.desc!,
-      "image": file,
+      //"image": file
     };
-    SuccessResponse successResponse = await _applicantRepository.updateApplicantProfile(queries);
+    //successResponse = await _applicantRepository.updateApplicantProfile(queries);
+
+    if (file != null) {
+      queries["image"] = file;
+      successResponse = await _applicantRepository.updateApplicantProfile(queries);
+    } else {
+      successResponse = await _applicantRepository.updateApplicantProfileNonImage(queries);
+    }
+
+    successResponse = await _applicantRepository.updateApplicantProfile(queries);
     networkStatus = successResponse.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
     notifyListeners();
     return successResponse;
@@ -295,8 +305,4 @@ class ApplicantProvider with ChangeNotifier {
     notifyListeners();
     return successResponse;
   }
-
-
-
-
 }

@@ -223,11 +223,6 @@ class JobPostingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future setSelectedNationality(String value) async {
-    otherService.selectedNationality = value;
-    notifyListeners();
-  }
-
   Future setSelectedCity(String value) async {
     otherService.selectedCity = value;
     notifyListeners();
@@ -240,8 +235,7 @@ class JobPostingProvider with ChangeNotifier {
 
   Future updateDistrictByCity(String city) async {
     otherService.districts.clear();
-    Map<String, String> resp = await otherService.fetchDistricts(city);
-    //jobDetail!.district = resp.values.first;
+    await otherService.fetchDistricts(city);
     notifyListeners();
   }
 
@@ -249,7 +243,6 @@ class JobPostingProvider with ChangeNotifier {
     filterData["caretakerType"] = (await _secureLocalRepository.readSecureData("caretakerType"))!;
     filterData["shiftSystem"] = (await _secureLocalRepository.readSecureData("shiftSystem"))!;
     filterData["experience"] = (await _secureLocalRepository.readSecureData("experience"))!;
-    filterData["nationality"] = (await _secureLocalRepository.readSecureData("nationality"))!;
     filterData["city"] = (await _secureLocalRepository.readSecureData("city"))!;
     filterData["district"] = (await _secureLocalRepository.readSecureData("district"))!;
     filterData["age"] = (await _secureLocalRepository.readSecureData("age"))!;
@@ -262,7 +255,6 @@ class JobPostingProvider with ChangeNotifier {
       StorageItem("caretakerType", otherService.selectedCaretakerType ?? ""),
       StorageItem("shiftSystem", otherService.selectedShiftSystem ?? ""),
       StorageItem("experience", otherService.selectedExperience ?? ""),
-      StorageItem("nationality", otherService.selectedNationality ?? ""),
       StorageItem("city", otherService.selectedCity ?? ""),
       StorageItem("age", otherService.selectedAge ?? ""),
       StorageItem("gender", otherService.gender ? "female" : "male"),

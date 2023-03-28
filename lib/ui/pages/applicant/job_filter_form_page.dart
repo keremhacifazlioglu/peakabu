@@ -87,15 +87,7 @@ class JobFilterFormPage extends StatelessWidget {
                           await provider.setSelectedExperience(p0);
                         },
                       ),
-                      SearchCaretakerCriteriaForm(
-                        text: "Uyruk",
-                        selectedValue:
-                            provider.otherService.selectedNationality ?? provider.otherService.nationalities["1"],
-                        data: provider.otherService.nationalities,
-                        onChange: (p0) async {
-                          await provider.setSelectedNationality(p0);
-                        },
-                      ),
+
                       SearchCaretakerCriteriaForm(
                         text: "Yaş",
                         selectedValue: provider.otherService.selectedAge ?? provider.otherService.ages["1"],

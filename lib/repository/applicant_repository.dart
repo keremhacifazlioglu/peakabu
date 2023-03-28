@@ -58,6 +58,33 @@ class ApplicantRepository implements IApplicantRepository {
   }
 
   @override
+  Future<SuccessResponse> updateApplicantProfileNonImage(Map<String, dynamic> queries) async {
+    SuccessResponse successResponse = SuccessResponse();
+    try {
+      successResponse = await _restClient.updateApplicantProfile(
+        name: queries['name'],
+        gender: queries['gender'],
+        city: queries['city'],
+        title: queries['title'],
+        district: queries['district'],
+        caretakerType: queries['caretakerType'],
+        shiftSystem: queries['shiftSystem'],
+        experience: queries['experience'],
+        nationality: queries['nationality'],
+        age: queries['age'],
+        desc: queries['desc']
+      );
+      successResponse.isSuccess = true;
+    } on CustomGenericDioError catch (e) {
+      successResponse.message = e.text;
+      successResponse.status = e.response.statusCode;
+      successResponse.isSuccess = false;
+    }
+    return successResponse;
+  }
+
+
+  @override
   Future<SuccessResponse> createApplicantProfile(Map<String, dynamic> queries) async {
     SuccessResponse successResponse = SuccessResponse();
     try {

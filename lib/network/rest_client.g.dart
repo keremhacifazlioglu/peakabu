@@ -901,6 +901,85 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
+              '/applicant/applicant_profiles/me',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccessResponse> updateApplicantProfileNonImage({
+    required name,
+    required gender,
+    required city,
+    required title,
+    required district,
+    required caretakerType,
+    required shiftSystem,
+    required experience,
+    required nationality,
+    required age,
+    required desc,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'name',
+      name,
+    ));
+    _data.fields.add(MapEntry(
+      'gender',
+      gender,
+    ));
+    _data.fields.add(MapEntry(
+      'city',
+      city,
+    ));
+    _data.fields.add(MapEntry(
+      'title',
+      title,
+    ));
+    _data.fields.add(MapEntry(
+      'district',
+      district,
+    ));
+    _data.fields.add(MapEntry(
+      'caretakerType',
+      caretakerType,
+    ));
+    _data.fields.add(MapEntry(
+      'shiftSystem',
+      shiftSystem,
+    ));
+    _data.fields.add(MapEntry(
+      'experience',
+      experience,
+    ));
+    _data.fields.add(MapEntry(
+      'nationality',
+      nationality,
+    ));
+    _data.fields.add(MapEntry(
+      'age',
+      age,
+    ));
+    _data.fields.add(MapEntry(
+      'desc',
+      desc,
+    ));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
               '/applicant/applicant_profiles',
               queryParameters: queryParameters,
               data: _data,

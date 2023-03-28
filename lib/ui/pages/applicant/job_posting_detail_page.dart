@@ -164,7 +164,9 @@ class JobPostingDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(32, 16, 32, 8),
                 child: PlatformSubmitButton(
                   buttonText: "Şimdi Ara",
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                 ),
               )
             ],

@@ -73,7 +73,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             },
                             onChanged: (value) {
                               applicantProvider.applicantProfile!.name = value;
-                              applicantProvider.refresh();
+                              //applicantProvider.refresh();
                             },
                           ),
                         ),
