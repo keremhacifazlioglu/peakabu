@@ -14,6 +14,8 @@ class ChooseRedirectRow extends StatefulWidget {
 }
 
 class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
+  Color selectedColorRecruiter = PlatformColor.primaryColor, selectedColorApplicant = PlatformColor.grayLightColor;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,6 +27,11 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
             padding: const EdgeInsets.only(right: PlatformDimension.sizeXXS),
             child: GestureDetector(
               onTap: () async {
+                setState(() {
+                  selectedColorRecruiter = PlatformColor.primaryColor;
+                  selectedColorApplicant = PlatformColor.grayLightColor;
+                });
+                await Future.delayed(const Duration(milliseconds: 100),);
                 secureLocalRepository.readSecureData("userType2").then(
                       (value) => {
                         if (value == null || value == "recruiter")
@@ -49,8 +56,8 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
                       },
                     );
               },
-              child: const ChooseRedirectButton(
-                selectedColor: PlatformColor.grayLightColor,
+              child: ChooseRedirectButton(
+                selectedColor: selectedColorRecruiter,
                 svgPath: "assets/icons/family.svg",
                 text: "Yardımcı Arıyorum",
               ),
@@ -60,6 +67,11 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
             padding: const EdgeInsets.only(left: PlatformDimension.sizeXXS),
             child: GestureDetector(
               onTap: () async {
+                setState(() {
+                  selectedColorApplicant = PlatformColor.primaryColor;
+                  selectedColorRecruiter = PlatformColor.grayLightColor;
+                });
+                await Future.delayed(const Duration(milliseconds: 100),);
                 secureLocalRepository.readSecureData("userType2").then(
                       (value) => {
                         if (value == null || value == "applicant")
@@ -84,8 +96,8 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
                       },
                     );
               },
-              child: const ChooseRedirectButton(
-                selectedColor: PlatformColor.grayLightColor,
+              child:  ChooseRedirectButton(
+                selectedColor: selectedColorApplicant,
                 svgPath: "assets/icons/bakici.svg",
                 text: "İş Arıyorum",
               ),

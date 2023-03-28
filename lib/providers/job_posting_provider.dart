@@ -44,8 +44,10 @@ class JobPostingProvider with ChangeNotifier {
     } else if (pageType == PageType.detail) {
       fetchJobPostingDetailByUserType();
     } else if (pageType == PageType.filterForm) {
+      _secureLocalRepository.deleteSecureData(StorageItem("selectedNationalities", "value"));
       fetchAllOtherData();
     } else if (pageType == PageType.filter) {
+      _secureLocalRepository.deleteSecureData(StorageItem("selectedNationalities", "value"));
       fetchFilterJobPostingsWithPagination();
     } else if (pageType == PageType.update) {
       fetchMyJobPostingDetail();
@@ -257,7 +259,7 @@ class JobPostingProvider with ChangeNotifier {
     filterData["age"] = (await _secureLocalRepository.readSecureData("age"))!;
     filterData["gender"] = (await _secureLocalRepository.readSecureData("gender"))!;
     filterData["pagingSize"] = pagingSize.toString();
-    filterData["nationality"] = (await _secureLocalRepository.readSecureData("nationality"))!;
+    filterData["nationality"] = (await _secureLocalRepository.readSecureData("selectedNationalities"))!;
   }
 
   Future saveFilterData() async {
@@ -265,7 +267,7 @@ class JobPostingProvider with ChangeNotifier {
       StorageItem("caretakerType", otherService.selectedCaretakerType ?? ""),
       StorageItem("shiftSystem", otherService.selectedShiftSystem ?? ""),
       StorageItem("experience", otherService.selectedExperience ?? ""),
-      StorageItem("nationality", otherService.selectedNationality ?? ""),
+      StorageItem("nationality", (await _secureLocalRepository.readSecureData("selectedNationalities"))?? ""),
       StorageItem("city", otherService.selectedCity ?? ""),
       StorageItem("age", otherService.selectedAge ?? ""),
       StorageItem("gender", otherService.gender ? "female" : "male"),

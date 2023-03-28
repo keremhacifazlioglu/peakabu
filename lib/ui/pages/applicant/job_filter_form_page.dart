@@ -6,6 +6,7 @@ import 'package:platform/providers/job_posting_provider.dart';
 import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/sizes.dart';
+import 'package:platform/ui/organisms/nationality_search_criteria_form.dart';
 import 'package:platform/ui/organisms/redirect/choose_gender_row.dart';
 import 'package:platform/ui/organisms/search_criteria_form.dart';
 import 'package:platform/ui/tokens/colors.dart';
@@ -69,7 +70,11 @@ class JobFilterFormPage extends StatelessWidget {
                           await provider.setSelectedCaretakerTypes(p0);
                         },
                       ),
-                      SearchCriteriaForm(
+                      NationalitySearchCriteriaForm(
+                        data: provider.otherService.nationalities,
+                        text: "Uyruk",
+                      ),
+                      /*SearchCriteriaForm(
                         text: "Uyruk",
                         selectedValue:
                             provider.otherService.selectedNationality ?? provider.otherService.nationalities["1"],
@@ -77,7 +82,7 @@ class JobFilterFormPage extends StatelessWidget {
                         onChange: (p0) async {
                           await provider.setSelectedNationality(p0);
                         },
-                      ),
+                      ),*/
                       SearchCriteriaForm(
                         text: "Çalışma şekli",
                         selectedValue:

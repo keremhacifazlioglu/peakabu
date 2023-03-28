@@ -88,7 +88,11 @@ class ApplicantFilterFormPage extends StatelessWidget {
                           await provider.setSelectedExperience(p0);
                         },
                       ),
-                      SearchCriteriaForm(
+                      NationalitySearchCriteriaForm(
+                        data: provider.otherService.nationalities,
+                        text: "Uyruk",
+                      ),
+                      /*SearchCriteriaForm(
                         text: "Uyruk",
                         selectedValue:
                         provider.otherService.selectedNationality ?? provider.otherService.nationalities["1"],
@@ -96,7 +100,7 @@ class ApplicantFilterFormPage extends StatelessWidget {
                         onChange: (p0) async {
                           await provider.setSelectedNationality(p0);
                         },
-                      ),
+                      ),*/
                       SearchCriteriaForm(
                         text: "Yaş",
                         selectedValue: provider.otherService.selectedAge ?? provider.otherService.ages["1"],

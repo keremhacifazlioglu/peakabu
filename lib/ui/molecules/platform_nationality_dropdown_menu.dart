@@ -27,9 +27,7 @@ class _PlatformNationalityDropdownMenuState extends State<PlatformNationalityDro
 
   @override
   void initState() {
-    secureLocalRepository.readSecureData("selectedNationalities").then((value) => {
-      selectedText = value!,
-    });
+    getInitialData();
     super.initState();
   }
 
@@ -59,14 +57,14 @@ class _PlatformNationalityDropdownMenuState extends State<PlatformNationalityDro
                 onTap: () {
                   Navigator.of(context, rootNavigator: true).pushNamed("/nationality", arguments: widget.data).then(
                         (value) => {
-                          secureLocalRepository.writeSecureData(StorageItem("selectedNationalities", value as String)),
-                          setState(
+                      secureLocalRepository.writeSecureData(StorageItem("selectedNationalities", value as String)),
+                      setState(
                             () {
-                              selectedText = value;
-                            },
-                          ),
+                          selectedText = value;
                         },
-                      );
+                      ),
+                    },
+                  );
                 },
                 child: PlatformDefaultText(
                   text: selectedText.isEmpty ? "Uyruk seçiniz" : selectedText,
@@ -89,5 +87,12 @@ class _PlatformNationalityDropdownMenuState extends State<PlatformNationalityDro
         ],
       ),
     );
+  }
+
+  Future getInitialData() async {
+    String? value = await secureLocalRepository.readSecureData("selectedNationalities");
+    setState(() {
+      selectedText = value??"";
+    });
   }
 }

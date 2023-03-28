@@ -43,8 +43,8 @@ class SpecialForMeList extends StatelessWidget {
             child: const SpecialForMeItem(
                 svgPath: "assets/icons/empty_star.svg", title: "Favori İş İlanlarım"),
           ),
-          const SpecialForMeItem(
-              svgPath: "assets/icons/iconSettings.svg", title: "Ayarlar"),
+          /*const SpecialForMeItem(
+              svgPath: "assets/icons/iconSettings.svg", title: "Ayarlar"),*/
         ],
       ),
     );

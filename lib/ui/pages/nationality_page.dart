@@ -20,9 +20,9 @@ class _NationalityPageState extends State<NationalityPage> {
   @override
   void initState() {
     secureLocalRepository.readSecureData("selectedNationalities").then((value) => {
-      text = value!,
-      prepareCheckBox()
-    });
+          text = value!,
+          prepareCheckBox(),
+        });
     super.initState();
   }
 
@@ -34,7 +34,7 @@ class _NationalityPageState extends State<NationalityPage> {
           padding: EdgeInsets.only(left: 12),
           child: Text("Uyruk seçiniz"),
         ),
-        leading:  Padding(
+        leading: Padding(
           padding: const EdgeInsets.all(16.0),
           child: GestureDetector(
             onTap: () {
@@ -48,25 +48,23 @@ class _NationalityPageState extends State<NationalityPage> {
         addAutomaticKeepAlives: true,
         itemBuilder: (context, index) {
           var list = widget.data!.values.toList();
-          prepareCheckBox();
-          return  Row(
-              children: [
-                Checkbox(
-                  value: selectedMap[list[index]] ?? false,
-                  onChanged: (value)  {
-                    selectedMap[list[index]] = value!;
-                    text =  prepareSelectedText();
-                    setState(()  {
-                    });
-                  },
-                ),
-                PlatformDefaultText(
-                  color: PlatformColorFoundation.textColor,
-                  text: list[index],
-                  fontSize: PlatformTypographyFoundation.bodyMedium,
-                  fontWeight: FontWeight.w400,
-                ),
-              ],
+          return Row(
+            children: [
+              Checkbox(
+                value: selectedMap[list[index]] ?? false,
+                onChanged: (value) {
+                  selectedMap[list[index]] = value!;
+                  text = prepareSelectedText();
+                  setState(() {});
+                },
+              ),
+              PlatformDefaultText(
+                color: PlatformColorFoundation.textColor,
+                text: list[index],
+                fontSize: PlatformTypographyFoundation.bodyMedium,
+                fontWeight: FontWeight.w400,
+              ),
+            ],
           );
         },
         separatorBuilder: (context, index) {
@@ -80,21 +78,20 @@ class _NationalityPageState extends State<NationalityPage> {
     );
   }
 
-  String prepareSelectedText(){
+  String prepareSelectedText() {
     String text = "";
     selectedMap.forEach((key, value) {
-      if(value){
+      if (value) {
         text += "$key,";
       }
     });
     return text;
   }
 
-  Future prepareCheckBox() async{
-    //String? selectedText = await secureLocalRepository.readSecureData("selectedNationalities");
+  Future prepareCheckBox() async {
     List<String> selectedList = text.split(",");
     for (String element in selectedList) {
-      if(element.isNotEmpty){
+      if (element.isNotEmpty) {
         selectedMap[element] = true;
       }
     }
