@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:platform/cons/register_status.dart';
 import 'package:platform/providers/root_recruiter_provider.dart';
-import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/molecules/platform_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 

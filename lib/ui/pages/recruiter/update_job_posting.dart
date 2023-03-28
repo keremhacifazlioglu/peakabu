@@ -10,8 +10,9 @@ import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/organisms/custom_show_dialog.dart';
+import 'package:platform/ui/organisms/nationality_search_criteria_form.dart';
 import 'package:platform/ui/organisms/redirect/choose_gender_row.dart';
-import 'package:platform/ui/organisms/search_caretaker_criteria_form.dart';
+import 'package:platform/ui/organisms/search_criteria_form.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -83,7 +84,7 @@ class UpdateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Şehir",
                           selectedValue: provider.jobDetail!.city,
                           data: provider.otherService.cities,
@@ -93,7 +94,7 @@ class UpdateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "İlçe",
                           selectedValue: provider.jobDetail!.district,
                           data: provider.otherService.districts,
@@ -102,7 +103,7 @@ class UpdateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Yardımcı türü",
                           selectedValue: provider.jobDetail!.caretakerType,
                           data: provider.otherService.caretakerTypes,
@@ -111,7 +112,7 @@ class UpdateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Çalışma şekli",
                           selectedValue: provider.jobDetail!.shiftSystem,
                           data: provider.otherService.shiftSystems,
@@ -120,7 +121,7 @@ class UpdateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Deneyim",
                           selectedValue: provider.jobDetail!.experience,
                           data: provider.otherService.experiences,
@@ -129,16 +130,11 @@ class UpdateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
-                          text: "Uyruk",
-                          selectedValue: provider.jobDetail!.nationality,
+                        NationalitySearchCriteriaForm(
                           data: provider.otherService.nationalities,
-                          onChange: (p0) {
-                            provider.jobDetail!.nationality = p0;
-                            provider.refresh();
-                          },
+                          text:  "Uyruk",
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Yaş",
                           selectedValue: provider.jobDetail!.age,
                           data: provider.otherService.ages,

@@ -7,7 +7,7 @@ import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/atoms/platform_submit_button.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/organisms/redirect/choose_gender_row.dart';
-import 'package:platform/ui/organisms/search_caretaker_criteria_form.dart';
+import 'package:platform/ui/organisms/search_criteria_form.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:platform/util/logger.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +42,7 @@ class JobFilterFormPage extends StatelessWidget {
                           provider.setSelectedGender(p0);
                         },
                       ),
-                      SearchCaretakerCriteriaForm(
+                      SearchCriteriaForm(
                         text: "Şehir",
                         selectedValue: provider.otherService.selectedCity ?? provider.otherService.cities["1"],
                         data: provider.otherService.cities,
@@ -51,7 +51,7 @@ class JobFilterFormPage extends StatelessWidget {
                           await provider.updateDistrictByCity(p0);
                         },
                       ),
-                      SearchCaretakerCriteriaForm(
+                      SearchCriteriaForm(
                         text: "İlçe",
                         selectedValue: provider.otherService.selectedDistrict ?? provider.otherService.districts["1"],
                         data: provider.otherService.districts,
@@ -59,7 +59,7 @@ class JobFilterFormPage extends StatelessWidget {
                           await provider.setSelectedDistrict(p0);
                         },
                       ),
-                      SearchCaretakerCriteriaForm(
+                      SearchCriteriaForm(
                         text: "Yardımcı türü",
                         selectedValue:
                             provider.otherService.selectedCaretakerType ?? provider.otherService.caretakerTypes["1"],
@@ -69,7 +69,16 @@ class JobFilterFormPage extends StatelessWidget {
                           await provider.setSelectedCaretakerTypes(p0);
                         },
                       ),
-                      SearchCaretakerCriteriaForm(
+                      SearchCriteriaForm(
+                        text: "Uyruk",
+                        selectedValue:
+                            provider.otherService.selectedNationality ?? provider.otherService.nationalities["1"],
+                        data: provider.otherService.nationalities,
+                        onChange: (p0) async {
+                          await provider.setSelectedNationality(p0);
+                        },
+                      ),
+                      SearchCriteriaForm(
                         text: "Çalışma şekli",
                         selectedValue:
                             provider.otherService.selectedShiftSystem ?? provider.otherService.shiftSystems["1"],
@@ -78,7 +87,7 @@ class JobFilterFormPage extends StatelessWidget {
                           await provider.setSelectedShiftSystem(p0);
                         },
                       ),
-                      SearchCaretakerCriteriaForm(
+                      SearchCriteriaForm(
                         text: "Deneyim",
                         selectedValue:
                             provider.otherService.selectedExperience ?? provider.otherService.experiences["1"],
@@ -87,8 +96,7 @@ class JobFilterFormPage extends StatelessWidget {
                           await provider.setSelectedExperience(p0);
                         },
                       ),
-
-                      SearchCaretakerCriteriaForm(
+                      SearchCriteriaForm(
                         text: "Yaş",
                         selectedValue: provider.otherService.selectedAge ?? provider.otherService.ages["1"],
                         data: provider.otherService.ages,

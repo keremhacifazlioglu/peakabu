@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
 import 'package:platform/cons/page_type.dart';
@@ -10,8 +12,9 @@ import 'package:platform/ui/foundations/colors.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/foundations/typography.dart';
 import 'package:platform/ui/organisms/custom_show_dialog.dart';
+import 'package:platform/ui/organisms/nationality_search_criteria_form.dart';
 import 'package:platform/ui/organisms/redirect/choose_gender_row.dart';
-import 'package:platform/ui/organisms/search_caretaker_criteria_form.dart';
+import 'package:platform/ui/organisms/search_criteria_form.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +85,7 @@ class CreateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Şehir",
                           selectedValue: provider.otherService.selectedCity,
                           data: provider.otherService.cities,
@@ -92,7 +95,7 @@ class CreateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "İlçe",
                           selectedValue: provider.otherService.selectedDistrict,
                           data: provider.otherService.districts,
@@ -101,7 +104,7 @@ class CreateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Yardımcı türü",
                           selectedValue: provider.otherService.selectedCaretakerType,
                           data: provider.otherService.caretakerTypes,
@@ -110,7 +113,7 @@ class CreateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Çalışma şekli",
                           selectedValue: provider.otherService.selectedShiftSystem,
                           data: provider.otherService.shiftSystems,
@@ -119,7 +122,11 @@ class CreateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        NationalitySearchCriteriaForm(
+                          data: provider.otherService.nationalities,
+                          text: "Uyruk",
+                        ),
+                        SearchCriteriaForm(
                           text: "Deneyim",
                           selectedValue: provider.otherService.selectedExperience,
                           data: provider.otherService.experiences,
@@ -128,16 +135,7 @@ class CreateJobPostingPage extends StatelessWidget {
                             provider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
-                          text: "Uyruk",
-                          selectedValue: provider.otherService.selectedNationality,
-                          data: provider.otherService.nationalities,
-                          onChange: (p0) {
-                            provider.otherService.selectedNationality = p0;
-                            provider.refresh();
-                          },
-                        ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Yaş",
                           selectedValue: provider.otherService.selectedAge,
                           data: provider.otherService.ages,
@@ -208,7 +206,7 @@ class CreateJobPostingPage extends StatelessWidget {
                           (value) => {
                             if (value.isSuccess!)
                               {
-                                Navigator.of(context).pushReplacementNamed("/my_job_posting_detail",arguments: value),
+                                Navigator.of(context).pushReplacementNamed("/my_job_posting_detail", arguments: value),
                               }
                             else
                               {

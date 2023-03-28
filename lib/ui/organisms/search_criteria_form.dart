@@ -3,12 +3,12 @@ import 'package:platform/ui/atoms/platform_label.dart';
 import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/molecules/platform_dropdown_menu.dart';
 
-class SearchCaretakerCriteriaForm extends StatelessWidget {
+class SearchCriteriaForm extends StatelessWidget {
   final String? text,selectedValue;
   final Map<String, String>? data;
   final Function(String)? onChange;
 
-  const SearchCaretakerCriteriaForm({
+  const SearchCriteriaForm({
     Key? key,
     this.text,
     this.data,

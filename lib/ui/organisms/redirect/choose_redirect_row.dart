@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:platform/config/locator.dart';
-import 'package:platform/cons/register_status.dart';
 import 'package:platform/storage/storage_item.dart';
 import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/molecules/redirect/choose_redirect_button.dart';

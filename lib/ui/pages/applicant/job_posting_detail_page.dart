@@ -14,6 +14,7 @@ import 'package:platform/ui/organisms/applicant/job_posting/job_posting_detail_c
 import 'package:platform/ui/organisms/applicant/job_posting/job_posting_detail_skill_card.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class JobPostingDetailPage extends StatelessWidget {
   final JobPosting? jobPosting;
@@ -165,7 +166,7 @@ class JobPostingDetailPage extends StatelessWidget {
                 child: PlatformSubmitButton(
                   buttonText: "Şimdi Ara",
                   onPressed: () {
-
+                    launch("tel://$phoneNumber");
                   },
                 ),
               )

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -23,10 +25,11 @@ class JobPostingProvider with ChangeNotifier {
   bool isLastPage = false, isFavoriteLastPage = false, isFilterLastPage = false, gender = true;
   int pagingSize = 10, pageNumber = 1, pageFavoriteNumber = 1, pageFilterNumber = 1;
   NetworkStatus networkStatus = NetworkStatus.none;
-  String? title, description, userType;
+  String? title, description, userType, nationality;
   JobPosting? jobPosting;
   JobDetail? jobDetail;
   Map<String, String> filterData = {};
+  List<String> selectedList = [];
 
   JobPostingProvider(
     this._jobPostingRepository,
@@ -126,6 +129,7 @@ class JobPostingProvider with ChangeNotifier {
     networkStatus = NetworkStatus.waiting;
     notifyListeners();
     jobDetail = await _jobPostingRepository.fetchRecruiterJobPosting();
+    await _secureLocalRepository.writeSecureData(StorageItem("selectedNationalities", jobDetail!.nationality!));
     networkStatus = jobDetail!.isSuccess! ? NetworkStatus.success : NetworkStatus.error;
     notifyListeners();
     return jobDetail!;
@@ -223,6 +227,11 @@ class JobPostingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future setSelectedNationality(String value) async {
+    otherService.selectedNationality = value;
+    notifyListeners();
+  }
+
   Future setSelectedCity(String value) async {
     otherService.selectedCity = value;
     notifyListeners();
@@ -248,6 +257,7 @@ class JobPostingProvider with ChangeNotifier {
     filterData["age"] = (await _secureLocalRepository.readSecureData("age"))!;
     filterData["gender"] = (await _secureLocalRepository.readSecureData("gender"))!;
     filterData["pagingSize"] = pagingSize.toString();
+    filterData["nationality"] = (await _secureLocalRepository.readSecureData("nationality"))!;
   }
 
   Future saveFilterData() async {
@@ -255,6 +265,7 @@ class JobPostingProvider with ChangeNotifier {
       StorageItem("caretakerType", otherService.selectedCaretakerType ?? ""),
       StorageItem("shiftSystem", otherService.selectedShiftSystem ?? ""),
       StorageItem("experience", otherService.selectedExperience ?? ""),
+      StorageItem("nationality", otherService.selectedNationality ?? ""),
       StorageItem("city", otherService.selectedCity ?? ""),
       StorageItem("age", otherService.selectedAge ?? ""),
       StorageItem("gender", otherService.gender ? "female" : "male"),
@@ -282,7 +293,7 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.shiftSystem = otherService.selectedShiftSystem;
     recruiterJobPostingRequest.gender = !gender ? "female" : "male";
     recruiterJobPostingRequest.age = otherService.selectedAge;
-    recruiterJobPostingRequest.nationality = otherService.selectedNationality;
+    recruiterJobPostingRequest.nationality = await _secureLocalRepository.readSecureData("selectedNationalities");
     recruiterJobPostingRequest.desc = description;
     recruiterJobPostingRequest.experience = otherService.selectedExperience;
 
@@ -304,7 +315,7 @@ class JobPostingProvider with ChangeNotifier {
     recruiterJobPostingRequest.shiftSystem = otherService.selectedShiftSystem;
     recruiterJobPostingRequest.gender = gender ? "female" : "male";
     recruiterJobPostingRequest.age = otherService.selectedAge;
-    recruiterJobPostingRequest.nationality = otherService.selectedNationality;
+    recruiterJobPostingRequest.nationality =  await _secureLocalRepository.readSecureData("selectedNationalities");
     recruiterJobPostingRequest.desc = description?? jobDetail!.desc;
     recruiterJobPostingRequest.experience = otherService.selectedExperience;
 
@@ -318,6 +329,11 @@ class JobPostingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future addNationalitySelectedList(List<String> x) async{
+    selectedList =x;
+    notifyListeners();
+  }
+
   Future fetchJobPostingDetailByUserType() async {
     userType = await _secureLocalRepository.readSecureData("userType");
     if (userType == "applicant") {
@@ -326,4 +342,5 @@ class JobPostingProvider with ChangeNotifier {
       await fetchMyJobPostingDetail();
     }
   }
+
 }

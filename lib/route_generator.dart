@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform/ui/pages/nationality_page.dart';
 import 'package:platform/ui/pages/recruiter/applicant_filter_form_page.dart';
 import 'package:platform/ui/pages/recruiter/applicant_filter_page.dart';
 import 'package:platform/ui/pages/recruiter/applicant_follow_page.dart';
@@ -6,7 +7,7 @@ import 'package:platform/ui/pages/recruiter/applicant_hired_page.dart';
 import 'package:platform/ui/pages/recruiter/applicants_page.dart';
 import 'package:platform/ui/pages/recruiter/create_job_posting.dart';
 import 'package:platform/ui/pages/recruiter/my_job_posting_page.dart';
-import 'package:platform/ui/pages/recruiter/special_for_me_page.dart' as ambassador;
+import 'package:platform/ui/pages/recruiter/special_for_me_page.dart' as recruiter;
 import 'package:platform/ui/pages/applicant/applicant_detail_page.dart';
 import 'package:platform/ui/pages/applicant/applicant_profile_page.dart';
 import 'package:platform/ui/pages/applicant/create_applicant_profile_page.dart';
@@ -76,7 +77,7 @@ class RouteGenerator {
         );
       case 'recruiter_special_for_me':
         return MaterialPageRoute(
-          builder: (_) => const ambassador.SpecialForMePage(),
+          builder: (_) => const recruiter.SpecialForMePage(),
         );
       case 'applicants':
         return MaterialPageRoute(
@@ -159,6 +160,10 @@ class RouteGenerator {
       case '/applicant_filters':
         return MaterialPageRoute(
           builder: (_) => const ApplicantFilterPage(),
+        );
+      case '/nationality':
+        return MaterialPageRoute(
+          builder: (_) => NationalityPage(data: settings.routeArgs()),
         );
       default:
         return _errorRoute();

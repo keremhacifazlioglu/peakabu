@@ -3,7 +3,6 @@ import 'package:platform/ui/atoms/platform_default_text.dart';
 import 'package:platform/ui/atoms/platform_head_text.dart';
 import 'package:platform/ui/atoms/platform_image.dart';
 import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/tokens/colors.dart';
 import 'package:platform/ui/tokens/sizes.dart';
 import 'package:platform/ui/tokens/typography.dart';
 

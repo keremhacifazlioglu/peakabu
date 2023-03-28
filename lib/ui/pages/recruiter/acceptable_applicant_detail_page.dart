@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:platform/config/locator.dart';
@@ -13,6 +11,7 @@ import 'package:platform/ui/organisms/applicant/profile/applicant_profile_body.d
 import 'package:platform/ui/organisms/applicant/profile/applicant_profile_header.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // Todo Bu sayfa kaldırılmak üzere yazılmıştır.
 class AcceptableApplicantDetailPage extends StatelessWidget {
@@ -150,7 +149,7 @@ class AcceptableApplicantDetailPage extends StatelessWidget {
                 child: PlatformSubmitButton(
                   buttonText: "Şimdi Ara",
                   onPressed: () {
-
+                    launch("tel://$phoneNumber");
                   },
                 ),
               )

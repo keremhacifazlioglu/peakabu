@@ -11,7 +11,7 @@ import 'package:platform/ui/foundations/sizes.dart';
 import 'package:platform/ui/molecules/platform_profile_img_upload.dart';
 import 'package:platform/ui/organisms/custom_show_dialog.dart';
 import 'package:platform/ui/organisms/redirect/choose_gender_row.dart';
-import 'package:platform/ui/organisms/search_caretaker_criteria_form.dart';
+import 'package:platform/ui/organisms/search_criteria_form.dart';
 import 'package:platform/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +87,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             applicantProvider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Şehir",
                           selectedValue: applicantProvider.applicantProfile!.city,
                           data: applicantProvider.otherService.cities,
@@ -97,7 +97,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             await applicantProvider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "İlçe",
                           selectedValue: applicantProvider.applicantProfile!.district,
                           data: applicantProvider.otherService.districts,
@@ -106,7 +106,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             await applicantProvider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Yardımcı türü",
                           selectedValue: applicantProvider.applicantProfile!.caretakerType,
                           data: applicantProvider.otherService.caretakerTypes,
@@ -115,7 +115,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             await applicantProvider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Çalışma şekli",
                           selectedValue: applicantProvider.applicantProfile!.shiftSystem,
                           data: applicantProvider.otherService.shiftSystems,
@@ -124,7 +124,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             await applicantProvider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Deneyim",
                           selectedValue: applicantProvider.applicantProfile!.experience,
                           data: applicantProvider.otherService.experiences,
@@ -133,7 +133,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             await applicantProvider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Uyruk",
                           selectedValue: applicantProvider.applicantProfile!.nationality,
                           data: applicantProvider.otherService.nationalities,
@@ -142,7 +142,7 @@ class ApplicantProfilePage extends StatelessWidget {
                             await applicantProvider.refresh();
                           },
                         ),
-                        SearchCaretakerCriteriaForm(
+                        SearchCriteriaForm(
                           text: "Yaş",
                           selectedValue: applicantProvider.applicantProfile!.age,
                           data: applicantProvider.otherService.ages,
