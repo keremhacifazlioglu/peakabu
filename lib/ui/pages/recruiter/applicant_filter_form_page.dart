@@ -92,15 +92,6 @@ class ApplicantFilterFormPage extends StatelessWidget {
                         data: provider.otherService.nationalities,
                         text: "Uyruk",
                       ),
-                      /*SearchCriteriaForm(
-                        text: "Uyruk",
-                        selectedValue:
-                        provider.otherService.selectedNationality ?? provider.otherService.nationalities["1"],
-                        data: provider.otherService.nationalities,
-                        onChange: (p0) async {
-                          await provider.setSelectedNationality(p0);
-                        },
-                      ),*/
                       SearchCriteriaForm(
                         text: "Yaş",
                         selectedValue: provider.otherService.selectedAge ?? provider.otherService.ages["1"],
@@ -144,8 +135,9 @@ class ApplicantFilterFormPage extends StatelessWidget {
                   child: PlatformSubmitButton(
                     buttonText: "Sonuçları göster",
                     onPressed: () {
-                      provider.saveFilterData();
-                      Navigator.of(context).pushNamed("/applicant_filters");
+                      provider.saveFilterData().then((value) => {
+                        Navigator.of(context).pushNamed("/applicant_filters"),
+                      });
                     },
                   ),
                 ),

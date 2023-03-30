@@ -13,7 +13,7 @@ class SecureLocalRepository {
       );
 
   IOSOptions _getIOSOptions() => const IOSOptions(
-      accessibility: KeychainAccessibility.first_unlock_this_device);
+      accessibility: KeychainAccessibility.unlocked_this_device);
 
   Future<void> writeSecureData(StorageItem newItem) async {
     await _secureStorage.write(

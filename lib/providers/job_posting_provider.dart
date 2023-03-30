@@ -259,7 +259,7 @@ class JobPostingProvider with ChangeNotifier {
     filterData["age"] = (await _secureLocalRepository.readSecureData("age"))!;
     filterData["gender"] = (await _secureLocalRepository.readSecureData("gender"))!;
     filterData["pagingSize"] = pagingSize.toString();
-    filterData["nationality"] = (await _secureLocalRepository.readSecureData("selectedNationalities"))!;
+    filterData["nationality"] = (await _secureLocalRepository.readSecureData("selectedNationalities"))??"";
   }
 
   Future saveFilterData() async {

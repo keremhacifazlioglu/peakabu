@@ -12,4 +12,5 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
     }
     return handler.next(options);
   }
+
 }

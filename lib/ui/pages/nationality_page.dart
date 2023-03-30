@@ -20,7 +20,7 @@ class _NationalityPageState extends State<NationalityPage> {
   @override
   void initState() {
     secureLocalRepository.readSecureData("selectedNationalities").then((value) => {
-          text = value!,
+          text = value??"",
           prepareCheckBox(),
         });
     super.initState();
