@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:platform/route_generator.dart';
-import 'package:platform/storage/secure_local_repository.dart';
+import 'package:peakabu/route_generator.dart';
+import 'package:peakabu/storage/secure_local_repository.dart';
 
 @injectable
 class RootProvider extends ChangeNotifier {

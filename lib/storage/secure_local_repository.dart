@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:platform/storage/storage_item.dart';
+import 'package:peakabu/storage/storage_item.dart';
 
 @injectable
 class SecureLocalRepository {

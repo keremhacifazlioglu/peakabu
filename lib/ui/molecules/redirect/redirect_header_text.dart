@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_head_text.dart';
-import 'package:platform/ui/atoms/platform_image.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/tokens/sizes.dart';
-import 'package:platform/ui/tokens/typography.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_head_text.dart';
+import 'package:peakabu/ui/atoms/platform_image.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/tokens/sizes.dart';
+import 'package:peakabu/ui/tokens/typography.dart';
 
 class RedirectHeaderText extends StatelessWidget {
   const RedirectHeaderText({Key? key}) : super(key: key);

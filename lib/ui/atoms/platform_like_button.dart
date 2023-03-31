@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class PlatformLikeButton extends StatelessWidget {
   final double? width, height;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/ui/molecules/applicant/profile/applicant_profile_header_card.dart';
-import 'package:platform/ui/tokens/sizes.dart';
+import 'package:peakabu/domain/response/applicant/applicant_profile.dart';
+import 'package:peakabu/ui/molecules/applicant/profile/applicant_profile_header_card.dart';
+import 'package:peakabu/ui/tokens/sizes.dart';
 
 class ApplicantDetailHeader extends StatelessWidget {
   final ApplicantProfile? applicantProfile;

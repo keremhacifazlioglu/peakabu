@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/storage/storage_item.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/molecules/redirect/choose_redirect_button.dart';
-import 'package:platform/ui/tokens/colors.dart';
-import 'package:platform/ui/tokens/sizes.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/storage/storage_item.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/molecules/redirect/choose_redirect_button.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
+import 'package:peakabu/ui/tokens/sizes.dart';
 
 class ChooseRedirectRow extends StatefulWidget {
   const ChooseRedirectRow({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/ui/molecules/applicant/applicant_skill_item.dart';
-import 'package:platform/ui/molecules/applicant/profile/applicant_profile_description_card.dart';
-import 'package:platform/ui/tokens/colors.dart';
-import 'package:platform/ui/tokens/sizes.dart';
+import 'package:peakabu/domain/response/applicant/applicant_profile.dart';
+import 'package:peakabu/ui/molecules/applicant/applicant_skill_item.dart';
+import 'package:peakabu/ui/molecules/applicant/profile/applicant_profile_description_card.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
+import 'package:peakabu/ui/tokens/sizes.dart';
 
 class ApplicantProfileBody extends StatelessWidget {
   final ApplicantProfile? applicantProfile;

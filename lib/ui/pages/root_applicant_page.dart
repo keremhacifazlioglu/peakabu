@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/providers/root_provider.dart';
-import 'package:platform/ui/molecules/platform_bottom_nav_bar.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/providers/root_provider.dart';
+import 'package:peakabu/ui/molecules/platform_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 class RootApplicantPage extends StatelessWidget {

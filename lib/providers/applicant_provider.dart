@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
-import 'package:platform/cons/page_type.dart';
-import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/domain/response/job/base_list_response.dart';
-import 'package:platform/domain/response/job/job_phone.dart';
-import 'package:platform/domain/response/success_response.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/repository/applicant_repository.dart';
-import 'package:platform/service/other_service.dart';
-import 'package:platform/storage/secure_local_repository.dart';
+import 'package:peakabu/cons/page_type.dart';
+import 'package:peakabu/domain/response/applicant/applicant_profile.dart';
+import 'package:peakabu/domain/response/job/base_list_response.dart';
+import 'package:peakabu/domain/response/job/job_phone.dart';
+import 'package:peakabu/domain/response/success_response.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/repository/applicant_repository.dart';
+import 'package:peakabu/service/other_service.dart';
+import 'package:peakabu/storage/secure_local_repository.dart';
 
 @injectable
 class ApplicantProvider with ChangeNotifier {

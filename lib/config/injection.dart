@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:platform/config/injection.config.dart';
+import 'package:peakabu/config/injection.config.dart';
 
 final getIt = GetIt.instance;
 

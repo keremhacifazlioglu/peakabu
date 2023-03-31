@@ -1,15 +1,15 @@
 import 'package:injectable/injectable.dart';
-import 'package:platform/domain/response/job/base_list_response.dart';
-import 'package:platform/domain/response/other/age.dart';
-import 'package:platform/domain/response/other/caretaker_type.dart';
-import 'package:platform/domain/response/other/city.dart';
-import 'package:platform/domain/response/other/district.dart';
-import 'package:platform/domain/response/other/experience.dart';
-import 'package:platform/domain/response/other/nationality.dart';
-import 'package:platform/domain/response/other/shift_system.dart';
-import 'package:platform/network/interceptor/error_interceptor.dart';
-import 'package:platform/network/rest_client.dart';
-import 'package:platform/repository/impl/other_repository_impl.dart';
+import 'package:peakabu/domain/response/job/base_list_response.dart';
+import 'package:peakabu/domain/response/other/age.dart';
+import 'package:peakabu/domain/response/other/caretaker_type.dart';
+import 'package:peakabu/domain/response/other/city.dart';
+import 'package:peakabu/domain/response/other/district.dart';
+import 'package:peakabu/domain/response/other/experience.dart';
+import 'package:peakabu/domain/response/other/nationality.dart';
+import 'package:peakabu/domain/response/other/shift_system.dart';
+import 'package:peakabu/network/interceptor/error_interceptor.dart';
+import 'package:peakabu/network/rest_client.dart';
+import 'package:peakabu/repository/impl/other_repository_impl.dart';
 
 @injectable
 class OtherRepository implements IOtherRepository{

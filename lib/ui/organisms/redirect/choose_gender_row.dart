@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/molecules/platform_gender_button.dart';
-import 'package:platform/ui/tokens/colors.dart';
-import 'package:platform/ui/tokens/sizes.dart';
+import 'package:peakabu/ui/molecules/platform_gender_button.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
+import 'package:peakabu/ui/tokens/sizes.dart';
 
 class ChooseGenderRow extends StatelessWidget {
   final Function(bool)? onTap;

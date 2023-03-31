@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class LoadingBody extends StatelessWidget {
   final Widget? child;

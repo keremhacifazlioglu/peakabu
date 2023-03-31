@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/molecules/applicant/special_for_me/special_for_me_item.dart';
+import 'package:peakabu/ui/molecules/applicant/special_for_me/special_for_me_item.dart';
 
 class SpecialForMeList extends StatelessWidget {
   const SpecialForMeList({Key? key}) : super(key: key);

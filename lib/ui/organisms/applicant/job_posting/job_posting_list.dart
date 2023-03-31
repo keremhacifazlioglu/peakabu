@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
-import 'package:platform/storage/storage_item.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/molecules/applicant/job_posting/job_posting_list_item.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/domain/response/job/job_posting.dart';
+import 'package:peakabu/storage/storage_item.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/molecules/applicant/job_posting/job_posting_list_item.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class JobPostingList extends StatelessWidget {
   final List<JobPosting>? jobPostings;

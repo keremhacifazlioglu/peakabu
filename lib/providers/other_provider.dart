@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
-import 'package:platform/domain/response/job/base_list_response.dart';
-import 'package:platform/domain/response/other/age.dart';
-import 'package:platform/domain/response/other/caretaker_type.dart';
-import 'package:platform/domain/response/other/city.dart';
-import 'package:platform/domain/response/other/experience.dart';
-import 'package:platform/domain/response/other/nationality.dart';
-import 'package:platform/domain/response/other/shift_system.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/repository/other_repository.dart';
+import 'package:peakabu/domain/response/job/base_list_response.dart';
+import 'package:peakabu/domain/response/other/age.dart';
+import 'package:peakabu/domain/response/other/caretaker_type.dart';
+import 'package:peakabu/domain/response/other/city.dart';
+import 'package:peakabu/domain/response/other/experience.dart';
+import 'package:peakabu/domain/response/other/nationality.dart';
+import 'package:peakabu/domain/response/other/shift_system.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/repository/other_repository.dart';
 
 @injectable
 class OtherProvider with ChangeNotifier {

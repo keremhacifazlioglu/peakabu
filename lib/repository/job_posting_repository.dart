@@ -1,14 +1,14 @@
 import 'package:injectable/injectable.dart';
-import 'package:platform/domain/request/job/recruiter_job_posting_request.dart';
-import 'package:platform/domain/response/job/base_list_response.dart';
-import 'package:platform/domain/response/job/job_detail.dart';
-import 'package:platform/domain/response/job/job_request.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
-import 'package:platform/domain/response/job/job_phone.dart';
-import 'package:platform/domain/response/success_response.dart';
-import 'package:platform/network/interceptor/error_interceptor.dart';
-import 'package:platform/network/rest_client.dart';
-import 'package:platform/repository/impl/job_posting_repository_impl.dart';
+import 'package:peakabu/domain/request/job/recruiter_job_posting_request.dart';
+import 'package:peakabu/domain/response/job/base_list_response.dart';
+import 'package:peakabu/domain/response/job/job_detail.dart';
+import 'package:peakabu/domain/response/job/job_request.dart';
+import 'package:peakabu/domain/response/job/job_posting.dart';
+import 'package:peakabu/domain/response/job/job_phone.dart';
+import 'package:peakabu/domain/response/success_response.dart';
+import 'package:peakabu/network/interceptor/error_interceptor.dart';
+import 'package:peakabu/network/rest_client.dart';
+import 'package:peakabu/repository/impl/job_posting_repository_impl.dart';
 
 @injectable
 class JobPostingRepository extends IJobPostingRepository {

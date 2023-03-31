@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/cons/page_type.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/providers/job_posting_provider.dart';
-import 'package:platform/ui/organisms/applicant/job_posting/job_posting_list.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/cons/page_type.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/providers/job_posting_provider.dart';
+import 'package:peakabu/ui/organisms/applicant/job_posting/job_posting_list.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class JobFollowPage extends StatelessWidget {

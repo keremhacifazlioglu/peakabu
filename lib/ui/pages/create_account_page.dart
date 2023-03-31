@@ -1,19 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/providers/auth_provider.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_head_text.dart';
-import 'package:platform/ui/atoms/platform_icon.dart';
-import 'package:platform/ui/atoms/platform_loading.dart';
-import 'package:platform/ui/atoms/platform_submit_button.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/organisms/custom_show_dialog.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/providers/auth_provider.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_head_text.dart';
+import 'package:peakabu/ui/atoms/platform_icon.dart';
+import 'package:peakabu/ui/atoms/platform_loading.dart';
+import 'package:peakabu/ui/atoms/platform_submit_button.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/organisms/custom_show_dialog.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class CreateAccountPage extends StatelessWidget {

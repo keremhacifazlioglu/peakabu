@@ -1,4 +1,4 @@
-import 'package:platform/domain/response/job/base_list_response.dart';
+import 'package:peakabu/domain/response/job/base_list_response.dart';
 
 abstract class IOtherRepository {
 

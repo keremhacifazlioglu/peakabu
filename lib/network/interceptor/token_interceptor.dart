@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:platform/config/locator.dart';
+import 'package:peakabu/config/locator.dart';
 
 class TokenInterceptor extends QueuedInterceptorsWrapper {
   @override

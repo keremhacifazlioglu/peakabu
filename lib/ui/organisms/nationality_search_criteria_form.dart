@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_label.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/molecules/platform_dropdown_menu.dart';
-import 'package:platform/ui/molecules/platform_nationality_dropdown_menu.dart';
+import 'package:peakabu/ui/atoms/platform_label.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/molecules/platform_dropdown_menu.dart';
+import 'package:peakabu/ui/molecules/platform_nationality_dropdown_menu.dart';
 
 class NationalitySearchCriteriaForm extends StatelessWidget {
   final String? text;

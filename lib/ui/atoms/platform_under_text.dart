@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
 
 class PlatformUnderText extends StatelessWidget {
   final String? text;

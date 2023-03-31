@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/job/job_detail.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/molecules/applicant/applicant_skill_item.dart';
+import 'package:peakabu/domain/response/job/job_detail.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/molecules/applicant/applicant_skill_item.dart';
 
 class MyJobPostingDetailSkillCard extends StatelessWidget {
   final JobDetail? jobDetail;

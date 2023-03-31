@@ -1,14 +1,14 @@
 import 'package:injectable/injectable.dart';
-import 'package:platform/domain/request/auth/confirm_sms_request.dart';
-import 'package:platform/domain/request/auth/register_request.dart';
-import 'package:platform/domain/request/auth/send_sms_request.dart';
-import 'package:platform/domain/request/auth/token_request.dart';
-import 'package:platform/domain/response/auth/send_sms.dart';
-import 'package:platform/domain/response/auth/token.dart';
-import 'package:platform/domain/response/success_response.dart';
-import 'package:platform/network/interceptor/error_interceptor.dart';
-import 'package:platform/network/rest_client.dart';
-import 'package:platform/repository/impl/auth_repository_impl.dart';
+import 'package:peakabu/domain/request/auth/confirm_sms_request.dart';
+import 'package:peakabu/domain/request/auth/register_request.dart';
+import 'package:peakabu/domain/request/auth/send_sms_request.dart';
+import 'package:peakabu/domain/request/auth/token_request.dart';
+import 'package:peakabu/domain/response/auth/send_sms.dart';
+import 'package:peakabu/domain/response/auth/token.dart';
+import 'package:peakabu/domain/response/success_response.dart';
+import 'package:peakabu/network/interceptor/error_interceptor.dart';
+import 'package:peakabu/network/rest_client.dart';
+import 'package:peakabu/repository/impl/auth_repository_impl.dart';
 
 @injectable
 class AuthRepository implements IAuthRepository {

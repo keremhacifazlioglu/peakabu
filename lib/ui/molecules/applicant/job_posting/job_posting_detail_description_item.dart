@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class JobPostingDetailDescriptionItem extends StatelessWidget {
   final String? jobPostingDescription;

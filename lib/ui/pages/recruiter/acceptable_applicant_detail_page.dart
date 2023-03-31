@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/cons/page_type.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/providers/applicant_provider.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_submit_button.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/organisms/applicant/profile/applicant_profile_body.dart';
-import 'package:platform/ui/organisms/applicant/profile/applicant_profile_header.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/cons/page_type.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/providers/applicant_provider.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_submit_button.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/organisms/applicant/profile/applicant_profile_body.dart';
+import 'package:peakabu/ui/organisms/applicant/profile/applicant_profile_header.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

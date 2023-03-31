@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/molecules/platform_icon_label.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/domain/response/applicant/applicant_profile.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/molecules/platform_icon_label.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class ApplicantProfileHeaderCard extends StatelessWidget {
   final ApplicantProfile? applicantProfile;

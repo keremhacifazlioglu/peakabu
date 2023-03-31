@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/tokens/typography.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/tokens/typography.dart';
 
 class PlatformTextFormInput extends StatelessWidget {
   final String? labelText;

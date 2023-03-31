@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/tokens/typography.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/tokens/typography.dart';
 
 class PlatformLabel extends StatelessWidget {
   final String? text;

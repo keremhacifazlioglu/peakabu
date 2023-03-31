@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/cons/page_type.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/providers/job_posting_provider.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_submit_button.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/organisms/recruiter/job_candidate/my_job_posting_detail_card.dart';
-import 'package:platform/ui/organisms/recruiter/job_candidate/my_job_posting_detail_skill_card.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/cons/page_type.dart';
+import 'package:peakabu/domain/response/job/job_posting.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/providers/job_posting_provider.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_submit_button.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/organisms/recruiter/job_candidate/my_job_posting_detail_card.dart';
+import 'package:peakabu/ui/organisms/recruiter/job_candidate/my_job_posting_detail_skill_card.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class MyJobPostingPage extends StatelessWidget {

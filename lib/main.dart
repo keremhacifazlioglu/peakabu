@@ -2,14 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:platform/config/injection.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/firebase_options.dart';
-import 'package:platform/providers/other_provider.dart';
-import 'package:platform/providers/root_recruiter_provider.dart';
-import 'package:platform/providers/root_provider.dart';
-import 'package:platform/route_generator.dart';
-import 'package:platform/ui/theme.dart';
+import 'package:peakabu/config/injection.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/firebase_options.dart';
+import 'package:peakabu/providers/other_provider.dart';
+import 'package:peakabu/providers/root_recruiter_provider.dart';
+import 'package:peakabu/providers/root_provider.dart';
+import 'package:peakabu/route_generator.dart';
+import 'package:peakabu/ui/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

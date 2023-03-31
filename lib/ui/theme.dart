@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 import 'foundations/colors.dart';
 

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:platform/cons/register_status.dart';
-import 'package:platform/domain/request/auth/confirm_sms_request.dart';
-import 'package:platform/domain/request/auth/register_request.dart';
-import 'package:platform/domain/request/auth/send_sms_request.dart';
-import 'package:platform/domain/request/auth/token_request.dart';
-import 'package:platform/domain/response/auth/send_sms.dart';
-import 'package:platform/domain/response/auth/token.dart';
-import 'package:platform/domain/response/success_response.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/repository/auth_repository.dart';
-import 'package:platform/storage/secure_local_repository.dart';
-import 'package:platform/storage/storage_item.dart';
+import 'package:peakabu/cons/register_status.dart';
+import 'package:peakabu/domain/request/auth/confirm_sms_request.dart';
+import 'package:peakabu/domain/request/auth/register_request.dart';
+import 'package:peakabu/domain/request/auth/send_sms_request.dart';
+import 'package:peakabu/domain/request/auth/token_request.dart';
+import 'package:peakabu/domain/response/auth/send_sms.dart';
+import 'package:peakabu/domain/response/auth/token.dart';
+import 'package:peakabu/domain/response/success_response.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/repository/auth_repository.dart';
+import 'package:peakabu/storage/secure_local_repository.dart';
+import 'package:peakabu/storage/storage_item.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
 class AuthProvider with ChangeNotifier {

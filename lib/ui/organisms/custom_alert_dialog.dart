@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_cancel_button.dart';
-import 'package:platform/ui/atoms/platform_submit_button.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/atoms/platform_cancel_button.dart';
+import 'package:peakabu/ui/atoms/platform_submit_button.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String? message;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/applicant_requests/applicant_request.dart';
-import 'package:platform/providers/applicant_hired_provider.dart';
-import 'package:platform/ui/atoms/platform_cancel_button.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_submit_button.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/molecules/recruiter/applicant_hired/applicant_hired_list_item.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/domain/response/applicant_requests/applicant_request.dart';
+import 'package:peakabu/providers/applicant_hired_provider.dart';
+import 'package:peakabu/ui/atoms/platform_cancel_button.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_submit_button.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/molecules/recruiter/applicant_hired/applicant_hired_list_item.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class ApplicantHiredList extends StatelessWidget {

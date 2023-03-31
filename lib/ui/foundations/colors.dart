@@ -1,4 +1,4 @@
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class PlatformColorFoundation {
   static const textColor = PlatformColor.offBlackColor;

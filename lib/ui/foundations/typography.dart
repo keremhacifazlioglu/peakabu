@@ -1,4 +1,4 @@
-import 'package:platform/ui/tokens/typography.dart';
+import 'package:peakabu/ui/tokens/typography.dart';
 
 class PlatformTypographyFoundation {
   static const double bodyLarge = PlatformTypography.sizeSL;

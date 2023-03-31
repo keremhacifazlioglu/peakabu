@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_icon.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/atoms/platform_icon.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class ChooseRedirectButton extends StatelessWidget {
   final String? svgPath, text;

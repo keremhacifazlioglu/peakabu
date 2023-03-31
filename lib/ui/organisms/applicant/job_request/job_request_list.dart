@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
-import 'package:platform/domain/response/job/job_request.dart';
-import 'package:platform/providers/job_requests_provider.dart';
-import 'package:platform/ui/atoms/platform_cancel_button.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_submit_button.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/molecules/applicant/job_request/job_request_list_item.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/domain/response/job/job_posting.dart';
+import 'package:peakabu/domain/response/job/job_request.dart';
+import 'package:peakabu/providers/job_requests_provider.dart';
+import 'package:peakabu/ui/atoms/platform_cancel_button.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_submit_button.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/molecules/applicant/job_request/job_request_list_item.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class JobRequestList extends StatelessWidget {

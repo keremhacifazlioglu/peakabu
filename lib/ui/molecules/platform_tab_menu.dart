@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
 
 class PlatformTabMenu extends StatelessWidget {
   final double? width;

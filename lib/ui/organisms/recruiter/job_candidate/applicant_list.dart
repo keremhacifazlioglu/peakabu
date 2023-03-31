@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/storage/storage_item.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/molecules/recruiter/job_candidate/applicant_list_item.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/domain/response/applicant/applicant_profile.dart';
+import 'package:peakabu/storage/storage_item.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/molecules/recruiter/job_candidate/applicant_list_item.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class ApplicantList extends StatelessWidget {
   final List<ApplicantProfile>? applicantProfiles;

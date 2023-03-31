@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:platform/providers/root_recruiter_provider.dart';
-import 'package:platform/ui/molecules/platform_bottom_nav_bar.dart';
+import 'package:peakabu/providers/root_recruiter_provider.dart';
+import 'package:peakabu/ui/molecules/platform_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/locator.dart';

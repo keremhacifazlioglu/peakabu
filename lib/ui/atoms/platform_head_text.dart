@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
 
 class PlatformHeadText extends StatelessWidget {
   final String? headText;

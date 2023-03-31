@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/domain/response/job/job_posting.dart';
-import 'package:platform/providers/job_posting_provider.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/atoms/platform_like_button.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/molecules/platform_icon_label.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/domain/response/job/job_posting.dart';
+import 'package:peakabu/providers/job_posting_provider.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/atoms/platform_like_button.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/molecules/platform_icon_label.dart';
 import 'package:provider/provider.dart';
 
 class JobPostingListItem extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:platform/domain/response/job/job_detail.dart';
-import 'package:platform/ui/atoms/platform_default_text.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/molecules/platform_icon_label.dart';
+import 'package:peakabu/domain/response/job/job_detail.dart';
+import 'package:peakabu/ui/atoms/platform_default_text.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/molecules/platform_icon_label.dart';
 
 class JobPostingListItem extends StatelessWidget {
   final JobDetail? jobDetail;

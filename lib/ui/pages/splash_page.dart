@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:platform/config/locator.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/providers/splash_provider.dart';
-import 'package:platform/ui/organisms/custom_show_dialog.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/config/locator.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/providers/splash_provider.dart';
+import 'package:peakabu/ui/organisms/custom_show_dialog.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatelessWidget {

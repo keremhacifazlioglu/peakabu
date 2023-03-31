@@ -1,10 +1,10 @@
-import 'package:platform/config/injection.dart';
-import 'package:platform/repository/applicant_repository.dart';
-import 'package:platform/repository/auth_repository.dart';
-import 'package:platform/repository/job_posting_repository.dart';
-import 'package:platform/repository/other_repository.dart';
-import 'package:platform/service/other_service.dart';
-import 'package:platform/storage/secure_local_repository.dart';
+import 'package:peakabu/config/injection.dart';
+import 'package:peakabu/repository/applicant_repository.dart';
+import 'package:peakabu/repository/auth_repository.dart';
+import 'package:peakabu/repository/job_posting_repository.dart';
+import 'package:peakabu/repository/other_repository.dart';
+import 'package:peakabu/service/other_service.dart';
+import 'package:peakabu/storage/secure_local_repository.dart';
 
 final SecureLocalRepository secureLocalRepository = getIt.get<SecureLocalRepository>();
 final AuthRepository authRepository = getIt.get<AuthRepository>();

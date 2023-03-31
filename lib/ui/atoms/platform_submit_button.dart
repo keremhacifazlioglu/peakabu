@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/colors.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/foundations/colors.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class PlatformSubmitButton extends StatelessWidget {
   final String? buttonText;

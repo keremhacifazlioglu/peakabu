@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:platform/cons/page_type.dart';
-import 'package:platform/domain/response/job/base_list_response.dart';
-import 'package:platform/domain/response/job/job_request.dart';
-import 'package:platform/domain/response/success_response.dart';
-import 'package:platform/network/network_status.dart';
-import 'package:platform/repository/job_posting_repository.dart';
+import 'package:peakabu/cons/page_type.dart';
+import 'package:peakabu/domain/response/job/base_list_response.dart';
+import 'package:peakabu/domain/response/job/job_request.dart';
+import 'package:peakabu/domain/response/success_response.dart';
+import 'package:peakabu/network/network_status.dart';
+import 'package:peakabu/repository/job_posting_repository.dart';
 
 @injectable
 class JobRequestsProvider with ChangeNotifier {

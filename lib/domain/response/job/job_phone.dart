@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:platform/domain/exception_error.dart';
+import 'package:peakabu/domain/exception_error.dart';
 
 part 'job_phone.g.dart';
 

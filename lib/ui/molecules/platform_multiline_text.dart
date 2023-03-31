@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_label.dart';
-import 'package:platform/ui/foundations/sizes.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/atoms/platform_label.dart';
+import 'package:peakabu/ui/foundations/sizes.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class PlatformMultilineText extends StatelessWidget {
   const PlatformMultilineText({Key? key}) : super(key: key);

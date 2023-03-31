@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/foundations/typography.dart';
-import 'package:platform/ui/tokens/colors.dart';
+import 'package:peakabu/ui/foundations/typography.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
 
 class PlatformCancelButton extends StatelessWidget {
   final String? buttonText;

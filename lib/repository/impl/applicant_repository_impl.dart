@@ -1,8 +1,8 @@
-import 'package:platform/domain/response/applicant/applicant_profile.dart';
-import 'package:platform/domain/response/job/base_list_response.dart';
-import 'package:platform/domain/response/job/job_detail.dart';
-import 'package:platform/domain/response/job/job_phone.dart';
-import 'package:platform/domain/response/success_response.dart';
+import 'package:peakabu/domain/response/applicant/applicant_profile.dart';
+import 'package:peakabu/domain/response/job/base_list_response.dart';
+import 'package:peakabu/domain/response/job/job_detail.dart';
+import 'package:peakabu/domain/response/job/job_phone.dart';
+import 'package:peakabu/domain/response/success_response.dart';
 
 abstract class IApplicantRepository {
 

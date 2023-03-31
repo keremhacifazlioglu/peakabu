@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:platform/ui/atoms/platform_icon.dart';
-import 'package:platform/ui/atoms/platform_dropdown.dart';
-import 'package:platform/ui/tokens/colors.dart';
-import 'package:platform/ui/tokens/sizes.dart';
+import 'package:peakabu/ui/atoms/platform_icon.dart';
+import 'package:peakabu/ui/atoms/platform_dropdown.dart';
+import 'package:peakabu/ui/tokens/colors.dart';
+import 'package:peakabu/ui/tokens/sizes.dart';
 
 class CustomDropdownMenu extends StatelessWidget {
   final Map<String, String>? data;
