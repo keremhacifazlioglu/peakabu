@@ -11,6 +11,7 @@ import 'package:peakabu/providers/root_provider.dart';
 import 'package:peakabu/route_generator.dart';
 import 'package:peakabu/ui/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,7 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+  await clearSecureStorageOnReinstall();
   runApp(
     MultiProvider(
       providers: [
@@ -41,6 +43,16 @@ void main() async {
       child: const MyApp(),
     ),
   );
+}
+
+Future clearSecureStorageOnReinstall() async {
+  String key = 'hasRunBefore';
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool hasRunBefore = prefs.getBool(key)?? false;
+  if(!hasRunBefore) {
+    await secureLocalRepository.deleteAllSecureData();
+    prefs.setBool(key, true);
+  }
 }
 
 class MyApp extends StatelessWidget {

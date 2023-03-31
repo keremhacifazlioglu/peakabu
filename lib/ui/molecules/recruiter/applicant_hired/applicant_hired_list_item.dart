@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:peakabu/cons/request_job_status.dart';
 import 'package:peakabu/domain/response/applicant_requests/applicant_request.dart';
 import 'package:peakabu/ui/atoms/platform_default_text.dart';
@@ -94,10 +95,26 @@ class ApplicantHiredListItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),
+          if(applicantRequest!.requestStatus == "accepted")
+            Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SvgPicture.asset("assets/icons/chevron_right.svg"),
+                  ),
+                ],
+              ),
+            )
+          else
+            const Text(""),
         ],
       ),
     );

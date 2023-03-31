@@ -29,7 +29,7 @@ class ApplicantHiredList extends StatelessWidget {
             if (applicantRequests![index].requestStatus == "accepted") {
               Navigator.of(context, rootNavigator: true).pushNamed("/acceptable_applicant_detail");
             } else if (applicantRequests![index].requestStatus == "pending" &&
-                applicantHiredProvider.isSelectedHireJob) {
+                applicantHiredProvider.isSelectedFindJob) {
               showConfirmApplicantDialog(context, applicantHiredProvider, applicantRequests![index]);
             }
           },

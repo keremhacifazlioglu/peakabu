@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:peakabu/config/locator.dart';
 import 'package:peakabu/cons/page_type.dart';

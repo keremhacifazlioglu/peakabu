@@ -34,7 +34,7 @@ class JobRequestList extends StatelessWidget {
               if (jobRequests![index].requestStatus == "accepted") {
                 Navigator.of(context, rootNavigator: true).pushNamed("/acceptable_job_posting_detail",
                     arguments: JobPosting.fromJson(jobRequests![index].toJson()));
-              } else if(jobRequests![index].requestStatus == "pending" && jobRequestProvider.isSelectedFindJob){
+              } else if(jobRequests![index].requestStatus == "pending" && jobRequestProvider.isSelectedHireJob){
                 showConfirmRequestDialog(context, jobRequestProvider, jobRequests![index]);
               }
             },

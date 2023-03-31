@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:peakabu/cons/request_job_status.dart';
 import 'package:peakabu/domain/response/job/job_request.dart';
 import 'package:peakabu/ui/atoms/platform_default_text.dart';
@@ -24,7 +25,7 @@ class JobRequestListItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width - 64,
+                width: MediaQuery.of(context).size.width - 80,
                 child: Padding(
                   padding: const EdgeInsets.only(
                     top: 8,
@@ -34,9 +35,17 @@ class JobRequestListItem extends StatelessWidget {
                     color: PlatformColorFoundation.textColor,
                     fontWeight: FontWeight.w600,
                     fontSize: PlatformTypographyFoundation.bodyLarge,
+                    maxLine: 2,
                   ),
                 ),
               ),
+              if(jobRequest!.requestStatus == "accepted")
+                Padding(
+                  padding: const EdgeInsets.only(top: 8,left: 8),
+                  child: SvgPicture.asset("assets/icons/chevron_right.svg"),
+                )
+              else
+                const Text(""),
             ],
           ),
           Row(
@@ -53,8 +62,7 @@ class JobRequestListItem extends StatelessWidget {
                       ),
                       child: PlatformIconLabel(
                         labelIconPath: "assets/icons/group.svg",
-                        labelText:
-                            "${jobRequest!.caretakerType!}/${jobRequest!.shiftSystem!}",
+                        labelText: "${jobRequest!.caretakerType!}/${jobRequest!.shiftSystem!}",
                       ),
                     ),
                     Padding(

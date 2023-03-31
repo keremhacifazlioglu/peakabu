@@ -57,7 +57,7 @@ class _PlatformNationalityDropdownMenuState extends State<PlatformNationalityDro
                 onTap: () {
                   Navigator.of(context, rootNavigator: true).pushNamed("/nationality", arguments: widget.data).then(
                         (value) => {
-                      secureLocalRepository.writeSecureData(StorageItem("selectedNationalities", value as String)),
+                      secureLocalRepository.writeSecureData(StorageItem("selectedNationalities", (value as String))),
                       setState(
                             () {
                           selectedText = value;

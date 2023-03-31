@@ -14,7 +14,7 @@ class ChooseRedirectRow extends StatefulWidget {
 }
 
 class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
-  Color selectedColorRecruiter = PlatformColor.primaryColor, selectedColorApplicant = PlatformColor.grayLightColor;
+  Color selectedColorRecruiter = PlatformColor.grayLightColor, selectedColorApplicant = PlatformColor.grayLightColor;
 
   @override
   Widget build(BuildContext context) {
