@@ -25,7 +25,8 @@ class SplashPage extends StatelessWidget {
               if (provider.networkStatus == NetworkStatus.success) {
                 SchedulerBinding.instance.addPostFrameCallback(
                   (_) {
-                    provider.getUserType().then(
+                    Navigator.of(context, rootNavigator: true).pushNamed("/ambassador");
+                    /*provider.getUserType().then(
                           (value) => {
                             if (value.isEmpty)
                               {
@@ -48,7 +49,7 @@ class SplashPage extends StatelessWidget {
                                     ),
                               }
                           },
-                        );
+                        );*/
                   },
                 );
               }

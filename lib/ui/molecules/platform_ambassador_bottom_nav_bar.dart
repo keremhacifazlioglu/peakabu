@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:peakabu/ui/atoms/platform_icon.dart';
 import 'package:peakabu/ui/tokens/colors.dart';
 
-class PlatformBottomNavBar extends StatelessWidget {
+class PlatformAmbassadorBottomNavBar extends StatelessWidget {
   final int? currentIndex;
   final Function(int)? onTap;
 
-  const PlatformBottomNavBar({
+  const PlatformAmbassadorBottomNavBar({
     Key? key,
     this.currentIndex,
     this.onTap,
@@ -39,21 +39,6 @@ class PlatformBottomNavBar extends StatelessWidget {
           label: 'Home',
           activeIcon: PlatformIcon(
             svgPath: "assets/icons/home.svg",
-            height: 30,
-            width: 30,
-            color: PlatformColor.primaryColor,
-          ),
-        ),
-        BottomNavigationBarItem(
-          icon: PlatformIcon(
-            svgPath: "assets/icons/empty_star.svg",
-            height: 30,
-            width: 30,
-            color: PlatformColor.grayLightColor,
-          ),
-          label: 'Follow',
-          activeIcon: PlatformIcon(
-            svgPath: "assets/icons/empty_star.svg",
             height: 30,
             width: 30,
             color: PlatformColor.primaryColor,

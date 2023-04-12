@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:peakabu/ui/pages/ambassador/ambassadors_page.dart';
+import 'package:peakabu/ui/pages/ambassador/notify_page.dart';
 import 'package:peakabu/ui/pages/nationality_page.dart';
 import 'package:peakabu/ui/pages/recruiter/applicant_filter_form_page.dart';
 import 'package:peakabu/ui/pages/recruiter/applicant_filter_page.dart';
@@ -19,6 +21,7 @@ import 'package:peakabu/ui/pages/applicant/special_for_me_page.dart';
 import 'package:peakabu/ui/pages/confirm_sms_page.dart';
 import 'package:peakabu/ui/pages/create_account_page.dart';
 import 'package:peakabu/ui/pages/redirect_page.dart';
+import 'package:peakabu/ui/pages/root_ambassador_page.dart';
 import 'package:peakabu/ui/pages/root_recruiter_page.dart';
 import 'package:peakabu/ui/pages/root_applicant_page.dart';
 import 'package:peakabu/ui/pages/splash_page.dart';
@@ -44,14 +47,6 @@ class RouteGenerator {
       case 'splash':
         return MaterialPageRoute(
           builder: (_) => const SplashPage(),
-        );
-      case '/applicant':
-        return MaterialPageRoute(
-          builder: (_) => const RootApplicantPage(),
-        );
-      case '/recruiter':
-        return MaterialPageRoute(
-          builder: (_) => const RootRecruiterPage(),
         );
       case 'redirect':
         return MaterialPageRoute(
@@ -92,6 +87,26 @@ class RouteGenerator {
           builder: (_) => ApplicantRequestPage(
             selectedTab: settings.routeArgs(),
           ),
+        );
+      case '/applicant':
+        return MaterialPageRoute(
+          builder: (_) => const RootApplicantPage(),
+        );
+      case '/recruiter':
+        return MaterialPageRoute(
+          builder: (_) => const RootRecruiterPage(),
+        );
+      case '/ambassador':
+        return MaterialPageRoute(
+          builder: (_) => const RootAmbassadorPage(),
+        );
+      case 'ambassadors':
+        return MaterialPageRoute(
+          builder: (_) => const AmbassadorsPage(),
+        );
+      case 'notify':
+        return MaterialPageRoute(
+          builder: (_) => const NotifyPage(),
         );
       case '/job_posting_detail':
         return MaterialPageRoute(

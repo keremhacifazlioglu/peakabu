@@ -33,7 +33,7 @@ class ApplicantDetailHeader extends StatelessWidget {
                   bottomRight: Radius.circular(PlatformDimension.sizeXL),
                 ),
                 child: Image.network(
-                  applicantProfile!.image?? "https://i.mdel.net/i/db/2018/12/1034512/1034512-800w.jpg",
+                  applicantProfile!.image?? "",
                   fit: BoxFit.cover,
                   height: 500,
                   width: double.infinity,

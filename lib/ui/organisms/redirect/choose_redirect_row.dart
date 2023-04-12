@@ -31,7 +31,9 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
                   selectedColorRecruiter = PlatformColor.primaryColor;
                   selectedColorApplicant = PlatformColor.grayLightColor;
                 });
-                await Future.delayed(const Duration(milliseconds: 100),);
+                await Future.delayed(
+                  const Duration(milliseconds: 100),
+                );
                 secureLocalRepository.readSecureData("userType2").then(
                       (value) => {
                         if (value == null || value == "recruiter")
@@ -71,7 +73,9 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
                   selectedColorApplicant = PlatformColor.primaryColor;
                   selectedColorRecruiter = PlatformColor.grayLightColor;
                 });
-                await Future.delayed(const Duration(milliseconds: 100),);
+                await Future.delayed(
+                  const Duration(milliseconds: 100),
+                );
                 secureLocalRepository.readSecureData("userType2").then(
                       (value) => {
                         if (value == null || value == "applicant")
@@ -96,7 +100,7 @@ class _ChooseRedirectRowState extends State<ChooseRedirectRow> {
                       },
                     );
               },
-              child:  ChooseRedirectButton(
+              child: ChooseRedirectButton(
                 selectedColor: selectedColorApplicant,
                 svgPath: "assets/icons/bakici.svg",
                 text: "İş Arıyorum",
